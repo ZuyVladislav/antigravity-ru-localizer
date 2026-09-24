@@ -1,0 +1,9 @@
+# Generated per-machine state and backups
+install-manifest.json
+*.bak
+_temp_asar/
+
+# Node/npm cache and editor state
+node_modules/
+.vscode/
+*.log

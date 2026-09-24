@@ -1,0 +1,378 @@
+"use strict";
+
+// Local, static Russian UI localization for Google Antigravity 2.17.0.
+// It never sends application content to a translator or any remote service.
+// The sole external tool is the open-source @electron/asar package used to
+// unpack and repack Electron's local app.asar archive.
+
+const childProcess = require("child_process");
+const crypto = require("crypto");
+const fs = require("fs");
+const os = require("os");
+const path = require("path");
+const vm = require("vm");
+
+const SCRIPT_DIR = __dirname;
+const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
+const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
+const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
+const MENU_END = "/* ANTIGRAVITY_RU_MENU_END */";
+const TRAY_START = "/* ANTIGRAVITY_RU_TRAY_START */";
+const TRAY_END = "/* ANTIGRAVITY_RU_TRAY_END */";
+const ORIGINAL_BACKUP_NAME = "app.asar.antigravity-ru-original.bak";
+const EXPECTED_RESOURCES = path.join(
+  process.env.LOCALAPPDATA || path.join(os.homedir(), "AppData", "Local"),
+  "Programs",
+  "antigravity",
+  "resources",
+);
+
+function fail(message) {
+  throw new Error(message);
+}
+
+function sha256(filePath) {
+  const hash = crypto.createHash("sha256");
+  hash.update(fs.readFileSync(filePath));
+  return hash.digest("hex");
+}
+
+function npx(args) {
+  const command = process.platform === "win32" ? "npx.cmd" : "npx";
+  const result = childProcess.spawnSync(command, args, {
+    cwd: SCRIPT_DIR,
+    encoding: "utf8",
+    stdio: "pipe",
+    windowsHide: true,
+    // Node cannot launch a Windows .cmd shim directly without cmd.exe.
+    shell: process.platform === "win32",
+  });
+  if (result.error) fail(`Could not run ${command}: ${result.error.message}`);
+  if (result.status !== 0) {
+    fail(`@electron/asar failed: ${(result.stderr || result.stdout || "unknown error").trim()}`);
+  }
+}
+
+function resolveResources() {
+  const argument = process.argv.find((value) => value.startsWith("--resources="));
+  const resources = path.resolve(argument ? argument.slice("--resources=".length) : EXPECTED_RESOURCES);
+  const expected = path.resolve(EXPECTED_RESOURCES).toLowerCase();
+  if (resources.toLowerCase() !== expected) {
+    fail(`For safety this localizer only targets the installed Antigravity resources directory: ${EXPECTED_RESOURCES}`);
+  }
+  if (!fs.existsSync(path.join(resources, "app.asar"))) {
+    fail(`Antigravity app.asar was not found at ${resources}.`);
+  }
+  return resources;
+}
+
+function removeMarkedBlock(source, start, end) {
+  let cleaned = source;
+  while (true) {
+    const first = cleaned.indexOf(start);
+    if (first < 0) return cleaned;
+    const last = cleaned.indexOf(end, first);
+    if (last < 0) fail(`Found ${start} without its closing marker.`);
+    cleaned = cleaned.slice(0, first) + cleaned.slice(last + end.length);
+  }
+}
+
+function loadDictionary() {
+  const dictionaryPath = path.join(SCRIPT_DIR, "dicts", "ru.json");
+  const dictionary = JSON.parse(fs.readFileSync(dictionaryPath, "utf8"));
+  if (Object.keys(dictionary).length < 4000) {
+    fail("Russian dictionary is incomplete.");
+  }
+  for (const [key, value] of Object.entries(dictionary)) {
+    if (typeof key !== "string" || typeof value !== "string") {
+      fail("Russian dictionary contains a non-string entry.");
+    }
+  }
+  return dictionary;
+}
+
+function makePreloadScript(dictionary) {
+  const dictionaryJson = JSON.stringify(dictionary);
+  return `${START}
+(() => {
+  "use strict";
+  // Only exact fixed-interface labels are translated. User prompts, model
+  // responses, source code, terminals, editors, and browser content are kept.
+  const dictionary = ${dictionaryJson};
+  const exact = new Map(Object.entries(dictionary));
+  const lower = new Map(Object.entries(dictionary).map(([key, value]) => [key.toLowerCase(), value]));
+  const blockedTags = new Set(["SCRIPT", "STYLE", "CODE", "PRE", "INPUT", "TEXTAREA", "SVG", "CANVAS", "SYMBOL", "PATH"]);
+  const blockedClasses = ["monaco-editor", "editor-container", "terminal", "output-view", "debug-console", "code-view", "artifact-container", "suggest-widget", "chat-message", "assistant-message", "user-message", "conversation-message", "markdown", "prose"];
+  const blockedSelectors = ["[contenteditable='true']", "[data-testid='user-input-step']", "[data-ag-localization-skip]", "[data-message-id]", "[data-turn-id]", "[data-testid*='message']", "article", "pre", "code", "textarea", "input"];
+
+  const normalize = (value) => String(value || "").replace(/\\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
+  const permissionTitles = new Map([
+    ["Allow checking Docker contexts and Postgres service path?", "Разрешить проверку контекстов Docker и пути к службе PostgreSQL?"],
+  ]);
+  const translatePermissionText = (value) => {
+    const normalized = normalize(value);
+    if (permissionTitles.has(normalized)) return permissionTitles.get(normalized);
+    if (/^Allow\\s+.+\\?$/i.test(normalized)) return "Разрешить действие агента?";
+    if (/^Yes, allow this time$/i.test(normalized)) return "Да, разрешить сейчас";
+    if (/^No\\s*\\(tell the agent what to do instead\\)$/i.test(normalized)) return "Нет (указать агенту другой вариант)";
+    if (/^Submit\\s+([↵⏎])$/i.test(normalized)) return "Отправить " + normalized.slice(-1);
+    const templates = [
+      [/^Yes, and always allow\\s+(.+?)\\s+in this conversation$/i, "Да, всегда разрешать $1 в этом диалоге"],
+      [/^Yes, and always allow\\s+(.+?)\\s+when not in a project$/i, "Да, всегда разрешать $1 вне проекта"],
+      [/^Yes, and always allow\\s+(.+?)\\s+in this project$/i, "Да, всегда разрешать $1 в этом проекте"],
+      [/^Yes, and always allow\\s+(.+?)\\s+in all projects$/i, "Да, всегда разрешать $1 во всех проектах"],
+      [/^Yes, and always allow\\s+(.+)$/i, "Да, всегда разрешать $1"],
+    ];
+    for (const [pattern, replacement] of templates) {
+      if (pattern.test(normalized)) return normalized.replace(pattern, replacement);
+    }
+    return null;
+  };
+  const translationFor = (value) => {
+    const normalized = normalize(value);
+    if (!normalized) return null;
+    const permissionTranslation = translatePermissionText(normalized);
+    if (permissionTranslation) return permissionTranslation;
+    return exact.get(normalized) || lower.get(normalized.toLowerCase()) || null;
+  };
+  const isBlocked = (node) => {
+    let current = node && (node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement);
+    while (current) {
+      if (current.nodeType !== Node.ELEMENT_NODE) return true;
+      if (blockedTags.has(current.tagName)) return true;
+      if (current.getAttribute("translate") === "no") return true;
+      if (blockedSelectors.some((selector) => current.matches(selector))) return true;
+      const classes = typeof current.className === "string" ? current.className : "";
+      if (blockedClasses.some((className) => classes.includes(className))) return true;
+      current = current.parentElement;
+    }
+    return false;
+  };
+  const translateText = (node) => {
+    if (!node || isBlocked(node)) return;
+    const source = node.nodeValue;
+    const translated = translationFor(source);
+    if (!translated || translated === source) return;
+    const leading = (source.match(/^\\s*/) || [""])[0];
+    const trailing = (source.match(/\\s*$/) || [""])[0];
+    node.nodeValue = leading + translated + trailing;
+  };
+  const translateAttributes = (element) => {
+    if (!element || isBlocked(element)) return;
+    for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder"]) {
+      const source = element.getAttribute(attribute);
+      const translated = translationFor(source);
+      if (translated && translated !== source) element.setAttribute(attribute, translated);
+    }
+  };
+  const scan = (root) => {
+    if (!root || !document.documentElement) return;
+    const owner = root.ownerDocument || document;
+    const walker = owner.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (node.nodeType === Node.ELEMENT_NODE && isBlocked(node)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      },
+    });
+    let node = walker.currentNode;
+    while (node) {
+      if (node.nodeType === Node.TEXT_NODE) translateText(node);
+      else if (node.nodeType === Node.ELEMENT_NODE) {
+        translateAttributes(node);
+        if (node.shadowRoot) scan(node.shadowRoot);
+      }
+      node = walker.nextNode();
+    }
+  };
+  let scheduled = false;
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    queueMicrotask(() => {
+      scheduled = false;
+      scan(document.documentElement);
+    });
+  };
+  const observe = () => {
+    schedule();
+    new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "data-placeholder"] });
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observe, { once: true });
+  else observe();
+})();
+${END}`;
+}
+
+function patchMenu(content) {
+  const cleaned = removeMarkedBlock(content, MENU_START, MENU_END);
+  const target = "electron_1.Menu.setApplicationMenu(menu);";
+  if (!cleaned.includes(target)) fail("Antigravity 2.17.0 menu insertion point was not found.");
+  const translations = {
+    File: "Файл", Edit: "Правка", View: "Вид", Window: "Окно", Help: "Справка",
+    "New Window": "Новое окно", "Create Project": "Создать проект", "Command Palette": "Палитра команд",
+    Docs: "Документация", "Check for Updates": "Проверить обновления", "Toggle Developer Tools": "Инструменты разработчика",
+    Undo: "Отменить", Redo: "Повторить", Cut: "Вырезать", Copy: "Копировать", Paste: "Вставить", "Select All": "Выделить всё",
+    Minimize: "Свернуть", Maximize: "Развернуть", Close: "Закрыть", Zoom: "Масштаб", "Reset Zoom": "Сбросить масштаб",
+    "Zoom In": "Увеличить", "Zoom Out": "Уменьшить", "Toggle Full Screen": "Полный экран", Version: "Версия",
+    "About Antigravity": "О программе Antigravity", Services: "Службы", "Hide Antigravity": "Скрыть Antigravity",
+    "Hide Others": "Скрыть остальные", "Show All": "Показать все", "Quit Antigravity": "Выйти из Antigravity", Quit: "Выйти",
+    "Connect to WSL": "Подключиться к WSL", "Reopen Locally": "Открыть локально",
+  };
+  const injection = `${MENU_START}
+const antigravityRuMenu = ${JSON.stringify(translations)};
+function localizeAntigravityMenu(items) {
+  for (const item of items || []) {
+    const source = item.label || "";
+    const mnemonic = source.match(/&([a-zA-Z])/);
+    const clean = source.replace("&", "");
+    const translated = antigravityRuMenu[clean] || antigravityRuMenu[source];
+    if (translated) item.label = translated + (mnemonic ? " (&" + mnemonic[1] + ")" : "");
+    if (item.submenu && item.submenu.items) localizeAntigravityMenu(item.submenu.items);
+  }
+}
+localizeAntigravityMenu(menu.items);
+${MENU_END}`;
+  return cleaned.replace(target, `${injection}\n${target}`)
+    .replace("return { label: 'Connect to WSL', submenu };", "return { label: 'Подключиться к WSL', submenu };")
+    .replace("return { label: 'Reopen Locally', click: () => relaunchWithWslDistro('') };", "return { label: 'Открыть локально', click: () => relaunchWithWslDistro('') };");
+}
+
+function patchTray(content) {
+  let patched = removeMarkedBlock(content, TRAY_START, TRAY_END);
+  const translations = {
+    "No agents running": "Нет запущенных агентов",
+    "Open Antigravity": "Открыть Antigravity",
+    Quit: "Выйти",
+    "Connect to WSL": "Подключиться к WSL",
+    "Reopen Locally": "Открыть локально",
+  };
+  const createTarget = "function createTray(actions) {";
+  if (patched.includes(createTarget)) {
+    patched = patched.replace(createTarget, `${createTarget}\n${TRAY_START}\nconst antigravityRuTray = ${JSON.stringify(translations)};\nfor (const item of actions || []) if (antigravityRuTray[item.label]) item.label = antigravityRuTray[item.label];\n${TRAY_END}`);
+  }
+  const insertTarget = "function insertTrayMenuItem(position, options) {";
+  if (patched.includes(insertTarget)) {
+    patched = patched.replace(insertTarget, `${insertTarget}\n${TRAY_START}\nconst antigravityRuTrayDynamic = ${JSON.stringify(translations)};\nif (options && antigravityRuTrayDynamic[options.label]) options.label = antigravityRuTrayDynamic[options.label];\n${TRAY_END}`);
+  }
+  return patched.replace(/countItem\.label\s*=\s*\([\s\S]*?' running';/g, "countItem.label = count > 0 ? `${count} агентов запущено` : 'Нет запущенных агентов';");
+}
+
+function replaceOptionalFiles(unpacked) {
+  const staticReplacements = [
+    ["dist/loadingOverlay.js", "<div class=\"text\">Loading Antigravity</div>", "<div class=\"text\">Загрузка Antigravity</div>"],
+    ["dist/updater.js", "title: 'Check for Updates',", "title: 'Проверить обновления',"],
+    ["dist/updater.js", "message: 'No updates available',", "message: 'Нет доступных обновлений',"],
+    ["dist/provisionSplash.js", "<div>Setting up WSL: ${escapeHtml(distro)}</div>", "<div>Настройка WSL: ${escapeHtml(distro)}</div>"],
+    ["dist/wsl.js", "onStatus?.('Downloading the Antigravity binary\\u2026');", "onStatus?.('Скачивание Antigravity\\u2026');"],
+    ["dist/wsl.js", "onStatus?.(`Installing into ${distro}\\u2026`);", "onStatus?.(`Установка в ${distro}\\u2026`);"],
+    ["dist/main.js", "await electron_1.dialog.showErrorBox('WSL setup failed', msg);", "await electron_1.dialog.showErrorBox('Ошибка настройки WSL', msg);"],
+  ];
+  for (const [relativePath, source, replacement] of staticReplacements) {
+    const filePath = path.join(unpacked, relativePath);
+    if (!fs.existsSync(filePath)) continue;
+    const content = fs.readFileSync(filePath, "utf8");
+    fs.writeFileSync(filePath, content.replace(source, replacement), "utf8");
+  }
+}
+
+function install() {
+  const resources = resolveResources();
+  const asarPath = path.join(resources, "app.asar");
+  const backupPath = path.join(resources, ORIGINAL_BACKUP_NAME);
+  const dictionary = loadDictionary();
+  if (!fs.existsSync(backupPath)) {
+    fs.copyFileSync(asarPath, backupPath);
+  } else {
+    fs.copyFileSync(backupPath, asarPath);
+  }
+  const originalHash = sha256(backupPath);
+  const work = fs.mkdtempSync(path.join(os.tmpdir(), "antigravity-ru-"));
+  const unpacked = path.join(work, "unpacked");
+  const packed = path.join(work, "app.asar");
+  try {
+    npx(["-y", "@electron/asar", "extract", asarPath, unpacked]);
+    const preloadPath = path.join(unpacked, "dist", "preload.js");
+    if (!fs.existsSync(preloadPath)) fail("Antigravity 2.17.0 preload.js was not found after extraction.");
+    const preload = removeMarkedBlock(fs.readFileSync(preloadPath, "utf8"), START, END);
+    fs.writeFileSync(preloadPath, `${preload}\n${makePreloadScript(dictionary)}\n`, "utf8");
+    const menuPath = path.join(unpacked, "dist", "menu.js");
+    if (!fs.existsSync(menuPath)) fail("Antigravity 2.17.0 menu.js was not found after extraction.");
+    fs.writeFileSync(menuPath, patchMenu(fs.readFileSync(menuPath, "utf8")), "utf8");
+    const trayPath = path.join(unpacked, "dist", "tray.js");
+    if (fs.existsSync(trayPath)) fs.writeFileSync(trayPath, patchTray(fs.readFileSync(trayPath, "utf8")), "utf8");
+    replaceOptionalFiles(unpacked);
+    npx(["-y", "@electron/asar", "pack", unpacked, packed]);
+    npx(["-y", "@electron/asar", "list", packed]);
+    if (fs.statSync(packed).size < 1000000) fail("Repacked app.asar is unexpectedly small.");
+    fs.copyFileSync(packed, asarPath);
+    const manifest = {
+      product: "Google Antigravity",
+      expectedVersion: "2.17.0",
+      localizedAt: new Date().toISOString(),
+      resources,
+      originalSha256: originalHash,
+      localizedSha256: sha256(asarPath),
+      staticDictionaryEntries: Object.keys(dictionary).length,
+      dataHandling: "Local static UI mapping only; no application data sent to a translation service.",
+      rollback: path.join(resources, ORIGINAL_BACKUP_NAME),
+    };
+    fs.writeFileSync(path.join(SCRIPT_DIR, "install-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+    console.log(`Russian UI localization installed. Backup: ${backupPath}`);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+}
+
+function restore() {
+  const resources = resolveResources();
+  const asarPath = path.join(resources, "app.asar");
+  const backupPath = path.join(resources, ORIGINAL_BACKUP_NAME);
+  if (!fs.existsSync(backupPath)) fail(`Original backup was not found: ${backupPath}`);
+  fs.copyFileSync(backupPath, asarPath);
+  console.log(`Restored the original Antigravity app.asar from ${backupPath}`);
+}
+
+function selfTest() {
+  const dictionary = loadDictionary();
+  const injected = makePreloadScript(dictionary);
+  new vm.Script(injected, { filename: "antigravity-ru-preload.js" });
+  if (dictionary["New Conversation"] !== "Новый диалог" || dictionary["No Project"] !== "Без проекта" || dictionary["Model"] !== "Модель" || dictionary["Agent terminated due to error"] !== "Агент остановлен из-за ошибки") {
+    fail("Required Antigravity 2.17.0 UI labels are missing from the dictionary.");
+  }
+  if (/[\p{Script=Han}]/u.test(JSON.stringify(dictionary))) {
+    fail("Russian dictionary unexpectedly contains Chinese text.");
+  }
+  const injectedWithoutDictionary = injected.replace(JSON.stringify(dictionary), "{}");
+  if (/(fetch\(|XMLHttpRequest|translate\.googleapis|openrouter|ollama)/i.test(injectedWithoutDictionary)) {
+    fail("Injected script contains a remote translation route.");
+  }
+  for (const expected of ["Разрешить действие агента?", "Да, разрешить сейчас", "Нет (указать агенту другой вариант)", "в этом диалоге", "вне проекта"]) {
+    if (!injected.includes(expected)) fail(`Permission-dialog translation is missing: ${expected}`);
+  }
+  const menuFixture = "const menu = { items: [] };\nelectron_1.Menu.setApplicationMenu(menu);";
+  const twicePatchedMenu = patchMenu(patchMenu(menuFixture));
+  if ((twicePatchedMenu.match(/ANTIGRAVITY_RU_MENU_START/g) || []).length !== 1) {
+    fail("Menu patch is not idempotent.");
+  }
+  const trayFixture = "function createTray(actions) {}\nfunction insertTrayMenuItem(position, options) {}";
+  const twicePatchedTray = patchTray(patchTray(trayFixture));
+  if ((twicePatchedTray.match(/ANTIGRAVITY_RU_TRAY_START/g) || []).length !== 2) {
+    fail("Tray patch is not idempotent.");
+  }
+  console.log(`Self-test passed: ${Object.keys(dictionary).length} static entries; no remote translation route.`);
+}
+
+function npxSelfTest() {
+  npx(["-y", "@electron/asar", "--version"]);
+  console.log("@electron/asar launch test passed.");
+}
+
+try {
+  if (process.argv.includes("--self-test")) selfTest();
+  else if (process.argv.includes("--npx-self-test")) npxSelfTest();
+  else if (process.argv.includes("--restore")) restore();
+  else install();
+} catch (error) {
+  console.error(`Localization was not installed: ${error.message}`);
+  process.exitCode = 1;
+}
