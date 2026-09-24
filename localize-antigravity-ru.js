@@ -20,12 +20,25 @@ const MENU_END = "/* ANTIGRAVITY_RU_MENU_END */";
 const TRAY_START = "/* ANTIGRAVITY_RU_TRAY_START */";
 const TRAY_END = "/* ANTIGRAVITY_RU_TRAY_END */";
 const ORIGINAL_BACKUP_NAME = "app.asar.antigravity-ru-original.bak";
-const EXPECTED_RESOURCES = path.join(
-  process.env.LOCALAPPDATA || path.join(os.homedir(), "AppData", "Local"),
-  "Programs",
-  "antigravity",
-  "resources",
-);
+function supportedResourceDirectories(platform = process.platform, home = os.homedir()) {
+  if (platform === "win32") {
+    const localAppData = process.env.LOCALAPPDATA || path.win32.join(home, "AppData", "Local");
+    return [path.win32.join(localAppData, "Programs", "antigravity", "resources")];
+  }
+  if (platform === "linux") {
+    const join = path.posix.join;
+    return [
+      "/opt/antigravity/resources",
+      "/opt/Antigravity/resources",
+      join(home, ".local", "opt", "antigravity", "resources"),
+      join(home, ".local", "opt", "Antigravity", "resources"),
+      join(home, ".local", "share", "antigravity", "resources"),
+      join(home, "Applications", "antigravity", "resources"),
+      join(home, "Applications", "Antigravity", "resources"),
+    ];
+  }
+  fail(`Unsupported platform: ${platform}. This localizer currently supports Windows and Linux.`);
+}
 
 function fail(message) {
   throw new Error(message);
@@ -55,15 +68,43 @@ function npx(args) {
 
 function resolveResources() {
   const argument = process.argv.find((value) => value.startsWith("--resources="));
-  const resources = path.resolve(argument ? argument.slice("--resources=".length) : EXPECTED_RESOURCES);
-  const expected = path.resolve(EXPECTED_RESOURCES).toLowerCase();
-  if (resources.toLowerCase() !== expected) {
-    fail(`For safety this localizer only targets the installed Antigravity resources directory: ${EXPECTED_RESOURCES}`);
+  const candidates = supportedResourceDirectories();
+  const provided = argument ? argument.slice("--resources=".length) : null;
+  let resources;
+  if (provided) {
+    if (!path.isAbsolute(provided)) fail("--resources must be an absolute path to Antigravity's resources directory.");
+    resources = path.resolve(provided);
+    if (process.platform === "win32") {
+      const expected = path.resolve(candidates[0]).toLowerCase();
+      if (resources.toLowerCase() !== expected) {
+        fail(`For safety the Windows target must be: ${candidates[0]}`);
+      }
+    } else if (path.basename(resources) !== "resources") {
+      fail("For safety --resources must point exactly to a directory named resources.");
+    }
+  } else {
+    resources = candidates.find((candidate) => fs.existsSync(path.join(candidate, "app.asar")));
+    if (!resources) {
+      fail(`Antigravity app.asar was not found. Pass --resources=/absolute/path/to/resources. Checked:\n${candidates.map((candidate) => `  - ${candidate}`).join("\n")}`);
+    }
   }
   if (!fs.existsSync(path.join(resources, "app.asar"))) {
     fail(`Antigravity app.asar was not found at ${resources}.`);
   }
   return resources;
+}
+
+function inspect() {
+  const resources = resolveResources();
+  const asarPath = path.join(resources, "app.asar");
+  const backupPath = path.join(resources, ORIGINAL_BACKUP_NAME);
+  console.log(JSON.stringify({
+    resources,
+    appAsar: asarPath,
+    appAsarSha256: sha256(asarPath),
+    backupExists: fs.existsSync(backupPath),
+    backupPath,
+  }, null, 2));
 }
 
 function removeMarkedBlock(source, start, end) {
@@ -336,6 +377,14 @@ function selfTest() {
   const dictionary = loadDictionary();
   const injected = makePreloadScript(dictionary);
   new vm.Script(injected, { filename: "antigravity-ru-preload.js" });
+  const windowsResources = supportedResourceDirectories("win32", "C:\\Users\\tester");
+  const linuxResources = supportedResourceDirectories("linux", "/home/tester");
+  if (windowsResources.length !== 1 || path.win32.basename(windowsResources[0]) !== "resources") {
+    fail("Windows resource-directory resolution is invalid.");
+  }
+  for (const requiredLinuxPath of ["/opt/antigravity/resources", "/home/tester/.local/opt/antigravity/resources"]) {
+    if (!linuxResources.includes(requiredLinuxPath)) fail(`Linux resource directory is missing: ${requiredLinuxPath}`);
+  }
   if (dictionary["New Conversation"] !== "Новый диалог" || dictionary["No Project"] !== "Без проекта" || dictionary["Model"] !== "Модель" || dictionary["Agent terminated due to error"] !== "Агент остановлен из-за ошибки") {
     fail("Required Antigravity 2.17.0 UI labels are missing from the dictionary.");
   }
@@ -370,6 +419,7 @@ function npxSelfTest() {
 try {
   if (process.argv.includes("--self-test")) selfTest();
   else if (process.argv.includes("--npx-self-test")) npxSelfTest();
+  else if (process.argv.includes("--inspect")) inspect();
   else if (process.argv.includes("--restore")) restore();
   else install();
 } catch (error) {
