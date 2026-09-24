@@ -1,6 +1,6 @@
 # Локальный русификатор Antigravity 2.17.0
 
-Пакет переводит фиксированные подписи, статусы, уведомления, сообщения об ошибках и диалоги разрешений интерфейса Google Antigravity 2.17.0 на русском языке. Он работает на Windows и Linux, использует только локальный словарь и не передаёт запросы, ответы, файлы, код или историю диалогов во внешние сервисы.
+Пакет переводит фиксированные подписи, статусы, уведомления, сообщения об ошибках и диалоги разрешений интерфейса Google Antigravity 2.17.0 на русском языке. Он работает на Windows, Linux и macOS, использует только локальный словарь и не передаёт запросы, ответы, файлы, код или историю диалогов во внешние сервисы.
 
 Перед изменением `localize-antigravity-ru.js` сохраняет исходный `app.asar` как `app.asar.antigravity-ru-original.bak` в той же директории. Закройте Antigravity перед установкой, проверкой или откатом.
 
@@ -60,6 +60,36 @@ sudo node localize-antigravity-ru.js --resources=/opt/antigravity/resources --re
 ```
 
 AppImage не изменяется в работающем смонтированном образе. Распакуйте его в постоянную директорию либо используйте tarball-установку, затем укажите папку `resources`.
+
+## macOS
+
+Поддерживается самостоятельное приложение `Antigravity.app`, а не отдельная Antigravity IDE с распакованной структурой файлов. Скрипт ищет:
+
+```text
+/Applications/Antigravity.app/Contents/Resources
+~/Applications/Antigravity.app/Contents/Resources
+```
+
+Сначала проверьте путь:
+
+```bash
+node localize-antigravity-ru.js --inspect
+```
+
+Для приложения в `/Applications` обычно требуются права администратора:
+
+```bash
+sudo node localize-antigravity-ru.js --resources=/Applications/Antigravity.app/Contents/Resources --inspect
+sudo node localize-antigravity-ru.js --resources=/Applications/Antigravity.app/Contents/Resources
+```
+
+После установки и отката скрипт автоматически применяет локальную ad-hoc подпись через системный `codesign`, а затем проверяет её. Она заменяет подпись Google только у изменённой локальной копии приложения; следующая официальная установка или обновление вернёт исходный `app.asar`.
+
+Откат:
+
+```bash
+sudo node localize-antigravity-ru.js --resources=/Applications/Antigravity.app/Contents/Resources --restore
+```
 
 Словарь собран только из статических блоков `DICT` проверенного MIT-проекта `j46871417-ui/Antigravity-Localizer` (commit `8a6954cd1852397e893e9e60f08dea3f1f92fb35`). Его правила и функции онлайн-перевода не используются. Механизм распаковки адаптирован по структуре Antigravity 2.16.0 из `Silas-02/antigravity-desktop-cn` (commit `e78432b826d9561b9f79c1222bf7abb26eb6de50`), а точки встраивания отдельно проверены на установленной Antigravity 2.17.0. Инъекция написана заново для русского статического словаря.
 

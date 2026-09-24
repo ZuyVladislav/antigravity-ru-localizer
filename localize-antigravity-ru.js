@@ -37,7 +37,14 @@ function supportedResourceDirectories(platform = process.platform, home = os.hom
       join(home, "Applications", "Antigravity", "resources"),
     ];
   }
-  fail(`Unsupported platform: ${platform}. This localizer currently supports Windows and Linux.`);
+  if (platform === "darwin") {
+    const join = path.posix.join;
+    return [
+      "/Applications/Antigravity.app/Contents/Resources",
+      join(home, "Applications", "Antigravity.app", "Contents", "Resources"),
+    ];
+  }
+  fail(`Unsupported platform: ${platform}. This localizer currently supports Windows, Linux, and macOS.`);
 }
 
 function fail(message) {
@@ -66,6 +73,37 @@ function npx(args) {
   }
 }
 
+function macAppBundle(resources) {
+  const contents = path.dirname(resources);
+  const appBundle = path.dirname(contents);
+  if (path.basename(contents) !== "Contents" || !path.basename(appBundle).endsWith(".app")) {
+    fail("On macOS --resources must be inside Antigravity.app/Contents/Resources.");
+  }
+  if (!fs.existsSync("/usr/bin/codesign")) {
+    fail("macOS codesign was not found at /usr/bin/codesign.");
+  }
+  return appBundle;
+}
+
+function signMacApp(appBundle) {
+  const sign = childProcess.spawnSync("/usr/bin/codesign", ["--force", "--sign", "-", appBundle], {
+    cwd: SCRIPT_DIR,
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+  if (sign.error || sign.status !== 0) {
+    fail(`macOS ad-hoc signing failed: ${(sign.error?.message || sign.stderr || sign.stdout || "unknown error").trim()}`);
+  }
+  const verify = childProcess.spawnSync("/usr/bin/codesign", ["--verify", "--strict", appBundle], {
+    cwd: SCRIPT_DIR,
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+  if (verify.error || verify.status !== 0) {
+    fail(`macOS signature verification failed: ${(verify.error?.message || verify.stderr || verify.stdout || "unknown error").trim()}`);
+  }
+}
+
 function resolveResources() {
   const argument = process.argv.find((value) => value.startsWith("--resources="));
   const candidates = supportedResourceDirectories();
@@ -91,6 +129,7 @@ function resolveResources() {
   if (!fs.existsSync(path.join(resources, "app.asar"))) {
     fail(`Antigravity app.asar was not found at ${resources}.`);
   }
+  if (process.platform === "darwin") macAppBundle(resources);
   return resources;
 }
 
@@ -320,6 +359,7 @@ function install() {
   const resources = resolveResources();
   const asarPath = path.join(resources, "app.asar");
   const backupPath = path.join(resources, ORIGINAL_BACKUP_NAME);
+  const appBundle = process.platform === "darwin" ? macAppBundle(resources) : null;
   const dictionary = loadDictionary();
   if (!fs.existsSync(backupPath)) {
     fs.copyFileSync(asarPath, backupPath);
@@ -346,6 +386,19 @@ function install() {
     npx(["-y", "@electron/asar", "list", packed]);
     if (fs.statSync(packed).size < 1000000) fail("Repacked app.asar is unexpectedly small.");
     fs.copyFileSync(packed, asarPath);
+    if (appBundle) {
+      try {
+        signMacApp(appBundle);
+      } catch (error) {
+        fs.copyFileSync(backupPath, asarPath);
+        try {
+          signMacApp(appBundle);
+        } catch (rollbackError) {
+          fail(`macOS signing failed and the original app.asar was restored, but its signature could not be restored automatically: ${rollbackError.message}`);
+        }
+        throw error;
+      }
+    }
     const manifest = {
       product: "Google Antigravity",
       expectedVersion: "2.17.0",
@@ -356,6 +409,7 @@ function install() {
       staticDictionaryEntries: Object.keys(dictionary).length,
       dataHandling: "Local static UI mapping only; no application data sent to a translation service.",
       rollback: path.join(resources, ORIGINAL_BACKUP_NAME),
+      macAppBundle: appBundle,
     };
     fs.writeFileSync(path.join(SCRIPT_DIR, "install-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     console.log(`Russian UI localization installed. Backup: ${backupPath}`);
@@ -368,8 +422,10 @@ function restore() {
   const resources = resolveResources();
   const asarPath = path.join(resources, "app.asar");
   const backupPath = path.join(resources, ORIGINAL_BACKUP_NAME);
+  const appBundle = process.platform === "darwin" ? macAppBundle(resources) : null;
   if (!fs.existsSync(backupPath)) fail(`Original backup was not found: ${backupPath}`);
   fs.copyFileSync(backupPath, asarPath);
+  if (appBundle) signMacApp(appBundle);
   console.log(`Restored the original Antigravity app.asar from ${backupPath}`);
 }
 
@@ -379,11 +435,15 @@ function selfTest() {
   new vm.Script(injected, { filename: "antigravity-ru-preload.js" });
   const windowsResources = supportedResourceDirectories("win32", "C:\\Users\\tester");
   const linuxResources = supportedResourceDirectories("linux", "/home/tester");
+  const macResources = supportedResourceDirectories("darwin", "/Users/tester");
   if (windowsResources.length !== 1 || path.win32.basename(windowsResources[0]) !== "resources") {
     fail("Windows resource-directory resolution is invalid.");
   }
   for (const requiredLinuxPath of ["/opt/antigravity/resources", "/home/tester/.local/opt/antigravity/resources"]) {
     if (!linuxResources.includes(requiredLinuxPath)) fail(`Linux resource directory is missing: ${requiredLinuxPath}`);
+  }
+  for (const requiredMacPath of ["/Applications/Antigravity.app/Contents/Resources", "/Users/tester/Applications/Antigravity.app/Contents/Resources"]) {
+    if (!macResources.includes(requiredMacPath)) fail(`macOS resource directory is missing: ${requiredMacPath}`);
   }
   if (dictionary["New Conversation"] !== "Новый диалог" || dictionary["No Project"] !== "Без проекта" || dictionary["Model"] !== "Модель" || dictionary["Agent terminated due to error"] !== "Агент остановлен из-за ошибки") {
     fail("Required Antigravity 2.17.0 UI labels are missing from the dictionary.");
