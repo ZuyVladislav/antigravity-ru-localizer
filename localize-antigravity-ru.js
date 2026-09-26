@@ -13,6 +13,7 @@ const path = require("path");
 const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
+const ASAR_VERSION = "4.3.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -57,19 +58,161 @@ function sha256(filePath) {
   return hash.digest("hex");
 }
 
-function npx(args) {
-  const command = process.platform === "win32" ? "npx.cmd" : "npx";
-  const result = childProcess.spawnSync(command, args, {
+function assertSupportedNode() {
+  const [major, minor] = process.versions.node.split(".").map(Number);
+  if (major < 22 || (major === 22 && minor < 12)) {
+    fail(`Node.js 22.12 or newer is required; found ${process.versions.node}.`);
+  }
+}
+
+function compactToolOutput(value, limit = 4000) {
+  const text = String(value || "unknown error").trim();
+  if (text.length <= limit) return text;
+  return `${text.slice(0, limit)}\n… output truncated (${text.length} characters total)`;
+}
+
+function asar(args) {
+  assertSupportedNode();
+  const packagePath = path.join(SCRIPT_DIR, "node_modules", "@electron", "asar", "package.json");
+  const cliPath = path.join(SCRIPT_DIR, "node_modules", "@electron", "asar", "bin", "asar.mjs");
+  if (!fs.existsSync(packagePath) || !fs.existsSync(cliPath)) {
+    fail(`Pinned @electron/asar ${ASAR_VERSION} is not installed. Run \"npm ci\" in the localizer directory first.`);
+  }
+  let installedVersion;
+  try {
+    installedVersion = JSON.parse(fs.readFileSync(packagePath, "utf8")).version;
+  } catch (error) {
+    fail(`Could not read the installed @electron/asar manifest: ${error.message}`);
+  }
+  if (installedVersion !== ASAR_VERSION) {
+    fail(`Expected @electron/asar ${ASAR_VERSION}, found ${installedVersion || "unknown"}. Run \"npm ci\" to restore the locked dependency.`);
+  }
+  const result = childProcess.spawnSync(process.execPath, [cliPath, ...args], {
     cwd: SCRIPT_DIR,
     encoding: "utf8",
     stdio: "pipe",
     windowsHide: true,
-    // Node cannot launch a Windows .cmd shim directly without cmd.exe.
-    shell: process.platform === "win32",
+    shell: false,
   });
-  if (result.error) fail(`Could not run ${command}: ${result.error.message}`);
+  if (result.error) fail(`Could not run the pinned @electron/asar CLI: ${result.error.message}`);
   if (result.status !== 0) {
-    fail(`@electron/asar failed: ${(result.stderr || result.stdout || "unknown error").trim()}`);
+    fail(`@electron/asar failed: ${compactToolOutput(result.stderr || result.stdout)}`);
+  }
+  return result.stdout || "";
+}
+
+function normalizeAsarEntry(entry) {
+  const normalized = String(entry || "").trim().replace(/\\/g, "/").replace(/^\/+/, "");
+  if (!normalized || normalized.split("/").some((part) => !part || part === "." || part === "..")) {
+    fail(`Unsafe or invalid ASAR entry reported by @electron/asar: ${entry}`);
+  }
+  return normalized;
+}
+
+function parseAsarPackingEntries(output) {
+  const entries = new Map();
+  for (const line of String(output || "").split(/\r?\n/)) {
+    const match = /^\s*(pack|unpack)\s*:\s*(.+?)\s*$/i.exec(line);
+    if (!match) continue;
+    const name = normalizeAsarEntry(match[2]);
+    const mode = match[1].toLowerCase();
+    if (entries.has(name) && entries.get(name) !== mode) {
+      fail(`Conflicting ASAR packing status for ${name}.`);
+    }
+    entries.set(name, mode);
+  }
+  if (!entries.size) fail("@electron/asar did not return a readable packing layout.");
+  return entries;
+}
+
+function getAsarPackingEntries(archivePath) {
+  return parseAsarPackingEntries(asar(["list", "--is-pack", archivePath]));
+}
+
+function asarExternalPath(archivePath, entry) {
+  return path.join(`${archivePath}.unpacked`, ...entry.split("/"));
+}
+
+function getAsarFilePackingLayout(archivePath, entries) {
+  const files = new Map();
+  for (const [entry, mode] of entries) {
+    const externalPath = asarExternalPath(archivePath, entry);
+    if (fs.existsSync(externalPath) && fs.lstatSync(externalPath).isDirectory()) continue;
+    files.set(entry, mode);
+  }
+  return files;
+}
+
+function makeSingleGlob(paths, label) {
+  if (!paths.length) return null;
+  if (paths.some((value) => /[{},]/.test(value))) {
+    fail(`Cannot safely preserve ${label}: an external path contains a glob control character.`);
+  }
+  if (paths.length > 1) {
+    fail(`Cannot safely preserve ${label}: this Antigravity package uses multiple independent external paths.`);
+  }
+  const pattern = paths[0].split("/").join(path.sep);
+  if (Buffer.byteLength(pattern, "utf8") > 24000) {
+    fail(`Cannot safely preserve ${label}: the required matcher is too long.`);
+  }
+  return pattern;
+}
+
+function buildPackingArguments(archivePath) {
+  const layout = getAsarPackingEntries(archivePath);
+  const unpacked = [...layout.entries()].filter(([, mode]) => mode === "unpack").map(([entry]) => entry);
+  if (!unpacked.length) return { layout, args: [] };
+
+  const packed = new Set([...layout.entries()].filter(([, mode]) => mode === "pack").map(([entry]) => entry));
+  const directoryCandidates = new Set();
+  for (const entry of unpacked) {
+    const parts = entry.split("/");
+    for (let index = 1; index < parts.length; index += 1) {
+      directoryCandidates.add(parts.slice(0, index).join("/"));
+    }
+  }
+
+  const unpackDirectories = [];
+  for (const directory of [...directoryCandidates].sort((left, right) => left.length - right.length)) {
+    if (unpackDirectories.some((parent) => directory.startsWith(`${parent}/`))) continue;
+    const externalPath = asarExternalPath(archivePath, directory);
+    const hasPackedFile = [...packed].some((entry) => {
+      if (!entry.startsWith(`${directory}/`)) return false;
+      const packedExternalPath = asarExternalPath(archivePath, entry);
+      return !fs.existsSync(packedExternalPath) || !fs.lstatSync(packedExternalPath).isDirectory();
+    });
+    if (!hasPackedFile && fs.existsSync(externalPath) && fs.lstatSync(externalPath).isDirectory()) {
+      unpackDirectories.push(directory);
+    }
+  }
+  const unpackFiles = unpacked.filter((entry) => !unpackDirectories.some((directory) => entry.startsWith(`${directory}/`)));
+  for (const entry of unpackFiles) {
+    const externalPath = asarExternalPath(archivePath, entry);
+    if (!fs.existsSync(externalPath)) {
+      fail(`Required external Antigravity resource is missing: ${externalPath}. Restore the original application before localizing.`);
+    }
+  }
+  if (!unpackDirectories.length && !unpackFiles.length) {
+    fail("Could not identify the external Antigravity resources required by this app.asar.");
+  }
+  const args = [];
+  const directoryPattern = makeSingleGlob(unpackDirectories, "the unpacked directory layout");
+  const filePattern = makeSingleGlob(unpackFiles, "the unpacked file layout");
+  if (directoryPattern) args.push(`--unpack-dir=${directoryPattern}`);
+  if (filePattern) args.push(`--unpack=${filePattern}`);
+  return { layout, args };
+}
+
+function assertSamePackingLayout(expectedArchive, expected, actualArchive, actual) {
+  const expectedFiles = getAsarFilePackingLayout(expectedArchive, expected);
+  const actualFiles = getAsarFilePackingLayout(actualArchive, actual);
+  if (expectedFiles.size !== actualFiles.size) {
+    fail("Repacked app.asar has a different file-entry count from the original package.");
+  }
+  for (const [entry, mode] of expectedFiles) {
+    if (actualFiles.get(entry) !== mode) {
+      fail(`Repacked app.asar changed the external-resource layout at ${entry}.`);
+    }
   }
 }
 
@@ -131,6 +274,15 @@ function resolveResources() {
   }
   if (process.platform === "darwin") macAppBundle(resources);
   return resources;
+}
+
+function resolveManifestPath() {
+  const selected = process.env.ANTIGRAVITY_RU_MANIFEST_PATH;
+  if (!selected) return path.join(SCRIPT_DIR, "install-manifest.json");
+  if (!path.isAbsolute(selected)) {
+    fail("ANTIGRAVITY_RU_MANIFEST_PATH must be an absolute path when supplied.");
+  }
+  return path.resolve(selected);
 }
 
 function inspect() {
@@ -371,7 +523,8 @@ function install() {
   const unpacked = path.join(work, "unpacked");
   const packed = path.join(work, "app.asar");
   try {
-    npx(["-y", "@electron/asar", "extract", asarPath, unpacked]);
+    const packing = buildPackingArguments(asarPath);
+    asar(["extract", asarPath, unpacked]);
     const preloadPath = path.join(unpacked, "dist", "preload.js");
     if (!fs.existsSync(preloadPath)) fail("Antigravity 2.17.0 preload.js was not found after extraction.");
     const preload = removeMarkedBlock(fs.readFileSync(preloadPath, "utf8"), START, END);
@@ -382,8 +535,8 @@ function install() {
     const trayPath = path.join(unpacked, "dist", "tray.js");
     if (fs.existsSync(trayPath)) fs.writeFileSync(trayPath, patchTray(fs.readFileSync(trayPath, "utf8")), "utf8");
     replaceOptionalFiles(unpacked);
-    npx(["-y", "@electron/asar", "pack", unpacked, packed]);
-    npx(["-y", "@electron/asar", "list", packed]);
+    asar(["pack", unpacked, packed, ...packing.args]);
+    assertSamePackingLayout(asarPath, packing.layout, packed, getAsarPackingEntries(packed));
     if (fs.statSync(packed).size < 1000000) fail("Repacked app.asar is unexpectedly small.");
     fs.copyFileSync(packed, asarPath);
     if (appBundle) {
@@ -408,10 +561,11 @@ function install() {
       localizedSha256: sha256(asarPath),
       staticDictionaryEntries: Object.keys(dictionary).length,
       dataHandling: "Local static UI mapping only; no application data sent to a translation service.",
+      externalResourceLayout: "Preserved and verified against the original app.asar before replacement.",
       rollback: path.join(resources, ORIGINAL_BACKUP_NAME),
       macAppBundle: appBundle,
     };
-    fs.writeFileSync(path.join(SCRIPT_DIR, "install-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
+    fs.writeFileSync(resolveManifestPath(), `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
     console.log(`Russian UI localization installed. Backup: ${backupPath}`);
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
@@ -468,17 +622,24 @@ function selfTest() {
   if ((twicePatchedTray.match(/ANTIGRAVITY_RU_TRAY_START/g) || []).length !== 2) {
     fail("Tray patch is not idempotent.");
   }
+  const layoutFixture = parseAsarPackingEntries("pack   : \\dist\nunpack : \\node_modules\\native-addon\n");
+  if (layoutFixture.get("dist") !== "pack" || layoutFixture.get("node_modules/native-addon") !== "unpack") {
+    fail("ASAR external-resource layout parsing is invalid.");
+  }
+  if (!compactToolOutput("x".repeat(5000)).includes("output truncated")) {
+    fail("ASAR diagnostic output is not bounded.");
+  }
   console.log(`Self-test passed: ${Object.keys(dictionary).length} static entries; no remote translation route.`);
 }
 
-function npxSelfTest() {
-  npx(["-y", "@electron/asar", "--version"]);
-  console.log("@electron/asar launch test passed.");
+function dependencyCheck() {
+  asar(["--version"]);
+  console.log(`Pinned @electron/asar ${ASAR_VERSION} dependency check passed.`);
 }
 
 try {
   if (process.argv.includes("--self-test")) selfTest();
-  else if (process.argv.includes("--npx-self-test")) npxSelfTest();
+  else if (process.argv.includes("--dependency-check") || process.argv.includes("--npx-self-test")) dependencyCheck();
   else if (process.argv.includes("--inspect")) inspect();
   else if (process.argv.includes("--restore")) restore();
   else install();

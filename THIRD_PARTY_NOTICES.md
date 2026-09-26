@@ -29,3 +29,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+`@electron/asar` 4.3.0 is installed by `npm ci` from the lock file and is not
+vendored in this repository. It is an MIT-licensed Electron Archive CLI:
+<https://github.com/electron/asar>. It is used only to unpack, repack and list
+the user's local ASAR archive.
+
+The locked dependency graph was checked on 2026-09-26. In addition to
+`@electron/asar` 4.3.0 (MIT), it contains `balanced-match` 4.0.4,
+`brace-expansion` 5.0.12 and `minipass` 7.1.3 (MIT), plus `glob` 13.0.6,
+`lru-cache` 11.5.3, `minimatch` 10.2.6 and `path-scurry` 2.0.2
+(BlueOak-1.0.0). Every resolved package has an integrity value in
+`package-lock.json`.

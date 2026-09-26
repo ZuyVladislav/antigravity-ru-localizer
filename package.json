@@ -1,0 +1,19 @@
+{
+  "name": "antigravity-ru-localizer",
+  "version": "2.17.0",
+  "description": "Local static Russian UI patcher for Google Antigravity 2.17.0",
+  "private": true,
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.12.0 <23"
+  },
+  "scripts": {
+    "test": "node localize-antigravity-ru.js --self-test && node localize-antigravity-ru.js --dependency-check",
+    "self-test": "node localize-antigravity-ru.js --self-test",
+    "dependency-check": "node localize-antigravity-ru.js --dependency-check"
+  },
+  "dependencies": {
+    "@electron/asar": "4.3.0"
+  }
+}

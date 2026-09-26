@@ -7,3 +7,7 @@ _temp_asar/
 node_modules/
 .vscode/
 *.log
+npm-debug.log*
+.npm/
+.DS_Store
+coverage/
