@@ -62,7 +62,7 @@ function readExpandedDictionary(sourcePath) {
 const dictionary = {
   ...readExpandedDictionary(expandedSourcePath),
   ...readBaseDictionary(baseSourcePath),
-  // Present in Antigravity 2.17.0 but missing from the reviewed phrase source.
+  // Present in Antigravity 2.18.1 but missing from the reviewed phrase source.
   "No Project": "Без проекта",
   "Model": "Модель",
   "View Usage": "Использование",

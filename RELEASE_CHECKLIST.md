@@ -16,7 +16,7 @@ request.
 - [ ] Run a secret scan of the complete reachable Git history, not only the
       working tree.
 - [ ] Test install and `--restore` on a disposable copy of the matching
-      Antigravity 2.17.0 installation. Do not test on an active work profile.
+      Antigravity 2.18.1 installation. Do not test on an active work profile.
 - [ ] Recheck the current Google terms and application-integrity behaviour.
 - [ ] Confirm that release notes state the supported Antigravity version and
       that the project is unofficial.

@@ -19,7 +19,7 @@ account data, prompts, chats, browser state or local backup files.
 ## Compatibility research boundary
 
 `Silas-02/antigravity-desktop-cn` was reviewed only to understand the expected
-Antigravity 2.17.0 resource layout. Its local source checkout has no tracked
+Antigravity 2.18.1 resource layout. Its local source checkout has no tracked
 licence file. Therefore no source code, dictionary, binary or asset from that
 project is included or accepted as a dependency in this repository.
 

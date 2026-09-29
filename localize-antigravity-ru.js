@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.17.0.
+// Local, static Russian UI localization for Google Antigravity 2.18.1.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,6 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
+const SUPPORTED_APP_VERSION = "2.18.1";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -323,6 +324,23 @@ function loadDictionary() {
   return dictionary;
 }
 
+function assertSupportedAppVersion(unpacked) {
+  const manifestPath = path.join(unpacked, "package.json");
+  if (!fs.existsSync(manifestPath)) {
+    fail("Antigravity package.json was not found after extraction.");
+  }
+  let appVersion;
+  try {
+    appVersion = String(JSON.parse(fs.readFileSync(manifestPath, "utf8")).version || "");
+  } catch (error) {
+    fail(`Could not read the Antigravity package version: ${error.message}`);
+  }
+  if (appVersion !== SUPPORTED_APP_VERSION) {
+    fail(`This localizer supports only Antigravity ${SUPPORTED_APP_VERSION}; found ${appVersion || "unknown"}. Download a matching localizer release instead of patching an unverified version.`);
+  }
+  return appVersion;
+}
+
 function makePreloadScript(dictionary) {
   const dictionaryJson = JSON.stringify(dictionary);
   return `${START}
@@ -438,7 +456,7 @@ ${END}`;
 function patchMenu(content) {
   const cleaned = removeMarkedBlock(content, MENU_START, MENU_END);
   const target = "electron_1.Menu.setApplicationMenu(menu);";
-  if (!cleaned.includes(target)) fail("Antigravity 2.17.0 menu insertion point was not found.");
+  if (!cleaned.includes(target)) fail(`Antigravity ${SUPPORTED_APP_VERSION} menu insertion point was not found.`);
   const translations = {
     File: "Файл", Edit: "Правка", View: "Вид", Window: "Окно", Help: "Справка",
     "New Window": "Новое окно", "Create Project": "Создать проект", "Command Palette": "Палитра команд",
@@ -513,12 +531,6 @@ function install() {
   const backupPath = path.join(resources, ORIGINAL_BACKUP_NAME);
   const appBundle = process.platform === "darwin" ? macAppBundle(resources) : null;
   const dictionary = loadDictionary();
-  if (!fs.existsSync(backupPath)) {
-    fs.copyFileSync(asarPath, backupPath);
-  } else {
-    fs.copyFileSync(backupPath, asarPath);
-  }
-  const originalHash = sha256(backupPath);
   const work = fs.mkdtempSync(path.join(os.tmpdir(), "antigravity-ru-"));
   const unpacked = path.join(work, "unpacked");
   const packed = path.join(work, "app.asar");
@@ -526,11 +538,22 @@ function install() {
     const packing = buildPackingArguments(asarPath);
     asar(["extract", asarPath, unpacked]);
     const preloadPath = path.join(unpacked, "dist", "preload.js");
-    if (!fs.existsSync(preloadPath)) fail("Antigravity 2.17.0 preload.js was not found after extraction.");
-    const preload = removeMarkedBlock(fs.readFileSync(preloadPath, "utf8"), START, END);
+    const appVersion = assertSupportedAppVersion(unpacked);
+    if (!fs.existsSync(preloadPath)) fail(`Antigravity ${SUPPORTED_APP_VERSION} preload.js was not found after extraction.`);
+    const installedPreload = fs.readFileSync(preloadPath, "utf8");
+    const alreadyLocalized = installedPreload.includes(START);
+    if (!alreadyLocalized) {
+      // An Antigravity update replaces app.asar. Refresh the rollback copy from
+      // that new pristine archive instead of restoring a stale previous-version backup.
+      fs.copyFileSync(asarPath, backupPath);
+    } else if (!fs.existsSync(backupPath)) {
+      fail("The installed archive is already localized, but its original backup is missing. Reinstall Antigravity before patching it again.");
+    }
+    const originalHash = sha256(backupPath);
+    const preload = removeMarkedBlock(installedPreload, START, END);
     fs.writeFileSync(preloadPath, `${preload}\n${makePreloadScript(dictionary)}\n`, "utf8");
     const menuPath = path.join(unpacked, "dist", "menu.js");
-    if (!fs.existsSync(menuPath)) fail("Antigravity 2.17.0 menu.js was not found after extraction.");
+    if (!fs.existsSync(menuPath)) fail(`Antigravity ${SUPPORTED_APP_VERSION} menu.js was not found after extraction.`);
     fs.writeFileSync(menuPath, patchMenu(fs.readFileSync(menuPath, "utf8")), "utf8");
     const trayPath = path.join(unpacked, "dist", "tray.js");
     if (fs.existsSync(trayPath)) fs.writeFileSync(trayPath, patchTray(fs.readFileSync(trayPath, "utf8")), "utf8");
@@ -554,7 +577,9 @@ function install() {
     }
     const manifest = {
       product: "Google Antigravity",
-      expectedVersion: "2.17.0",
+      expectedVersion: SUPPORTED_APP_VERSION,
+      actualVersion: appVersion,
+      alreadyLocalized,
       localizedAt: new Date().toISOString(),
       resources,
       originalSha256: originalHash,
@@ -600,7 +625,7 @@ function selfTest() {
     if (!macResources.includes(requiredMacPath)) fail(`macOS resource directory is missing: ${requiredMacPath}`);
   }
   if (dictionary["New Conversation"] !== "Новый диалог" || dictionary["No Project"] !== "Без проекта" || dictionary["Model"] !== "Модель" || dictionary["Agent terminated due to error"] !== "Агент остановлен из-за ошибки") {
-    fail("Required Antigravity 2.17.0 UI labels are missing from the dictionary.");
+    fail(`Required Antigravity ${SUPPORTED_APP_VERSION} UI labels are missing from the dictionary.`);
   }
   if (/[\p{Script=Han}]/u.test(JSON.stringify(dictionary))) {
     fail("Russian dictionary unexpectedly contains Chinese text.");
@@ -628,6 +653,23 @@ function selfTest() {
   }
   if (!compactToolOutput("x".repeat(5000)).includes("output truncated")) {
     fail("ASAR diagnostic output is not bounded.");
+  }
+  const versionFixture = fs.mkdtempSync(path.join(os.tmpdir(), "antigravity-ru-version-test-"));
+  try {
+    fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: SUPPORTED_APP_VERSION }), "utf8");
+    if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
+      fail("Supported Antigravity version detection is invalid.");
+    }
+    fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: "0.0.0" }), "utf8");
+    let rejected = false;
+    try {
+      assertSupportedAppVersion(versionFixture);
+    } catch (error) {
+      rejected = error.message.includes(SUPPORTED_APP_VERSION);
+    }
+    if (!rejected) fail("Unsupported Antigravity versions are not rejected.");
+  } finally {
+    fs.rmSync(versionFixture, { recursive: true, force: true });
   }
   console.log(`Self-test passed: ${Object.keys(dictionary).length} static entries; no remote translation route.`);
 }
