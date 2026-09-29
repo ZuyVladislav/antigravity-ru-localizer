@@ -17,6 +17,11 @@ request.
       working tree.
 - [ ] Test install and `--restore` on a disposable copy of the matching
       Antigravity 2.18.1 installation. Do not test on an active work profile.
+- [ ] Confirm the GitHub Actions matrix passes on Windows, Linux and macOS,
+      including the Linux/macOS synthetic `install -> verify -> restore` smoke
+      test and macOS ad-hoc signature verification.
+- [ ] Package Unix downloads as `.tar.gz` so executable bits on `.sh` and
+      `.command` files are preserved.
 - [ ] Recheck the current Google terms and application-integrity behaviour.
 - [ ] Confirm that release notes state the supported Antigravity version and
       that the project is unofficial.

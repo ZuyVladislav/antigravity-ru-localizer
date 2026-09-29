@@ -28,6 +28,7 @@ npm test
 ```powershell
 node localize-antigravity-ru.js --inspect
 node localize-antigravity-ru.js
+node localize-antigravity-ru.js --verify
 ```
 
 Откат:
@@ -38,75 +39,90 @@ node localize-antigravity-ru.js --restore
 
 ## Linux
 
-Поддержаны распакованная и системная установки. Скрипт автоматически ищет `app.asar` в:
+Официальные сборки x64 и ARM64 поддерживаются одинаково: русификатор изменяет JavaScript-архив приложения и не зависит от архитектуры процессора. Удобный установщик сам проверяет Node.js, при необходимости выполняет `npm ci --ignore-scripts`, находит приложение, не позволяет менять файлы запущенной Antigravity и после установки выполняет полную проверку:
+
+```bash
+chmod +x scripts/install-linux.sh scripts/install-unix.sh
+./scripts/install-linux.sh inspect
+./scripts/install-linux.sh install
+```
+
+Проверка и откат:
+
+```bash
+./scripts/install-linux.sh verify
+./scripts/install-linux.sh restore
+```
+
+Для системной установки установщик сам вызывает `sudo` только для патчера. Зависимости всегда устанавливаются заранее от имени обычного пользователя.
+
+Поддержаны официальные DEB/RPM-пакеты, распакованный tarball и пользовательские установки. Скрипт автоматически ищет `app.asar` в:
 
 ```text
 /opt/antigravity/resources
 /opt/Antigravity/resources
+/opt/Antigravity/Antigravity-x64/resources
+/opt/Antigravity/Antigravity-arm64/resources
+/usr/share/antigravity/resources
+/usr/lib/antigravity/resources
+/usr/lib64/antigravity/resources
 ~/.local/opt/antigravity/resources
 ~/.local/opt/Antigravity/resources
 ~/.local/share/antigravity/resources
+~/.local/share/Antigravity/resources
 ~/Applications/antigravity/resources
 ~/Applications/Antigravity/resources
-```
-
-Сначала проверьте выбранный путь без изменений:
-
-```bash
-node localize-antigravity-ru.js --inspect
 ```
 
 Если Antigravity распакован в другую директорию, явно передайте абсолютный путь ровно к папке `resources`:
 
 ```bash
-node localize-antigravity-ru.js --resources="$HOME/Applications/Antigravity/resources" --inspect
-node localize-antigravity-ru.js --resources="$HOME/Applications/Antigravity/resources"
-```
-
-Для системной установки в `/opt` необходимы права на запись в эту папку:
-
-```bash
-sudo node localize-antigravity-ru.js --resources=/opt/antigravity/resources --inspect
-sudo node localize-antigravity-ru.js --resources=/opt/antigravity/resources
-```
-
-Откат выполняется тем же путём:
-
-```bash
-sudo node localize-antigravity-ru.js --resources=/opt/antigravity/resources --restore
+./scripts/install-linux.sh inspect --resources="$HOME/Applications/Antigravity/resources"
+./scripts/install-linux.sh install --resources="$HOME/Applications/Antigravity/resources"
 ```
 
 AppImage не изменяется в работающем смонтированном образе. Распакуйте его в постоянную директорию либо используйте tarball-установку, затем укажите папку `resources`.
 
 ## macOS
 
-Поддерживается самостоятельное приложение `Antigravity.app`, а не отдельная Antigravity IDE с распакованной структурой файлов. Скрипт ищет:
+Поддерживаются Apple Silicon и Intel начиная с macOS 12 — код русификатора одинаков для обеих архитектур. Поддерживается самостоятельное приложение `Antigravity.app`, а не отдельная Antigravity IDE с распакованной структурой файлов. Скрипт ищет:
 
 ```text
 /Applications/Antigravity.app/Contents/Resources
 ~/Applications/Antigravity.app/Contents/Resources
 ```
 
-Сначала проверьте путь:
+Закройте Antigravity, сделайте установщики исполняемыми и запустите:
 
 ```bash
-node localize-antigravity-ru.js --inspect
+chmod +x scripts/install-macos.command scripts/install-unix.sh
+./scripts/install-macos.command inspect
+./scripts/install-macos.command install
 ```
 
-Для приложения в `/Applications` обычно требуются права администратора:
+Проверка и откат:
 
 ```bash
-sudo node localize-antigravity-ru.js --resources=/Applications/Antigravity.app/Contents/Resources --inspect
-sudo node localize-antigravity-ru.js --resources=/Applications/Antigravity.app/Contents/Resources
+./scripts/install-macos.command verify
+./scripts/install-macos.command restore
 ```
 
-После установки и отката скрипт автоматически применяет локальную ad-hoc подпись через системный `codesign`, а затем проверяет её. Она заменяет подпись Google только у изменённой локальной копии приложения; следующая официальная установка или обновление вернёт исходный `app.asar`.
-
-Откат:
+Если приложение находится в `/Applications`, установщик сам запросит права администратора для изменения этой копии. Явный путь с правильным для macOS регистром также поддержан:
 
 ```bash
-sudo node localize-antigravity-ru.js --resources=/Applications/Antigravity.app/Contents/Resources --restore
+./scripts/install-macos.command install --resources=/Applications/Antigravity.app/Contents/Resources
 ```
+
+После установки и отката скрипт автоматически применяет локальную ad-hoc подпись через системный `codesign`, сохраняет доступные метаданные предыдущей подписи и проверяет всю структуру приложения командами `--deep --strict`. Она заменяет подпись Google только у изменённой локальной копии приложения; следующая официальная установка или обновление вернёт исходный `app.asar`.
+
+Ручные команды для диагностики остаются доступны на обеих системах:
+
+```bash
+node localize-antigravity-ru.js --resources=/absolute/path/to/resources --inspect
+node localize-antigravity-ru.js --resources=/absolute/path/to/resources --verify
+```
+
+CI запускает одинаковые проверки словаря и структуры на Windows, Linux и macOS. На Linux и macOS дополнительно создаётся синтетическая Electron-установка, после чего проверяется полный цикл `install → verify → restore`; в macOS в этот цикл входит локальная подпись и её строгая проверка. Реальный интерфейс всё равно нужно визуально проверить на целевой машине после запуска приложения.
 
 Словарь собран только из статических блоков `DICT` MIT-проекта `j46871417-ui/Antigravity-Localizer` (commit `8a6954cd1852397e893e9e60f08dea3f1f92fb35`). Его правила и функции онлайн-перевода не используются. Публичный пакет не содержит исходников, словарей или ресурсов других русификаторов; происхождение и границы сторонних материалов описаны в `PROVENANCE.md` и `THIRD_PARTY_NOTICES.md`. Точки встраивания отдельно проверяются для Antigravity 2.18.1.
 

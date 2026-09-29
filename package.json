@@ -11,7 +11,8 @@
   "scripts": {
     "test": "node localize-antigravity-ru.js --self-test && node localize-antigravity-ru.js --dependency-check",
     "self-test": "node localize-antigravity-ru.js --self-test",
-    "dependency-check": "node localize-antigravity-ru.js --dependency-check"
+    "dependency-check": "node localize-antigravity-ru.js --dependency-check",
+    "platform-smoke-test": "node scripts/platform-smoke-test.js"
   },
   "dependencies": {
     "@electron/asar": "4.3.0"

@@ -10,7 +10,11 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-14, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,3 +23,9 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm test
+      - if: runner.os != 'Windows'
+        run: npm run platform-smoke-test
+      - if: runner.os == 'Linux'
+        run: bash scripts/install-linux.sh --help
+      - if: runner.os == 'macOS'
+        run: bash scripts/install-macos.command --help
