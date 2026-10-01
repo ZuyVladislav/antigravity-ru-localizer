@@ -1,7 +1,7 @@
 {
   "name": "antigravity-ru-localizer",
-  "version": "2.18.1",
-  "description": "Local static Russian UI patcher for Google Antigravity 2.18.1",
+  "version": "2.19.1",
+  "description": "Local static Russian UI patcher for Google Antigravity 2.19.1",
   "private": true,
   "license": "MIT",
   "type": "commonjs",

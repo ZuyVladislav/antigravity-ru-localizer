@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.18.1.
+// Local, static Russian UI localization for Google Antigravity 2.19.1.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.18.1";
+const SUPPORTED_APP_VERSION = "2.19.1";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -400,6 +400,84 @@ function assertSupportedAppVersion(unpacked) {
   return appVersion;
 }
 
+const PERMISSION_SCOPES = [
+  ["when not in a project", "вне проекта"],
+  ["in this conversation", "в этом диалоге"],
+  ["in this project", "в этом проекте"],
+  ["in this workspace", "в этом рабочем пространстве"],
+  ["in all projects", "во всех проектах"],
+  ["globally", "глобально"],
+];
+const PERMISSION_PREFIXES = [
+  ["Yes, and always allow", "Да, всегда разрешать"],
+  ["Yes, save rule for", "Да, сохранить правило для"],
+  ["Yes, save rule", "Да, сохранить правило"],
+  ["Да, всегда разрешать", "Да, всегда разрешать"],
+  ["Да, сохранить правило", "Да, сохранить правило"],
+];
+
+// Keep variable UI labels separate from the exact-match dictionary. This
+// function is also embedded in the preload, so its behavior is tested here.
+function translateDynamicUiText(value) {
+  if (/^No\s*\(tell the agent what to do instead\)$/i.test(value)) {
+    return "Нет (указать агенту другой вариант)";
+  }
+  if (/^\(tell the agent what to do instead\)$/i.test(value)) {
+    return "(указать агенту другой вариант)";
+  }
+  if (/^tell the agent what to do instead$/i.test(value)) {
+    return "указать агенту другой вариант";
+  }
+
+  const lowerValue = value.toLowerCase();
+  for (const [english, russian] of PERMISSION_SCOPES) {
+    if (lowerValue === english) return russian;
+  }
+  for (const [english, russian] of PERMISSION_PREFIXES) {
+    if (lowerValue === english.toLowerCase()) return russian;
+    if (!lowerValue.startsWith(english.toLowerCase() + " ")) continue;
+    let remainder = value.slice(english.length);
+    for (const [scope, translation] of PERMISSION_SCOPES) {
+      if (remainder.toLowerCase().endsWith(" " + scope)) {
+        remainder = remainder.slice(0, -scope.length) + translation;
+        break;
+      }
+    }
+    return russian + remainder;
+  }
+
+  if (/^Searching web$/i.test(value)) return "Поиск в интернете";
+  let match = /^Explored\s+(\d+)\s+search(?:es)?,\s*ran\s+(\d+)\s+commands?$/i.exec(value);
+  if (match) return `Выполнено поисковых запросов: ${match[1]}; команд: ${match[2]}`;
+  match = /^Explored\s+(\d+)\s+search(?:es)?$/i.exec(value);
+  if (match) return `Выполнено поисковых запросов: ${match[1]}`;
+  match = /^Exploring\s+(\d+)\s+search(?:es)?$/i.exec(value);
+  if (match) {
+    const n = Number(match[1]);
+    const word = n % 100 >= 11 && n % 100 <= 14 ? "запросов" : n % 10 === 1 ? "запрос" : n % 10 >= 2 && n % 10 <= 4 ? "запроса" : "запросов";
+    return `Идёт поиск: ${match[1]} ${word}`;
+  }
+  match = /^Ran\s+(\d+)\s+commands?$/i.exec(value);
+  if (match) return `Выполнено команд: ${match[1]}`;
+  match = /^Running\s+(\d+)\s+commands?$/i.exec(value);
+  if (match) return `Выполняется команд: ${match[1]}`;
+
+  if (value === "Resets in") return "Сброс через";
+  match = /^Resets in\s+(.+)$/i.exec(value);
+  if (match) {
+    if (match[1] === "<1m") return "Сброс менее чем через 1 мин.";
+    const parts = match[1].match(/\d+\s*[dhms]/gi);
+    if (parts && parts.join(" ").replace(/\s+/g, "") === match[1].replace(/\s+/g, "")) {
+      const units = { d: "д.", h: "ч.", m: "мин.", s: "с." };
+      return "Сброс через " + parts.map((part) => {
+        const item = /^(\d+)\s*([dhms])$/i.exec(part);
+        return `${item[1]} ${units[item[2].toLowerCase()]}`;
+      }).join(" ");
+    }
+  }
+  return null;
+}
+
 function makePreloadScript(dictionary) {
   const dictionaryJson = JSON.stringify(dictionary);
   return `${START}
@@ -415,6 +493,9 @@ function makePreloadScript(dictionary) {
   const blockedSelectors = ["[contenteditable='true']", "[data-testid='user-input-step']", "[data-ag-localization-skip]", "[data-message-id]", "[data-turn-id]", "[data-testid*='message']", "article", "pre", "code", "textarea", "input"];
 
   const normalize = (value) => String(value || "").replace(/\\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
+  const PERMISSION_SCOPES = ${JSON.stringify(PERMISSION_SCOPES)};
+  const PERMISSION_PREFIXES = ${JSON.stringify(PERMISSION_PREFIXES)};
+  const translateDynamicUiText = ${translateDynamicUiText.toString()};
   const permissionTitles = new Map([
     ["Allow checking Docker contexts and Postgres service path?", "Разрешить проверку контекстов Docker и пути к службе PostgreSQL?"],
   ]);
@@ -440,6 +521,8 @@ function makePreloadScript(dictionary) {
   const translationFor = (value) => {
     const normalized = normalize(value);
     if (!normalized) return null;
+    const dynamicTranslation = translateDynamicUiText(normalized);
+    if (dynamicTranslation) return dynamicTranslation;
     const permissionTranslation = translatePermissionText(normalized);
     if (permissionTranslation) return permissionTranslation;
     return exact.get(normalized) || lower.get(normalized.toLowerCase()) || null;
@@ -555,9 +638,9 @@ function patchTray(content) {
     "Connect to WSL": "Подключиться к WSL",
     "Reopen Locally": "Открыть локально",
   };
-  const createTarget = "function createTray(actions) {";
-  if (patched.includes(createTarget)) {
-    patched = patched.replace(createTarget, `${createTarget}\n${TRAY_START}\nconst antigravityRuTray = ${JSON.stringify(translations)};\nfor (const item of actions || []) if (antigravityRuTray[item.label]) item.label = antigravityRuTray[item.label];\n${TRAY_END}`);
+  const createTarget = /function createTray\(actions(?:,\s*onClick)?\) \{/;
+  if (createTarget.test(patched)) {
+    patched = patched.replace(createTarget, (target) => `${target}\n${TRAY_START}\nconst antigravityRuTray = ${JSON.stringify(translations)};\nfor (const item of actions || []) if (antigravityRuTray[item.label]) item.label = antigravityRuTray[item.label];\n${TRAY_END}`);
   }
   const insertTarget = "function insertTrayMenuItem(position, options) {";
   if (patched.includes(insertTarget)) {
@@ -697,6 +780,30 @@ function selfTest() {
   if (dictionary["New Conversation"] !== "Новый диалог" || dictionary["No Project"] !== "Без проекта" || dictionary["Model"] !== "Модель" || dictionary["Agent terminated due to error"] !== "Агент остановлен из-за ошибки") {
     fail(`Required Antigravity ${SUPPORTED_APP_VERSION} UI labels are missing from the dictionary.`);
   }
+  const dynamicFixtures = [
+    ["Yes, and always allow", "Да, всегда разрешать"],
+    ["Yes, and always allow in this conversation", "Да, всегда разрешать в этом диалоге"],
+    ["Да, всегда разрешать in this conversation", "Да, всегда разрешать в этом диалоге"],
+    ["Yes, and always allow 'corsairs-harbour.ru' in this project", "Да, всегда разрешать 'corsairs-harbour.ru' в этом проекте"],
+    ["Yes, save rule for 'corsairs-harbour.ru' globally", "Да, сохранить правило для 'corsairs-harbour.ru' глобально"],
+    ["No (tell the agent what to do instead)", "Нет (указать агенту другой вариант)"],
+    ["(tell the agent what to do instead)", "(указать агенту другой вариант)"],
+    ["Explored 3 searches, ran 9 commands", "Выполнено поисковых запросов: 3; команд: 9"],
+    ["Exploring 2 searches", "Идёт поиск: 2 запроса"],
+    ["Ran 4 commands", "Выполнено команд: 4"],
+    ["Searching web", "Поиск в интернете"],
+    ["Resets in 1d", "Сброс через 1 д."],
+    ["Resets in 57m", "Сброс через 57 мин."],
+    ["Resets in 1d 2h", "Сброс через 1 д. 2 ч."],
+    ["Resets in <1m", "Сброс менее чем через 1 мин."],
+    ["I explored 3 searches", null],
+    ["pwsh -Command docker context ls", null],
+  ];
+  for (const [source, expected] of dynamicFixtures) {
+    if (translateDynamicUiText(source) !== expected) {
+      fail(`Dynamic UI translation failed for ${JSON.stringify(source)}.`);
+    }
+  }
   if (/[\p{Script=Han}]/u.test(JSON.stringify(dictionary))) {
     fail("Russian dictionary unexpectedly contains Chinese text.");
   }
@@ -712,10 +819,13 @@ function selfTest() {
   if ((twicePatchedMenu.match(/ANTIGRAVITY_RU_MENU_START/g) || []).length !== 1) {
     fail("Menu patch is not idempotent.");
   }
-  const trayFixture = "function createTray(actions) {}\nfunction insertTrayMenuItem(position, options) {}";
+  const trayFixture = "function createTray(actions, onClick) {}\nfunction insertTrayMenuItem(position, options) {}";
   const twicePatchedTray = patchTray(patchTray(trayFixture));
   if ((twicePatchedTray.match(/ANTIGRAVITY_RU_TRAY_START/g) || []).length !== 2) {
     fail("Tray patch is not idempotent.");
+  }
+  if (!twicePatchedTray.includes("const antigravityRuTray =")) {
+    fail("Antigravity 2.19.1 tray menu was not localized.");
   }
   const layoutFixture = parseAsarPackingEntries("pack   : \\dist\nunpack : \\node_modules\\native-addon\n");
   if (layoutFixture.get("dist") !== "pack" || layoutFixture.get("node_modules/native-addon") !== "unpack") {
