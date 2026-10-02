@@ -446,8 +446,16 @@ function translateDynamicUiText(value) {
     return russian + remainder;
   }
 
+  let match = /^Show\s+(\d+)\s+breakdowns?$/i.exec(value);
+  if (match) return "Показать детализацию (" + match[1] + ")";
+  match = /^([\d][\d.,\s]*)\/\s*([\d][\d.,\s]*)\s+tokens(?:\s+(\([^)]*\)))?$/i.exec(value);
+  if (match) {
+    const percentage = match[3] ? " " + match[3] : "";
+    return match[1].trim() + " / " + match[2].trim() + " токенов" + percentage;
+  }
+
   if (/^Searching web$/i.test(value)) return "Поиск в интернете";
-  let match = /^Explored\s+(\d+)\s+search(?:es)?,\s*ran\s+(\d+)\s+commands?$/i.exec(value);
+  match = /^Explored\s+(\d+)\s+search(?:es)?,\s*ran\s+(\d+)\s+commands?$/i.exec(value);
   if (match) return `Выполнено поисковых запросов: ${match[1]}; команд: ${match[2]}`;
   match = /^Explored\s+(\d+)\s+search(?:es)?$/i.exec(value);
   if (match) return `Выполнено поисковых запросов: ${match[1]}`;
@@ -527,13 +535,18 @@ function makePreloadScript(dictionary) {
     if (permissionTranslation) return permissionTranslation;
     return exact.get(normalized) || lower.get(normalized.toLowerCase()) || null;
   };
-  const isBlocked = (node) => {
-    let current = node && (node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement);
+  const isBlocked = (node, allowFormFieldAttributes = false) => {
+    const target = node && (node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement);
+    let current = target;
     while (current) {
       if (current.nodeType !== Node.ELEMENT_NODE) return true;
-      if (blockedTags.has(current.tagName)) return true;
+      const isTargetFormField = allowFormFieldAttributes && current === target && /^(INPUT|TEXTAREA)$/.test(current.tagName);
+      if (blockedTags.has(current.tagName) && !isTargetFormField) return true;
       if (current.getAttribute("translate") === "no") return true;
-      if (blockedSelectors.some((selector) => current.matches(selector))) return true;
+      if (blockedSelectors.some((selector) => {
+        if (isTargetFormField && (selector === "input" || selector === "textarea")) return false;
+        return current.matches(selector);
+      })) return true;
       const classes = typeof current.className === "string" ? current.className : "";
       if (blockedClasses.some((className) => classes.includes(className))) return true;
       current = current.parentElement;
@@ -550,8 +563,10 @@ function makePreloadScript(dictionary) {
     node.nodeValue = leading + translated + trailing;
   };
   const translateAttributes = (element) => {
-    if (!element || isBlocked(element)) return;
+    const isFormField = element && /^(INPUT|TEXTAREA)$/.test(element.tagName);
+    if (!element || isBlocked(element, isFormField)) return;
     for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder"]) {
+      if (isFormField && attribute !== "placeholder" && attribute !== "aria-placeholder") continue;
       const source = element.getAttribute(attribute);
       const translated = translationFor(source);
       if (translated && translated !== source) element.setAttribute(attribute, translated);
@@ -562,7 +577,10 @@ function makePreloadScript(dictionary) {
     const owner = root.ownerDocument || document;
     const walker = owner.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
-        if (node.nodeType === Node.ELEMENT_NODE && isBlocked(node)) return NodeFilter.FILTER_REJECT;
+        if (node.nodeType === Node.ELEMENT_NODE && isBlocked(node)) {
+          const isFormField = /^(INPUT|TEXTAREA)$/.test(node.tagName);
+          if (!isFormField || isBlocked(node, true)) return NodeFilter.FILTER_REJECT;
+        }
         return NodeFilter.FILTER_ACCEPT;
       },
     });
@@ -587,7 +605,7 @@ function makePreloadScript(dictionary) {
   };
   const observe = () => {
     schedule();
-    new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "data-placeholder"] });
+    new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "aria-placeholder", "data-placeholder"] });
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observe, { once: true });
   else observe();
@@ -780,6 +798,18 @@ function selfTest() {
   if (dictionary["New Conversation"] !== "Новый диалог" || dictionary["No Project"] !== "Без проекта" || dictionary["Model"] !== "Модель" || dictionary["Agent terminated due to error"] !== "Агент остановлен из-за ошибки") {
     fail(`Required Antigravity ${SUPPORTED_APP_VERSION} UI labels are missing from the dictionary.`);
   }
+  const screenshotTranslations = [
+    ["Windows Subsystem for Linux", "Подсистема Windows для Linux"],
+    ["Run the app against a Linux environment. Connecting relaunches the app into the selected WSL distro.", "Запуск приложения в среде Linux. При подключении приложение перезапустится в выбранном дистрибутиве WSL."],
+    ["Other Customizations", "Другие настройки"],
+    ["Remote Control Issue", "Проблема с удалённым управлением"],
+    ["Describe the bug you encountered...", "Опишите обнаруженную ошибку..."],
+    ["Please describe the issue in detail. The more actionable your feedback, the quicker our team can address your request. Some helpful information includes:", "Подробно опишите проблему. Чем точнее будут сведения, тем быстрее команда сможет её решить. Полезно указать:"],
+    ["The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.", "Здесь показан расход токенов на настройки: правила, навыки и MCP. При превышении лимита большие правила заменяются ссылками на файлы, а крупные настройки автоматически исключаются."],
+  ];
+  for (const [source, expected] of screenshotTranslations) {
+    if (dictionary[source] !== expected) fail("Screenshot UI translation is missing for " + JSON.stringify(source) + ".");
+  }
   const dynamicFixtures = [
     ["Yes, and always allow", "Да, всегда разрешать"],
     ["Yes, and always allow in this conversation", "Да, всегда разрешать в этом диалоге"],
@@ -796,6 +826,10 @@ function selfTest() {
     ["Resets in 57m", "Сброс через 57 мин."],
     ["Resets in 1d 2h", "Сброс через 1 д. 2 ч."],
     ["Resets in <1m", "Сброс менее чем через 1 мин."],
+    ["Show 1 breakdown", "Показать детализацию (1)"],
+    ["Show 3 breakdowns", "Показать детализацию (3)"],
+    ["97 / 20 000 tokens (0.5%)", "97 / 20 000 токенов (0.5%)"],
+    ["384 / 20,000 tokens (1.9%)", "384 / 20,000 токенов (1.9%)"],
     ["I explored 3 searches", null],
     ["pwsh -Command docker context ls", null],
   ];
@@ -803,6 +837,9 @@ function selfTest() {
     if (translateDynamicUiText(source) !== expected) {
       fail(`Dynamic UI translation failed for ${JSON.stringify(source)}.`);
     }
+  }
+  if (!injected.includes('attribute !== "placeholder" && attribute !== "aria-placeholder"') || !injected.includes("if (!isFormField || isBlocked(node, true))")) {
+    fail("Form-field localization must translate only fixed placeholders while preserving entered values.");
   }
   if (/[\p{Script=Han}]/u.test(JSON.stringify(dictionary))) {
     fail("Russian dictionary unexpectedly contains Chinese text.");
