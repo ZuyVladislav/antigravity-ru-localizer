@@ -448,6 +448,8 @@ function translateDynamicUiText(value) {
 
   let match = /^Show\s+(\d+)\s+breakdowns?$/i.exec(value);
   if (match) return "Показать детализацию (" + match[1] + ")";
+  match = /^(\d+)\s+tools?\s+(enabled|disabled)$/i.exec(value);
+  if (match) return "Инструментов " + (match[2].toLowerCase() === "enabled" ? "включено: " : "отключено: ") + match[1];
   match = /^([\d][\d.,\s]*)\/\s*([\d][\d.,\s]*)\s+tokens(?:\s+(\([^)]*\)))?$/i.exec(value);
   if (match) {
     const percentage = match[3] ? " " + match[3] : "";
@@ -486,6 +488,29 @@ function translateDynamicUiText(value) {
   return null;
 }
 
+// Known public catalogue descriptions only. Some cards truncate their text
+// before it reaches the DOM; show a fixed Russian summary for those entries.
+// These mappings never edit a skill's source, instructions, ID or server name.
+const CATALOG_DESCRIPTIONS = [
+  ["Interactive guide to design and create a scheduled background automation.", "Руководство по созданию фоновых задач по расписанию: ежедневные сводки, еженедельные списки дел и другие повторяющиеся задания. Также открывается командой /automation."],
+  ["Manage the separately connected second Gmail account used as a reserve mailbox and for service registrations, security notices, and account recovery.", "Работа с отдельно подключённым вторым Gmail для регистраций в сервисах, уведомлений безопасности и восстановления доступа. Поиск и чтение писем, очистка, метки, архивирование, вложения и подготовка сообщений в указанном втором ящике."],
+  ["How to manage and create plugins — namespaced bundles of skills, agents, rules, MCP servers and hooks", "Управление и создание плагинов — комплектов навыков, агентов, правил, серверов MCP и обработчиков, которые устанавливаются, включаются и отключаются вместе. Установка, удаление и создание плагинов; команда /plugin. Для отдельных навыков и правил используйте руководство по кастомизации."],
+  ["Build, package, run, and debug UI extensions for Antigravity:", "Создание, сборка, запуск и отладка расширений интерфейса Antigravity: интерактивных веб-панелей в боковой области. Панели обслуживаются отдельным процессом Node.js через встроенный Sidecar SDK."],
+  ["Discover UI plugin panels relevant to the current task and surface a one-click pill in chat", "Поиск панелей плагинов, полезных для текущей задачи, и добавление в чат кнопки для открытия панели в боковой области. Также используется после включения новой панели плагина."],
+  ["The Cloud Audit Manager remote MCP server allows you to enroll projects, generate audit and scope reports, and check resource enrollment statuses", "Удалённый сервер MCP Cloud Audit Manager позволяет подключать проекты к аудиту, создавать отчёты об аудите и его области и проверять состояние подключения ресурсов."],
+  ["Investigate and fix software issues using AI-powered root cause analysis. This MCP server connects to your Antimetal account", "Поиск и исправление проблем программного обеспечения с помощью ИИ-анализа причин. Сервер MCP подключается к аккаунту Antimetal для поиска проблем и чтения отчётов расследования."],
+  ["Query and act on your marketing, analytics, CRM, e-commerce, and warehouse data across 325+ connectors", "Запросы и операции с данными маркетинга, аналитики, CRM, интернет-магазинов и хранилищ через более 325 подключений, включая Meta Ads, Google Ads, TikTok Ads, GA4 и HubSpot."],
+  ["Query your GitLab SDLC as a knowledge graph. Orbit indexes", "Запросы к данным жизненного цикла разработки в GitLab в виде графа знаний. Orbit объединяет группы, проекты, исходный код, запросы на слияние, сборки, задачи и результаты проверок безопасности."],
+  ["Enable Antigravity to deploy apps to Google Cloud Run.", "Развёртывание приложений в Google Cloud Run через Antigravity."],
+];
+
+function translateCatalogDescription(value) {
+  for (const [source, translated] of CATALOG_DESCRIPTIONS) {
+    if (value === source || value.startsWith(source + " ") || value.startsWith(source + "...") || value.startsWith(source + "…")) return translated;
+  }
+  return null;
+}
+
 function makePreloadScript(dictionary) {
   const dictionaryJson = JSON.stringify(dictionary);
   return `${START}
@@ -504,6 +529,8 @@ function makePreloadScript(dictionary) {
   const PERMISSION_SCOPES = ${JSON.stringify(PERMISSION_SCOPES)};
   const PERMISSION_PREFIXES = ${JSON.stringify(PERMISSION_PREFIXES)};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
+  const CATALOG_DESCRIPTIONS = ${JSON.stringify(CATALOG_DESCRIPTIONS)};
+  const translateCatalogDescription = ${translateCatalogDescription.toString()};
   const permissionTitles = new Map([
     ["Allow checking Docker contexts and Postgres service path?", "Разрешить проверку контекстов Docker и пути к службе PostgreSQL?"],
   ]);
@@ -533,7 +560,7 @@ function makePreloadScript(dictionary) {
     if (dynamicTranslation) return dynamicTranslation;
     const permissionTranslation = translatePermissionText(normalized);
     if (permissionTranslation) return permissionTranslation;
-    return exact.get(normalized) || lower.get(normalized.toLowerCase()) || null;
+    return exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || null;
   };
   const isBlocked = (node, allowFormFieldAttributes = false) => {
     const target = node && (node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement);
@@ -770,6 +797,106 @@ function restore() {
   console.log(`Restored the original Antigravity app.asar from ${backupPath}`);
 }
 
+function selfTestPreloadDom(injected) {
+  // Execute the actual generated preload against a minimal DOM fixture.
+  // The fixture contains no application data and requires no browser process.
+  const Node = { ELEMENT_NODE: 1, TEXT_NODE: 3 };
+  const NodeFilter = { SHOW_ELEMENT: 1, SHOW_TEXT: 4, FILTER_ACCEPT: 1, FILTER_REJECT: 2 };
+  let document;
+  const element = (tag, attributes = {}, children = []) => {
+    const node = {
+      nodeType: Node.ELEMENT_NODE, tagName: tag.toUpperCase(),
+      className: attributes.class || "", children, attributes: { ...attributes },
+      parentElement: null, ownerDocument: document,
+      getAttribute(name) { return this.attributes[name] ?? null; },
+      setAttribute(name, value) { this.attributes[name] = value; },
+      matches(selector) {
+        if (!selector.startsWith("[")) return selector === this.tagName.toLowerCase();
+        const match = /^\[([\w-]+)(?:(\*?=)'([^']*)')?\]$/.exec(selector);
+        if (!match) throw new Error("Unsupported DOM fixture selector: " + selector);
+        const actual = this.getAttribute(match[1]);
+        if (!match[2]) return actual !== null;
+        return actual !== null && (match[2] === "*=" ? actual.includes(match[3]) : actual === match[3]);
+      },
+    };
+    for (const child of children) child.parentElement = node;
+    return node;
+  };
+  const text = (value) => ({ nodeType: Node.TEXT_NODE, nodeValue: value, parentElement: null, ownerDocument: document });
+  const jobs = [];
+  let mutationCallback;
+  document = {
+    readyState: "complete",
+    createTreeWalker(root, _whatToShow, filter) {
+      const nodes = [root];
+      const visit = (node) => {
+        if (filter.acceptNode(node) === NodeFilter.FILTER_REJECT) return;
+        nodes.push(node);
+        for (const child of node.children || []) visit(child);
+      };
+      for (const child of root.children || []) visit(child);
+      let index = 0;
+      return { currentNode: root, nextNode() { return nodes[++index] || null; } };
+    },
+  };
+  const uiLabel = text("Changes to third-party model access");
+  const uiCount = text("24 tools enabled");
+  const splitPlan = [text("and select"), text("plan"), text("to have the agent generate a plan.")];
+  const description = text(CATALOG_DESCRIPTIONS[3][0] + " interactive web panels...");
+  const preservedModels = ["Medium", "Thinking", "Economy", "High accuracy"].map(text);
+  const preservedNames = ["Windsor.ai", "Cloud Run", "ui-extension"].map(text);
+  const protectedText = [];
+  const protectedContainers = [];
+  for (const [tag, attributes] of [
+    ["pre", {}], ["code", {}], ["article", {}],
+    ["div", { class: "chat-message" }], ["div", { class: "user-message" }],
+    ["div", { class: "assistant-message markdown" }], ["div", { class: "prose" }],
+    ["div", { class: "monaco-editor" }], ["div", { class: "terminal" }],
+    ["div", { "data-message-id": "fixture-message" }], ["div", { "data-turn-id": "fixture-turn" }],
+    ["div", { "data-testid": "user-input-step" }], ["div", { "data-ag-localization-skip": "" }],
+    ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
+  ]) {
+    const leaves = [text("Model"), text("24 tools enabled"), text(CATALOG_DESCRIPTIONS[3][0])];
+    protectedText.push(...leaves.map(node => ({ node, original: node.nodeValue })));
+    protectedContainers.push(element(tag, attributes, leaves));
+  }
+  const input = element("input", { placeholder: "Search MCP servers by name", title: "Model", "aria-label": "Model", value: "Model" });
+  input.value = "User-entered Model";
+  const textarea = element("textarea", { placeholder: "Describe the bug you encountered...", value: "Model" });
+  textarea.value = "User-entered Medium";
+  const protectedInput = element("input", { placeholder: "Search MCP servers by name" });
+  const root = element("html", {}, [element("body", {}, [
+    element("div", {}, [uiLabel, uiCount, description, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
+    input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
+  ])]);
+  document.documentElement = root;
+  new vm.Script(injected).runInNewContext({ document, Node, NodeFilter,
+    queueMicrotask(callback) { jobs.push(callback); },
+    MutationObserver: class { constructor(callback) { mutationCallback = callback; } observe() {} },
+  });
+  const flush = () => { while (jobs.length) jobs.shift()(); };
+  flush();
+  const assert = (condition, message) => { if (!condition) fail("Preload DOM test: " + message); };
+  assert(uiLabel.nodeValue === "Изменения в доступе к сторонним моделям", "notification translation failed");
+  assert(uiCount.nodeValue === "Инструментов включено: 24", "tool count translation failed");
+  assert(description.nodeValue === CATALOG_DESCRIPTIONS[3][1], "known catalogue description translation failed");
+  assert(splitPlan.map(node => node.nodeValue).join(" ") === "и выберите plan чтобы агент составил план.", "split plan hint translation failed");
+  for (const entry of protectedText) assert(entry.node.nodeValue === entry.original, "protected message/code text changed");
+  const expectedNames = ["Medium", "Thinking", "Economy", "High accuracy", "Windsor.ai", "Cloud Run", "ui-extension"];
+  [...preservedModels, ...preservedNames].forEach((node, index) => assert(node.nodeValue === expectedNames[index], "model/server identifier changed"));
+  assert(input.getAttribute("placeholder") === "Поиск серверов MCP по имени", "search placeholder translation failed");
+  assert(input.value === "User-entered Model" && input.getAttribute("value") === "Model" && input.getAttribute("title") === "Model" && input.getAttribute("aria-label") === "Model", "form input data or label changed");
+  assert(textarea.value === "User-entered Medium" && textarea.getAttribute("value") === "Model", "textarea content changed");
+  assert(textarea.getAttribute("placeholder") === "Опишите обнаруженную ошибку...", "feedback placeholder translation failed");
+  assert(protectedInput.getAttribute("placeholder") === "Search MCP servers by name", "protected field placeholder changed");
+  const inserted = text("7 tools enabled");
+  root.children[0].children.push(inserted);
+  inserted.parentElement = root.children[0];
+  mutationCallback();
+  flush();
+  assert(inserted.nodeValue === "Инструментов включено: 7", "new catalogue content was not translated");
+}
+
 function selfTest() {
   const dictionary = loadDictionary();
   const injected = makePreloadScript(dictionary);
@@ -799,6 +926,16 @@ function selfTest() {
     fail(`Required Antigravity ${SUPPORTED_APP_VERSION} UI labels are missing from the dictionary.`);
   }
   const screenshotTranslations = [
+    ["Gemini 3.6 & 3.7 Flash Deprecation", "Скорое отключение Gemini 3.6 и 3.7 Flash"],
+    ["Make sure you are using Gemini 3.8 Flash! We will be turning down Gemini 3.6 Flash and Gemini 3.7 Flash shortly.", "Убедитесь, что вы используете Gemini 3.8 Flash. В ближайшее время Gemini 3.6 Flash и Gemini 3.7 Flash будут отключены."],
+    ["Changes to third-party model access", "Изменения в доступе к сторонним моделям"],
+    ["Opus 5.5 and Sonnet 5.5 are available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Opus 5.5 и Sonnet 5.5 доступны на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["Plan Review Policy", "Политика проверки плана"],
+    ["Type / and select plan to have the agent generate a plan.", "Нажмите / и выберите команду plan, чтобы агент составил план."],
+    ["Close", "Закрыть"],
+    ["Notification Settings", "Настройки уведомлений"],
+    ["To modify notification settings, open your operating system's system preferences.", "Для изменения настроек уведомлений откройте параметры операционной системы."],
+    ["Open System Settings", "Открыть системные настройки"],
     ["Windows Subsystem for Linux", "Подсистема Windows для Linux"],
     ["Run the app against a Linux environment. Connecting relaunches the app into the selected WSL distro.", "Запуск приложения в среде Linux. При подключении приложение перезапустится в выбранном дистрибутиве WSL."],
     ["Other Customizations", "Другие настройки"],
@@ -809,6 +946,10 @@ function selfTest() {
   ];
   for (const [source, expected] of screenshotTranslations) {
     if (dictionary[source] !== expected) fail("Screenshot UI translation is missing for " + JSON.stringify(source) + ".");
+  }
+  const preserveModelTerms = ["Economy", "Fast", "High", "Low", "Medium", "Thinking", "high", "low", "medium", "High capability", "High Capability", "High accuracy", "High intelligence"];
+  for (const term of preserveModelTerms) {
+    if (Object.prototype.hasOwnProperty.call(dictionary, term)) fail("A model label should remain in English: " + term + ".");
   }
   const dynamicFixtures = [
     ["Yes, and always allow", "Да, всегда разрешать"],
@@ -830,6 +971,9 @@ function selfTest() {
     ["Show 3 breakdowns", "Показать детализацию (3)"],
     ["97 / 20 000 tokens (0.5%)", "97 / 20 000 токенов (0.5%)"],
     ["384 / 20,000 tokens (1.9%)", "384 / 20,000 токенов (1.9%)"],
+    ["24 tools enabled", "Инструментов включено: 24"],
+    ["1 tool enabled", "Инструментов включено: 1"],
+    ["2 tools disabled", "Инструментов отключено: 2"],
     ["I explored 3 searches", null],
     ["pwsh -Command docker context ls", null],
   ];
@@ -838,6 +982,15 @@ function selfTest() {
       fail(`Dynamic UI translation failed for ${JSON.stringify(source)}.`);
     }
   }
+  for (const [source, expected] of CATALOG_DESCRIPTIONS) {
+    if (translateCatalogDescription(source) !== expected || translateCatalogDescription(source + " More information...") !== expected) {
+      fail("Known catalogue description is not translated: " + source);
+    }
+  }
+  for (const value of ["Unknown MCP server description", "My notes about GitLab SDLC", "Gemini 3.8 Flash Medium", "Cloud Audit Manager (us-central1)", "Antimetal", "Windsor.ai", "GitLab Orbit", "Cloud Run", "ui-extension", "gmail-services-recovery-mail"]) {
+    if (translateCatalogDescription(value) !== null) fail("Catalogue translation changed an unknown description or identifier: " + value);
+  }
+  selfTestPreloadDom(injected);
   if (!injected.includes('attribute !== "placeholder" && attribute !== "aria-placeholder"') || !injected.includes("if (!isFormField || isBlocked(node, true))")) {
     fail("Form-field localization must translate only fixed placeholders while preserving entered values.");
   }
