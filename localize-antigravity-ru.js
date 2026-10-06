@@ -502,6 +502,98 @@ const CATALOG_DESCRIPTIONS = [
   ["Query and act on your marketing, analytics, CRM, e-commerce, and warehouse data across 325+ connectors", "Запросы и операции с данными маркетинга, аналитики, CRM, интернет-магазинов и хранилищ через более 325 подключений, включая Meta Ads, Google Ads, TikTok Ads, GA4 и HubSpot."],
   ["Query your GitLab SDLC as a knowledge graph. Orbit indexes", "Запросы к данным жизненного цикла разработки в GitLab в виде графа знаний. Orbit объединяет группы, проекты, исходный код, запросы на слияние, сборки, задачи и результаты проверок безопасности."],
   ["Enable Antigravity to deploy apps to Google Cloud Run.", "Развёртывание приложений в Google Cloud Run через Antigravity."],
+  ["Ask questions. Get answers. The MCP is a server", "Задавайте вопросы о данных PostHog прямо в редакторе: сервер MCP выполняет запросы и возвращает ответы без SQL и панелей с графиками. Например: сколько уникальных пользователей зарегистрировалось за последние 7 дней по дням; создать A/B-тест страницы цен с оценкой переходов к оплате; найти 5 самых частых ошибок проекта за неделю."],
+  ["Search and reference over 600,000 real-world app", "Поиск и использование более 600 000 экранов реальных приложений, пользовательских сценариев и шаблонов интерфейса Mobbin прямо в инструментах ИИ."],
+  ["Build, edit, deploy, and manage full-stack web apps with Lovable,", "Создание, редактирование, развёртывание и управление веб-приложениями с Lovable на естественном языке. Подключение клиента ИИ к проектам и рабочим пространствам, отправка заданий агенту Lovable, просмотр изменений кода и дерева файлов, чтение и запись знаний проекта, управление базами Postgres и подключениями."],
+  ["Let your agents talk to your Splunk data.", "Работа агентов с данными Splunk: задавайте обычным языком вопросы о сбоях, их причинах и изменениях. Агенты ищут события, находят полезные сохранённые поиски и справочники и составляют запросы SPL."],
+  ["The Wiz MCP Server connects multiple security data sources", "Сервер MCP Wiz объединяет источники данных безопасности в единое представление для расследования, реагирования на инциденты и устранения проблем. Доступ к облачным ресурсам, конфигурациям и проблемам безопасности с учётом бизнес-контекста помогает выбирать приоритетные меры защиты."],
+  ["The GKE remote MCP server provides read write access", "Удалённый сервер MCP GKE предоставляет доступ для чтения и записи ресурсов Kubernetes в GKE. Агент ИИ может изучать и наблюдать за вашей средой."],
+  ["The Dart and Flutter MCP server exposes", "Сервер MCP Dart и Flutter предоставляет совместимым клиентам ИИ-помощников действия инструментов разработки Dart и Flutter."],
+  ["The Firebase Model Context Protocol (MCP) Server gives", "Сервер Firebase Model Context Protocol (MCP) позволяет инструментам разработки с ИИ работать с вашими проектами Firebase и кодом приложения."],
+  ["The Genkit Model Context Protocol (MCP) Server gives", "Сервер Genkit Model Context Protocol (MCP) позволяет инструментам разработки с ИИ создавать, отлаживать и изучать приложение Genkit."],
+  ["The gopls Model Context Protocol (MCP) server provides", "Сервер gopls Model Context Protocol (MCP) предоставляет инструменты семантического анализа кода, текущей диагностики и преобразования кода Go."],
+  ["Interact with your BigQuery data using natural language.", "Работа с данными BigQuery на естественном языке: безопасное подключение к наборам данных, поиск, просмотр метаданных таблиц, выполнение SQL, прогнозирование временных рядов и анализ вклада факторов прямо из инструментов ИИ."],
+  ["The AlloyDB for PostgreSQL remote MCP server lets", "Удалённый сервер MCP AlloyDB for PostgreSQL предоставляет инструменты управления кластерами, экземплярами и пользователями AlloyDB, создания и восстановления резервных копий, импорта и экспорта данных и выполнения SQL из сред разработки и платформ агентов ИИ."],
+  ["The Bigtable Admin remote MCP server lets", "Удалённый сервер MCP Bigtable Admin позволяет управлять ресурсами Bigtable."],
+  ["Manage Google Cloud resources with gcloud and bq CLI tools", "Управление ресурсами Google Cloud с помощью инструментов командной строки gcloud и bq в удалённой изолированной среде."],
+  ["The Cloud SQL remote MCP server lets", "Удалённый сервер MCP Cloud SQL предоставляет инструменты управления экземплярами и пользователями Cloud SQL, создания и восстановления резервных копий, импорта и экспорта данных и выполнения SQL из сред разработки и платформ агентов ИИ."],
+  ["The Spanner remote MCP server lets", "Удалённый сервер MCP Spanner предоставляет инструменты создания ресурсов Spanner, управления ими и выполнения запросов из сред разработки и платформ агентов ИИ."],
+  ["The Apigee API hub remote MCP server lets", "Удалённый сервер MCP Apigee API hub позволяет на естественном языке создавать, читать, обновлять, удалять и искать API, версии, спецификации, операции, развёртывания, атрибуты, внешние API и зависимости, зарегистрированные в вашем API hub."],
+  ["Connect your AI assistants to Looker business intelligence.", "Подключение ИИ-помощников к аналитике Looker: запросы на естественном языке, запуск сохранённых Looks, создание панелей и управление ими, проверка состояния экземпляра Looker."],
+  ["Connect your AI assistants to the Knowledge Catalog", "Подключение ИИ-помощников к Knowledge Catalog (прежнее название — Dataplex). Поиск ресурсов данных, получение подробных метаданных, включая схемы и владельцев, и изучение типов аспектов распределённых данных."],
+  ["The MCP Toolbox for Databases is an open-source MCP server", "MCP Toolbox for Databases — сервер MCP с открытым исходным кодом для упрощения и защиты разработки инструментов работы с базами данных."],
+  ["Interact with your Oracle Database data using natural language.", "Работа с данными Oracle Database на естественном языке: безопасное подключение к базам, выполнение SQL, просмотр схем таблиц и диагностика проблем производительности прямо из инструментов ИИ."],
+  ["The Dev Mode MCP Server brings Figma directly", "Сервер MCP Dev Mode предоставляет агентам ИИ данные и контекст дизайна Figma для генерации кода по файлам дизайна прямо в рабочем процессе."],
+  ["The GitHub MCP Server is a Model Context Protocol", "Сервер GitHub Model Context Protocol (MCP) обеспечивает интеграцию с API GitHub для автоматизации и взаимодействия разработчиков и инструментов с GitHub."],
+  ["The Google Home Developer MCP server allows", "Сервер MCP Google Home Developer позволяет искать сведения в документации Google Home и спецификациях OpenThread и Matter."],
+  ["Manage your Neon backend with the Neon MCP Server:", "Управление серверной частью Neon через сервер MCP Neon: Lakebase Postgres, ветвление, Object Storage, Functions и AI Gateway."],
+  ["The Stripe Model Context Protocol server allows", "Сервер Stripe Model Context Protocol позволяет работать с API Stripe через вызовы функций. Протокол предоставляет инструменты для взаимодействия с разными сервисами Stripe."],
+  ["Interact with Redis key-value stores", "Работа с хранилищами пар «ключ — значение» Redis."],
+  ["A Model Context Protocol server for interacting with MongoDB Atlas.", "Сервер Model Context Protocol для работы с MongoDB Atlas."],
+  ["Official Notion MCP Server that allows", "Официальный сервер MCP Notion для работы с рабочими пространствами, страницами, базами данных и комментариями через API Notion."],
+  ["Official Linear.app MCP Server for interacting", "Официальный сервер MCP Linear.app для работы с проектами, задачами и рабочими процессами Linear."],
+  ["An MCP server implementation that integrates the Perplexity Sonar API", "Сервер MCP с интеграцией API Perplexity Sonar для исследования информации во всём интернете в реальном времени."],
+  ["Official PayPal MCP Server that allows", "Официальный сервер MCP PayPal для работы с API PayPal: обработка платежей, управление транзакциями и операции с аккаунтом."],
+  ["The Heroku Platform MCP Server enables", "Сервер MCP Heroku Platform позволяет языковым моделям просматривать ресурсы Heroku Platform, управлять приложениями, дополнениями, базами данных и другими ресурсами и выполнять операции с ними."],
+  ["The Pinecone MCP Server enables AI tools", "Сервер MCP Pinecone позволяет инструментам ИИ искать документацию Pinecone, настраивать индексы, генерировать код с учётом конфигурации индекса, добавлять и обновлять данные и выполнять поиск в индексах."],
+  ["Connect your Supabase projects to AI assistants.", "Подключение проектов Supabase к ИИ-помощникам: управление таблицами, получение конфигурации, выполнение SQL, управление edge-функциями и работа со схемой базы данных."],
+  ["The Prisma MCP Server enables AI tools", "Сервер MCP Prisma позволяет инструментам ИИ работать с Prisma для создания баз данных Postgres и управления ими."],
+  ["The Locofy MCP Server enables Locofy.ai code", "Сервер MCP Locofy позволяет интегрировать и расширять код Locofy.ai в вашей IDE."],
+  ["Airweave lets agents search any app.", "Airweave позволяет агентам выполнять поиск в любом приложении."],
+  ["Atlassian MCP Server for interacting with Atlassian products.", "Сервер MCP Atlassian для работы с продуктами Atlassian."],
+  ["Interact with your Harness account using natural language.", "Работа с аккаунтом Harness на естественном языке: изучение и управление конвейерами CI/CD, запусками, сервисами, средами, подключениями, флагами функций, облачными расходами, результатами проверок безопасности, экспериментами отказоустойчивости и другими ресурсами Harness."],
+  ["SonarQube MCP Server enables AI assistants", "Сервер MCP SonarQube позволяет ИИ-помощникам работать с экземплярами SonarQube: анализировать качество кода, управлять проектами и выполнять операции с проверками качества."],
+  ["Netlify MCP Server enables AI assistants", "Сервер MCP Netlify позволяет ИИ-помощникам управлять сайтами, развёртываниями, доменами и другими рабочими процессами веб-разработки в Netlify."],
+  ["A Model Context Protocol server that provides structured thinking", "Сервер Model Context Protocol для структурированного обдумывания и рассуждения в диалогах с языковыми моделями."],
+  ["Sonatype MCP server for interacting with", "Сервер MCP Sonatype для работы с платформой управления зависимостями и анализа безопасности Sonatype."],
+  ["The Google Maps Platform Code Assist MCP server provides", "Сервер MCP Google Maps Platform Code Assist предоставляет ИИ-помощнику актуальную официальную документацию Google Maps Platform, примеры кода и рекомендации. Официальные источники помогают генерировать более точный, надёжный и полезный код."],
+  ["This MCP server provides your LLM with docs and examples", "Сервер MCP предоставляет языковой модели документацию и примеры подключения трассировки приложений ИИ к Arize AX, а также доступ к поддержке Arize. Подключение к IDE или языковой модели даёт готовые примеры и рекомендации по трассировке."],
+  ["The Postman MCP Server connects Postman to AI tools,", "Сервер MCP Postman подключает Postman к инструментам ИИ: доступ к рабочим пространствам, управление коллекциями и средами, проверка API и автоматизация рабочих процессов на естественном языке."],
+  ["The Stitch MCP server enables AI assistants", "Сервер MCP Stitch позволяет ИИ-помощникам создавать интерфейсы по тексту и изображениям и получать сведения о проектах и экранах Stitch. Подробнее: https://stitch.withgoogle.com/docs."],
+  ["The Google Developer Knowledge MCP server gives", "Сервер MCP Google Developer Knowledge позволяет инструментам разработки с ИИ искать официальную документацию Google и получать сведения о Firebase, Google Cloud, Android, Maps и других продуктах. Прямое подключение к официальной библиотеке обеспечивает актуальный контекст для кода и рекомендаций."],
+  ["The ClickHouse MCP server enables agents", "Сервер MCP ClickHouse обеспечивает безопасную работу агентов с базами ClickHouse: выполнение SQL, изучение данных, просмотр сведений о резервных копиях и оплате через единый интерфейс для аналитики."],
+  ["Perform a range of infrastructure management tasks, including:", "Управление инфраструктурой Google Compute Engine: экземплярами виртуальных машин (VM), группами экземпляров и шаблонами, дисками и снимками; получение сведений о резервировании ресурсов и обязательствах."],
+  ["Access enterprise mobility data using natural language queries", "Доступ к данным корпоративных мобильных устройств через запросы на естественном языке: сведения о парке устройств, автоматический аудит соответствия политикам и включение данных управления устройствами в автоматизированные рабочие процессы."],
+  ["Search your Google Cloud projects using natural language.", "Поиск проектов Google Cloud на естественном языке."],
+  ["Discover, manage, and audit organization policies and custom constraints", "Поиск, управление и аудит политик организации и пользовательских ограничений ресурсов Google Cloud на естественном языке."],
+  ["Create, inspect, restrict, and manage the lifecycle of API keys", "Создание, просмотр, ограничение и управление жизненным циклом ключей API в проектах Google Cloud на естественном языке."],
+  ["Perform searches on ingested data in Google-owned data stores.", "Поиск по загруженным данным в хранилищах Google."],
+  ["Interact with documents stored in a Firestore database", "Работа с документами в базе данных Firestore на естественном языке."],
+  ["Access resources in the Cloud Logging platform", "Доступ к ресурсам платформы Cloud Logging на естественном языке."],
+  ["Manage clusters for Managed Service for Apache Kafka and Kafka Connect", "Управление кластерами Managed Service for Apache Kafka и Kafka Connect на естественном языке."],
+  ["Access resources in the Cloud Monitoring platform", "Доступ к ресурсам платформы Cloud Monitoring на естественном языке."],
+  ["Manage Pub/Sub resources and publish messages.", "Управление ресурсами Pub/Sub и публикация сообщений. Создание, просмотр списков, получение, обновление и удаление тем, подписок и снимков Pub/Sub; публикация сообщений в темы."],
+  ["The Cloud Quotas MCP server allows", "Сервер MCP Cloud Quotas позволяет просматривать выделенные квоты, запрашивать их увеличение и управлять конфигурациями Quota Adjuster."],
+  ["Access Personalized Service Health events impacting Google Cloud", "Доступ на естественном языке к событиям Personalized Service Health, которые затрагивают продукты и сервисы Google Cloud, используемые вашими проектами."],
+  ["The Unified Maintenance MCP server allows", "Сервер MCP Unified Maintenance позволяет находить и запрашивать сведения о запланированном обслуживании ресурсов Google Cloud с перерывами в работе."],
+  ["Interact with your Neo4j graph database using natural language.", "Работа с графовой базой Neo4j на естественном языке: прямое подключение к экземпляру Neo4j, изучение схемы графа, выполнение Cypher для чтения и записи, просмотр узлов, связей и путей из инструментов ИИ."],
+  ["Author, run, and maintain mabl end-to-end tests", "Создание, запуск и сопровождение сквозных тестов mabl из инструментов ИИ. Подключение к рабочим пространствам mabl, генерация и изменение тестов, облачные и локальные запуски, диагностика с ИИ и просмотр результатов в разных средах. Запуски и доказательства сохраняются в mabl для аудита и контроля соответствия."],
+  ["Connect your Miro boards to AI assistants.", "Подключение досок Miro к ИИ-помощникам: поиск и сводки, создание и обновление стикеров, фигур, рамок и соединителей, генерация диаграмм Mermaid и работа с комментариями с соблюдением существующих прав доступа Miro."],
+  ["Search the live web and extract content from URLs", "Поиск актуальной информации в интернете и извлечение содержимого URL прямо в Antigravity. Parallel предоставляет агенту подходящие результаты поиска и читаемый текст страниц. Начать можно бесплатно, ключ API не требуется."],
+  ["The Grafana Cloud MCP server is a remotely hosted", "Удалённый сервер Grafana Cloud Model Context Protocol (MCP) подключает внешних агентов ИИ к данным Grafana Cloud. Совместимые клиенты могут запрашивать метрики, журналы и другие данные наблюдаемости без локальной установки."],
+  ["Give your agent real-time web search and content retrieval.", "Поиск в интернете и получение содержимого в реальном времени для вашего агента. Сервер MCP подключается к поисковому API Exa: веб-поиск, полный текст страниц в Markdown и многошаговое исследование для составления и дополнения списков из инструментов ИИ."],
+  ["Use natural language to find hosts, review detections, search events,", "Поиск узлов, просмотр обнаружений, поиск событий и другие операции безопасности в Falcon на естественном языке. CrowdStrike MCP безопасно подключает приложения ИИ к возможностям платформы Falcon через Model Context Protocol (MCP)."],
+  ["Interact with your Vercel projects using natural language.", "Работа с проектами Vercel на естественном языке: поиск документации, изучение проектов и развёртываний, анализ журналов сборки и развёртывания, безопасное управление поддерживаемыми ресурсами Vercel."],
+  ["Connect to FactSet AI-Ready Data to search and read", "Подключение к FactSet AI-Ready Data для поиска и чтения финансовых данных профессионального уровня на естественном языке. Доступ к показателям компаний, прогнозам, мировым ценам, структуре владения, сделкам M&A, долговому капиталу, цепочкам поставок, фондам/ETF и неструктурированным материалам."],
+  ["Stand up matters, shape workspace schema, govern access,", "Создание дел, настройка схем рабочих пространств, управление доступом и анализ использования RelativityOne. Безопасное подключение для поиска материалов, создания и изменения дел, рабочих пространств и клиентов, управления правами пользователей и групп и подготовки отчётов на естественном языке."],
+  ["Connect to Daloopa to discover companies, series,", "Подключение к Daloopa для поиска компаний и рядов данных, получения показателей компаний и котировок, поиска финансовых документов. Проверенные финансовые данные и KPI из отчётности SEC, презентаций инвесторам и отчётов о результатах с указанием источников."],
+  ["Search and retrieve real-time financial and stock market data from Finnhub", "Поиск и получение финансовых и биржевых данных Finnhub в реальном времени на естественном языке. Доступ к котировкам, историческим свечам OHLCV, профилям компаний, финансовой отчётности, расшифровкам обсуждений результатов, прогнозам и целевым ценам аналитиков, документам SEC, составу ETF и фондов, валютам, криптовалютам и экономическим показателям."],
+  ["Search and retrieve comprehensive financial and corporate data from S&P Global", "Поиск и получение финансовых и корпоративных данных S&P Global на естественном языке. Подключение к S&P Global Market Intelligence через Kensho: профили компаний, идентификаторы CUSIP и ISIN, финансовая отчётность, исторические цены акций, капитализация, расшифровки обсуждений результатов, сделки M&A, раунды финансирования, прогнозы аналитиков и сведения о руководителях."],
+  ["Explore deep global markets data and financial analytics from LSEG", "Данные мировых рынков и финансовая аналитика LSEG (London Stock Exchange Group). Подключение к LSEG Financial Analytics (LFA) для оценки облигаций и фьючерсов, анализа кривых доходности и кредитных кривых, валютных стратегий FX, оценки опционов и их чувствительности, получения прогнозов IBES, показателей компаний, исторических цен и макроэкономических данных."],
+  ["Bring Harvey's legal intelligence into your AI tools", "Юридические возможности Harvey в инструментах ИИ: общие правовые вопросы, анализ документов проектов Vault и поиск по специализированным источникам юридических знаний."],
+  ["Search Guidepoint's expert network for interview transcripts,", "Поиск расшифровок интервью в сети экспертов Guidepoint, просмотр отобранных мероприятий и личного расписания. Управление участием: регистрация, запрос одобрения или отмена участия в предстоящих мероприятиях Guidepoint из инструментов ИИ."],
+  ["Access institutional-grade financial data in your AI tools,", "Финансовые данные профессионального уровня в инструментах ИИ: фундаментальные показатели, коэффициенты, KPI, сегменты, скорректированные метрики, отчётность SEC, обсуждения результатов и рыночные котировки через несколько минут после публикации результатов."],
+  ["Connect with your Docusign account using natural language.", "Работа с аккаунтом Docusign на естественном языке: поиск пакетов документов, шаблонов и документов, чтение сведений и метаданных, создание и обновление пакетов, запуск или отмена экземпляров рабочих процессов из инструментов ИИ."],
+  ["LegalZoom's MCP connector gives users instant access", "Подключение MCP LegalZoom предоставляет в диалоге сведения о юридических продуктах, рекомендации по регистрации бизнеса и консультации юристов по запросу."],
+  ["Search and retrieve documents from your NetDocuments repository", "Поиск и получение документов из NetDocuments на естественном языке. Безопасный поиск документов и писем, фильтрация по метаданным и чтение содержимого и сведений с соблюдением действующих прав и правил управления NetDocuments."],
+  ["Interact with your iManage Work platform using natural language.", "Работа с iManage Work на естественном языке: подключение к аккаунту, поиск рабочих пространств, папок и документов, просмотр профилей документов и истории версий, чтение содержимого и управление юридическими рабочими процессами и знаниями."],
+  ["Search and manage Salesforce records from your Salesforce remote MCP server.", "Поиск и управление записями через удалённый сервер MCP Salesforce. Подключение к экземпляру Salesforce, поиск по объектам (SOSL), выполнение SOQL, изучение схем объектов и связанных записей, создание, обновление и удаление записей."],
+  ["Civil legal guidance for people navigating court without a lawyer.", "Образовательные рекомендации для самостоятельного ведения гражданских дел в судах США во всех 50 штатах: первоначальная оценка дела, расчёт процессуальных сроков и выбор следующих шагов по приоритету из инструментов ИИ."],
+  ["Intelligent DevSecOps automation for your development workflow,", "Автоматизация DevSecOps на естественном языке. Подключение агента Antigravity к более чем 150 инструментам DevOps через MCP: проверки безопасности, генерация конвейеров, аудит соответствия и документация из IDE. Анализ исходного кода выполняется локально; на портал возвращаются только структурированные результаты."],
+  ["Forge is an AI-powered platform that automates", "Forge автоматизирует начальное планирование разработки «Day 0», которое обычно требует недель встреч и согласований. Предоставляет агенту ИИ связывание проектов и репозиториев, получение материалов PRD/BRD и архитектуры, управление заданиями, автоматизацию коммитов и PR и инструменты конвейеров CI/CD."],
+  ["Bring Endor Labs security into your AI tools.", "Безопасность Endor Labs в инструментах ИИ: проверка зависимости перед добавлением пакета, поиск уязвимостей и вредоносного кода в открытых зависимостях, поиск случайно сохранённых секретов в истории Git, статический анализ SAST и проверки изменений кода с ИИ."],
+  ["The Canva MCP server enables AI assistants", "Сервер MCP Canva предоставляет ИИ-помощникам инструменты дизайна Canva: создание и редактирование дизайнов, управление материалами и брендами, поиск в библиотеке, экспорт и комментарии. Возможности доступны на естественном языке через уже используемые инструменты ИИ."],
+  ["Enable Antigravity to control and inspect a live Chrome browser,", "Управление открытым браузером Chrome и его изучение через Antigravity с возможностями Chrome DevTools для надёжной автоматизации, подробной отладки и анализа производительности."],
 ];
 
 function translateCatalogDescription(value) {
@@ -843,6 +935,9 @@ function selfTestPreloadDom(injected) {
   const uiCount = text("24 tools enabled");
   const splitPlan = [text("and select"), text("plan"), text("to have the agent generate a plan.")];
   const description = text(CATALOG_DESCRIPTIONS[3][0] + " interactive web panels...");
+  const catalogueCards = CATALOG_DESCRIPTIONS.flatMap(([source, expected]) =>
+    [source, source + " More information.", source + "...", source + "…"].map(value => ({ node: text(value), expected })));
+  const unknownDescription = text("Unknown MCP server description with new capabilities.");
   const preservedModels = ["Medium", "Thinking", "Economy", "High accuracy"].map(text);
   const preservedNames = ["Windsor.ai", "Cloud Run", "ui-extension"].map(text);
   const protectedText = [];
@@ -856,7 +951,7 @@ function selfTestPreloadDom(injected) {
     ["div", { "data-testid": "user-input-step" }], ["div", { "data-ag-localization-skip": "" }],
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
-    const leaves = [text("Model"), text("24 tools enabled"), text(CATALOG_DESCRIPTIONS[3][0])];
+    const leaves = [text("Model"), text("24 tools enabled"), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
     protectedText.push(...leaves.map(node => ({ node, original: node.nodeValue })));
     protectedContainers.push(element(tag, attributes, leaves));
   }
@@ -866,7 +961,7 @@ function selfTestPreloadDom(injected) {
   textarea.value = "User-entered Medium";
   const protectedInput = element("input", { placeholder: "Search MCP servers by name" });
   const root = element("html", {}, [element("body", {}, [
-    element("div", {}, [uiLabel, uiCount, description, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
+    element("div", {}, [uiLabel, uiCount, description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
   ])]);
   document.documentElement = root;
@@ -880,6 +975,8 @@ function selfTestPreloadDom(injected) {
   assert(uiLabel.nodeValue === "Изменения в доступе к сторонним моделям", "notification translation failed");
   assert(uiCount.nodeValue === "Инструментов включено: 24", "tool count translation failed");
   assert(description.nodeValue === CATALOG_DESCRIPTIONS[3][1], "known catalogue description translation failed");
+  for (const card of catalogueCards) assert(card.node.nodeValue === card.expected, "full or truncated catalogue card translation failed");
+  assert(unknownDescription.nodeValue === "Unknown MCP server description with new capabilities.", "unknown catalogue description changed");
   assert(splitPlan.map(node => node.nodeValue).join(" ") === "и выберите plan чтобы агент составил план.", "split plan hint translation failed");
   for (const entry of protectedText) assert(entry.node.nodeValue === entry.original, "protected message/code text changed");
   const expectedNames = ["Medium", "Thinking", "Economy", "High accuracy", "Windsor.ai", "Cloud Run", "ui-extension"];
@@ -983,9 +1080,13 @@ function selfTest() {
     }
   }
   for (const [source, expected] of CATALOG_DESCRIPTIONS) {
-    if (translateCatalogDescription(source) !== expected || translateCatalogDescription(source + " More information...") !== expected) {
+    if ([source, source + " More information...", source + "...", source + "…"].some(value => translateCatalogDescription(value) !== expected)) {
       fail("Known catalogue description is not translated: " + source);
     }
+    if (translateCatalogDescription("User note: " + source) !== null || translateCatalogDescription(source + "Unknown") !== null) {
+      fail("Catalogue translation matched text outside its known prefix boundary: " + source);
+    }
+    if (CATALOG_DESCRIPTIONS.filter(([other]) => other === source).length !== 1) fail("Duplicate catalogue description prefix: " + source);
   }
   for (const value of ["Unknown MCP server description", "My notes about GitLab SDLC", "Gemini 3.8 Flash Medium", "Cloud Audit Manager (us-central1)", "Antimetal", "Windsor.ai", "GitLab Orbit", "Cloud Run", "ui-extension", "gmail-services-recovery-mail"]) {
     if (translateCatalogDescription(value) !== null) fail("Catalogue translation changed an unknown description or identifier: " + value);
