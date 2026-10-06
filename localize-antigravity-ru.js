@@ -415,10 +415,15 @@ const PERMISSION_PREFIXES = [
   ["Да, всегда разрешать", "Да, всегда разрешать"],
   ["Да, сохранить правило", "Да, сохранить правило"],
 ];
+const TASK_ACTIVITY_TITLES = Object.freeze({
+  "Find Yandex Browser executable": "Поиск исполняемого файла Яндекс Браузера",
+  "Check npm global packages": "Проверка глобальных пакетов npm",
+});
 
 // Keep variable UI labels separate from the exact-match dictionary. This
 // function is also embedded in the preload, so its behavior is tested here.
 function translateDynamicUiText(value) {
+  if (value === "Thinking..." || value === "Thinking…") return "Думает…";
   if (/^No\s*\(tell the agent what to do instead\)$/i.test(value)) {
     return "Нет (указать агенту другой вариант)";
   }
@@ -457,6 +462,29 @@ function translateDynamicUiText(value) {
   }
 
   if (/^Searching web$/i.test(value)) return "Поиск в интернете";
+  const activityCounts = /^Exploring ([0-9]+) tasks?, running ([0-9]+) commands?$/i.exec(value);
+  if (activityCounts) return `Выполняется: задач — ${activityCounts[1]}; команд — ${activityCounts[2]}`;
+  const thoughtDuration = /^Thought for (.+)$/i.exec(value);
+  if (thoughtDuration) {
+    const parts = thoughtDuration[1].match(/[0-9]+[ ]*[dhms]/gi);
+    if (parts && parts.join(" ").replace(/ /g, "") === thoughtDuration[1].replace(/ /g, "")) {
+      const units = { d: "д.", h: "ч.", m: "мин.", s: "с." };
+      return "Думал: " + parts.map((part) => {
+        const item = /^([0-9]+)[ ]*([dhms])$/i.exec(part);
+        return `${item[1]} ${units[item[2].toLowerCase()]}`;
+      }).join(" ");
+    }
+  }
+  const checkedTask = /^Checked task (.+)$/i.exec(value);
+  if (checkedTask) return `Проверена задача «${TASK_ACTIVITY_TITLES[checkedTask[1]] || checkedTask[1]}»`;
+  const finishedTask = /^(.+) finished$/i.exec(value);
+  if (finishedTask) {
+    const title = TASK_ACTIVITY_TITLES[finishedTask[1]];
+    if (title === "Поиск исполняемого файла Яндекс Браузера") return `${title} завершён`;
+    if (title === "Проверка глобальных пакетов npm") return `${title} завершена`;
+    if (title) return `Задача «${title}» завершена`;
+    return `Задача завершена: ${finishedTask[1]}`;
+  }
   match = /^Explored\s+(\d+)\s+search(?:es)?,\s*ran\s+(\d+)\s+commands?$/i.exec(value);
   if (match) return `Выполнено поисковых запросов: ${match[1]}; команд: ${match[2]}`;
   match = /^Explored\s+(\d+)\s+search(?:es)?$/i.exec(value);
@@ -620,6 +648,7 @@ function makePreloadScript(dictionary) {
   const normalize = (value) => String(value || "").replace(/\\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
   const PERMISSION_SCOPES = ${JSON.stringify(PERMISSION_SCOPES)};
   const PERMISSION_PREFIXES = ${JSON.stringify(PERMISSION_PREFIXES)};
+  const TASK_ACTIVITY_TITLES = ${JSON.stringify(TASK_ACTIVITY_TITLES)};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
   const CATALOG_DESCRIPTIONS = ${JSON.stringify(CATALOG_DESCRIPTIONS)};
   const translateCatalogDescription = ${translateCatalogDescription.toString()};
@@ -933,6 +962,17 @@ function selfTestPreloadDom(injected) {
   };
   const uiLabel = text("Changes to third-party model access");
   const uiCount = text("24 tools enabled");
+  const activityLabels = [
+    ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
+    ["Thought for 16s", "Думал: 16 с."],
+    ["Thought for 1m 2s", "Думал: 1 мин. 2 с."],
+    ["Checked task Find Yandex Browser executable", "Проверена задача «Поиск исполняемого файла Яндекс Браузера»"],
+    ["Find Yandex Browser executable finished", "Поиск исполняемого файла Яндекс Браузера завершён"],
+    ["Checked task Check npm global packages", "Проверена задача «Проверка глобальных пакетов npm»"],
+    ["Check npm global packages finished", "Проверка глобальных пакетов npm завершена"],
+    ["Thinking...", "Думает…"],
+    ["Thinking…", "Думает…"],
+  ].map(([source, expected]) => ({ node: text(source), expected }));
   const splitPlan = [text("and select"), text("plan"), text("to have the agent generate a plan.")];
   const description = text(CATALOG_DESCRIPTIONS[3][0] + " interactive web panels...");
   const catalogueCards = CATALOG_DESCRIPTIONS.flatMap(([source, expected]) =>
@@ -952,6 +992,10 @@ function selfTestPreloadDom(injected) {
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
     const leaves = [text("Model"), text("24 tools enabled"), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
+    if (attributes.class === "assistant-message markdown") {
+      leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
+      leaves.push(text("python -m pip show playwright"));
+    }
     protectedText.push(...leaves.map(node => ({ node, original: node.nodeValue })));
     protectedContainers.push(element(tag, attributes, leaves));
   }
@@ -961,7 +1005,7 @@ function selfTestPreloadDom(injected) {
   textarea.value = "User-entered Medium";
   const protectedInput = element("input", { placeholder: "Search MCP servers by name" });
   const root = element("html", {}, [element("body", {}, [
-    element("div", {}, [uiLabel, uiCount, description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
+    element("div", {}, [uiLabel, uiCount, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
   ])]);
   document.documentElement = root;
@@ -974,6 +1018,7 @@ function selfTestPreloadDom(injected) {
   const assert = (condition, message) => { if (!condition) fail("Preload DOM test: " + message); };
   assert(uiLabel.nodeValue === "Изменения в доступе к сторонним моделям", "notification translation failed");
   assert(uiCount.nodeValue === "Инструментов включено: 24", "tool count translation failed");
+  for (const label of activityLabels) assert(label.node.nodeValue === label.expected, "agent activity label translation failed: " + label.node.nodeValue);
   assert(description.nodeValue === CATALOG_DESCRIPTIONS[3][1], "known catalogue description translation failed");
   for (const card of catalogueCards) assert(card.node.nodeValue === card.expected, "full or truncated catalogue card translation failed");
   assert(unknownDescription.nodeValue === "Unknown MCP server description with new capabilities.", "unknown catalogue description changed");
@@ -1058,6 +1103,16 @@ function selfTest() {
     ["(tell the agent what to do instead)", "(указать агенту другой вариант)"],
     ["Explored 3 searches, ran 9 commands", "Выполнено поисковых запросов: 3; команд: 9"],
     ["Exploring 2 searches", "Идёт поиск: 2 запроса"],
+    ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
+    ["Thought for 16s", "Думал: 16 с."],
+    ["Thought for 1m 2s", "Думал: 1 мин. 2 с."],
+    ["Checked task Find Yandex Browser executable", "Проверена задача «Поиск исполняемого файла Яндекс Браузера»"],
+    ["Find Yandex Browser executable finished", "Поиск исполняемого файла Яндекс Браузера завершён"],
+    ["Checked task Check npm global packages", "Проверена задача «Проверка глобальных пакетов npm»"],
+    ["Check npm global packages finished", "Проверка глобальных пакетов npm завершена"],
+    ["Thinking...", "Думает…"],
+    ["Thinking…", "Думает…"],
+    ["Thinking", null],
     ["Ran 4 commands", "Выполнено команд: 4"],
     ["Searching web", "Поиск в интернете"],
     ["Resets in 1d", "Сброс через 1 д."],
@@ -1073,6 +1128,7 @@ function selfTest() {
     ["2 tools disabled", "Инструментов отключено: 2"],
     ["I explored 3 searches", null],
     ["pwsh -Command docker context ls", null],
+    ["python -m pip show playwright", null],
   ];
   for (const [source, expected] of dynamicFixtures) {
     if (translateDynamicUiText(source) !== expected) {
