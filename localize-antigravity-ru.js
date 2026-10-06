@@ -708,7 +708,8 @@ function makePreloadScript(dictionary) {
     if (!translated || translated === source) return;
     const leading = (source.match(/^\\s*/) || [""])[0];
     const trailing = (source.match(/\\s*$/) || [""])[0];
-    node.nodeValue = leading + translated + trailing;
+    const replacement = leading + translated + trailing;
+    if (replacement !== source) node.nodeValue = replacement;
   };
   const translateAttributes = (element) => {
     const isFormField = element && /^(INPUT|TEXTAREA)$/.test(element.tagName);
@@ -743,17 +744,33 @@ function makePreloadScript(dictionary) {
     }
   };
   let scheduled = false;
-  const schedule = () => {
+  const pendingRoots = new Set();
+  const schedule = (root) => {
+    if (!root || root.isConnected === false) return;
+    const isFormField = root.nodeType === Node.ELEMENT_NODE && /^(INPUT|TEXTAREA)$/.test(root.tagName);
+    if (isBlocked(root, isFormField)) return;
+    pendingRoots.add(root);
     if (scheduled) return;
     scheduled = true;
-    queueMicrotask(() => {
+    setTimeout(() => {
       scheduled = false;
-      scan(document.documentElement);
-    });
+      const roots = Array.from(pendingRoots);
+      pendingRoots.clear();
+      for (const changedRoot of roots) {
+        if (changedRoot.isConnected !== false) scan(changedRoot);
+      }
+    }, 16);
+  };
+  const handleMutations = (mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "childList") {
+        for (const added of mutation.addedNodes) schedule(added);
+      } else schedule(mutation.target);
+    }
   };
   const observe = () => {
-    schedule();
-    new MutationObserver(schedule).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "aria-placeholder", "data-placeholder"] });
+    new MutationObserver(handleMutations).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "aria-placeholder", "data-placeholder"] });
+    schedule(document.documentElement);
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observe, { once: true });
   else observe();
@@ -924,13 +941,30 @@ function selfTestPreloadDom(injected) {
   const Node = { ELEMENT_NODE: 1, TEXT_NODE: 3 };
   const NodeFilter = { SHOW_ELEMENT: 1, SHOW_TEXT: 4, FILTER_ACCEPT: 1, FILTER_REJECT: 2 };
   let document;
+  const jobs = [];
+  const scannedRoots = [];
+  let mutationCallback;
+  let observing = false;
+  let pendingMutations = [];
+  const emitMutation = (record) => {
+    if (!observing) return;
+    pendingMutations.push(record);
+    if (pendingMutations.length === 1) jobs.push(() => {
+      const records = pendingMutations;
+      pendingMutations = [];
+      mutationCallback(records);
+    });
+  };
   const element = (tag, attributes = {}, children = []) => {
     const node = {
       nodeType: Node.ELEMENT_NODE, tagName: tag.toUpperCase(),
       className: attributes.class || "", children, attributes: { ...attributes },
       parentElement: null, ownerDocument: document,
       getAttribute(name) { return this.attributes[name] ?? null; },
-      setAttribute(name, value) { this.attributes[name] = value; },
+      setAttribute(name, value) {
+        this.attributes[name] = value;
+        emitMutation({ type: "attributes", target: this, attributeName: name });
+      },
       matches(selector) {
         if (!selector.startsWith("[")) return selector === this.tagName.toLowerCase();
         const match = /^\[([\w-]+)(?:(\*?=)'([^']*)')?\]$/.exec(selector);
@@ -943,12 +977,18 @@ function selfTestPreloadDom(injected) {
     for (const child of children) child.parentElement = node;
     return node;
   };
-  const text = (value) => ({ nodeType: Node.TEXT_NODE, nodeValue: value, parentElement: null, ownerDocument: document });
-  const jobs = [];
-  let mutationCallback;
+  const text = (value) => ({ nodeType: Node.TEXT_NODE, parentElement: null, ownerDocument: document, writes: 0,
+    get nodeValue() { return value; },
+    set nodeValue(next) {
+      value = next;
+      this.writes++;
+      emitMutation({ type: "characterData", target: this });
+    },
+  });
   document = {
     readyState: "complete",
     createTreeWalker(root, _whatToShow, filter) {
+      scannedRoots.push(root);
       const nodes = [root];
       const visit = (node) => {
         if (filter.acceptNode(node) === NodeFilter.FILTER_REJECT) return;
@@ -962,6 +1002,8 @@ function selfTestPreloadDom(injected) {
   };
   const uiLabel = text("Changes to third-party model access");
   const uiCount = text("24 tools enabled");
+  const spacedBrandLabels = [" Firebase ", "\nChrome DevTools\t"].map(text);
+  const spacedUiLabel = text("  Model \n");
   const activityLabels = [
     ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
     ["Thought for 16s", "Думал: 16 с."],
@@ -1005,19 +1047,32 @@ function selfTestPreloadDom(injected) {
   textarea.value = "User-entered Medium";
   const protectedInput = element("input", { placeholder: "Search MCP servers by name" });
   const root = element("html", {}, [element("body", {}, [
-    element("div", {}, [uiLabel, uiCount, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
+    element("div", {}, [uiLabel, uiCount, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
   ])]);
   document.documentElement = root;
   new vm.Script(injected).runInNewContext({ document, Node, NodeFilter,
     queueMicrotask(callback) { jobs.push(callback); },
-    MutationObserver: class { constructor(callback) { mutationCallback = callback; } observe() {} },
+    setTimeout(callback, delay) {
+      if (!(delay > 0)) fail("Preload DOM test: localization must yield to the renderer event loop");
+      jobs.push(callback);
+    },
+    MutationObserver: class { constructor(callback) { mutationCallback = callback; } observe() { observing = true; } },
   });
-  const flush = () => { while (jobs.length) jobs.shift()(); };
+  const flush = () => {
+    let executed = 0;
+    while (jobs.length) {
+      if (++executed > 20) fail("Preload DOM test: mutation feedback did not settle");
+      jobs.shift()();
+    }
+  };
   flush();
   const assert = (condition, message) => { if (!condition) fail("Preload DOM test: " + message); };
   assert(uiLabel.nodeValue === "Изменения в доступе к сторонним моделям", "notification translation failed");
   assert(uiCount.nodeValue === "Инструментов включено: 24", "tool count translation failed");
+  assert(spacedBrandLabels.every(node => node.writes === 0), "unchanged brand labels with whitespace were rewritten");
+  assert(spacedUiLabel.nodeValue === "  Модель \n" && spacedUiLabel.writes === 1, "localized whitespace label was rewritten repeatedly");
+  assert(scannedRoots.filter(node => node === root).length === 1, "localization rescanned the whole document after its own writes");
   for (const label of activityLabels) assert(label.node.nodeValue === label.expected, "agent activity label translation failed: " + label.node.nodeValue);
   assert(description.nodeValue === CATALOG_DESCRIPTIONS[3][1], "known catalogue description translation failed");
   for (const card of catalogueCards) assert(card.node.nodeValue === card.expected, "full or truncated catalogue card translation failed");
@@ -1034,9 +1089,25 @@ function selfTestPreloadDom(injected) {
   const inserted = text("7 tools enabled");
   root.children[0].children.push(inserted);
   inserted.parentElement = root.children[0];
-  mutationCallback();
+  const beforeInsertion = scannedRoots.length;
+  mutationCallback([{ type: "childList", target: root.children[0], addedNodes: [inserted] }]);
   flush();
   assert(inserted.nodeValue === "Инструментов включено: 7", "new catalogue content was not translated");
+  assert(scannedRoots.slice(beforeInsertion).every(node => node === inserted), "added content triggered a full-document scan");
+  const beforeRepeatedChange = scannedRoots.length;
+  inserted.nodeValue = "8 tools enabled";
+  mutationCallback(Array.from({ length: 10 }, () => ({ type: "characterData", target: inserted })));
+  flush();
+  assert(inserted.nodeValue === "Инструментов включено: 8", "updated text was not translated");
+  assert(scannedRoots.length - beforeRepeatedChange === 2, "repeated mutation records were not coalesced");
+  const beforeProtectedChange = scannedRoots.length;
+  const protectedNode = protectedText[0].node;
+  protectedNode.nodeValue = "User-supplied updated content";
+  flush();
+  assert(scannedRoots.length === beforeProtectedChange, "protected content changes scheduled localization");
+  input.setAttribute("placeholder", "Search MCP servers by name");
+  flush();
+  assert(input.getAttribute("placeholder") === "Поиск серверов MCP по имени", "updated field placeholder was not translated");
 }
 
 function selfTest() {
