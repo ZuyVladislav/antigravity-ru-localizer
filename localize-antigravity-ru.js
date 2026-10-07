@@ -674,16 +674,32 @@ function makePreloadScript(dictionary) {
     }
     return null;
   };
-  const translationFor = (value) => {
+  // Short pieces surrounding icons are fixed UI text only inside notification cards.
+  const notificationFragments = new Map([
+    ["Search conversations with", "Ищите диалоги с помощью"],
+    ["in the top left.", "в левом верхнем углу."],
+    ["View archived in the sidebar (", "Архивные диалоги доступны в боковой панели ("],
+    ["menu).", "меню)."],
+  ]);
+  const isNotificationUi = (node) => {
+    let current = node && node.nodeType === Node.ELEMENT_NODE ? node : node && node.parentElement;
+    while (current) {
+      if (current.matches("[data-testid='nux-card']") || current.matches("[data-testid='toast-notification']")) return true;
+      current = current.parentElement;
+    }
+    return false;
+  };
+  const translationFor = (value, notificationUi = false) => {
     const normalized = normalize(value);
     if (!normalized) return null;
     const dynamicTranslation = translateDynamicUiText(normalized);
     if (dynamicTranslation) return dynamicTranslation;
     const permissionTranslation = translatePermissionText(normalized);
     if (permissionTranslation) return permissionTranslation;
-    return exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || null;
+    return (notificationUi && notificationFragments.get(normalized)) || exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || null;
   };
   const isBlocked = (node, allowFormFieldAttributes = false) => {
+    const notificationUi = isNotificationUi(node);
     const target = node && (node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement);
     let current = target;
     while (current) {
@@ -696,7 +712,7 @@ function makePreloadScript(dictionary) {
         return current.matches(selector);
       })) return true;
       const classes = typeof current.className === "string" ? current.className : "";
-      if (blockedClasses.some((className) => classes.includes(className))) return true;
+      if (blockedClasses.some((className) => classes.includes(className) && !(notificationUi && (className === "markdown" || className === "prose")))) return true;
       current = current.parentElement;
     }
     return false;
@@ -704,7 +720,7 @@ function makePreloadScript(dictionary) {
   const translateText = (node) => {
     if (!node || isBlocked(node)) return;
     const source = node.nodeValue;
-    const translated = translationFor(source);
+    const translated = translationFor(source, isNotificationUi(node));
     if (!translated || translated === source) return;
     const leading = (source.match(/^\\s*/) || [""])[0];
     const trailing = (source.match(/\\s*$/) || [""])[0];
@@ -1016,6 +1032,14 @@ function selfTestPreloadDom(injected) {
     ["Thinking…", "Думает…"],
   ].map(([source, expected]) => ({ node: text(source), expected }));
   const splitPlan = [text("and select"), text("plan"), text("to have the agent generate a plan.")];
+  const searchNotificationTitle = text("Search Across Conversations");
+  const splitSearchNotification = [text("Search conversations with "), text(" in the top left."), text("View archived in the sidebar ("), text(" menu).")];
+  const searchIcons = [element("svg", {}, [element("path", { d: "search-icon" })]), element("svg", {}, [element("path", { d: "filter-icon" })])];
+  const notificationCode = text("Search Across Conversations");
+  const notificationPrivateText = text("Search Across Conversations");
+  const unknownNotification = text("A new notification not included in the fixed local dictionary.");
+  const fragmentOutsideNotification = text("menu).");
+  const markdownToast = text("Changes to third-party model access");
   const description = text(CATALOG_DESCRIPTIONS[3][0] + " interactive web panels...");
   const catalogueCards = CATALOG_DESCRIPTIONS.flatMap(([source, expected]) =>
     [source, source + " More information.", source + "...", source + "…"].map(value => ({ node: text(value), expected })));
@@ -1033,13 +1057,15 @@ function selfTestPreloadDom(injected) {
     ["div", { "data-testid": "user-input-step" }], ["div", { "data-ag-localization-skip": "" }],
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
-    const leaves = [text("Model"), text("24 tools enabled"), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
+    const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
     if (attributes.class === "assistant-message markdown") {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
       leaves.push(text("python -m pip show playwright"));
     }
     protectedText.push(...leaves.map(node => ({ node, original: node.nodeValue })));
-    protectedContainers.push(element(tag, attributes, leaves));
+    const nestedNotificationText = text("Search Across Conversations");
+    protectedText.push({ node: nestedNotificationText, original: nestedNotificationText.nodeValue });
+    protectedContainers.push(element(tag, attributes, [...leaves, element("div", { "data-testid": "nux-card" }, [element("div", { class: "markdown prose" }, [nestedNotificationText])])]));
   }
   const input = element("input", { placeholder: "Search MCP servers by name", title: "Model", "aria-label": "Model", value: "Model" });
   input.value = "User-entered Model";
@@ -1049,6 +1075,9 @@ function selfTestPreloadDom(injected) {
   const root = element("html", {}, [element("body", {}, [
     element("div", {}, [uiLabel, uiCount, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
+    element("div", { "data-testid": "nux-card" }, [searchNotificationTitle, element("div", { class: "markdown prose" }, [splitSearchNotification[0], searchIcons[0], splitSearchNotification[1], element("br"), splitSearchNotification[2], searchIcons[1], splitSearchNotification[3], unknownNotification, element("code", {}, [notificationCode]), element("div", { class: "assistant-message" }, [notificationPrivateText])])]),
+    element("div", { "data-testid": "toast-notification" }, [element("div", { class: "markdown prose" }, [markdownToast])]),
+    fragmentOutsideNotification,
   ])]);
   document.documentElement = root;
   new vm.Script(injected).runInNewContext({ document, Node, NodeFilter,
@@ -1078,6 +1107,14 @@ function selfTestPreloadDom(injected) {
   for (const card of catalogueCards) assert(card.node.nodeValue === card.expected, "full or truncated catalogue card translation failed");
   assert(unknownDescription.nodeValue === "Unknown MCP server description with new capabilities.", "unknown catalogue description changed");
   assert(splitPlan.map(node => node.nodeValue).join(" ") === "и выберите plan чтобы агент составил план.", "split plan hint translation failed");
+  assert(searchNotificationTitle.nodeValue === "Поиск по всем диалогам", "search notification title translation failed");
+  assert(splitSearchNotification.map(node => node.nodeValue).join("") === "Ищите диалоги с помощью  в левом верхнем углу.Архивные диалоги доступны в боковой панели ( меню).", "split notification text translation failed");
+  assert(searchIcons[0].children[0].getAttribute("d") === "search-icon" && searchIcons[1].children[0].getAttribute("d") === "filter-icon", "notification icons were modified");
+  assert(markdownToast.nodeValue === "Изменения в доступе к сторонним моделям", "fixed markdown toast translation failed");
+  assert(notificationCode.nodeValue === "Search Across Conversations" && notificationPrivateText.nodeValue === "Search Across Conversations", "notification context bypassed code/message protection");
+  assert(fragmentOutsideNotification.nodeValue === "menu).", "notification fragment escaped its UI context");
+  assert(unknownNotification.nodeValue === "A new notification not included in the fixed local dictionary.", "unknown notification was modified");
+  assert(splitSearchNotification.every(node => node.writes === 1), "notification translation did not settle after one write");
   for (const entry of protectedText) assert(entry.node.nodeValue === entry.original, "protected message/code text changed");
   const expectedNames = ["Medium", "Thinking", "Economy", "High accuracy", "Windsor.ai", "Cloud Run", "ui-extension"];
   [...preservedModels, ...preservedNames].forEach((node, index) => assert(node.nodeValue === expectedNames[index], "model/server identifier changed"));
@@ -1139,6 +1176,7 @@ function selfTest() {
     fail(`Required Antigravity ${SUPPORTED_APP_VERSION} UI labels are missing from the dictionary.`);
   }
   const screenshotTranslations = [
+    ["Search Across Conversations", "Поиск по всем диалогам"],
     ["Gemini 3.6 & 3.7 Flash Deprecation", "Скорое отключение Gemini 3.6 и 3.7 Flash"],
     ["Make sure you are using Gemini 3.8 Flash! We will be turning down Gemini 3.6 Flash and Gemini 3.7 Flash shortly.", "Убедитесь, что вы используете Gemini 3.8 Flash. В ближайшее время Gemini 3.6 Flash и Gemini 3.7 Flash будут отключены."],
     ["Changes to third-party model access", "Изменения в доступе к сторонним моделям"],
