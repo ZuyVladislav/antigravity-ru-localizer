@@ -2,8 +2,8 @@
 
 ## Supported scope
 
-Only the current `2.18.1` localizer source is maintained. It is intended for a
-local copy of Antigravity 2.18.1 and must not be used to distribute Antigravity
+Only the current `2.21.0` localizer source is maintained. It is intended for a
+local copy of Antigravity 2.21.0 and must not be used to distribute Antigravity
 binaries, `app.asar`, account data, browser profiles, session files, logs or
 user prompts.
 

@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.19.1.
+// Local, static Russian UI localization for Google Antigravity 2.21.0.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.19.1";
+const SUPPORTED_APP_VERSION = "2.21.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -1243,7 +1243,7 @@ function selfTest() {
     fail("Tray patch is not idempotent.");
   }
   if (!twicePatchedTray.includes("const antigravityRuTray =")) {
-    fail("Antigravity 2.19.1 tray menu was not localized.");
+    fail(`Antigravity ${SUPPORTED_APP_VERSION} tray menu was not localized.`);
   }
   const layoutFixture = parseAsarPackingEntries("pack   : \\dist\nunpack : \\node_modules\\native-addon\n");
   if (layoutFixture.get("dist") !== "pack" || layoutFixture.get("node_modules/native-addon") !== "unpack") {
@@ -1258,14 +1258,16 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: "0.0.0" }), "utf8");
-    let rejected = false;
-    try {
-      assertSupportedAppVersion(versionFixture);
-    } catch (error) {
-      rejected = error.message.includes(SUPPORTED_APP_VERSION);
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.22.0"]) {
+      fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
+      let rejected = false;
+      try {
+        assertSupportedAppVersion(versionFixture);
+      } catch (error) {
+        rejected = error.message.includes(SUPPORTED_APP_VERSION);
+      }
+      if (!rejected) fail(`Unsupported Antigravity ${unsupportedVersion} was not rejected.`);
     }
-    if (!rejected) fail("Unsupported Antigravity versions are not rejected.");
   } finally {
     fs.rmSync(versionFixture, { recursive: true, force: true });
   }

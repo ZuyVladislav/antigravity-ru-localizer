@@ -7,6 +7,7 @@ const os = require("os");
 const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
+const APP_VERSION = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8")).version;
 const PATCHER = path.join(ROOT, "localize-antigravity-ru.js");
 const ASAR_CLI = path.join(ROOT, "node_modules", "@electron", "asar", "bin", "asar.mjs");
 
@@ -19,6 +20,7 @@ function run(command, args, options = {}) {
     cwd: ROOT,
     encoding: "utf8",
     stdio: "pipe",
+    windowsHide: true,
     ...options,
   });
   if (result.error || result.status !== 0) {
@@ -44,7 +46,7 @@ try {
   const dist = path.join(source, "dist");
   fs.mkdirSync(dist, { recursive: true });
   fs.mkdirSync(resources, { recursive: true });
-  fs.writeFileSync(path.join(source, "package.json"), JSON.stringify({ name: "antigravity", version: "2.19.1" }), "utf8");
+  fs.writeFileSync(path.join(source, "package.json"), JSON.stringify({ name: "antigravity", version: APP_VERSION }), "utf8");
   fs.writeFileSync(path.join(dist, "preload.js"), "'use strict';\n", "utf8");
   fs.writeFileSync(path.join(dist, "menu.js"), "const menu = { items: [] };\nelectron_1.Menu.setApplicationMenu(menu);\n", "utf8");
   fs.writeFileSync(path.join(dist, "tray.js"), "function createTray(actions) {}\nfunction insertTrayMenuItem(position, options) {}\n", "utf8");
@@ -67,7 +69,7 @@ try {
 <key>CFBundleIdentifier</key><string>test.antigravity.localizer</string>
 <key>CFBundleName</key><string>Antigravity</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>2.19.1</string>
+<key>CFBundleShortVersionString</key><string>${APP_VERSION}</string>
 </dict></plist>
 `, "utf8");
     run("/usr/bin/codesign", ["--force", "--sign", "-", appBundle]);
@@ -78,7 +80,7 @@ try {
   const env = { ...process.env, ANTIGRAVITY_RU_MANIFEST_PATH: manifest };
   run(process.execPath, [PATCHER, resourceArgument], { env });
   const verification = JSON.parse(run(process.execPath, [PATCHER, resourceArgument, "--verify"], { env }));
-  if (!verification.verified || verification.appVersion !== "2.19.1") fail("Installed fixture did not verify.");
+  if (!verification.verified || verification.appVersion !== APP_VERSION) fail("Installed fixture did not verify.");
   if (sha256(appAsar) === originalHash) fail("Install did not change the synthetic app.asar.");
   run(process.execPath, [PATCHER, resourceArgument, "--restore"], { env });
   if (sha256(appAsar) !== originalHash) fail("Restore did not reproduce the original synthetic app.asar.");

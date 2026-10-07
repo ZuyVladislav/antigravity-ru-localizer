@@ -2,7 +2,7 @@
 
 ## Scope
 
-Contributions may improve only fixed Antigravity 2.18.1 interface labels,
+Contributions may improve only fixed Antigravity 2.21.0 interface labels,
 installer safety and deterministic local checks. Do not add translation of user
 prompts, assistant responses, source code, terminals, files, browser content or
 network-backed translation.
