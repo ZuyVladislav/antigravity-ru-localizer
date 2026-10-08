@@ -500,6 +500,20 @@ function translateDynamicUiText(value) {
   match = /^Running\s+(\d+)\s+commands?$/i.exec(value);
   if (match) return `Выполняется команд: ${match[1]}`;
 
+  match = /^You have used some of your weekly limit, it will fully refresh in (.+?)\.?$/i.exec(value);
+  if (match && /^[0-9]+\s+(?:days?|hours?|minutes?|seconds?)(?:(?:,\s*(?:and\s+)?|\s+(?:and\s+)?)[0-9]+\s+(?:days?|hours?|minutes?|seconds?))*$/i.test(match[1])) {
+    const units = {
+      day: ["день", "дня", "дней"], hour: ["час", "часа", "часов"],
+      minute: ["минуту", "минуты", "минут"], second: ["секунду", "секунды", "секунд"],
+    };
+    const parts = Array.from(match[1].matchAll(/([0-9]+)\s+(day|hour|minute|second)s?/gi), ([, count, unit]) => {
+      const n = Number(count);
+      const form = n % 100 >= 11 && n % 100 <= 14 ? 2 : n % 10 === 1 ? 0 : n % 10 >= 2 && n % 10 <= 4 ? 1 : 2;
+      return `${count} ${units[unit.toLowerCase()][form]}`;
+    });
+    return "Вы использовали часть недельного лимита. Он полностью восстановится через " + parts.join(", ") + ".";
+  }
+
   if (value === "Resets in") return "Сброс через";
   match = /^Resets in\s+(.+)$/i.exec(value);
   if (match) {
@@ -1018,6 +1032,7 @@ function selfTestPreloadDom(injected) {
   };
   const uiLabel = text("Changes to third-party model access");
   const uiCount = text("24 tools enabled");
+  const quotaRefresh = text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours.");
   const spacedBrandLabels = [" Firebase ", "\nChrome DevTools\t"].map(text);
   const spacedUiLabel = text("  Model \n");
   const activityLabels = [
@@ -1057,7 +1072,7 @@ function selfTestPreloadDom(injected) {
     ["div", { "data-testid": "user-input-step" }], ["div", { "data-ag-localization-skip": "" }],
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
-    const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
+    const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
     if (attributes.class === "assistant-message markdown") {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
       leaves.push(text("python -m pip show playwright"));
@@ -1073,7 +1088,7 @@ function selfTestPreloadDom(injected) {
   textarea.value = "User-entered Medium";
   const protectedInput = element("input", { placeholder: "Search MCP servers by name" });
   const root = element("html", {}, [element("body", {}, [
-    element("div", {}, [uiLabel, uiCount, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
+    element("div", {}, [uiLabel, uiCount, quotaRefresh, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
     element("div", { "data-testid": "nux-card" }, [searchNotificationTitle, element("div", { class: "markdown prose" }, [splitSearchNotification[0], searchIcons[0], splitSearchNotification[1], element("br"), splitSearchNotification[2], searchIcons[1], splitSearchNotification[3], unknownNotification, element("code", {}, [notificationCode]), element("div", { class: "assistant-message" }, [notificationPrivateText])])]),
     element("div", { "data-testid": "toast-notification" }, [element("div", { class: "markdown prose" }, [markdownToast])]),
@@ -1099,6 +1114,7 @@ function selfTestPreloadDom(injected) {
   const assert = (condition, message) => { if (!condition) fail("Preload DOM test: " + message); };
   assert(uiLabel.nodeValue === "Изменения в доступе к сторонним моделям", "notification translation failed");
   assert(uiCount.nodeValue === "Инструментов включено: 24", "tool count translation failed");
+  assert(quotaRefresh.nodeValue === "Вы использовали часть недельного лимита. Он полностью восстановится через 4 дня, 19 часов.", "weekly quota refresh translation failed");
   assert(spacedBrandLabels.every(node => node.writes === 0), "unchanged brand labels with whitespace were rewritten");
   assert(spacedUiLabel.nodeValue === "  Модель \n" && spacedUiLabel.writes === 1, "localized whitespace label was rewritten repeatedly");
   assert(scannedRoots.filter(node => node === root).length === 1, "localization rescanned the whole document after its own writes");
@@ -1137,6 +1153,11 @@ function selfTestPreloadDom(injected) {
   flush();
   assert(inserted.nodeValue === "Инструментов включено: 8", "updated text was not translated");
   assert(scannedRoots.length - beforeRepeatedChange === 2, "repeated mutation records were not coalesced");
+  const beforeQuotaChange = scannedRoots.length;
+  quotaRefresh.nodeValue = "You have used some of your weekly limit, it will fully refresh in 3 hours, 1 minute.";
+  flush();
+  assert(quotaRefresh.nodeValue === "Вы использовали часть недельного лимита. Он полностью восстановится через 3 часа, 1 минуту.", "updated weekly quota timer was not translated");
+  assert(scannedRoots.slice(beforeQuotaChange).every(node => node === quotaRefresh), "quota timer update triggered a full-document scan");
   const beforeProtectedChange = scannedRoots.length;
   const protectedNode = protectedText[0].node;
   protectedNode.nodeValue = "User-supplied updated content";
@@ -1228,6 +1249,20 @@ function selfTest() {
     ["Resets in 57m", "Сброс через 57 мин."],
     ["Resets in 1d 2h", "Сброс через 1 д. 2 ч."],
     ["Resets in <1m", "Сброс менее чем через 1 мин."],
+    ["You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours.", "Вы использовали часть недельного лимита. Он полностью восстановится через 4 дня, 19 часов."],
+    ["You have used some of your weekly limit, it will fully refresh in 1 day, 1 hour.", "Вы использовали часть недельного лимита. Он полностью восстановится через 1 день, 1 час."],
+    ["You have used some of your weekly limit, it will fully refresh in 2 days, 3 hours.", "Вы использовали часть недельного лимита. Он полностью восстановится через 2 дня, 3 часа."],
+    ["You have used some of your weekly limit, it will fully refresh in 5 days, 11 hours.", "Вы использовали часть недельного лимита. Он полностью восстановится через 5 дней, 11 часов."],
+    ["You have used some of your weekly limit, it will fully refresh in 21 days, 22 hours.", "Вы использовали часть недельного лимита. Он полностью восстановится через 21 день, 22 часа."],
+    ["You have used some of your weekly limit, it will fully refresh in 1 minute", "Вы использовали часть недельного лимита. Он полностью восстановится через 1 минуту."],
+    ["You have used some of your weekly limit, it will fully refresh in 14 minutes and 15 seconds.", "Вы использовали часть недельного лимита. Он полностью восстановится через 14 минут, 15 секунд."],
+    ["You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours, 1 minute, and 1 second.", "Вы использовали часть недельного лимита. Он полностью восстановится через 4 дня, 19 часов, 1 минуту, 1 секунду."],
+    ["You have used some of your weekly limit, it will fully refresh in 0 minutes.", "Вы использовали часть недельного лимита. Он полностью восстановится через 0 минут."],
+    ["You have used some of your weekly limit, it will fully refresh in tomorrow.", null],
+    ["You have used some of your weekly limit, it will fully refresh in 1 month.", null],
+    ["You have used some of your weekly limit, it will fully refresh in 4 days. Run another command.", null],
+    ["My note: You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours.", null],
+    ["Вы использовали часть недельного лимита. Он полностью восстановится через 4 дня, 19 часов.", null],
     ["Show 1 breakdown", "Показать детализацию (1)"],
     ["Show 3 breakdowns", "Показать детализацию (3)"],
     ["97 / 20 000 tokens (0.5%)", "97 / 20 000 токенов (0.5%)"],
