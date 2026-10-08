@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.21.0.
+// Local, static Russian UI localization for Google Antigravity 2.21.1.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.21.0";
+const SUPPORTED_APP_VERSION = "2.21.1";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -1296,7 +1296,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.22.0"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.2", "2.22.0"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {
