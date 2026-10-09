@@ -499,6 +499,8 @@ function translateDynamicUiText(value) {
   if (match) return `Выполнено команд: ${match[1]}`;
   match = /^Running\s+(\d+)\s+commands?$/i.exec(value);
   if (match) return `Выполняется команд: ${match[1]}`;
+  match = /^Running ((?:python(?:\d+(?:\.\d+)*)?|pythonw|pwsh|powershell|cmd|node|npm|npx|bash|sh|zsh|fish|git)(?:\.exe)?(?:[ \t]+[\s\S]*)?)$/i.exec(value);
+  if (match) return "Запуск " + match[1];
 
   match = /^You have used some of your weekly limit, it will fully refresh in (.+?)\.?$/i.exec(value);
   if (match && /^[0-9]+\s+(?:days?|hours?|minutes?|seconds?)(?:(?:,\s*(?:and\s+)?|\s+(?:and\s+)?)[0-9]+\s+(?:days?|hours?|minutes?|seconds?))*$/i.test(match[1])) {
@@ -706,7 +708,7 @@ function makePreloadScript(dictionary) {
   const translationFor = (value, notificationUi = false) => {
     const normalized = normalize(value);
     if (!normalized) return null;
-    const dynamicTranslation = translateDynamicUiText(normalized);
+    const dynamicTranslation = translateDynamicUiText(String(value || "").trim()) || translateDynamicUiText(normalized);
     if (dynamicTranslation) return dynamicTranslation;
     const permissionTranslation = translatePermissionText(normalized);
     if (permissionTranslation) return permissionTranslation;
@@ -1036,6 +1038,9 @@ function selfTestPreloadDom(injected) {
   const spacedBrandLabels = [" Firebase ", "\nChrome DevTools\t"].map(text);
   const spacedUiLabel = text("  Model \n");
   const activityLabels = [
+    ["Running commands", "Выполняются команды"],
+    ["Running python -c \"print('fixture')\"", "Запуск python -c \"print('fixture')\""],
+    ["Running python -c \"print('two  spaces')\"", "Запуск python -c \"print('two  spaces')\""],
     ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
     ["Thought for 16s", "Думал: 16 с."],
     ["Thought for 1m 2s", "Думал: 1 мин. 2 с."],
@@ -1073,6 +1078,7 @@ function selfTestPreloadDom(injected) {
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
     const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
+    leaves.push(text("Running commands"), text("Running python -c \"print('fixture')\""));
     if (attributes.class === "assistant-message markdown") {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
       leaves.push(text("python -m pip show playwright"));
@@ -1197,6 +1203,7 @@ function selfTest() {
     fail(`Required Antigravity ${SUPPORTED_APP_VERSION} UI labels are missing from the dictionary.`);
   }
   const screenshotTranslations = [
+    ["Running commands", "Выполняются команды"],
     ["Search Across Conversations", "Поиск по всем диалогам"],
     ["Gemini 3.6 & 3.7 Flash Deprecation", "Скорое отключение Gemini 3.6 и 3.7 Flash"],
     ["Make sure you are using Gemini 3.8 Flash! We will be turning down Gemini 3.6 Flash and Gemini 3.7 Flash shortly.", "Убедитесь, что вы используете Gemini 3.8 Flash. В ближайшее время Gemini 3.6 Flash и Gemini 3.7 Flash будут отключены."],
@@ -1244,6 +1251,13 @@ function selfTest() {
     ["Thinking…", "Думает…"],
     ["Thinking", null],
     ["Ran 4 commands", "Выполнено команд: 4"],
+    ["Running python -c \"print('two  spaces')\"", "Запуск python -c \"print('two  spaces')\""],
+    ["Running pwsh -Command \"Write-Output 'fixture'\"", "Запуск pwsh -Command \"Write-Output 'fixture'\""],
+    ["Running git status --short", "Запуск git status --short"],
+    ["Running python3.12 -V", "Запуск python3.12 -V"],
+    ["Running cmd.exe /c echo fixture", "Запуск cmd.exe /c echo fixture"],
+    ["My note: Running python -V", null],
+    ["Running pythonic analysis", null],
     ["Searching web", "Поиск в интернете"],
     ["Resets in 1d", "Сброс через 1 д."],
     ["Resets in 57m", "Сброс через 57 мин."],
