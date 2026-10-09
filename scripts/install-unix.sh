@@ -13,7 +13,7 @@ die() {
 
 usage() {
   cat <<'EOF'
-Установка русификатора Antigravity 2.21.1 на Linux и macOS.
+Установка русификатора Antigravity 2.22.0 на Linux и macOS.
 
 Использование:
   ./scripts/install-unix.sh [install|inspect|verify|restore] [--resources=/absolute/path]
