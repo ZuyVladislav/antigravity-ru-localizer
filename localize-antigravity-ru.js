@@ -1041,6 +1041,8 @@ function selfTestPreloadDom(injected) {
     ["Running commands", "Выполняются команды"],
     ["Use Global Settings", "Использовать глобальные настройки"],
     ["Fix with Agent", "Исправить с помощью агента"],
+    ["Notice", "Уведомление"],
+    ["Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Sonnet 5.5 теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
     ["Running python -c \"print('fixture')\"", "Запуск python -c \"print('fixture')\""],
     ["Running python -c \"print('two  spaces')\"", "Запуск python -c \"print('two  spaces')\""],
     ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
@@ -1080,7 +1082,7 @@ function selfTestPreloadDom(injected) {
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
     const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
-    leaves.push(text("Use Global Settings"), text("Fix with Agent"), text("Running commands"), text("Running python -c \"print('fixture')\""));
+    leaves.push(text("Notice"), text("Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Use Global Settings"), text("Fix with Agent"), text("Running commands"), text("Running python -c \"print('fixture')\""));
     if (attributes.class === "assistant-message markdown") {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
       leaves.push(text("python -m pip show playwright"));
@@ -1208,6 +1210,8 @@ function selfTest() {
     ["Running commands", "Выполняются команды"],
     ["Use Global Settings", "Использовать глобальные настройки"],
     ["Fix with Agent", "Исправить с помощью агента"],
+    ["Notice", "Уведомление"],
+    ["Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Sonnet 5.5 теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
     ["Search Across Conversations", "Поиск по всем диалогам"],
     ["Gemini 3.6 & 3.7 Flash Deprecation", "Скорое отключение Gemini 3.6 и 3.7 Flash"],
     ["Make sure you are using Gemini 3.8 Flash! We will be turning down Gemini 3.6 Flash and Gemini 3.7 Flash shortly.", "Убедитесь, что вы используете Gemini 3.8 Flash. В ближайшее время Gemini 3.6 Flash и Gemini 3.7 Flash будут отключены."],

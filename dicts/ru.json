@@ -4652,5 +4652,7 @@
   "See our troubleshooting guide for more help.": "Подробнее — в руководстве по устранению неполадок.",
   "Copy debug": "Копировать отладочные данные",
   "Use Global Settings": "Использовать глобальные настройки",
-  "Fix with Agent": "Исправить с помощью агента"
+  "Fix with Agent": "Исправить с помощью агента",
+  "Notice": "Уведомление",
+  "Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.": "Sonnet 5.5 теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."
 }
