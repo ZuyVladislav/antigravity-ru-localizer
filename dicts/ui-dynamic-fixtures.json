@@ -1,0 +1,270 @@
+[
+  [
+    "Configure My server",
+    "Настроить My server"
+  ],
+  [
+    "Configure C:\\folder  with  spaces\\config.json",
+    "Настроить C:\\folder  with  spaces\\config.json"
+  ],
+  [
+    "More actions for My project",
+    "Другие действия для My project"
+  ],
+  [
+    "Review permissions for My project",
+    "Проверить разрешения для My project"
+  ],
+  [
+    "The My server MCP server requires configuration parameters before it can be started.",
+    "Для запуска сервера MCP My server необходимо задать параметры подключения."
+  ],
+  [
+    "Install folder \"C:\\folder  with  spaces\" is already in use",
+    "Папка установки «C:\\folder  with  spaces» уже используется"
+  ],
+  [
+    "Add 2 plugins from My bundle",
+    "Добавить плагины (2) из My bundle"
+  ],
+  [
+    "Add all · 3",
+    "Добавить все (3)"
+  ],
+  [
+    "Enabled \"My automation\".",
+    "Включено: «My automation»."
+  ],
+  [
+    "Started \"My automation\".",
+    "Запущено: «My automation»."
+  ],
+  [
+    "Restarted \"My automation\".",
+    "Перезапущено: «My automation»."
+  ],
+  [
+    "Deleted \"My automation\".",
+    "Удалено: «My automation»."
+  ],
+  [
+    "Created automation \"My automation\".",
+    "Создана автоматизация «My automation»."
+  ],
+  [
+    "Refreshed credentials for \"My automation\".",
+    "Авторизация для «My automation» обновлена."
+  ],
+  [
+    "Failed to refresh credentials for \"My automation\"",
+    "Не удалось обновить авторизацию для «My automation»."
+  ],
+  [
+    "Failed to start \"My automation\".",
+    "Не удалось запустить «My automation»."
+  ],
+  [
+    "Failed to save project settings: Error 403",
+    "Не удалось сохранить настройки проекта: Error 403"
+  ],
+  [
+    "Fix with Agent: My server",
+    "Исправить с помощью агента: My server"
+  ],
+  [
+    "Auth code for My server",
+    "Код авторизации для My server"
+  ],
+  [
+    "Authorization code for Google",
+    "Код авторизации для Google"
+  ],
+  [
+    "Secret for a new Google account",
+    "Секрет для нового аккаунта Google"
+  ],
+  [
+    "See 4 more skills",
+    "Показать ещё (4) — навыки"
+  ],
+  [
+    "See more rules",
+    "Показать другие правила"
+  ],
+  [
+    "Filter skills and rules: Global",
+    "Фильтр навыков и правил: Global"
+  ],
+  [
+    "Adding plugins from My bundle",
+    "Добавление плагинов из My bundle"
+  ],
+  [
+    "Unnamed Agent 2",
+    "Агент без имени 2"
+  ],
+  [
+    "Rule 3",
+    "Правило 3"
+  ],
+  [
+    "Go to slide 4",
+    "Перейти к слайду 4"
+  ],
+  [
+    "Go to page 5",
+    "Перейти к странице 5"
+  ],
+  [
+    "Open conversation My conversation",
+    "Открыть диалог My conversation"
+  ],
+  [
+    "Open the My plugin plugin",
+    "Открыть плагин My plugin"
+  ],
+  [
+    "Opens external link: https://example.org/path",
+    "Открывает внешнюю ссылку: https://example.org/path"
+  ],
+  [
+    "View Diff for main",
+    "Посмотреть изменения: main"
+  ],
+  [
+    "Cost summary: 2 credits",
+    "Сводка расходов: 2 credits"
+  ],
+  [
+    "Searched for files: *.js",
+    "Поиск файлов: *.js"
+  ],
+  [
+    "Creating workspace \"My workspace\"...",
+    "Создание рабочей области «My workspace»…"
+  ],
+  [
+    "Marked 5 conversations as read",
+    "Диалогов отмечено прочитанными: 5"
+  ],
+  [
+    "For Antigravity, telemetry is force disabled.",
+    "Для Antigravity телеметрия принудительно отключена."
+  ],
+  [
+    "When toggled on, Antigravity collects usage data to help Google enhance performance and features.",
+    "При включении Antigravity собирает данные об использовании, чтобы Google могла улучшать производительность и функции."
+  ],
+  [
+    "Receive product updates, tips, and promotions from Google Antigravity via email.",
+    "Получать по электронной почте новости о продукте, советы и предложения Google Antigravity."
+  ],
+  [
+    "Sign in to use Antigravity!",
+    "Войдите, чтобы использовать Antigravity!"
+  ],
+  [
+    "Manage Antigravity app settings.",
+    "Управление настройками приложения Antigravity."
+  ],
+  [
+    "Reset 2 overrides",
+    "Сбросить переопределения (2)"
+  ],
+  [
+    "Shared with: Person A, Person B",
+    "Доступ предоставлен: Person A, Person B"
+  ],
+  [
+    "Cannot add folder: \"C:\\my folder\" is not a valid folder location.",
+    "Не удалось добавить папку: «C:\\my folder» не является допустимым путём к папке."
+  ],
+  [
+    "This project overrides your global permission settings.",
+    "Этот проект переопределяет глобальные разрешения."
+  ],
+  [
+    "Manage project folders, agent settings, and permissions.",
+    "Управление папками проекта, настройками и разрешениями агента."
+  ],
+  [
+    "Load older messages, showing 20 of 50",
+    "Загрузить более ранние сообщения; показано 20 из 50"
+  ],
+  [
+    "No more older messages, showing 50 of 50",
+    "Более ранних сообщений нет; показано 50 из 50"
+  ],
+  [
+    "Question 1 of 3",
+    "Вопрос 1 из 3"
+  ],
+  [
+    "Agent permissions preset selector, current: Default",
+    "Набор разрешений агента, текущий: Default"
+  ],
+  [
+    "Select model, current: Claude Opus 4.6 (Thinking)",
+    "Выбор модели, текущая: Claude Opus 4.6 (Thinking)"
+  ],
+  [
+    "Select modes, current: Medium, Thinking",
+    "Выбор режимов, текущие: Medium, Thinking"
+  ],
+  [
+    "Select project, current: My project",
+    "Выбор проекта, текущий: My project"
+  ],
+  [
+    "Select workspace, current: My workspace",
+    "Выбор рабочей области, текущая: My workspace"
+  ],
+  [
+    "Environment: My environment",
+    "Среда: My environment"
+  ],
+  [
+    "Send now: Ctrl+Enter",
+    "Отправить сейчас: Ctrl+Enter"
+  ],
+  [
+    "Unmount workspace My workspace",
+    "Отключить рабочую область My workspace"
+  ],
+  [
+    "Refresh credentials for My automation",
+    "Обновить авторизацию для My automation"
+  ],
+  [
+    "All automations run as Flash.",
+    "Все автоматизации выполняются с моделью Flash."
+  ],
+  [
+    "No accounts configured.",
+    "Нет настроенных аккаунтов."
+  ],
+  [
+    "No plugins matching your search",
+    "Нет плагинов, соответствующих поиску"
+  ],
+  [
+    "Subagents (3)",
+    "Субагенты (3)"
+  ],
+  [
+    "Debug Mode Enabled",
+    "Режим отладки включён"
+  ],
+  [
+    "Copy entire request JSON",
+    "Скопировать весь JSON: request"
+  ],
+  [
+    "Scroll to: My comment on page 3",
+    "Перейти к «My comment» на странице 3"
+  ],
+  [
+    "Page 4 failed to load",
+    "Не удалось загрузить страницу 4"
+  ]
+]

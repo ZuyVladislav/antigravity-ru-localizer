@@ -8,6 +8,7 @@ request.
 - [ ] Confirm no Antigravity binary, `app.asar`, backup, account data, prompt,
       chat, screenshot with private content, manifest or local path is tracked.
 - [ ] Run `npm ci` and `npm test` with Node.js 22.12+.
+- [ ] Run `node scripts/audit-ui-copy.js --binary <application resources/bin/language_server[.exe]> --out <local evidence>/ui-copy-audit.json` on the exact new application version. Review all missing UI copy and explicit exclusions before publishing; do not commit the extracted application bundle. Preserve model names, modes, commands and private content.
 - [ ] Test install and rollback on an isolated copy of `app.asar` together
       with `app.asar.unpacked` when the application uses external ASAR files.
 - [ ] Review `npm ls --all` and `THIRD_PARTY_NOTICES.md` after a dependency

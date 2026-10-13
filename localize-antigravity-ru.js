@@ -423,6 +423,8 @@ const TASK_ACTIVITY_TITLES = Object.freeze({
 // Keep variable UI labels separate from the exact-match dictionary. This
 // function is also embedded in the preload, so its behavior is tested here.
 function translateDynamicUiText(value) {
+  const modelShortcut = /^Select model with ((?:(?:Ctrl|Control|Alt|Option|Shift|Cmd|Command|Meta)[+]){1,4}[A-Za-z0-9])$/.exec(value);
+  if (modelShortcut) return `Выберите модель сочетанием ${modelShortcut[1]}`;
   // Fixed model-access notice templates; preserve the model name as opaque text.
   const accessNotice = (text) => {
     const notice = /^Third-party model access will no longer be available on your current plan starting on (January|February|March|April|May|June|July|August|September|October|November|December) ([1-9]|[12][0-9]|3[01]), (20[0-9]{2})\.$/i.exec(text);
@@ -661,6 +663,99 @@ const CATALOG_DESCRIPTIONS = [
   ["Enable Antigravity to control and inspect a live Chrome browser,", "Управление открытым браузером Chrome и его изучение через Antigravity с возможностями Chrome DevTools для надёжной автоматизации, подробной отладки и анализа производительности."],
 ];
 
+// Variable values remain opaque. These templates run only in tooltip attributes,
+// tooltip containers, and notification cards, never ordinary navigation titles.
+function translateScopedUiText(value, allowActionPrefixes = true) {
+  if (value.length > 1200 || /[\r\n]/.test(value)) return null;
+  const prefixes = [
+    ["More actions for ", "Другие действия для "], ["Review permissions for ", "Проверить разрешения для "],
+    ["Fix with Agent: ", "Исправить с помощью агента: "], ["Auth code for ", "Код авторизации для "],
+    ["Authorization code for ", "Код авторизации для "], ["Secret for a new ", "Секрет для нового аккаунта: "],
+    ["Secret for ", "Секрет для "], ["Filter skills and rules: ", "Фильтр навыков и правил: "],
+    ["Adding plugins from ", "Добавление плагинов из "], ["Opens external link: ", "Открывает внешнюю ссылку: "],
+    ["View Diff for ", "Посмотреть изменения: "], ["Cost summary: ", "Сводка расходов: "],
+    ["Searched for files: ", "Поиск файлов: "], ["Shared with: ", "Доступ предоставлен: "],
+    ["Agent permissions preset selector, current: ", "Набор разрешений агента, текущий: "],
+    ["Select model, current: ", "Выбор модели, текущая: "], ["Select harnesses, current: ", "Выбор сред выполнения, текущие: "],
+    ["Select modes, current: ", "Выбор режимов, текущие: "], ["Select project, current: ", "Выбор проекта, текущий: "],
+    ["Select workspace, current: ", "Выбор рабочей области, текущая: "], ["Environment: ", "Среда: "],
+    ["Send now: ", "Отправить сейчас: "], ["Use custom repository: ", "Использовать другой репозиторий: "],
+    ["Unmount workspace ", "Отключить рабочую область "], ["Remount workspace ", "Переподключить рабочую область "],
+    ["Delete workspace ", "Удалить рабочую область "], ["Refresh credentials for ", "Обновить авторизацию для "],
+    ["Open conversation ", "Открыть диалог "], ["New ", "Создать: "], ["Set up ", "Настроить "],
+    ["Install ", "Установить "], ["Configure ", "Настроить "], ["Toggle ", "Переключить "],
+    ["Open ", "Открыть "], ["Close ", "Закрыть "], ["Remove ", "Удалить "], ["Delete ", "Удалить "],
+    ["Enable ", "Включить "], ["Edit ", "Изменить "], ["Add ", "Добавить "], ["View ", "Посмотреть "],
+    ["Unpin ", "Открепить "], ["Maximize ", "Развернуть "], ["Copy ", "Скопировать "],
+    ["Triggered ", "Запущено: "], ["All changes since ", "Все изменения с "],
+    ["Work locally on ", "Работать локально: "], ["Worktree from ", "Рабочая копия из "],
+    ["Navigate up to parent: ", "Перейти к родительскому элементу: "],
+    ["Edit comment: ", "Изменить комментарий: "], ["Aux pane ", "Дополнительная панель "],
+    ["System Prompt: ", "Системная инструкция: "], ["Tool Definition: ", "Описание инструмента: "],
+    ["Execution Run: ", "Запуск: "], ["Invocation: ", "Вызов: "],
+    ["Failed to create ", "Не удалось создать "], ["Failed to archive ", "Не удалось архивировать "],
+    ["Failed to delete ", "Не удалось удалить "], ["See more ", "Показать другие "],
+  ];
+  // Specific templates must precede broad action prefixes.
+  let match;
+  if ((match = /^Secret for a new (.+) account$/.exec(value))) return `Секрет для нового аккаунта ${match[1]}`;
+  if ((match = /^Agents created by this (plugin|bundle) run in a dedicated (project|workspace) with its own permissions\. You can change the permissions in the \2 settings page\.$/.exec(value))) return `Агенты, созданные ${match[1]==="plugin"?"этим плагином":"этим набором"}, работают ${match[2]==="project"?"в отдельном проекте":"в отдельной рабочей области"} со своими разрешениями. Разрешения можно изменить в настройках ${match[2]==="project"?"проекта":"рабочей области"}.`;
+  if ((match = /^When toggled on, (.+) collects usage data to help Google enhance performance and features\.$/.exec(value))) return `При включении ${match[1]} собирает данные об использовании, чтобы помочь Google улучшать производительность и функции.`;
+  if ((match = /^Receive product updates, tips, and promotions from Google (.+) via email\.$/.exec(value))) return `Получать новости, советы и специальные предложения Google ${match[1]} по электронной почте.`;
+  if ((match = /^Changes the base URL (on each extension page|for marketplace search results)\. You must restart (.+) to use the new marketplace after changing this value\.$/.exec(value))) return `Изменяет базовый адрес ${match[1]==="on each extension page"?"страниц расширений":"результатов поиска в каталоге"}. После изменения перезапустите ${match[2]}, чтобы использовать новый каталог.`;
+  if ((match = /^When toggled on, (.+) will use your AI credits to fulfill model requests once you're out of model quota\. \1 will always use your model quota first before using AI credits\.$/.exec(value))) return `При включении ${match[1]} использует кредиты ИИ для запросов к моделям после исчерпания лимита. Сначала всегда расходуется лимит модели, затем кредиты ИИ.`;
+  if ((match = /^Cannot add folder: "(.+)" is not a valid folder location\.$/.exec(value))) return `Не удалось добавить папку: «${match[1]}» не является допустимым путём к папке.`;
+  if ((match = /^Cannot add folder with unparseable URI: (.+)$/.exec(value))) return `Не удалось добавить папку: не удалось разобрать адрес ${match[1]}`;
+  if ((match = /^This (project|workspace) overrides your global permission settings\.$/.exec(value))) return `${match[1]==="project"?"Этот проект":"Эта рабочая область"} переопределяет глобальные разрешения.`;
+  if ((match = /^Agent settings and permissions for conversations outside of (projects|workspaces)\.$/.exec(value))) return `Настройки и разрешения агента для диалогов вне ${match[1]==="projects"?"проектов":"рабочих областей"}.`;
+  if ((match = /^Manage (project|workspace) (resources|folders), agent settings, and permissions\.$/.exec(value))) return `Управление ${match[2]==="resources"?"ресурсами":"папками"} ${match[1]==="project"?"проекта":"рабочей области"}, настройками и разрешениями агента.`;
+  if ((match = /^No (accounts|plugins|skills|rules|agents|servers|tasks) (matching your search|configured\.)$/.exec(value))) return `Нет ${match[2]==="configured."?"настроенных ":""}${({accounts:"аккаунтов",plugins:"плагинов",skills:"навыков",rules:"правил",agents:"агентов",servers:"серверов",tasks:"задач"})[match[1]]}${match[2]==="configured."?".":", соответствующих поиску"}`;
+  if ((match = /^(Couldn't|Failed to) (delete|archive|unarchive|fork|rename) conversation$/.exec(value))) return `Не удалось ${({delete:"удалить",archive:"архивировать",unarchive:"восстановить из архива",fork:"создать ответвление",rename:"переименовать"})[match[2]]} диалог`;
+  if ((match = /^The (.+) MCP server requires configuration parameters before it can be started\.$/.exec(value))) return `Для запуска сервера MCP ${match[1]} необходимо задать параметры подключения.`;
+  if ((match = /^Install folder "(.+)" is already in use$/.exec(value))) return `Папка установки «${match[1]}» уже используется`;
+  if ((match = /^Add ([0-9]+) plugins? from (.+)$/.exec(value))) return `Добавить плагины (${match[1]}) из ${match[2]}`;
+  if ((match = /^Add all · ([0-9]+)$/.exec(value))) return `Добавить все (${match[1]})`;
+  if ((match = /^(Enabled|Started|Restarted|Deleted) "(.+)"\.$/.exec(value))) return `${({Enabled:"Включено",Started:"Запущено",Restarted:"Перезапущено",Deleted:"Удалено"})[match[1]]}: «${match[2]}».`;
+  if ((match = /^Created automation "(.+)"\.$/.exec(value))) return `Создана автоматизация «${match[1]}».`;
+  if ((match = /^Refreshed credentials for "(.+)"\.$/.exec(value))) return `Авторизация для «${match[1]}» обновлена.`;
+  if ((match = /^Failed to (start|update|save|delete|refresh credentials for) "(.+)"\.?$/.exec(value))) return `${({start:"Не удалось запустить",update:"Не удалось обновить",save:"Не удалось сохранить",delete:"Не удалось удалить","refresh credentials for":"Не удалось обновить авторизацию для"})[match[1]]} «${match[2]}».`;
+  if ((match = /^Failed to (.+?): (.+)$/.exec(value))) {
+    const actions = {"save configuration":"сохранить настройки","remove agent":"удалить агента","save project Google3 configuration":"сохранить настройки проекта Google3","resolve folder":"определить папку","save project":"сохранить проект","save project settings":"сохранить настройки проекта","save project permissions":"сохранить разрешения проекта","save settings":"сохранить настройки","create project":"создать проект","save project branch":"сохранить ветку проекта","unarchive project":"восстановить проект из архива","select workspace":"выбрать рабочую область","create workspace":"создать рабочую область"};
+    if (actions[match[1]]) return `Не удалось ${actions[match[1]]}: ${match[2]}`;
+  }
+  if ((match = /^See ([0-9]+) more(?: (skills|rules|agents|plugins))?$/.exec(value))) return `Показать ещё (${match[1]})${match[2]?" — "+({skills:"навыки",rules:"правила",agents:"агенты",plugins:"плагины"})[match[2]]:""}`;
+  if ((match = /^See more (skills|rules|agents|plugins)$/.exec(value))) return `Показать другие ${({skills:"навыки",rules:"правила",agents:"агенты",plugins:"плагины"})[match[1]]}`;
+  if ((match = /^(Unnamed Agent|Rule|Conversation|Navigate to step|Go to slide|Go to page) ([0-9]+)$/.exec(value))) return `${({"Unnamed Agent":"Агент без имени","Rule":"Правило","Conversation":"Диалог","Navigate to step":"Перейти к шагу","Go to slide":"Перейти к слайду","Go to page":"Перейти к странице"})[match[1]]} ${match[2]}`;
+  if ((match = /^Question ([0-9]+) of ([0-9]+)$/.exec(value))) return `Вопрос ${match[1]} из ${match[2]}`;
+  if ((match = /^Marked ([0-9]+) conversations as read$/.exec(value))) return `Диалогов отмечено прочитанными: ${match[1]}`;
+  if ((match = /^(Load older messages|No more older messages), showing ([0-9]+) of ([0-9]+)$/.exec(value))) return `${match[1]==="Load older messages"?"Загрузить более ранние сообщения":"Более ранних сообщений нет"}; показано ${match[2]} из ${match[3]}`;
+  if ((match = /^Scroll to: (.+) on page ([0-9]+)$/.exec(value))) return `Перейти к «${match[1]}» на странице ${match[2]}`;
+  if ((match = /^Page ([0-9]+) failed to load$/.exec(value))) return `Не удалось загрузить страницу ${match[1]}`;
+  if ((match = /^Open the (.+) plugin$/.exec(value))) return `Открыть плагин ${match[1]}`;
+  if ((match = /^Creating workspace "(.+)"\.\.\.$/.exec(value))) return `Создание рабочей области «${match[1]}»…`;
+  if ((match = /^Searched for "(.+)"$/.exec(value))) return `Поиск «${match[1]}»`;
+  if ((match = /^For (.+), telemetry is force disabled\.$/.exec(value))) return `Для ${match[1]} телеметрия принудительно отключена.`;
+  if ((match = /^Sign in to use (.+)!$/.exec(value))) return `Войдите, чтобы использовать ${match[1]}!`;
+  if ((match = /^Manage (.+) app settings\.$/.exec(value))) return `Управление настройками приложения ${match[1]}.`;
+  if ((match = /^Reset ([0-9]+) overrides?$/.exec(value))) return `Сбросить переопределения (${match[1]})`;
+  if ((match = /^(Add new|Confirm add) (.+) item$/.exec(value))) return `${match[1]==="Add new"?"Добавить новый элемент":"Подтвердить добавление элемента"}: ${match[2]}`;
+  if ((match = /^All (task|automation)s run as Flash\.$/.exec(value))) return `Все ${match[1]==="task"?"задачи":"автоматизации"} выполняются с моделью Flash.`;
+  if ((match = /^Edit (project|workspace) name$/.exec(value))) return `Изменить название ${match[1]==="project"?"проекта":"рабочей области"}`;
+  if ((match = /^Duplicate (project|workspace) name$/.exec(value))) return `Такое название ${match[1]==="project"?"проекта":"рабочей области"} уже используется`;
+  if ((match = /^View (image|video|audio) ([0-9]+)$/.exec(value))) return `Открыть ${({image:"изображение",video:"видео",audio:"аудио"})[match[1]]} ${match[2]}`;
+  if ((match = /^User uploaded media ([0-9]+)$/.exec(value))) return `Медиафайл пользователя ${match[1]}`;
+  if ((match = /^Copy entire (.+) JSON$/.exec(value))) return `Скопировать весь JSON: ${match[1]}`;
+  if ((match = /^Artifacts \(([0-9]+) Files for Conversation\)$/.exec(value))) return `Артефакты (файлов диалога: ${match[1]})`;
+  if ((match = /^Debug Mode (Enabled|Disabled)$/.exec(value))) return `Режим отладки ${match[1]==="Enabled"?"включён":"выключен"}`;
+  if ((match = /^Unused capacity: ([0-9 ,]+) tokens$/.exec(value))) return `Неиспользованный объём: ${match[1]} токенов`;
+  if ((match = /^View ([0-9]+) side questions?$/.exec(value))) return `Показать дополнительные вопросы (${match[1]})`;
+  if ((match = /^(Subagents|Terminal|Changes Overview) \((.+)\)$/.exec(value))) return `${({Subagents:"Субагенты",Terminal:"Терминал","Changes Overview":"Обзор изменений"})[match[1]]} (${match[2]})`;
+  if ((match = /^Build with (.+) Plugins$/.exec(value))) return `Разработка с плагинами ${match[1]}`;
+  if (!allowActionPrefixes) return null;
+  for (const [source, translation] of prefixes.sort((a,b)=>b[0].length-a[0].length)) if (value.startsWith(source) && value.length > source.length) return translation + value.slice(source.length);
+  return null;
+}
+
 function translateCatalogDescription(value) {
   for (const [source, translated] of CATALOG_DESCRIPTIONS) {
     if (value === source || value.startsWith(source + " ") || value.startsWith(source + "...") || value.startsWith(source + "…")) return translated;
@@ -687,6 +782,7 @@ function makePreloadScript(dictionary) {
   const PERMISSION_PREFIXES = ${JSON.stringify(PERMISSION_PREFIXES)};
   const TASK_ACTIVITY_TITLES = ${JSON.stringify(TASK_ACTIVITY_TITLES)};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
+  const translateScopedUiText = ${translateScopedUiText.toString()};
   const CATALOG_DESCRIPTIONS = ${JSON.stringify(CATALOG_DESCRIPTIONS)};
   const translateCatalogDescription = ${translateCatalogDescription.toString()};
   const permissionTitles = new Map([
@@ -718,22 +814,36 @@ function makePreloadScript(dictionary) {
     ["View archived in the sidebar (", "Архивные диалоги доступны в боковой панели ("],
     ["menu).", "меню)."],
   ]);
-  const isNotificationUi = (node) => {
+  const planHintFragments = new Map([
+    ["Type", "Нажмите"],
+    ["and select", "и выберите"],
+    ["to have the agent generate a plan.", "чтобы агент составил план."],
+  ]);
+  const isPlanHintUi = (node) => {
     let current = node && node.nodeType === Node.ELEMENT_NODE ? node : node && node.parentElement;
     while (current) {
-      if (current.matches("[data-testid='nux-card']") || current.matches("[data-testid='toast-notification']")) return true;
+      if (current.matches("[data-testid='plan-command-fyi-alert']")) return true;
       current = current.parentElement;
     }
     return false;
   };
-  const translationFor = (value, notificationUi = false) => {
+  const isNotificationUi = (node) => {
+    let current = node && node.nodeType === Node.ELEMENT_NODE ? node : node && node.parentElement;
+    while (current) {
+      if (current.matches("[data-testid='nux-card']") || current.matches("[data-testid='toast-notification']") || current.matches("[role='tooltip']") || current.matches("[role='alert']") || current.matches("[role='status']")) return true;
+      current = current.parentElement;
+    }
+    return false;
+  };
+  const translationFor = (value, notificationUi = false, planHintUi = false, attributeUi = false) => {
     const normalized = normalize(value);
     if (!normalized) return null;
+    if (planHintUi && planHintFragments.has(normalized)) return planHintFragments.get(normalized);
     const dynamicTranslation = translateDynamicUiText(String(value || "").trim()) || translateDynamicUiText(normalized);
     if (dynamicTranslation) return dynamicTranslation;
     const permissionTranslation = translatePermissionText(normalized);
     if (permissionTranslation) return permissionTranslation;
-    return (notificationUi && notificationFragments.get(normalized)) || exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || null;
+    return (notificationUi && notificationFragments.get(normalized)) || exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || translateScopedUiText(String(value || "").trim(), notificationUi || attributeUi) || null;
   };
   const isBlocked = (node, allowFormFieldAttributes = false) => {
     const notificationUi = isNotificationUi(node);
@@ -757,7 +867,7 @@ function makePreloadScript(dictionary) {
   const translateText = (node) => {
     if (!node || isBlocked(node)) return;
     const source = node.nodeValue;
-    const translated = translationFor(source, isNotificationUi(node));
+    const translated = translationFor(source, isNotificationUi(node), isPlanHintUi(node));
     if (!translated || translated === source) return;
     const leading = (source.match(/^\\s*/) || [""])[0];
     const trailing = (source.match(/\\s*$/) || [""])[0];
@@ -770,7 +880,7 @@ function makePreloadScript(dictionary) {
     for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder"]) {
       if (isFormField && attribute !== "placeholder" && attribute !== "aria-placeholder") continue;
       const source = element.getAttribute(attribute);
-      const translated = translationFor(source);
+      const translated = translationFor(source, false, false, true);
       if (translated && translated !== source) element.setAttribute(attribute, translated);
     }
   };
@@ -989,6 +1099,9 @@ function restore() {
 }
 
 function selfTestPreloadDom(injected) {
+  const reviewedCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-copy-fixtures.json"), "utf8"));
+  const dynamicCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-dynamic-fixtures.json"), "utf8"));
+  if (reviewedCopy.appVersion !== SUPPORTED_APP_VERSION || reviewedCopy.cases.length < 400) fail("Reviewed UI copy inventory is missing or incomplete.");
   // Execute the actual generated preload against a minimal DOM fixture.
   // The fixture contains no application data and requires no browser process.
   const Node = { ELEMENT_NODE: 1, TEXT_NODE: 3 };
@@ -1123,12 +1236,39 @@ function selfTestPreloadDom(injected) {
   const textarea = element("textarea", { placeholder: "Describe the bug you encountered...", value: "Model" });
   textarea.value = "User-entered Medium";
   const protectedInput = element("input", { placeholder: "Search MCP servers by name" });
+  const auditedCopy = reviewedCopy.cases.map(item => {
+    const label = text(item.source);
+    const tooltip = element("button", { title: item.source, "aria-label": item.source });
+    const placeholder = element("input", { placeholder: item.source });
+    placeholder.value = item.source;
+    const notification = text(item.source);
+    const protectedMessage = text(item.source);
+    const protectedCode = text(item.source);
+    return { ...item, label, tooltip, placeholder, notification, protectedMessage, protectedCode,
+      container: element("div", {}, [label, tooltip, placeholder,
+        element("div", { "data-testid": "toast-notification" }, [element("div", { class: "markdown prose" }, [notification])]),
+        element("div", { class: "assistant-message" }, [protectedMessage]), element("code", {}, [protectedCode])]) };
+  });
+  const planHint = [text("Type"), text("and select"), text("to have the agent generate a plan.")];
+  const planCommand = text("plan");
+  const planHintOutside = text("Type");
+  const auditedDynamic = dynamicCopy.map(([source, expected]) => {
+    const label = text(source), outside = text(source), protectedMessage = text(source), protectedCode = text(source);
+    const attributes = element("button", {title:source,"aria-label":source});
+    return {source,expected,label,outside,protectedMessage,protectedCode,attributes,container:element("div", {}, [
+      element("div", {role:"tooltip",class:"markdown prose"}, [label]), attributes, outside,
+      element("div", {class:"assistant-message"}, [element("div", {role:"tooltip"}, [protectedMessage])]), element("code", {}, [protectedCode])])};
+  });
   const root = element("html", {}, [element("body", {}, [
     element("div", {}, [uiLabel, uiCount, quotaRefresh, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
     element("div", { "data-testid": "nux-card" }, [searchNotificationTitle, element("div", { class: "markdown prose" }, [splitSearchNotification[0], searchIcons[0], splitSearchNotification[1], element("br"), splitSearchNotification[2], searchIcons[1], splitSearchNotification[3], unknownNotification, element("code", {}, [notificationCode]), element("div", { class: "assistant-message" }, [notificationPrivateText])])]),
     element("div", { "data-testid": "toast-notification" }, [element("div", { class: "markdown prose" }, [markdownToast])]),
     fragmentOutsideNotification,
+    ...auditedCopy.map(item => item.container),
+    ...auditedDynamic.map(item => item.container),
+    element("div", { "data-testid": "plan-command-fyi-alert" }, [planHint[0], element("code", {}, [text("/")]), planHint[1], element("code", {}, [planCommand]), planHint[2]]),
+    planHintOutside,
   ])]);
   document.documentElement = root;
   new vm.Script(injected).runInNewContext({ document, Node, NodeFilter,
@@ -1166,6 +1306,20 @@ function selfTestPreloadDom(injected) {
   assert(notificationCode.nodeValue === "Search Across Conversations" && notificationPrivateText.nodeValue === "Search Across Conversations", "notification context bypassed code/message protection");
   assert(fragmentOutsideNotification.nodeValue === "menu).", "notification fragment escaped its UI context");
   assert(unknownNotification.nodeValue === "A new notification not included in the fixed local dictionary.", "unknown notification was modified");
+  for (const item of auditedCopy) {
+    assert(item.label.nodeValue === item.expected && item.notification.nodeValue === item.expected, "Reviewed UI copy failed: " + JSON.stringify({source:item.source,expected:item.expected,label:item.label.nodeValue,notification:item.notification.nodeValue}));
+    assert(item.tooltip.getAttribute("title") === item.expected && item.tooltip.getAttribute("aria-label") === item.expected && item.placeholder.getAttribute("placeholder") === item.expected, "Reviewed tooltip/placeholder failed: " + item.source);
+    assert(item.placeholder.value === item.source && item.protectedMessage.nodeValue === item.source && item.protectedCode.nodeValue === item.source, "Reviewed copy modified protected data: " + item.source);
+    assert(item.label.writes <= 1 && item.notification.writes <= 1, "Reviewed copy entered a mutation loop: " + item.source);
+  }
+  assert(planHint.map(node => node.nodeValue).join(" ") === "Нажмите и выберите чтобы агент составил план.", "Split plan hint failed");
+  assert(planCommand.nodeValue === "plan" && planHintOutside.nodeValue === "Тип", "Plan hint escaped its scope or modified the command");
+  for (const item of auditedDynamic) {
+    assert(item.label.nodeValue === item.expected && item.attributes.getAttribute("title") === item.expected && item.attributes.getAttribute("aria-label") === item.expected, "Variable tooltip failed: " + JSON.stringify({source:item.source,actual:item.label.nodeValue,expected:item.expected}));
+    const dictionary = loadDictionary();
+    assert(item.outside.nodeValue === (translateDynamicUiText(item.source) || dictionary[item.source] || translateScopedUiText(item.source, false) || item.source), "Action tooltip changed an ordinary title: " + item.source);
+    assert(item.protectedMessage.nodeValue === item.source && item.protectedCode.nodeValue === item.source, "Variable tooltip modified protected content: " + item.source);
+  }
   assert(splitSearchNotification.every(node => node.writes === 1), "notification translation did not settle after one write");
   for (const entry of protectedText) assert(entry.node.nodeValue === entry.original, "protected message/code text changed");
   const expectedNames = ["Medium", "Thinking", "Economy", "High accuracy", "Windsor.ai", "Cloud Run", "ui-extension"];
@@ -1265,6 +1419,9 @@ function selfTest() {
     if (Object.prototype.hasOwnProperty.call(dictionary, term)) fail("A model label should remain in English: " + term + ".");
   }
   const dynamicFixtures = [
+    ["Select model with Ctrl+Shift+M", "Выберите модель сочетанием Ctrl+Shift+M"],
+    ["Select model with Cmd+M", "Выберите модель сочетанием Cmd+M"],
+    ["Select model with run a command", null],
     ["Opus 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026. Run this command.", null],
     ["My note: Third-party model access will no longer be available on your current plan starting on November 2, 2026.", null],
     ["Third-party model access will no longer be available on your current plan starting on February 31, 2026.", null],
@@ -1350,6 +1507,13 @@ function selfTest() {
     if (translateCatalogDescription(value) !== null) fail("Catalogue translation changed an unknown description or identifier: " + value);
   }
   selfTestPreloadDom(injected);
+  const { audit } = require("./scripts/audit-ui-copy.js");
+  const reviewedUiCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-copy-fixtures.json"), "utf8"));
+  const knownCopySource = reviewedUiCopy.cases.map(item => `({tooltip:${JSON.stringify(item.source)}});`).join("\n");
+  if (audit(knownCopySource).missing.length !== 0) fail("Reviewed UI inventory no longer passes the offline audit.");
+  const unknownCopy = audit('({tooltip:"A newly added tooltip needing translation"});');
+  if (unknownCopy.missing.length !== 1) fail("Offline audit failed to report new untranslated UI copy.");
+  if (audit('({tooltip:`New help for ${target}`});').newTemplates.length !== 1) fail("Offline audit failed to report a new variable tooltip.");
   if (!injected.includes('attribute !== "placeholder" && attribute !== "aria-placeholder"') || !injected.includes("if (!isFormField || isBlocked(node, true))")) {
     fail("Form-field localization must translate only fixed placeholders while preserving entered values.");
   }
@@ -1410,7 +1574,15 @@ function dependencyCheck() {
   console.log(`Pinned @electron/asar ${ASAR_VERSION} dependency check passed.`);
 }
 
-try {
+function translateAuditedUiCopy(value) {
+  const normalized = String(value || "").replace(/\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
+  const dictionary = loadDictionary();
+  return translateDynamicUiText(String(value || "").trim()) || dictionary[normalized] || Object.entries(dictionary).findLast(([key]) => key.toLowerCase() === normalized.toLowerCase())?.[1] || translateCatalogDescription(normalized) || translateScopedUiText(String(value || "").trim()) || null;
+}
+
+module.exports = { translateAuditedUiCopy };
+
+if (require.main === module) try {
   if (process.argv.includes("--self-test")) selfTest();
   else if (process.argv.includes("--dependency-check") || process.argv.includes("--npx-self-test")) dependencyCheck();
   else if (process.argv.includes("--verify")) verifyInstallation();

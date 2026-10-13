@@ -1,0 +1,2144 @@
+{
+  "appVersion": "2.23.0",
+  "sourceBundleSha256": "867d1990b61d87f4b9ff8c5ecb1551c8688135267f32e56e02563f2d3e78fd68",
+  "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
+  "cases": [
+    {
+      "source": "Inline Actions",
+      "expected": "Быстрые действия"
+    },
+    {
+      "source": "Show a floating notification card when background conversations need your input. Answer questions, approve commands, and grant permissions without leaving your current conversation. Share feedback at go/inline-actions-feedback.",
+      "expected": "Отображать карточку уведомлений, когда фоновым задачам требуется подтверждение."
+    },
+    {
+      "source": "Chief of Staff",
+      "expected": "Главный помощник"
+    },
+    {
+      "source": "Autonomous Mode",
+      "expected": "Автономный режим"
+    },
+    {
+      "source": "Adds an Autonomous Mode switch to the modes dropdown below the input box. Turns sent with it on run non-interactively: the agent does not ask questions or request new permissions.",
+      "expected": "Добавляет переключатель автономного режима в меню под полем ввода. В этом режиме агент работает без вопросов и новых запросов разрешений."
+    },
+    {
+      "source": "Add inline comment",
+      "expected": "Добавить комментарий"
+    },
+    {
+      "source": "Stop recording",
+      "expected": "Остановить запись"
+    },
+    {
+      "source": "Record voice memo",
+      "expected": "Голосовое сообщение"
+    },
+    {
+      "source": "Close",
+      "expected": "Закрыть"
+    },
+    {
+      "source": "Scroll to Bottom",
+      "expected": "Прокрутить вниз"
+    },
+    {
+      "source": "Loading…",
+      "expected": "Загрузка…"
+    },
+    {
+      "source": "Dismiss",
+      "expected": "Закрыть"
+    },
+    {
+      "source": "Commands",
+      "expected": "Команды"
+    },
+    {
+      "source": "Files",
+      "expected": "Файлы"
+    },
+    {
+      "source": "Conversations",
+      "expected": "Диалоги"
+    },
+    {
+      "source": "Projects",
+      "expected": "Проекты"
+    },
+    {
+      "source": "Code Search",
+      "expected": "Поиск по коду"
+    },
+    {
+      "source": "Select an option",
+      "expected": "Выберите вариант"
+    },
+    {
+      "source": "Select...",
+      "expected": "Выбрать..."
+    },
+    {
+      "source": "Backspace",
+      "expected": "Backspace"
+    },
+    {
+      "source": "Mentions",
+      "expected": "Упоминания"
+    },
+    {
+      "source": "Searching",
+      "expected": "Поиск..."
+    },
+    {
+      "source": "Searching…",
+      "expected": "Поиск…"
+    },
+    {
+      "source": "Unknown",
+      "expected": "Неизвестно"
+    },
+    {
+      "source": "Input",
+      "expected": "Ввод"
+    },
+    {
+      "source": "Message input",
+      "expected": "Поле ввода сообщения"
+    },
+    {
+      "source": "Leave a comment",
+      "expected": "Оставить комментарий"
+    },
+    {
+      "source": "Add Comment",
+      "expected": "Добавить комментарий"
+    },
+    {
+      "source": "Cancel",
+      "expected": "Отмена"
+    },
+    {
+      "source": "Edit comment",
+      "expected": "Редактировать комментарий"
+    },
+    {
+      "source": "Save Comment",
+      "expected": "Сохранить комментарий"
+    },
+    {
+      "source": "Submit",
+      "expected": "Отправить"
+    },
+    {
+      "source": "Open in Code Search",
+      "expected": "Открыть в поиске кода"
+    },
+    {
+      "source": "Pause (k)",
+      "expected": "Пауза (k)"
+    },
+    {
+      "source": "Play (k)",
+      "expected": "Воспроизвести (k)"
+    },
+    {
+      "source": "2x playback speed",
+      "expected": "Скорость воспроизведения 2×"
+    },
+    {
+      "source": "Zoom",
+      "expected": "Увеличить"
+    },
+    {
+      "source": "Zoom out (-)",
+      "expected": "Уменьшить (-)"
+    },
+    {
+      "source": "Reset zoom (0)",
+      "expected": "Сбросить масштаб (0)"
+    },
+    {
+      "source": "Comments",
+      "expected": "Комментарии"
+    },
+    {
+      "source": "Staged",
+      "expected": "Индексировано"
+    },
+    {
+      "source": "Unfold code block",
+      "expected": "Развернуть блок кода"
+    },
+    {
+      "source": "Fold code block",
+      "expected": "Свернуть блок кода"
+    },
+    {
+      "source": "Folders",
+      "expected": "Папки"
+    },
+    {
+      "source": "Fork conversation in this folder",
+      "expected": "Создать ответвление диалога в этой папке"
+    },
+    {
+      "source": "Keeps working in this folder. Nothing is copied.",
+      "expected": "Работа продолжится в этой папке. Файлы не копируются."
+    },
+    {
+      "source": "Rewinds the conversation only. Files in this folder stay as they are now.",
+      "expected": "Возвращает только диалог к выбранному моменту. Файлы в папке остаются в текущем состоянии."
+    },
+    {
+      "source": "Dismiss Tip",
+      "expected": "Закрыть подсказку"
+    },
+    {
+      "source": "Browse the Marketplace",
+      "expected": "Каталог плагинов"
+    },
+    {
+      "source": "Explore the plugin marketplace",
+      "expected": "Посмотреть каталог плагинов"
+    },
+    {
+      "source": "Find plugins - bundles of skills, agents, MCP servers, UI extensions and more, and install them in one click.",
+      "expected": "Найдите плагины с навыками, агентами, серверами MCP, расширениями интерфейса и другими возможностями и установите их одним нажатием."
+    },
+    {
+      "source": "Tip",
+      "expected": "Совет"
+    },
+    {
+      "source": "New models have been enabled for you!",
+      "expected": "Вам доступны новые модели!"
+    },
+    {
+      "source": "Welcome to Cider with Jetski",
+      "expected": "Добро пожаловать в Сидр с Jetski"
+    },
+    {
+      "source": "Learn more",
+      "expected": "Подробнее"
+    },
+    {
+      "source": "Core AI Systems is hiring!",
+      "expected": "Компания Core AI Systems приглашает на работу!"
+    },
+    {
+      "source": "See our open roles",
+      "expected": "Посмотрите наши открытые вакансии"
+    },
+    {
+      "source": "Create a new Cog (GoB) workspace from your initial prompt. Customize in General Settings, under Advanced.",
+      "expected": "Создайте рабочую область Cog (GoB) по первоначальному запросу. Параметры доступны в разделе «Основные» → «Расширенные настройки»."
+    },
+    {
+      "source": "Create a new Fig workspace from your initial prompt. Customize in General Settings, under Advanced.",
+      "expected": "Создайте рабочую область Fig по первоначальному запросу. Параметры доступны в разделе «Основные» → «Расширенные настройки»."
+    },
+    {
+      "source": "CitC Workspace",
+      "expected": "Рабочее пространство CitC"
+    },
+    {
+      "source": "Work in a CitC workspace.",
+      "expected": "Работа в рабочей области CitC."
+    },
+    {
+      "source": "Cog Workspace",
+      "expected": "Рабочее пространство шестеренки"
+    },
+    {
+      "source": "Work in a Cog workspace.",
+      "expected": "Работа в рабочей области Cog."
+    },
+    {
+      "source": "Work in an ABFS workspace.",
+      "expected": "Работа в рабочей области ABFS."
+    },
+    {
+      "source": "Create Project",
+      "expected": "Создать проект"
+    },
+    {
+      "source": "Create a new project using normal folders and/or citc workspaces.",
+      "expected": "Создать новый проект из локальных папок или рабочих областей."
+    },
+    {
+      "source": "Create Cloud Project",
+      "expected": "Создать облачный проект"
+    },
+    {
+      "source": "Create a project whose conversations run in the cloud.",
+      "expected": "Создайте проект, в котором задачи диалогов выполняются в облаке."
+    },
+    {
+      "source": "New Workspace",
+      "expected": "Новая рабочая область"
+    },
+    {
+      "source": "Workspaces",
+      "expected": "Рабочие пространства"
+    },
+    {
+      "source": "Workspace_1",
+      "expected": "Рабочая область_1"
+    },
+    {
+      "source": "Conversation 1",
+      "expected": "Разговор 1"
+    },
+    {
+      "source": "Conversation 2",
+      "expected": "Разговор 2"
+    },
+    {
+      "source": "Workspace_2",
+      "expected": "Рабочая область_2"
+    },
+    {
+      "source": "Conversation 3",
+      "expected": "Разговор 3"
+    },
+    {
+      "source": "Google3",
+      "expected": "Google3"
+    },
+    {
+      "source": "Workspace_3",
+      "expected": "Рабочая область_3"
+    },
+    {
+      "source": "New Conversation",
+      "expected": "Новый диалог"
+    },
+    {
+      "source": "Now",
+      "expected": "Сейчас"
+    },
+    {
+      "source": "Deprecated",
+      "expected": "Устарело"
+    },
+    {
+      "source": "Failed to read file",
+      "expected": "Не удалось прочитать файл"
+    },
+    {
+      "source": "Adding...",
+      "expected": "Добавление…"
+    },
+    {
+      "source": "Add",
+      "expected": "Добавить"
+    },
+    {
+      "source": "No description available.",
+      "expected": "Описание недоступно."
+    },
+    {
+      "source": "Install",
+      "expected": "Установить"
+    },
+    {
+      "source": "Configure MCP Server",
+      "expected": "Настроить сервер MCP"
+    },
+    {
+      "source": "Enter the required configuration values to install this MCP server.",
+      "expected": "Введите необходимые значения конфигурации для установки этого сервера MCP."
+    },
+    {
+      "source": "Enable",
+      "expected": "Включить"
+    },
+    {
+      "source": "Enabling...",
+      "expected": "Включение…"
+    },
+    {
+      "source": "Installing...",
+      "expected": "Установка..."
+    },
+    {
+      "source": "Saving...",
+      "expected": "Сохранение..."
+    },
+    {
+      "source": "Failed to update permissions. Please try again.",
+      "expected": "Не удалось обновить разрешения. Пожалуйста, повторите попытку."
+    },
+    {
+      "source": "No folder selected",
+      "expected": "Папка не выбрана"
+    },
+    {
+      "source": "Resolving permissions...",
+      "expected": "Проверка разрешений…"
+    },
+    {
+      "source": "Folders these agents can access.",
+      "expected": "Папки, доступные этим агентам."
+    },
+    {
+      "source": "Access grants",
+      "expected": "Предоставление доступа"
+    },
+    {
+      "source": "Commands and files these agents can use.",
+      "expected": "Команды и файлы, доступные этим агентам."
+    },
+    {
+      "source": "Save & Continue",
+      "expected": "Сохранить и продолжить"
+    },
+    {
+      "source": "Copied",
+      "expected": "Скопировано"
+    },
+    {
+      "source": "Copy link",
+      "expected": "Копировать ссылку"
+    },
+    {
+      "source": "Removing...",
+      "expected": "Удаление…"
+    },
+    {
+      "source": "Remove all",
+      "expected": "Удалить всё"
+    },
+    {
+      "source": "Loading...",
+      "expected": "Загрузка..."
+    },
+    {
+      "source": "Removing the bundle removes all of its plugins.",
+      "expected": "При удалении набора удаляются все входящие в него плагины."
+    },
+    {
+      "source": "You can also add or remove each plugin below.",
+      "expected": "Ниже можно добавить или удалить каждый плагин отдельно."
+    },
+    {
+      "source": "What's in this bundle",
+      "expected": "Состав набора"
+    },
+    {
+      "source": "Create a Plugin with the Agent",
+      "expected": "Создать плагин с помощью агента"
+    },
+    {
+      "source": "Create plugin",
+      "expected": "Создать плагин"
+    },
+    {
+      "source": "Create",
+      "expected": "Создать"
+    },
+    {
+      "source": "Included by",
+      "expected": "Включено в"
+    },
+    {
+      "source": "Installed in",
+      "expected": "Установлено в"
+    },
+    {
+      "source": "Dismiss error",
+      "expected": "Закрыть ошибку"
+    },
+    {
+      "source": "Delete Task",
+      "expected": "Удалить задачу"
+    },
+    {
+      "source": "Delete",
+      "expected": "Удалить"
+    },
+    {
+      "source": "Scheduled Tasks",
+      "expected": "Запланированные задачи"
+    },
+    {
+      "source": "Search tasks...",
+      "expected": "Поиск задач..."
+    },
+    {
+      "source": "Automations",
+      "expected": "Автоматизации"
+    },
+    {
+      "source": "Search automations...",
+      "expected": "Поиск автоматизаций..."
+    },
+    {
+      "source": "Actions",
+      "expected": "Действия"
+    },
+    {
+      "source": "Project Agent",
+      "expected": "Агент проекта"
+    },
+    {
+      "source": "Sidecar error",
+      "expected": "Ошибка Sidecar"
+    },
+    {
+      "source": "Add MCP Server",
+      "expected": "Добавить сервер MCP"
+    },
+    {
+      "source": "Search MCP servers by name",
+      "expected": "Поиск серверов MCP по имени"
+    },
+    {
+      "source": "Clear search",
+      "expected": "Очистить поиск"
+    },
+    {
+      "source": "Delete MCP Server",
+      "expected": "Удалить MCP-сервер"
+    },
+    {
+      "source": "Delete Skill",
+      "expected": "Удалить навык"
+    },
+    {
+      "source": "Deleting...",
+      "expected": "Удаление..."
+    },
+    {
+      "source": "Ask the agent to diagnose and fix this server",
+      "expected": "Попросить агента проверить и исправить этот сервер"
+    },
+    {
+      "source": "Fix with Agent",
+      "expected": "Исправить с помощью агента"
+    },
+    {
+      "source": "Sign-in required",
+      "expected": "Требуется вход"
+    },
+    {
+      "source": "Ready",
+      "expected": "Готов"
+    },
+    {
+      "source": "Pending",
+      "expected": "В ожидании"
+    },
+    {
+      "source": "Error",
+      "expected": "Ошибка"
+    },
+    {
+      "source": "Disabled",
+      "expected": "Отключено"
+    },
+    {
+      "source": "Plugin:",
+      "expected": "Плагин:"
+    },
+    {
+      "source": "Restart",
+      "expected": "Перезапустить"
+    },
+    {
+      "source": "Disable",
+      "expected": "Отключить"
+    },
+    {
+      "source": "Enter authorization code...",
+      "expected": "Введите код авторизации..."
+    },
+    {
+      "source": "Enter",
+      "expected": "Enter"
+    },
+    {
+      "source": "Click to disable tool",
+      "expected": "Нажмите, чтобы отключить инструмент"
+    },
+    {
+      "source": "Click to enable tool",
+      "expected": "Нажмите, чтобы включить инструмент"
+    },
+    {
+      "source": "Blocked by organization policy",
+      "expected": "Заблокировано политикой организации"
+    },
+    {
+      "source": "Enable recommended skills",
+      "expected": "Включить рекомендуемые навыки"
+    },
+    {
+      "source": "Enable Recommended Skills",
+      "expected": "Включить рекомендуемые навыки"
+    },
+    {
+      "source": "Skills and Rules Settings",
+      "expected": "Настройки навыков и правил"
+    },
+    {
+      "source": "See less",
+      "expected": "Свернуть"
+    },
+    {
+      "source": "See more",
+      "expected": "Показать больше"
+    },
+    {
+      "source": "Copied to clipboard",
+      "expected": "Скопировано в буфер обмена"
+    },
+    {
+      "source": "Unknown error",
+      "expected": "Неизвестная ошибка"
+    },
+    {
+      "source": "Agent",
+      "expected": "Агент"
+    },
+    {
+      "source": "Rule",
+      "expected": "Правило"
+    },
+    {
+      "source": "No customizations match your search.",
+      "expected": "Нет кастомизаций, соответствующих поиску."
+    },
+    {
+      "source": "Skills & Rules",
+      "expected": "Навыки и правила"
+    },
+    {
+      "source": "No skills or rules yet.",
+      "expected": "Навыков и правил пока нет."
+    },
+    {
+      "source": "No skills or rules match this filter.",
+      "expected": "Нет навыков или правил, соответствующих фильтру."
+    },
+    {
+      "source": "Custom Agents",
+      "expected": "Пользовательские агенты"
+    },
+    {
+      "source": "Custom Agent Error:",
+      "expected": "Ошибка пользовательского агента:"
+    },
+    {
+      "source": "No custom agents yet.",
+      "expected": "Пользовательских агентов пока нет."
+    },
+    {
+      "source": "Copy Config File Path",
+      "expected": "Скопировать путь к файлу конфигурации"
+    },
+    {
+      "source": "Built In",
+      "expected": "Встроенные"
+    },
+    {
+      "source": "Blocked",
+      "expected": "Заблокировано"
+    },
+    {
+      "source": "Plugins",
+      "expected": "Плагины"
+    },
+    {
+      "source": "Bundles",
+      "expected": "Наборы"
+    },
+    {
+      "source": "Add a whole working set at once — a bundle is a curated group of plugins.",
+      "expected": "Добавьте сразу весь рабочий набор — группу специально подобранных плагинов."
+    },
+    {
+      "source": "Skills",
+      "expected": "Навыки"
+    },
+    {
+      "source": "Unnamed MCP Server",
+      "expected": "Безымянный MCP-сервер"
+    },
+    {
+      "source": "Accounts",
+      "expected": "Аккаунты"
+    },
+    {
+      "source": "Reopen sign-in page",
+      "expected": "Снова открыть страницу входа"
+    },
+    {
+      "source": "Paste code",
+      "expected": "Вставить код"
+    },
+    {
+      "source": "Restart sign-in",
+      "expected": "Начать вход заново"
+    },
+    {
+      "source": "Sign in",
+      "expected": "Войти"
+    },
+    {
+      "source": "Paste key",
+      "expected": "Вставить ключ"
+    },
+    {
+      "source": "Signed-in accounts",
+      "expected": "Подключённые аккаунты"
+    },
+    {
+      "source": "Add account",
+      "expected": "Добавить аккаунт"
+    },
+    {
+      "source": "Context usage",
+      "expected": "Использование контекста"
+    },
+    {
+      "source": "Close Logs Modal",
+      "expected": "Закрыть окно журналов"
+    },
+    {
+      "source": "Manager Error",
+      "expected": "Ошибка диспетчера"
+    },
+    {
+      "source": "Process Error",
+      "expected": "Ошибка процесса"
+    },
+    {
+      "source": "Process exited with an error",
+      "expected": "Процесс завершился с ошибкой"
+    },
+    {
+      "source": "Copy command",
+      "expected": "Копировать команду"
+    },
+    {
+      "source": "Host Endpoint",
+      "expected": "Адрес узла"
+    },
+    {
+      "source": "Readme",
+      "expected": "Readme"
+    },
+    {
+      "source": "Agents",
+      "expected": "Агенты"
+    },
+    {
+      "source": "Rules",
+      "expected": "Правила"
+    },
+    {
+      "source": "Hooks",
+      "expected": "Хуки"
+    },
+    {
+      "source": "Plugin details",
+      "expected": "Подробности плагина"
+    },
+    {
+      "source": "Setup required",
+      "expected": "Требуется настройка"
+    },
+    {
+      "source": "Install this plugin to see the commands it adds, along with its skills, agents and MCP servers.",
+      "expected": "Установите этот плагин, чтобы увидеть добавляемые им команды, а также его навыки, агентов и серверы MCP."
+    },
+    {
+      "source": "Plugin metadata",
+      "expected": "Сведения о плагине"
+    },
+    {
+      "source": "Search...",
+      "expected": "Поиск..."
+    },
+    {
+      "source": "Marketplace",
+      "expected": "Каталог расширений"
+    },
+    {
+      "source": "Installed",
+      "expected": "Установлено"
+    },
+    {
+      "source": "Customizations views",
+      "expected": "Разделы настройки"
+    },
+    {
+      "source": "Customizations",
+      "expected": "Кастомизация"
+    },
+    {
+      "source": "Search customizations...",
+      "expected": "Поиск настроек..."
+    },
+    {
+      "source": "Recent Files",
+      "expected": "Последние файлы"
+    },
+    {
+      "source": "Failed to sync comments to extension",
+      "expected": "Не удалось синхронизировать комментарии с расширением"
+    },
+    {
+      "source": "This conversation is not on disk. Delete it to remove it from your sidebar.",
+      "expected": "Этот диалог отсутствует на диске. Удалите его, чтобы убрать из боковой панели."
+    },
+    {
+      "source": "Import AI Studio Project",
+      "expected": "Импортировать проект AI Studio"
+    },
+    {
+      "source": "Global",
+      "expected": "Глобальный"
+    },
+    {
+      "source": "Saves to your global ~/.gemini/antigravity/agents/ directory. This script will be available across all your workspaces.",
+      "expected": "Сохраняется в вашем глобальном каталоге ~/.gemini/antigravity/agents/. Этот скрипт будет доступен во всех ваших рабочих областях."
+    },
+    {
+      "source": "Workspace",
+      "expected": "Рабочее пространство"
+    },
+    {
+      "source": "Saves to the .agent/agents/ directory in your current workspace. This script can be version controlled and shared with your team.",
+      "expected": "Сохраняется в каталоге .agent/agents/ текущей рабочей области. Скрипт можно хранить в системе контроля версий и передавать команде."
+    },
+    {
+      "source": "Back",
+      "expected": "Назад"
+    },
+    {
+      "source": "Type absolute path or navigate folders...",
+      "expected": "Введите путь или выберите папку..."
+    },
+    {
+      "source": "Terminal",
+      "expected": "Терминал"
+    },
+    {
+      "source": "Failed to create terminal",
+      "expected": "Не удалось создать терминал"
+    },
+    {
+      "source": "Pinned Conversations",
+      "expected": "Закрепленные диалоги"
+    },
+    {
+      "source": "Notifications",
+      "expected": "Уведомления"
+    },
+    {
+      "source": "Jetski Chat",
+      "expected": "Чат"
+    },
+    {
+      "source": "Account",
+      "expected": "Аккаунт"
+    },
+    {
+      "source": "Permissions",
+      "expected": "Разрешения"
+    },
+    {
+      "source": "General",
+      "expected": "Основные"
+    },
+    {
+      "source": "Appearance",
+      "expected": "Внешний вид"
+    },
+    {
+      "source": "Tab",
+      "expected": "Таб"
+    },
+    {
+      "source": "Editor",
+      "expected": "Редактор"
+    },
+    {
+      "source": "Browser",
+      "expected": "Браузер"
+    },
+    {
+      "source": "Provide Feedback",
+      "expected": "Оставить отзыв"
+    },
+    {
+      "source": "Models",
+      "expected": "Модели"
+    },
+    {
+      "source": "App",
+      "expected": "Приложение"
+    },
+    {
+      "source": "Project General",
+      "expected": "Общие проекта"
+    },
+    {
+      "source": "Alt text:",
+      "expected": "Альтернативный текст:"
+    },
+    {
+      "source": "Image URL:",
+      "expected": "URL-адрес изображения:"
+    },
+    {
+      "source": "Copy full URL to clipboard",
+      "expected": "Скопировать URL"
+    },
+    {
+      "source": "Insert in terminal",
+      "expected": "Вставить в терминал"
+    },
+    {
+      "source": "Insert in Terminal",
+      "expected": "Вставить в терминал"
+    },
+    {
+      "source": "At mention code block",
+      "expected": "Упоминание блока кода"
+    },
+    {
+      "source": "At Mention Code Block",
+      "expected": "Упоминание блока кода"
+    },
+    {
+      "source": "Copy code",
+      "expected": "Копировать код"
+    },
+    {
+      "source": "Next",
+      "expected": "Далее"
+    },
+    {
+      "source": "Table options",
+      "expected": "Параметры таблицы"
+    },
+    {
+      "source": "Media actions",
+      "expected": "Действия с медиафайлом"
+    },
+    {
+      "source": "Artifacts",
+      "expected": "Артефакты"
+    },
+    {
+      "source": "Cancel All Tasks",
+      "expected": "Отменить все задачи"
+    },
+    {
+      "source": "Background Tasks",
+      "expected": "Фоновые задачи"
+    },
+    {
+      "source": "Cancel Task",
+      "expected": "Отменить задачу"
+    },
+    {
+      "source": "What counts as a document",
+      "expected": "Что считается документом"
+    },
+    {
+      "source": "Documents",
+      "expected": "Документы"
+    },
+    {
+      "source": "No documents",
+      "expected": "Документов нет"
+    },
+    {
+      "source": "Refresh",
+      "expected": "Обновить"
+    },
+    {
+      "source": "Loading Notebook View...",
+      "expected": "Загрузка просмотра блокнота..."
+    },
+    {
+      "source": "Files Changed",
+      "expected": "Изменённые файлы"
+    },
+    {
+      "source": "Killed",
+      "expected": "Остановлено"
+    },
+    {
+      "source": "Working...",
+      "expected": "Работаю..."
+    },
+    {
+      "source": "Collapse subagents",
+      "expected": "Свернуть субагентов"
+    },
+    {
+      "source": "Expand subagents",
+      "expected": "Развернуть субагентов"
+    },
+    {
+      "source": "Stop subagent",
+      "expected": "Остановить субагента"
+    },
+    {
+      "source": "Stop Subagent",
+      "expected": "Остановить субагента"
+    },
+    {
+      "source": "Stop All Subagents",
+      "expected": "Остановить всех субагентов"
+    },
+    {
+      "source": "Subagents",
+      "expected": "Субагенты"
+    },
+    {
+      "source": "No subagents",
+      "expected": "Нет субагентов"
+    },
+    {
+      "source": "Terminals",
+      "expected": "Терминалы"
+    },
+    {
+      "source": "Open Terminal",
+      "expected": "Открыть терминал"
+    },
+    {
+      "source": "Uploads",
+      "expected": "Загрузки"
+    },
+    {
+      "source": "View Stacked Diff",
+      "expected": "Стопочный дифф"
+    },
+    {
+      "source": "View Split Diff",
+      "expected": "Раздельный дифф"
+    },
+    {
+      "source": "Collapse Diffs",
+      "expected": "Свернуть диффы"
+    },
+    {
+      "source": "Expand Diffs",
+      "expected": "Развернуть диффы"
+    },
+    {
+      "source": "Show Whitespace Changes",
+      "expected": "Показать изменения пробелов"
+    },
+    {
+      "source": "Hide Whitespace Changes",
+      "expected": "Скрыть изменения пробелов"
+    },
+    {
+      "source": "Viewing Diff",
+      "expected": "Просмотр диффа"
+    },
+    {
+      "source": "View Diff",
+      "expected": "Просмотр изменений"
+    },
+    {
+      "source": "View File",
+      "expected": "Просмотреть файл"
+    },
+    {
+      "source": "Open in Notebook View",
+      "expected": "Открыть в виде блокнота"
+    },
+    {
+      "source": "Copy Content",
+      "expected": "Скопировать содержимое"
+    },
+    {
+      "source": "Copy Path",
+      "expected": "Копировать путь"
+    },
+    {
+      "source": "Export as PDF",
+      "expected": "Экспортировать в PDF"
+    },
+    {
+      "source": "Search",
+      "expected": "Поиск"
+    },
+    {
+      "source": "Merge Conflict",
+      "expected": "Конфликт слияния"
+    },
+    {
+      "source": "Split Terminal",
+      "expected": "Разделить терминал"
+    },
+    {
+      "source": "Delete Terminal",
+      "expected": "Закрыть терминал"
+    },
+    {
+      "source": "Standalone Terminals",
+      "expected": "Отдельные терминалы"
+    },
+    {
+      "source": "Resize terminal panes",
+      "expected": "Изменить размер панелей терминала"
+    },
+    {
+      "source": "Open Jetski Corp",
+      "expected": "Открытая компания Jetski Corp."
+    },
+    {
+      "source": "Creating terminal...",
+      "expected": "Создание терминала..."
+    },
+    {
+      "source": "Auxiliary Pane",
+      "expected": "Вспомогательная панель"
+    },
+    {
+      "source": "Overview",
+      "expected": "Обзор"
+    },
+    {
+      "source": "File Viewer",
+      "expected": "Просмотр файла"
+    },
+    {
+      "source": "File",
+      "expected": "Файл"
+    },
+    {
+      "source": "Directory Viewer",
+      "expected": "Просмотр папки"
+    },
+    {
+      "source": "Directory",
+      "expected": "Каталог"
+    },
+    {
+      "source": "Virtual File Viewer",
+      "expected": "Просмотр виртуального файла"
+    },
+    {
+      "source": "Virtual File",
+      "expected": "Виртуальный файл"
+    },
+    {
+      "source": "Artifact Viewer",
+      "expected": "Просмотр артефактов"
+    },
+    {
+      "source": "Artifact",
+      "expected": "Артефакт"
+    },
+    {
+      "source": "Review",
+      "expected": "Проверка"
+    },
+    {
+      "source": "Browser Subagent Viewer",
+      "expected": "Просмотр браузерного субагента"
+    },
+    {
+      "source": "Browser Task",
+      "expected": "Задача браузера"
+    },
+    {
+      "source": "Background Task Output",
+      "expected": "Вывод фоновой задачи"
+    },
+    {
+      "source": "Custom View",
+      "expected": "Пользовательское представление"
+    },
+    {
+      "source": "Sidecar View",
+      "expected": "Панель Sidecar"
+    },
+    {
+      "source": "Workspace File Explorer",
+      "expected": "Проводник файлов рабочей области"
+    },
+    {
+      "source": "Header",
+      "expected": "Заголовок"
+    },
+    {
+      "source": "Toggle Sidebar",
+      "expected": "Боковая панель"
+    },
+    {
+      "source": "For Turn",
+      "expected": "Для шага"
+    },
+    {
+      "source": "Clear filter",
+      "expected": "Сбросить фильтр"
+    },
+    {
+      "source": "Connecting to terminal...",
+      "expected": "Подключение к терминалу…"
+    },
+    {
+      "source": "Open File",
+      "expected": "Открыть файл"
+    },
+    {
+      "source": "Full View",
+      "expected": "Полный вид"
+    },
+    {
+      "source": "Subagent Conversation",
+      "expected": "Диалог субагента"
+    },
+    {
+      "source": "Subagent",
+      "expected": "Субагент"
+    },
+    {
+      "source": "Toggle sidebar",
+      "expected": "Боковая панель"
+    },
+    {
+      "source": "Preview",
+      "expected": "Предпросмотр"
+    },
+    {
+      "source": "Escape",
+      "expected": "Escape"
+    },
+    {
+      "source": "Search tabs, files, plugins, subagents, artifacts, tasks...",
+      "expected": "Поиск вкладок, файлов, плагинов, подагентов, артефактов и задач..."
+    },
+    {
+      "source": "Search for content to open",
+      "expected": "Найдите материал для открытия"
+    },
+    {
+      "source": "No results",
+      "expected": "Нет результатов"
+    },
+    {
+      "source": "Search results",
+      "expected": "Результаты поиска"
+    },
+    {
+      "source": "Unpin tab",
+      "expected": "Открепить вкладку"
+    },
+    {
+      "source": "Pin tab",
+      "expected": "Закрепить вкладку"
+    },
+    {
+      "source": "Close tabs to the right",
+      "expected": "Закрыть вкладки справа"
+    },
+    {
+      "source": "New tab",
+      "expected": "Новая вкладка"
+    },
+    {
+      "source": "New Tab",
+      "expected": "Новая вкладка"
+    },
+    {
+      "source": "Clear",
+      "expected": "Очистить"
+    },
+    {
+      "source": "Sent to Chief of Staff",
+      "expected": "Отправлено главному помощнику"
+    },
+    {
+      "source": "Chief of Staff voice message failed",
+      "expected": "Не удалось отправить голосовое сообщение главному помощнику"
+    },
+    {
+      "source": "Chief of Staff voice mode stopped",
+      "expected": "Голосовой режим главного помощника завершён"
+    },
+    {
+      "source": "View",
+      "expected": "Вид"
+    },
+    {
+      "source": "Window",
+      "expected": "Окно"
+    },
+    {
+      "source": "Search Conversations",
+      "expected": "Поиск диалогов"
+    },
+    {
+      "source": "Restore Pane",
+      "expected": "Восстановить панель"
+    },
+    {
+      "source": "Maximize Pane",
+      "expected": "Развернуть панель"
+    },
+    {
+      "source": "Toggle Auxiliary Pane",
+      "expected": "Вспомогательная панель"
+    },
+    {
+      "source": "Chief of Staff is listening — open the Chief of Staff conversation",
+      "expected": "Главный помощник слушает — откройте диалог с ним"
+    },
+    {
+      "source": "Chief of Staff is listening — each spoken turn is sent to the Chief of Staff agent. Turn off: Ctrl+Shift+M",
+      "expected": "Руководитель штаба слушает — каждая произнесённая реплика отправляется его агенту. Выключить: Ctrl+Shift+M"
+    },
+    {
+      "source": "Turn on the Chief of Staff mic (always-on listener). Ctrl+Shift+M — hold for push-to-talk",
+      "expected": "Включить микрофон руководителя штаба для постоянного прослушивания. Удерживайте Ctrl+Shift+M, чтобы говорить по нажатию клавиш."
+    },
+    {
+      "source": "Copy email address",
+      "expected": "Скопировать адрес электронной почты"
+    },
+    {
+      "source": "Copy path",
+      "expected": "Скопировать путь"
+    },
+    {
+      "source": "Uploading…",
+      "expected": "Загрузка…"
+    },
+    {
+      "source": "Upload debug bundle",
+      "expected": "Загрузить диагностический архив"
+    },
+    {
+      "source": "Upload Debug Bundle",
+      "expected": "Загрузить диагностический архив"
+    },
+    {
+      "source": "Not shared automatically—share with",
+      "expected": "Не отправляется автоматически — передайте"
+    },
+    {
+      "source": "Copied version",
+      "expected": "Версия скопирована"
+    },
+    {
+      "source": "Version Info",
+      "expected": "Сведения о версии"
+    },
+    {
+      "source": "More feedback options",
+      "expected": "Другие способы обратной связи"
+    },
+    {
+      "source": "Sidebar",
+      "expected": "Боковая панель"
+    },
+    {
+      "source": "Close Sidebar",
+      "expected": "Закрыть боковую панель"
+    },
+    {
+      "source": "Conversation History",
+      "expected": "История диалогов"
+    },
+    {
+      "source": "Automation credentials expired",
+      "expected": "Данные авторизации автоматизации устарели"
+    },
+    {
+      "source": "Automation credentials expiring soon",
+      "expected": "Срок действия авторизации автоматизации скоро истечёт"
+    },
+    {
+      "source": "Settings",
+      "expected": "Настройки"
+    },
+    {
+      "source": "Automation saved",
+      "expected": "Автоматизация сохранена"
+    },
+    {
+      "source": "Cron expression e.g. 0 */6 * * *",
+      "expected": "Выражение Cron, например. 0 */6 * * *"
+    },
+    {
+      "source": "Prompt to run when triggered...",
+      "expected": "Запрос для выполнения при срабатывании..."
+    },
+    {
+      "source": "Your changes were not saved. Please try again.",
+      "expected": "Изменения не сохранены. Попробуйте ещё раз."
+    },
+    {
+      "source": "Edit automation title",
+      "expected": "Изменить название автоматизации"
+    },
+    {
+      "source": "Enter a prompt for the agent to run...",
+      "expected": "Введите задачу для агента..."
+    },
+    {
+      "source": "Monday",
+      "expected": "Понедельник"
+    },
+    {
+      "source": "Failed to create automation.",
+      "expected": "Не удалось создать автоматизацию."
+    },
+    {
+      "source": "New Automation",
+      "expected": "Новая автоматизация"
+    },
+    {
+      "source": "Add automation",
+      "expected": "Добавить автоматизацию"
+    },
+    {
+      "source": "Credential expires in less than 1 week. Click to refresh TDAT",
+      "expected": "Срок действия авторизации истечёт менее чем через неделю. Нажмите, чтобы обновить TDAT."
+    },
+    {
+      "source": "Credential expired. Click to refresh TDAT",
+      "expected": "Срок действия авторизации истёк. Нажмите, чтобы обновить TDAT."
+    },
+    {
+      "source": "Search conversations...",
+      "expected": "Поиск диалогов..."
+    },
+    {
+      "source": "Prompt to execute on schedule...",
+      "expected": "Промпт для выполнения по расписанию..."
+    },
+    {
+      "source": "Edit task title",
+      "expected": "Редактировать название задачи"
+    },
+    {
+      "source": "Open project settings",
+      "expected": "Открыть настройки проекта"
+    },
+    {
+      "source": "This sidecar runs from a path that is not officially supported. Make sure your code is in a trusted location in google3.",
+      "expected": "Эта коляска движется по пути, который официально не поддерживается. Убедитесь, что ваш код находится в надежном месте в google3."
+    },
+    {
+      "source": "Create with Prompt",
+      "expected": "Создать по запросу"
+    },
+    {
+      "source": "New",
+      "expected": "Новый"
+    },
+    {
+      "source": "Border color of the command center when the window is inactive",
+      "expected": "Цвет границы центра команд в неактивном окне"
+    },
+    {
+      "source": "Colors and styles for the token.",
+      "expected": "Цвета и стили токена."
+    },
+    {
+      "source": "Foreground color for the token.",
+      "expected": "Цвет текста токена."
+    },
+    {
+      "source": "Sets the all font styles of the rule: 'italic', 'bold', 'underline' or 'strikethrough' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
+      "expected": "Задаёт стили шрифта правила: italic (курсив), bold (полужирный), underline (подчёркнутый), strikethrough (зачёркнутый) или их сочетание. Неуказанные стили отключаются. Пустая строка отключает все стили."
+    },
+    {
+      "source": "Sets or unsets the font style to bold. Note, the presence of 'fontStyle' overrides this setting.",
+      "expected": "Включает или отключает полужирный шрифт. Параметр fontStyle имеет приоритет над этой настройкой."
+    },
+    {
+      "source": "Sets or unsets the font style to italic. Note, the presence of 'fontStyle' overrides this setting.",
+      "expected": "Включает или отключает курсив. Параметр fontStyle имеет приоритет над этой настройкой."
+    },
+    {
+      "source": "Sets or unsets the font style to underline. Note, the presence of 'fontStyle' overrides this setting.",
+      "expected": "Включает или отключает подчёркивание. Параметр fontStyle имеет приоритет над этой настройкой."
+    },
+    {
+      "source": "Sets or unsets the font style to strikethrough. Note, the presence of 'fontStyle' overrides this setting.",
+      "expected": "Включает или отключает зачёркивание. Параметр fontStyle имеет приоритет над этой настройкой."
+    },
+    {
+      "source": "Environment Status",
+      "expected": "Состояние среды"
+    },
+    {
+      "source": "Gcert Status",
+      "expected": "Состояние Gcert"
+    },
+    {
+      "source": "Search in document...",
+      "expected": "Поиск в документе…"
+    },
+    {
+      "source": "Page",
+      "expected": "Страница"
+    },
+    {
+      "source": "Scroll position",
+      "expected": "Положение прокрутки"
+    },
+    {
+      "source": "Target text in PDF...",
+      "expected": "Текст для поиска в PDF..."
+    },
+    {
+      "source": "Write a comment...",
+      "expected": "Напишите комментарий..."
+    },
+    {
+      "source": "Hide Thumbnail Sidebar",
+      "expected": "Скрыть панель миниатюр"
+    },
+    {
+      "source": "Show Thumbnail Sidebar",
+      "expected": "Показать панель миниатюр"
+    },
+    {
+      "source": "Toggle Thumbnails",
+      "expected": "Показать или скрыть миниатюры"
+    },
+    {
+      "source": "Exit Fullscreen",
+      "expected": "Выйти из полноэкранного режима"
+    },
+    {
+      "source": "Enter Fullscreen",
+      "expected": "Полноэкранный режим"
+    },
+    {
+      "source": "Download PDF",
+      "expected": "Скачать PDF"
+    },
+    {
+      "source": "Comments unavailable at this screen size",
+      "expected": "Комментарии недоступны при этом размере экрана"
+    },
+    {
+      "source": "Disable Text Selection",
+      "expected": "Отключить выделение текста"
+    },
+    {
+      "source": "Enable Text Selection",
+      "expected": "Включить выделение текста"
+    },
+    {
+      "source": "Switch to Light Mode",
+      "expected": "Включить светлую тему"
+    },
+    {
+      "source": "Switch to Dark Mode",
+      "expected": "Включить тёмную тему"
+    },
+    {
+      "source": "Light Mode",
+      "expected": "Светлая тема"
+    },
+    {
+      "source": "Dark Mode",
+      "expected": "Тёмная тема"
+    },
+    {
+      "source": "Fit to Width",
+      "expected": "По ширине"
+    },
+    {
+      "source": "Fit to Page",
+      "expected": "Страница целиком"
+    },
+    {
+      "source": "Previous Page",
+      "expected": "Предыдущая страница"
+    },
+    {
+      "source": "Current Page",
+      "expected": "Текущая страница"
+    },
+    {
+      "source": "Next Page",
+      "expected": "Следующая страница"
+    },
+    {
+      "source": "Previous match",
+      "expected": "Предыдущее совпадение"
+    },
+    {
+      "source": "Next match",
+      "expected": "Следующее совпадение"
+    },
+    {
+      "source": "Clear Search",
+      "expected": "Очистить поиск"
+    },
+    {
+      "source": "Open Search",
+      "expected": "Открыть поиск"
+    },
+    {
+      "source": "Zoom Out",
+      "expected": "Уменьшить масштаб"
+    },
+    {
+      "source": "Zoom Level",
+      "expected": "Масштаб"
+    },
+    {
+      "source": "Zoom In",
+      "expected": "Увеличить масштаб"
+    },
+    {
+      "source": "More toolbar actions",
+      "expected": "Другие действия панели инструментов"
+    },
+    {
+      "source": "More",
+      "expected": "Ещё"
+    },
+    {
+      "source": "Navigation",
+      "expected": "Навигация"
+    },
+    {
+      "source": "Fit Mode",
+      "expected": "Масштабирование"
+    },
+    {
+      "source": "Thumbnails",
+      "expected": "Миниатюры"
+    },
+    {
+      "source": "Text selection is paused for smoother viewing. Search, comments, and annotations still work. Use the toolbar text button when selection is needed.",
+      "expected": "Выделение текста временно отключено для плавного просмотра. Поиск, комментарии и аннотации продолжают работать. Чтобы выделить текст, нажмите кнопку текста на панели инструментов."
+    },
+    {
+      "source": "Dismiss text selection notice",
+      "expected": "Закрыть уведомление о выделении текста"
+    },
+    {
+      "source": "Developer",
+      "expected": "Для разработчиков"
+    },
+    {
+      "source": "Zoom out",
+      "expected": "Уменьшить масштаб"
+    },
+    {
+      "source": "Reset zoom",
+      "expected": "Сбросить масштаб"
+    },
+    {
+      "source": "Zoom in",
+      "expected": "Увеличить масштаб"
+    },
+    {
+      "source": "Zoom in (+)",
+      "expected": "Увеличить (+)"
+    },
+    {
+      "source": "Download SVG",
+      "expected": "Скачать SVG"
+    },
+    {
+      "source": "Close (Esc)",
+      "expected": "Закрыть (Esc)"
+    },
+    {
+      "source": "Agent Team",
+      "expected": "Команда агентов"
+    },
+    {
+      "source": "Team of subagents to do long running work",
+      "expected": "Команда субагентов для длительных задач"
+    },
+    {
+      "source": "A permanent Chief of Staff conversation in the sidebar that manages your other conversations: delegate tasks, check status, and read results from one place.",
+      "expected": "Постоянный диалог с руководителем штаба в боковой панели для управления другими диалогами: поручайте задачи, проверяйте состояние и читайте результаты в одном месте."
+    },
+    {
+      "source": "CL details unavailable",
+      "expected": "Сведения об изменении недоступны"
+    },
+    {
+      "source": "Select a model in the model selector",
+      "expected": "Выберите модель в списке моделей"
+    }
+  ],
+  "exclusions": [
+    {
+      "source": "Title",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "PageId",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "JavascriptSource",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "JavascriptDescription",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "WaitingReason",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Background Task",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "CompactTooltipBaseUi",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Button",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "GutterHoverCommentButton",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "NewConversationToolbarButton",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "Failed to serialize ContextScopeItem for text content:",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "CodeBlock",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "DiffRowItem",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "Failed to load terminals for tab strip:",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "No agent service to write to",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "Project 4K",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "DoNotUseOneMoment",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "TaskIcon",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "AuxPaneContent",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "SideBarButton",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "Hub",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "Drag and drop feedback color for the activity bar items. The activity bar is showing on the far left or right and allows to switch between views of the side bar.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Activity notification badge background color. The activity bar is showing on the far left or right and allows to switch between views of the side bar.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Activity notification badge foreground color. The activity bar is showing on the far left or right and allows to switch between views of the side bar.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Active border color of the command center",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notifications center border color. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notification toast border color. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notifications foreground color. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notifications background color. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notification links foreground color. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notifications center header foreground color. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notifications center header background color. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notifications border color separating from other notifications in the notifications center. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "The color used for the icon of error notifications. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "The color used for the icon of warning notifications. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "The color used for the icon of info notifications. Notifications slide in from the bottom right of the window.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Invalid token modifier id.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Token background colors are currently not supported.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Invalid token type id.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Invalid token super type id.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Search across files...",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Enter",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Active Skills",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Add",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "No skills loaded.",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Installed Skills",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Refresh customizations",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Refresh",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Close panel",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Close",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Search all skills on Agent Market…",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Refresh skills",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Refresh Skills",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Close skills panel",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Search skills…",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "DelegatingResourceLocator",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Adapter",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Notification",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "NotificationImpl",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "NotificationChainImpl",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "The value of type '",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "FeatureMapUtil/FeatureENotificationImpl",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Inter",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Switch Roles",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Reset State",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "Delete Data Directory",
+      "reason": "library or non-UI schema region"
+    },
+    {
+      "source": "ScrollbarMarkersPopover",
+      "reason": "component identifier, product name, debug-only or dynamic fragment"
+    }
+  ],
+  "observedTemplates": [
+    "Select model with ${c}",
+    "Install ${b}",
+    "More actions for ${a}",
+    "Configure ${a.title}",
+    "Failed to save configuration: ${G}",
+    "Set up ${J}",
+    "Review permissions for ${J}",
+    "Install folder \"${jW(a.plugin)}\" is already in use",
+    "Configure ${b.serverName}",
+    "The ${b.serverName} MCP server requires configuration parameters before it can be started.",
+    "Add ${L} ${L===1?\"plugin\":\"plugins\"} from ${a}",
+    "Add all \\u00b7 ${L}",
+    "Enabled \"${h}\".",
+    "Agents created by this ${k} run in a dedicated ${e.lowercase} with its own permissions. You can change the permissions in the ${e.lowercase} settings page.",
+    "Started \"${m}\".",
+    "Failed to start \"${m}\".",
+    "Restarted \"${y}\".",
+    "Failed to update \"${y}\"",
+    "Fix with Agent: ${c}",
+    "More actions for ${y}",
+    "Auth code for ${y}",
+    "See ${e} more ${c}",
+    "See ${e} more",
+    "See more ${c}",
+    "Filter skills and rules: ${lX[a]}",
+    "Toggle ${e}",
+    "Adding plugins from ${n}",
+    "Add ${c} ${c===1?\"plugin\": \"plugins\"} from ${n}",
+    "Add all \\u00b7 ${c}",
+    "Unnamed Agent ${(f??0)+1}",
+    "Authorization code for ${J.provider}",
+    "Secret for ${J.provider}",
+    "Secret for a new ${J.provider} account",
+    "Rule ${f+1}",
+    "Couldn't ${b} conversation",
+    "Failed to ${b} conversation",
+    "Go to slide ${l+1}",
+    "Open conversation ${J}",
+    "Open the ${J} plugin",
+    "Opens external link: ${a}",
+    "View Diff for ${f}",
+    "Open ${v}",
+    "View ${y.toLowerCase()} ${t+1}",
+    "User uploaded media ${t+1}",
+    "Cost summary: ${n}",
+    "Searched for \"${a.query}\"",
+    "Searched for files: ${a.pattern}",
+    "Creating workspace \"${R}\"...",
+    "Trajectory not found (${H?\"displayed\":\"not displayed\"}).",
+    "Marked ${q} conversations as read",
+    "Open ${D}",
+    "Open ${c.config.title}",
+    "For ${m}, telemetry is force disabled.",
+    "For ${l?",
+    "When toggled on, ${b.product.nameShort} collects usage data to help Google enhance performance and features.",
+    "Receive product updates, tips, and promotions from Google ${b.product.nameShort} via email.",
+    "Sign in to use ${eKb}!",
+    "Add new ${a} item",
+    "Confirm add ${a} item",
+    "Option ${v} not found in options",
+    "Manage ${c} app settings.",
+    "Reset ${c} override${c===1?\"\":\"s\"}",
+    "Changes the base URL on each extension page. You must restart ${b.nameShort} to use the new marketplace after changing this value.",
+    "Changes the base URL for marketplace search results. You must restart ${b.nameShort} to use the new marketplace after changing this value.",
+    "Shared with: ${b.join(\", \")}",
+    "When toggled on, ${h} will use your AI credits to fulfill model requests once you're out of model quota. ${h} will always use your model quota first before using AI credits.",
+    "Failed to remove agent: ${u}",
+    "Toggle ${a}",
+    "Edit ${a.name}",
+    "Build with ${a} Plugins",
+    "Auth code for ${x}",
+    "Failed to save project Google3 configuration: ${gp(u)}",
+    "Failed to resolve folder: ${w}",
+    "Delete ${h.capitalized}",
+    "Failed to delete ${C.lowercase}: ${gp(Va)}",
+    "Duplicate ${C.lowercase} name",
+    "Failed to save project: ${gp(Na)}",
+    "Cannot add folder: \"${Ka}\" is not a valid folder location.",
+    "Failed to resolve folder: ${Qb} (${gp(qb)})",
+    "Cannot add folder with unparseable URI: ${Qb}",
+    "Failed to save project settings: ${gp(vb)}",
+    "Failed to save project permissions: ${gp(vb)}",
+    "Edit ${C.lowercase} name",
+    "Agent settings and permissions for conversations outside of ${C.lowercasePlural}.",
+    "Manage ${C.lowercase} ${Ja?\"resources\":\"folders\"}, agent settings, and permissions.",
+    "Delete ${C.capitalized}",
+    "All changes since ${l}",
+    "Project ${L} has ${Q.length} unparseable resource URI(s): ${Q.join(\", \")}",
+    "Conversation ${f.slice(0,8)}",
+    "Edit comment: ${a.comment}",
+    "Load older messages, showing ${b} of ${c}",
+    "No more older messages, showing ${b} of ${c}",
+    "Open ${a}",
+    "View ${g} side question${g===1?\"\":\"s\"}",
+    "Question ${t+1} of ${r.length}",
+    "Thought for ${Math.max(1,Number(H.seconds))}s",
+    "Failed to save project settings: ${gp(C)}",
+    "Failed to save settings: ${gp(w)}",
+    "This ${a.lowercase} overrides your global permission settings.",
+    "Agent permissions preset selector, current: ${l}",
+    "Failed to create project: ${gp(u)}",
+    "Generating ${e.envName} name took > 7 seconds",
+    "Using default ${e.envName} name",
+    "Creating project ${e.envName} took > 7 seconds",
+    "Failed to create ${e.envName}",
+    "Failed to create ${e.envName}: ${G}",
+    "Failed to create ${e.envName}: ${K}",
+    "Failed to save project branch: ${gp(H)}",
+    "Work locally on ${g.map(h=>pr(h)).join(\", \")}",
+    "Worktree from ${n.map(r=>pr(r)).join(\", \")}",
+    "Select model, current: ${t}${v?",
+    "Remove ${D}",
+    "Environment: ${w}",
+    "Select harnesses, current: ${f}",
+    "Best of N (${IYb(a)})",
+    "Select modes, current: ${g.join(\", \")}",
+    "View ${f}",
+    "View ${h}",
+    "Send now: ${e}",
+    "Failed to save project: ${gp(t)}",
+    "Failed to save project: ${gp(x)}",
+    "Cannot add folder: \"${f}\" is not a valid folder location.",
+    "Select project, current: ${x}",
+    "Select workspace, current: ${h??\"Select workspace...\"}",
+    "Failed to unarchive project: ${fp(gp(y))}",
+    "Failed to select workspace: ${x}",
+    "Failed to create workspace: ${H}",
+    "Use custom repository: \"${G}\"",
+    "Unmount workspace ${O.label}",
+    "Remount workspace ${O.label}",
+    "Delete workspace ${O.label}",
+    "Failed to archive ${v.lowercase}",
+    "Failed to delete ${v.lowercase}",
+    "Worked for ${cN(l.lastModifiedAtMs-l.createdAtMs)}",
+    "Close ${m.getTabTitle(a.content,k)}",
+    "Aux pane ${b}",
+    "Close ${B}",
+    "Unpin ${B}",
+    "Failed to save \"${n.displayName}\"",
+    "All ${e}s run as Flash.",
+    "Created automation \"${h.trim()}\".",
+    "Failed to update \"${u.displayName}\"",
+    "Refreshed credentials for \"${u.displayName}\".",
+    "Failed to refresh credentials for \"${u.displayName}\"",
+    "Deleted \"${k.displayName}\".",
+    "Failed to delete \"${k.displayName}\"",
+    "Refresh credentials for ${u.displayName}",
+    "Delete ${u.displayName}",
+    "Enable ${u.displayName}",
+    "Triggered ${u}",
+    "Failed to save \"${m}\"",
+    "Restarted \"${m}\".",
+    "Deleted \"${m}\".",
+    "Failed to delete \"${m}\"",
+    "Failed to create ${F}.",
+    "Add ${h}",
+    "New ${h}",
+    "Deleted \"${Q}\".",
+    "Failed to delete \"${Q}\"",
+    "Add ${r.emptyMessageSingular}",
+    "No ${r.emptyMessagePlural} matching your search",
+    "No ${r.emptyMessagePlural} configured.",
+    "Navigate to step ${x}",
+    "Artifacts (${c.length} Files for Conversation)",
+    "Changes Overview (${n})",
+    "Debug Mode ${b?\"Enabled\":\"Disabled\"}",
+    "Subagents (${f.length})",
+    "Terminal (${c})",
+    "System Prompt: ${Q.title||",
+    "Tool Definition: ${Q.name||\"unknown\"}",
+    "Step #${R} (${ca})",
+    "Step #${R}: ${ba} (${ca})",
+    "Unused capacity: ${r.toLocaleString()} tokens",
+    "Error serializing JSON: ${b}",
+    "Maximize ${a}",
+    "Copy ${a}",
+    "Copy entire ${a} JSON",
+    "Section ${Q+1}",
+    "Tool ${Q+1}",
+    "Sherlog (Retry #${K})",
+    "Execution Run: ${ja}",
+    "Invocation: ${pa}",
+    "Idle ${a7(g.endMs-g.startMs)} \\u00b7 ${Yec(g.startMs)} \\u2192 ${Yec(g.endMs)}",
+    "Navigate up to parent: ${t}",
+    "Add ${a.name}",
+    "Scroll to: ${b} on page ${c}",
+    "Page ${a} failed to load",
+    "Go to page ${k}"
+  ],
+  "templateScope": "Observed static template inventory; alerts on additions. Rendering is separately validated by ui-dynamic-fixtures.json; a template inventory is not full live acceptance."
+}
