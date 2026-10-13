@@ -423,6 +423,27 @@ const TASK_ACTIVITY_TITLES = Object.freeze({
 // Keep variable UI labels separate from the exact-match dictionary. This
 // function is also embedded in the preload, so its behavior is tested here.
 function translateDynamicUiText(value) {
+  // Fixed model-access notice templates; preserve the model name as opaque text.
+  const accessNotice = (text) => {
+    const notice = /^Third-party model access will no longer be available on your current plan starting on (January|February|March|April|May|June|July|August|September|October|November|December) ([1-9]|[12][0-9]|3[01]), (20[0-9]{2})\.$/i.exec(text);
+    if (!notice) return null;
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const russianMonths = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+    const month = months.findIndex(item => item.toLowerCase() === notice[1].toLowerCase());
+    const day = Number(notice[2]);
+    const year = Number(notice[3]);
+    if (day > new Date(year, month + 1, 0).getDate()) return null;
+    return `С ${day} ${russianMonths[month]} ${year} года на вашем текущем тарифе больше не будет доступа к сторонним моделям.`;
+  };
+  const accessOnly = accessNotice(value);
+  if (accessOnly) return accessOnly;
+  const modelNotice = /^([A-Za-z0-9][A-Za-z0-9 ._()+/&-]{0,99}) (is|are) (?:now )?available on paid Pro and Ultra plans\.(?: (Third-party model access will no longer be available on your current plan starting on .+))?$/.exec(value);
+  if (modelNotice) {
+    const ending = modelNotice[3] ? accessNotice(modelNotice[3]) : "";
+    if (modelNotice[3] && !ending) return null;
+    const modelName = modelNotice[1].replace(/ and /g, " и ");
+    return `${modelName} теперь ${modelNotice[2] === "are" ? "доступны" : "доступен"} на платных тарифах Pro и Ultra.` + (ending ? " " + ending : "");
+  }
   if (value === "Thinking..." || value === "Thinking…") return "Думает…";
   if (/^No\s*\(tell the agent what to do instead\)$/i.test(value)) {
     return "Нет (указать агенту другой вариант)";
@@ -1038,6 +1059,11 @@ function selfTestPreloadDom(injected) {
   const spacedBrandLabels = [" Firebase ", "\nChrome DevTools\t"].map(text);
   const spacedUiLabel = text("  Model \n");
   const activityLabels = [
+    ["Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["Opus 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Opus 5.5 теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Sonnet 5.5 теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["GPT-OSS 120B is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "GPT-OSS 120B теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["Opus 5.5 and Sonnet 5.5 are available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Opus 5.5 и Sonnet 5.5 теперь доступны на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
     ["Running commands", "Выполняются команды"],
     ["Use Global Settings", "Использовать глобальные настройки"],
     ["Fix with Agent", "Исправить с помощью агента"],
@@ -1082,7 +1108,7 @@ function selfTestPreloadDom(injected) {
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
     const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
-    leaves.push(text("Notice"), text("Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Use Global Settings"), text("Fix with Agent"), text("Running commands"), text("Running python -c \"print('fixture')\""));
+    leaves.push(text("Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Opus 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("GPT-OSS 120B is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Opus 5.5 and Sonnet 5.5 are available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Notice"), text("Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Use Global Settings"), text("Fix with Agent"), text("Running commands"), text("Running python -c \"print('fixture')\""));
     if (attributes.class === "assistant-message markdown") {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
       leaves.push(text("python -m pip show playwright"));
@@ -1239,6 +1265,16 @@ function selfTest() {
     if (Object.prototype.hasOwnProperty.call(dictionary, term)) fail("A model label should remain in English: " + term + ".");
   }
   const dynamicFixtures = [
+    ["Opus 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026. Run this command.", null],
+    ["My note: Third-party model access will no longer be available on your current plan starting on November 2, 2026.", null],
+    ["Third-party model access will no longer be available on your current plan starting on February 31, 2026.", null],
+    ["Claude Opus 4.6 (Thinking)", null],
+    ["GPT-OSS 120B (Medium)", null],
+    ["Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["Opus 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Opus 5.5 теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Sonnet 5.5 теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["GPT-OSS 120B is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "GPT-OSS 120B теперь доступен на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
+    ["Opus 5.5 and Sonnet 5.5 are available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026.", "Opus 5.5 и Sonnet 5.5 теперь доступны на платных тарифах Pro и Ultra. С 2 ноября 2026 года на вашем текущем тарифе больше не будет доступа к сторонним моделям."],
     ["Yes, and always allow", "Да, всегда разрешать"],
     ["Yes, and always allow in this conversation", "Да, всегда разрешать в этом диалоге"],
     ["Да, всегда разрешать in this conversation", "Да, всегда разрешать в этом диалоге"],
