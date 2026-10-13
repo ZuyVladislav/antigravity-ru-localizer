@@ -266,5 +266,21 @@
   [
     "Page 4 failed to load",
     "Не удалось загрузить страницу 4"
+  ],
+  [
+    "Gemini 4 Argon is currently available to Ultra plan subscribers.",
+    "Gemini 4 Argon сейчас доступен пользователям тарифа Ultra."
+  ],
+  [
+    "GPT-OSS will be removed from Antigravity on November 2, 2026.",
+    "Модель GPT-OSS будет удалена из Antigravity 2 ноября 2026 года."
+  ],
+  [
+    "Gemini Flash is currently available only to Pro plan subscribers.",
+    "Gemini Flash сейчас доступен только пользователям тарифа Pro."
+  ],
+  [
+    "Gemini Flash will be removed from Antigravity on February 29, 2028.",
+    "Модель Gemini Flash будет удалена из Antigravity 29 февраля 2028 года."
   ]
 ]

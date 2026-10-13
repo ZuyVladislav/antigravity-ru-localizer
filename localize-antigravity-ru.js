@@ -426,8 +426,8 @@ function translateDynamicUiText(value) {
   const modelShortcut = /^Select model with ((?:(?:Ctrl|Control|Alt|Option|Shift|Cmd|Command|Meta)[+]){1,4}[A-Za-z0-9])$/.exec(value);
   if (modelShortcut) return `Выберите модель сочетанием ${modelShortcut[1]}`;
   // Fixed model-access notice templates; preserve the model name as opaque text.
-  const accessNotice = (text) => {
-    const notice = /^Third-party model access will no longer be available on your current plan starting on (January|February|March|April|May|June|July|August|September|October|November|December) ([1-9]|[12][0-9]|3[01]), (20[0-9]{2})\.$/i.exec(text);
+  const russianNoticeDate = (text) => {
+    const notice = /^(January|February|March|April|May|June|July|August|September|October|November|December) ([1-9]|[12][0-9]|3[01]), (20[0-9]{2})$/i.exec(text);
     if (!notice) return null;
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const russianMonths = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
@@ -435,8 +435,23 @@ function translateDynamicUiText(value) {
     const day = Number(notice[2]);
     const year = Number(notice[3]);
     if (day > new Date(year, month + 1, 0).getDate()) return null;
-    return `С ${day} ${russianMonths[month]} ${year} года на вашем текущем тарифе больше не будет доступа к сторонним моделям.`;
+    return `${day} ${russianMonths[month]} ${year} года`;
   };
+  const accessNotice = (text) => {
+    const match = /^Third-party model access will no longer be available on your current plan starting on (.+)\.$/.exec(text);
+    const date = match && russianNoticeDate(match[1]);
+    return date ? `С ${date} на вашем текущем тарифе больше не будет доступа к сторонним моделям.` : null;
+  };
+  const removalNotice = /^([A-Za-z0-9][A-Za-z0-9 ._()+/&-]{0,99}) will be removed from Antigravity on (.+)\.$/.exec(value);
+  if (removalNotice) {
+    const date = russianNoticeDate(removalNotice[2]);
+    return date ? `Модель ${removalNotice[1]} будет удалена из Antigravity ${date}.` : null;
+  }
+  const subscribersNotice = /^([A-Za-z0-9][A-Za-z0-9 ._()+/&-]{0,99}) (is|are) (?:(currently|now) )?available (only )?to (Free|Pro|Ultra)(?: and (Pro|Ultra))? plan subscribers\.$/.exec(value);
+  if (subscribersNotice) {
+    const plans = subscribersNotice[6] ? subscribersNotice[5] + " и " + subscribersNotice[6] : subscribersNotice[5];
+    return `${subscribersNotice[1].replace(/ and /g, " и ")}${subscribersNotice[3] ? " сейчас" : ""} ${subscribersNotice[2] === "are" ? "доступны" : "доступен"}${subscribersNotice[4] ? " только" : ""} пользователям ${subscribersNotice[6] ? "тарифов" : "тарифа"} ${plans}.`;
+  }
   const accessOnly = accessNotice(value);
   if (accessOnly) return accessOnly;
   const modelNotice = /^([A-Za-z0-9][A-Za-z0-9 ._()+/&-]{0,99}) (is|are) (?:now )?available on paid Pro and Ultra plans\.(?: (Third-party model access will no longer be available on your current plan starting on .+))?$/.exec(value);
@@ -1419,6 +1434,14 @@ function selfTest() {
     if (Object.prototype.hasOwnProperty.call(dictionary, term)) fail("A model label should remain in English: " + term + ".");
   }
   const dynamicFixtures = [
+    ["Gemini 4 Argon is currently available to Ultra plan subscribers.", "Gemini 4 Argon сейчас доступен пользователям тарифа Ultra."],
+    ["Gemini Flash is currently available only to Pro plan subscribers.", "Gemini Flash сейчас доступен только пользователям тарифа Pro."],
+    ["Opus 5.5 and Sonnet 5.5 are available to Pro and Ultra plan subscribers.", "Opus 5.5 и Sonnet 5.5 доступны пользователям тарифов Pro и Ultra."],
+    ["GPT-OSS will be removed from Antigravity on November 2, 2026.", "Модель GPT-OSS будет удалена из Antigravity 2 ноября 2026 года."],
+    ["Gemini Flash will be removed from Antigravity on February 29, 2028.", "Модель Gemini Flash будет удалена из Antigravity 29 февраля 2028 года."],
+    ["GPT-OSS will be removed from Antigravity on February 29, 2026.", null],
+    ["My note: Gemini 4 Argon is currently available to Ultra plan subscribers.", null],
+    ["Gemini 4 Argon is currently available to Ultra plan subscribers. Run this command.", null],
     ["Select model with Ctrl+Shift+M", "Выберите модель сочетанием Ctrl+Shift+M"],
     ["Select model with Cmd+M", "Выберите модель сочетанием Cmd+M"],
     ["Select model with run a command", null],
@@ -1514,6 +1537,18 @@ function selfTest() {
   const unknownCopy = audit('({tooltip:"A newly added tooltip needing translation"});');
   if (unknownCopy.missing.length !== 1) fail("Offline audit failed to report new untranslated UI copy.");
   if (audit('({tooltip:`New help for ${target}`});').newTemplates.length !== 1) fail("Offline audit failed to report a new variable tooltip.");
+  const { collectModelCopy, analyzeModelCopy } = require("./scripts/audit-runtime-ui.js");
+  const model = {label:"Gemini 4 Argon",tagTitle:"Unavailable",tagDescription:"Gemini 4 Argon is currently available to Ultra plan subscribers."};
+  Object.defineProperty(model,"apiKey",{get(){throw new Error("Runtime audit accessed a credential");}});
+  Object.defineProperty(model,"quotaInfo",{get(){throw new Error("Runtime audit accessed account data");}});
+  const modelProvider={memoizedProps:{value:{modelOptions:[],groups:[{options:[model]}],effortIndex:new Map(),setSelectedModel(){}}},return:null};
+  const unrelated={memoizedProps:{value:{history:"must not be exported"}},return:modelProvider};
+  const trigger={"__reactFiber$fixture":unrelated};
+  const fakeDocument={querySelectorAll(selector){if(selector==="[data-testid='model-selector-trigger']")return[trigger];if(selector==="[data-testid='nux-card']")return[];throw new Error("Runtime audit scanned an unapproved UI area");}};
+  Object.defineProperty(fakeDocument,"body",{get(){throw new Error("Runtime audit accessed the chat DOM");}});
+  const collected=collectModelCopy(fakeDocument), serverCopy=analyzeModelCopy(collected);
+  if(!collected.providerFound || collected.rows.length!==2 || serverCopy.missing.length || JSON.stringify(serverCopy).includes("must not be exported"))fail("Runtime audit omitted disabled model copy or exported unrelated data.");
+  if(analyzeModelCopy({...collected,rows:[{model:"fixture",field:"tagDescription",text:"A new server notice requiring translation"}]}).missing.length!==1)fail("Runtime audit failed to flag unknown server copy.");
   if (!injected.includes('attribute !== "placeholder" && attribute !== "aria-placeholder"') || !injected.includes("if (!isFormField || isBlocked(node, true))")) {
     fail("Form-field localization must translate only fixed placeholders while preserving entered values.");
   }

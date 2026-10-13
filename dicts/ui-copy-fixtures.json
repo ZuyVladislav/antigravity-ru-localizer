@@ -1678,6 +1678,10 @@
     {
       "source": "Select a model in the model selector",
       "expected": "Выберите модель в списке моделей"
+    },
+    {
+      "source": "Unavailable",
+      "expected": "Недоступно"
     }
   ],
   "exclusions": [

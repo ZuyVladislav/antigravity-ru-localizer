@@ -4754,5 +4754,6 @@
   "More": "Ещё",
   "Fit Mode": "Масштабирование",
   "Thumbnails": "Миниатюры",
-  "Text selection is paused for smoother viewing. Search, comments, and annotations still work. Use the toolbar text button when selection is needed.": "Выделение текста временно отключено для плавного просмотра. Поиск, комментарии и аннотации продолжают работать. Чтобы выделить текст, нажмите кнопку текста на панели инструментов."
+  "Text selection is paused for smoother viewing. Search, comments, and annotations still work. Use the toolbar text button when selection is needed.": "Выделение текста временно отключено для плавного просмотра. Поиск, комментарии и аннотации продолжают работать. Чтобы выделить текст, нажмите кнопку текста на панели инструментов.",
+  "Unavailable": "Недоступно"
 }
