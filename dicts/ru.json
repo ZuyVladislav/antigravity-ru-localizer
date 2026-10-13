@@ -4650,5 +4650,7 @@
   "Let the agent access its knowledge base to inform its responses and automatically generate knowledge items in the background. Turning this off prevents the agent from accessing existing knowledge items, but doesn't delete them.": "Разрешить агенту обращаться к базе знаний и автоматически создавать записи в фоне.",
   "Agent execution terminated due to error": "Выполнение агента прервано из-за ошибки",
   "See our troubleshooting guide for more help.": "Подробнее — в руководстве по устранению неполадок.",
-  "Copy debug": "Копировать отладочные данные"
+  "Copy debug": "Копировать отладочные данные",
+  "Use Global Settings": "Использовать глобальные настройки",
+  "Fix with Agent": "Исправить с помощью агента"
 }

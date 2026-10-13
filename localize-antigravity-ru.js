@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.22.0.
+// Local, static Russian UI localization for Google Antigravity 2.23.0.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.22.0";
+const SUPPORTED_APP_VERSION = "2.23.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -1039,6 +1039,8 @@ function selfTestPreloadDom(injected) {
   const spacedUiLabel = text("  Model \n");
   const activityLabels = [
     ["Running commands", "Выполняются команды"],
+    ["Use Global Settings", "Использовать глобальные настройки"],
+    ["Fix with Agent", "Исправить с помощью агента"],
     ["Running python -c \"print('fixture')\"", "Запуск python -c \"print('fixture')\""],
     ["Running python -c \"print('two  spaces')\"", "Запуск python -c \"print('two  spaces')\""],
     ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
@@ -1078,7 +1080,7 @@ function selfTestPreloadDom(injected) {
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
     const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
-    leaves.push(text("Running commands"), text("Running python -c \"print('fixture')\""));
+    leaves.push(text("Use Global Settings"), text("Fix with Agent"), text("Running commands"), text("Running python -c \"print('fixture')\""));
     if (attributes.class === "assistant-message markdown") {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
       leaves.push(text("python -m pip show playwright"));
@@ -1204,6 +1206,8 @@ function selfTest() {
   }
   const screenshotTranslations = [
     ["Running commands", "Выполняются команды"],
+    ["Use Global Settings", "Использовать глобальные настройки"],
+    ["Fix with Agent", "Исправить с помощью агента"],
     ["Search Across Conversations", "Поиск по всем диалогам"],
     ["Gemini 3.6 & 3.7 Flash Deprecation", "Скорое отключение Gemini 3.6 и 3.7 Flash"],
     ["Make sure you are using Gemini 3.8 Flash! We will be turning down Gemini 3.6 Flash and Gemini 3.7 Flash shortly.", "Убедитесь, что вы используете Gemini 3.8 Flash. В ближайшее время Gemini 3.6 Flash и Gemini 3.7 Flash будут отключены."],
@@ -1345,7 +1349,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.1", "2.23.0"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.1", "2.24.0"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {
