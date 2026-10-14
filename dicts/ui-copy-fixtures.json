@@ -1,6 +1,6 @@
 {
-  "appVersion": "2.23.0",
-  "sourceBundleSha256": "867d1990b61d87f4b9ff8c5ecb1551c8688135267f32e56e02563f2d3e78fd68",
+  "appVersion": "2.23.1",
+  "sourceBundleSha256": "ad12ecf66061edab6a3835d1360e1bad50787bc7b2f2c9d86568281360864696",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "cases": [
     {
@@ -1682,6 +1682,86 @@
     {
       "source": "Unavailable",
       "expected": "Недоступно"
+    },
+    {
+      "source": "Seek",
+      "expected": "Перемотка"
+    },
+    {
+      "source": "Back 5s (←)",
+      "expected": "Назад на 5 с (←)"
+    },
+    {
+      "source": "Forward 5s (→)",
+      "expected": "Вперёд на 5 с (→)"
+    },
+    {
+      "source": "Volume",
+      "expected": "Громкость"
+    },
+    {
+      "source": "Previous (←)",
+      "expected": "Предыдущее (←)"
+    },
+    {
+      "source": "Next (→)",
+      "expected": "Следующее (→)"
+    },
+    {
+      "source": "MCP Authentication Error:",
+      "expected": "Ошибка авторизации MCP:"
+    },
+    {
+      "source": "MCP Restart Error:",
+      "expected": "Ошибка перезапуска MCP:"
+    },
+    {
+      "source": "Subagent ended",
+      "expected": "Подагент завершил работу"
+    },
+    {
+      "source": "Loading subagent...",
+      "expected": "Загрузка подагента…"
+    },
+    {
+      "source": "See [go/jetski-agent-sidecars#trusted-locations](http://go/jetski-agent-sidecars#trusted-locations).",
+      "expected": "См. [go/jetski-agent-sidecars#trusted-locations](http://go/jetski-agent-sidecars#trusted-locations)."
+    },
+    {
+      "source": "Render failed",
+      "expected": "Не удалось отобразить документ"
+    },
+    {
+      "source": "Cancel Render Page Failed",
+      "expected": "Не удалось отменить отображение страницы"
+    },
+    {
+      "source": "Failed to get annotations",
+      "expected": "Не удалось получить аннотации"
+    },
+    {
+      "source": "Failed to get all annotations",
+      "expected": "Не удалось получить все аннотации"
+    },
+    {
+      "source": "drawing line preview",
+      "expected": "Предпросмотр рисуемой линии"
+    },
+    {
+      "source": "drawing rectangle preview",
+      "expected": "Предпросмотр рисуемого прямоугольника"
+    },
+    {
+      "source": "Failed to load comments",
+      "expected": "Не удалось загрузить комментарии"
+    },
+    {
+      "source": "Cancel Render Thumbnail Failed",
+      "expected": "Не удалось отменить отображение миниатюры"
+    },
+    {
+      "source": "Failed to render diagram",
+      "expected": "Не удалось отобразить диаграмму"
     }
   ],
   "exclusions": [
@@ -1952,6 +2032,22 @@
     {
       "source": "ScrollbarMarkersPopover",
       "reason": "component identifier, product name, debug-only or dynamic fragment"
+    },
+    {
+      "source": "normal",
+      "reason": "MathML font style identifier, not interface copy"
+    },
+    {
+      "source": "document",
+      "reason": "File icon identifier in language-to-icon mapping"
+    },
+    {
+      "source": "folder-context",
+      "reason": "Folder icon identifier in icon mapping"
+    },
+    {
+      "source": "text",
+      "reason": "Technical lexer key; not rendered interface copy"
     }
   ],
   "observedTemplates": [

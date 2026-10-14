@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.23.0.
+// Local, static Russian UI localization for Google Antigravity 2.23.1.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.23.0";
+const SUPPORTED_APP_VERSION = "2.23.1";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -713,6 +713,7 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   ];
   // Specific templates must precede broad action prefixes.
   let match;
+  if ((match = /^(Section|Tool) ([1-9][0-9]*)$/.exec(value))) return `${match[1] === "Section" ? "Раздел" : "Инструмент"} ${match[2]}`;
   if ((match = /^Secret for a new (.+) account$/.exec(value))) return `Секрет для нового аккаунта ${match[1]}`;
   if ((match = /^Agents created by this (plugin|bundle) run in a dedicated (project|workspace) with its own permissions\. You can change the permissions in the \2 settings page\.$/.exec(value))) return `Агенты, созданные ${match[1]==="plugin"?"этим плагином":"этим набором"}, работают ${match[2]==="project"?"в отдельном проекте":"в отдельной рабочей области"} со своими разрешениями. Разрешения можно изменить в настройках ${match[2]==="project"?"проекта":"рабочей области"}.`;
   if ((match = /^When toggled on, (.+) collects usage data to help Google enhance performance and features\.$/.exec(value))) return `При включении ${match[1]} собирает данные об использовании, чтобы помочь Google улучшать производительность и функции.`;
@@ -1536,6 +1537,8 @@ function selfTest() {
   if (audit(knownCopySource).missing.length !== 0) fail("Reviewed UI inventory no longer passes the offline audit.");
   const unknownCopy = audit('({tooltip:"A newly added tooltip needing translation"});');
   if (unknownCopy.missing.length !== 1) fail("Offline audit failed to report new untranslated UI copy.");
+  const newPropertyCopy = audit('({label:"lowercase new player label",text:"NEW SYSTEM STATUS",children:"Another new interface caption"});');
+  if (newPropertyCopy.missing.length !== 3) fail("Offline audit omitted direct labels, text or lowercase copy.");
   if (audit('({tooltip:`New help for ${target}`});').newTemplates.length !== 1) fail("Offline audit failed to report a new variable tooltip.");
   const { collectModelCopy, analyzeModelCopy } = require("./scripts/audit-runtime-ui.js");
   const model = {label:"Gemini 4 Argon",tagTitle:"Unavailable",tagDescription:"Gemini 4 Argon is currently available to Ultra plan subscribers."};
@@ -1588,7 +1591,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.1", "2.24.0"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.2", "2.24.0"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {

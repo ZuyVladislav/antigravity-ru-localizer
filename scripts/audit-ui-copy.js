@@ -39,7 +39,10 @@ function audit(source) {
     if (value.length > 1500 || !/[A-Za-z]{3}/.test(value) || /[\uD800-\uDFFF]/.test(value)) continue;
     literals++;
     const context = source.slice(Math.max(0, match.index - 140), match.index + JSON.stringify(value).length + 180);
-    if (!/(?:tooltip|toast|notification|nux-card|description:|placeholder:|title:|content:|"aria-label":)/i.test(context) || !/^[A-Z](?:[a-z]|\s)|^\d+x playback|^with ID/.test(value) || /[{}\[\]<>\n\\]|^(?:https|var |function|SELECT )/.test(value)) continue;
+    const before = source.slice(Math.max(0, match.index - 80), match.index);
+    const directProperty = /(?:children|tooltip|description|placeholder|title|content|label|message|text|helperText|aria-label)["']?\s*:\s*$/.test(before);
+    const previousScope = /(?:tooltip|toast|notification|nux-card|description:|placeholder:|title:|content:|"aria-label":)/i.test(context) && /^[A-Z](?:[a-z]|\s)|^\d+x playback|^with ID/.test(value) && !/[{}\[\]<>\n\\]/.test(value);
+    if (!(previousScope || directProperty && /^[A-Za-z(]/.test(value) && !/^[a-zA-Z]+[A-Z][a-zA-Z]+$/.test(value)) || /[{}<>\n\\]|^(?:https|var |function|SELECT )/.test(value)) continue;
     const normalized = normalize(value);
     const translation = translateAuditedUiCopy(normalized);
     const excluded = !translation && exclusions.get(normalized);

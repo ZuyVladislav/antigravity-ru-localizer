@@ -282,5 +282,41 @@
   [
     "Gemini Flash will be removed from Antigravity on February 29, 2028.",
     "Модель Gemini Flash будет удалена из Antigravity 29 февраля 2028 года."
+  ],
+  [
+    "Agent settings and permissions for conversations outside of projects.",
+    "Настройки и разрешения агента для диалогов вне проектов."
+  ],
+  [
+    "Manage project resources, agent settings, and permissions.",
+    "Управление ресурсами проекта, настройками и разрешениями агента."
+  ],
+  [
+    "Agent settings and permissions for conversations outside of workspaces.",
+    "Настройки и разрешения агента для диалогов вне рабочих областей."
+  ],
+  [
+    "This workspace overrides your global permission settings.",
+    "Эта рабочая область переопределяет глобальные разрешения."
+  ],
+  [
+    "Manage workspace resources, agent settings, and permissions.",
+    "Управление ресурсами рабочей области, настройками и разрешениями агента."
+  ],
+  [
+    "Manage workspace folders, agent settings, and permissions.",
+    "Управление папками рабочей области, настройками и разрешениями агента."
+  ],
+  [
+    "Section 3",
+    "Раздел 3"
+  ],
+  [
+    "Tool 7",
+    "Инструмент 7"
+  ],
+  [
+    "Debug Mode Disabled",
+    "Режим отладки выключен"
   ]
 ]
