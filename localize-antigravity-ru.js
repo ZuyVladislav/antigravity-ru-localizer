@@ -532,12 +532,12 @@ function translateDynamicUiText(value) {
   if (/^Searching web$/i.test(value)) return "Поиск в интернете";
   const activityCounts = /^Exploring ([0-9]+) tasks?, running ([0-9]+) commands?$/i.exec(value);
   if (activityCounts) return `Выполняется: задач — ${activityCounts[1]}; команд — ${activityCounts[2]}`;
-  const thoughtDuration = /^Thought for (.+)$/i.exec(value);
+  const thoughtDuration = /^(Thought|Thinking) for (.+)$/i.exec(value);
   if (thoughtDuration) {
-    const parts = thoughtDuration[1].match(/[0-9]+[ ]*[dhms]/gi);
-    if (parts && parts.join(" ").replace(/ /g, "") === thoughtDuration[1].replace(/ /g, "")) {
+    const parts = thoughtDuration[2].match(/[0-9]+[ ]*[dhms]/gi);
+    if (parts && parts.join(" ").replace(/ /g, "") === thoughtDuration[2].replace(/ /g, "")) {
       const units = { d: "д.", h: "ч.", m: "мин.", s: "с." };
-      return "Думал: " + parts.map((part) => {
+      return (thoughtDuration[1].toLowerCase() === "thinking" ? "Думает: " : "Думал: ") + parts.map((part) => {
         const item = /^([0-9]+)[ ]*([dhms])$/i.exec(part);
         return `${item[1]} ${units[item[2].toLowerCase()]}`;
       }).join(" ");
@@ -824,8 +824,8 @@ function makePreloadScript(dictionary) {
   const exact = new Map(Object.entries(dictionary));
   const lower = new Map(Object.entries(dictionary).map(([key, value]) => [key.toLowerCase(), value]));
   const blockedTags = new Set(["SCRIPT", "STYLE", "CODE", "PRE", "INPUT", "TEXTAREA", "SVG", "CANVAS", "SYMBOL", "PATH"]);
-  const blockedClasses = ["monaco-editor", "editor-container", "terminal", "output-view", "debug-console", "code-view", "artifact-container", "suggest-widget", "chat-message", "assistant-message", "user-message", "conversation-message", "markdown", "prose"];
-  const blockedSelectors = ["[contenteditable='true']", "[data-testid='user-input-step']", "[data-ag-localization-skip]", "[data-message-id]", "[data-turn-id]", "[data-testid*='message']", "article", "pre", "code", "textarea", "input"];
+  const blockedClasses = ["monaco-editor", "editor-container", "terminal", "output-view", "debug-console", "code-view", "artifact-container", "suggest-widget", "chat-message", "assistant-message", "user-message", "conversation-message", "cursor-edit", "markdown", "prose"];
+  const blockedSelectors = ["[contenteditable='true']", "[data-testid='user-input-step']", "[data-testid='planner-response-text']", "[data-testid='setup-script-output']", "[data-ag-localization-skip]", "[data-message-id]", "[data-turn-id]", "[data-testid*='message']", "article", "pre", "code", "textarea", "input"];
 
   const normalize = (value) => String(value || "").replace(/\\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
   const PERMISSION_SCOPES = ${JSON.stringify(PERMISSION_SCOPES)};
@@ -1252,6 +1252,8 @@ function selfTestPreloadDom(injected) {
     ["Running python -c \"print('two  spaces')\"", "Запуск python -c \"print('two  spaces')\""],
     ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
     ["Thought for 16s", "Думал: 16 с."],
+    ["Thinking for 13s", "Думает: 13 с."],
+    ["Thinking for 1m 2s", "Думает: 1 мин. 2 с."],
     ["Thought for 1m 2s", "Думал: 1 мин. 2 с."],
     ["Checked task Find Yandex Browser executable", "Проверена задача «Поиск исполняемого файла Яндекс Браузера»"],
     ["Find Yandex Browser executable finished", "Поиск исполняемого файла Яндекс Браузера завершён"],
@@ -1284,6 +1286,8 @@ function selfTestPreloadDom(injected) {
     ["div", { class: "monaco-editor" }], ["div", { class: "terminal" }],
     ["div", { "data-message-id": "fixture-message" }], ["div", { "data-turn-id": "fixture-turn" }],
     ["div", { "data-testid": "user-input-step" }], ["div", { "data-ag-localization-skip": "" }],
+    ["div", { class: "cursor-edit group relative text-secondary-foreground pl-2" }],
+    ["div", { "data-testid": "planner-response-text" }],
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
     const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
@@ -1292,10 +1296,11 @@ function selfTestPreloadDom(injected) {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
       leaves.push(text("python -m pip show playwright"));
     }
-    protectedText.push(...leaves.map(node => ({ node, original: node.nodeValue })));
+    const streamedWords = ["New", "Tool", "Input", "Rules", "Now", "Read", "Send", "Status", "Plan"].map(text);
+    protectedText.push(...[...leaves, ...streamedWords].map(node => ({ node, original: node.nodeValue })));
     const nestedNotificationText = text("Search Across Conversations");
     protectedText.push({ node: nestedNotificationText, original: nestedNotificationText.nodeValue });
-    protectedContainers.push(element(tag, attributes, [...leaves, element("div", { "data-testid": "nux-card" }, [element("div", { class: "markdown prose" }, [nestedNotificationText])])]));
+    protectedContainers.push(element(tag, attributes, [...leaves, ...streamedWords.map(node => element("span", {}, [node])), element("div", { "data-testid": "nux-card" }, [element("div", { class: "markdown prose" }, [nestedNotificationText])])]));
   }
   const input = element("input", { placeholder: "Search MCP servers by name", title: "Model", "aria-label": "Model", value: "Model" });
   input.value = "User-entered Model";
