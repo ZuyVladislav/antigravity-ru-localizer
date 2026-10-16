@@ -338,5 +338,9 @@
   [
     "Unable to search @github-issues",
     "Не удалось выполнить поиск @github-issues"
+  ],
+  [
+    "Gemini 4 Argon is currently available to Ultra and paid Pro plan subscribers.",
+    "Gemini 4 Argon сейчас доступен пользователям тарифа Ultra и платного тарифа Pro."
   ]
 ]

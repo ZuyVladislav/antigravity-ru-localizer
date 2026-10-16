@@ -447,10 +447,10 @@ function translateDynamicUiText(value) {
     const date = russianNoticeDate(removalNotice[2]);
     return date ? `Модель ${removalNotice[1]} будет удалена из Antigravity ${date}.` : null;
   }
-  const subscribersNotice = /^([A-Za-z0-9][A-Za-z0-9 ._()+/&-]{0,99}) (is|are) (?:(currently|now) )?available (only )?to (Free|Pro|Ultra)(?: and (Pro|Ultra))? plan subscribers\.$/.exec(value);
+  const subscribersNotice = /^([A-Za-z0-9][A-Za-z0-9 ._()+/&-]{0,99}) (is|are) (?:(currently|now) )?available (only )?to (Free|Pro|Ultra)(?: and (paid Pro|Pro|Ultra))? plan subscribers\.$/.exec(value);
   if (subscribersNotice) {
-    const plans = subscribersNotice[6] ? subscribersNotice[5] + " и " + subscribersNotice[6] : subscribersNotice[5];
-    return `${subscribersNotice[1].replace(/ and /g, " и ")}${subscribersNotice[3] ? " сейчас" : ""} ${subscribersNotice[2] === "are" ? "доступны" : "доступен"}${subscribersNotice[4] ? " только" : ""} пользователям ${subscribersNotice[6] ? "тарифов" : "тарифа"} ${plans}.`;
+    const plans = subscribersNotice[6] === "paid Pro" ? `тарифа ${subscribersNotice[5]} и платного тарифа Pro` : `${subscribersNotice[6] ? "тарифов" : "тарифа"} ${subscribersNotice[5]}${subscribersNotice[6] ? " и " + subscribersNotice[6] : ""}`;
+    return `${subscribersNotice[1].replace(/ and /g, " и ")}${subscribersNotice[3] ? " сейчас" : ""} ${subscribersNotice[2] === "are" ? "доступны" : "доступен"}${subscribersNotice[4] ? " только" : ""} пользователям ${plans}.`;
   }
   const accessOnly = accessNotice(value);
   if (accessOnly) return accessOnly;
