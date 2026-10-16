@@ -318,5 +318,25 @@
   [
     "Debug Mode Disabled",
     "Режим отладки выключен"
+  ],
+  [
+    "No cloud plugins found for \"sample-plugin\".",
+    "Облачные плагины по запросу «sample-plugin» не найдены."
+  ],
+  [
+    "No cloud plugins found for \"C:\\Tools\\user-plugin\".",
+    "Облачные плагины по запросу «C:\\Tools\\user-plugin» не найдены."
+  ],
+  [
+    "Switch environment (Workstation X)",
+    "Переключить среду (Workstation X)"
+  ],
+  [
+    "Turn 3 of 9",
+    "Ход 3 из 9"
+  ],
+  [
+    "Unable to search @github-issues",
+    "Не удалось выполнить поиск @github-issues"
   ]
 ]

@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.23.1.
+// Local, static Russian UI localization for Google Antigravity 2.24.0.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.23.1";
+const SUPPORTED_APP_VERSION = "2.24.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -713,6 +713,10 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   ];
   // Specific templates must precede broad action prefixes.
   let match;
+  if ((match = /^No cloud plugins found for "(.+)"\.$/.exec(value))) return `Облачные плагины по запросу «${match[1]}» не найдены.`;
+  if ((match = /^Switch environment \(([^\r\n]{1,160})\)$/.exec(value))) return `Переключить среду (${match[1]})`;
+  if ((match = /^Turn ([1-9][0-9]*) of ([1-9][0-9]*)$/.exec(value))) return `Ход ${match[1]} из ${match[2]}`;
+  if ((match = /^Unable to search @([A-Za-z0-9._-]{1,120})$/.exec(value))) return `Не удалось выполнить поиск @${match[1]}`;
   if ((match = /^(Section|Tool) ([1-9][0-9]*)$/.exec(value))) return `${match[1] === "Section" ? "Раздел" : "Инструмент"} ${match[2]}`;
   if ((match = /^Secret for a new (.+) account$/.exec(value))) return `Секрет для нового аккаунта ${match[1]}`;
   if ((match = /^Agents created by this (plugin|bundle) run in a dedicated (project|workspace) with its own permissions\. You can change the permissions in the \2 settings page\.$/.exec(value))) return `Агенты, созданные ${match[1]==="plugin"?"этим плагином":"этим набором"}, работают ${match[2]==="project"?"в отдельном проекте":"в отдельной рабочей области"} со своими разрешениями. Разрешения можно изменить в настройках ${match[2]==="project"?"проекта":"рабочей области"}.`;
@@ -1223,7 +1227,7 @@ function selfTestPreloadDom(injected) {
   const catalogueCards = CATALOG_DESCRIPTIONS.flatMap(([source, expected]) =>
     [source, source + " More information.", source + "...", source + "…"].map(value => ({ node: text(value), expected })));
   const unknownDescription = text("Unknown MCP server description with new capabilities.");
-  const preservedModels = ["Medium", "Thinking", "Economy", "High accuracy"].map(text);
+  const preservedModels = ["Medium", "Thinking", "Economy", "High accuracy", "Flash", "Flash Lite"].map(text);
   const preservedNames = ["Windsor.ai", "Cloud Run", "ui-extension"].map(text);
   const protectedText = [];
   const protectedContainers = [];
@@ -1338,7 +1342,7 @@ function selfTestPreloadDom(injected) {
   }
   assert(splitSearchNotification.every(node => node.writes === 1), "notification translation did not settle after one write");
   for (const entry of protectedText) assert(entry.node.nodeValue === entry.original, "protected message/code text changed");
-  const expectedNames = ["Medium", "Thinking", "Economy", "High accuracy", "Windsor.ai", "Cloud Run", "ui-extension"];
+  const expectedNames = ["Medium", "Thinking", "Economy", "High accuracy", "Flash", "Flash Lite", "Windsor.ai", "Cloud Run", "ui-extension"];
   [...preservedModels, ...preservedNames].forEach((node, index) => assert(node.nodeValue === expectedNames[index], "model/server identifier changed"));
   assert(input.getAttribute("placeholder") === "Поиск серверов MCP по имени", "search placeholder translation failed");
   assert(input.value === "User-entered Model" && input.getAttribute("value") === "Model" && input.getAttribute("title") === "Model" && input.getAttribute("aria-label") === "Model", "form input data or label changed");
@@ -1430,7 +1434,7 @@ function selfTest() {
   for (const [source, expected] of screenshotTranslations) {
     if (dictionary[source] !== expected) fail("Screenshot UI translation is missing for " + JSON.stringify(source) + ".");
   }
-  const preserveModelTerms = ["Economy", "Fast", "High", "Low", "Medium", "Thinking", "high", "low", "medium", "High capability", "High Capability", "High accuracy", "High intelligence"];
+  const preserveModelTerms = ["Economy", "Fast", "High", "Low", "Medium", "Thinking", "high", "low", "medium", "High capability", "High Capability", "High accuracy", "High intelligence", "Flash", "Flash Lite"];
   for (const term of preserveModelTerms) {
     if (Object.prototype.hasOwnProperty.call(dictionary, term)) fail("A model label should remain in English: " + term + ".");
   }
@@ -1591,7 +1595,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.2", "2.24.0"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.1", "2.25.0"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {
