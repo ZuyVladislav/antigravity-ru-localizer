@@ -945,7 +945,7 @@ function makePreloadScript(dictionary) {
     for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder"]) {
       if (isFormField && attribute !== "placeholder" && attribute !== "aria-placeholder") continue;
       const source = element.getAttribute(attribute);
-      const translated = (attribute === "aria-label" && element.tagName === "BUTTON" && element.getAttribute("data-testid") === "tool-group-collapsible" && translateActivityTitle(source)) || translationFor(source, false, false, true);
+      const translated = ((attribute === "title" || attribute === "aria-label") && isActivityTitleUi(element) && translateActivityTitle(source)) || translationFor(source, false, false, true);
       if (translated && translated !== source) element.setAttribute(attribute, translated);
     }
   };
@@ -1327,7 +1327,7 @@ function selfTestPreloadDom(injected) {
   });
   const activityCopyNodes = activityCopy.map(([source, expected]) => {
     const title = text(source), groupTitle = text(source), output = text(source), command = text(source), message = text(source), outside = text(source);
-    const group = element("button", { "data-testid": "tool-group-collapsible", "aria-label": source }, [groupTitle]);
+    const group = element("button", { "data-testid": "tool-group-collapsible", "aria-label": source }, [element("span", { title: source }, [groupTitle])]);
     const header = element("div", { class: "group min-h-8 select-none" }, [element("span", {}, [title]), element("span", { class: "font-mono" }, [command])]);
     const container = element("div", {}, [group, element("div", { "data-testid": "run-command-step" }, [header, element("div", {}, [output])]), element("div", { class: "assistant-message" }, [message]), outside]);
     return { source, expected, title, groupTitle, group, output, command, message, outside, container };
@@ -1365,6 +1365,7 @@ function selfTestPreloadDom(injected) {
   for (const item of activityCopyNodes) {
     assert(item.title.nodeValue === item.expected && item.groupTitle.nodeValue === item.expected, "activity heading: " + item.source);
     assert(item.group.getAttribute("aria-label") === item.expected, "activity accessibility label: " + item.source);
+    assert(item.group.children[0].getAttribute("title") === item.expected, "activity tooltip: " + item.source);
     for (const node of [item.output, item.command, item.message, item.outside]) assert(node.nodeValue === item.source, "activity rule leaked into content: " + item.source);
     assert(item.title.writes <= 1 && item.groupTitle.writes <= 1, "activity translation did not settle");
   }
