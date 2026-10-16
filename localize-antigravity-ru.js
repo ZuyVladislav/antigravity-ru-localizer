@@ -422,6 +422,36 @@ const TASK_ACTIVITY_TITLES = Object.freeze({
 
 // Keep variable UI labels separate from the exact-match dictionary. This
 // function is also embedded in the preload, so its behavior is tested here.
+// Presentation-only tool headings. Never call this on messages, thoughts,
+// command lines or tool output; variable file/product names remain opaque.
+function translateActivityTitle(value) {
+  if (typeof value !== "string" || value.length > 180 || /[\r\n]/.test(value)) return null;
+  if (/&&|\|\||[;`$<>]/.test(value)) return null;
+  const fixed = {
+    "Check paths": "Проверка путей", "Get task action": "Получение действия задачи",
+    "Get task info": "Получение сведений о задаче", "Check task status": "Проверка состояния задачи",
+    "Get task status": "Получение состояния задачи", "Check files": "Проверка файлов",
+    "Check processes": "Проверка процессов", "Check services": "Проверка служб",
+    "Check logs": "Проверка журналов", "Read logs": "Чтение журналов",
+    "Get process info": "Получение сведений о процессе", "Get service info": "Получение сведений о службе",
+  };
+  if (fixed[value]) return fixed[value];
+  // Reviewed noun templates: the slot is an identifier, not arbitrary prose.
+  let match = /^(Check|Find|Get) ([A-Za-z0-9][A-Za-z0-9 ._()+&-]{0,70}) (task|files|process|service|status|version|logs)$/.exec(value);
+  if (match) {
+    const verbs = { Check: "Проверка", Find: "Поиск", Get: "Получение" };
+    const nouns = { task: "задачи", files: "файлов", process: "процесса", service: "службы", status: "состояния", version: "версии", logs: "журналов" };
+    return `${verbs[match[1]]} ${nouns[match[3]]} ${match[2]}`;
+  }
+  // Filename/path slots are copied byte for byte, including doubled spaces.
+  match = /^(Viewing|Reading|Editing|Read|Find|Search|Tail) (.+)$/.exec(value);
+  if (!match) return null;
+  const target = match[2];
+  if (!/^(?:[A-Za-z]:[\\/]|\.{0,2}[\\/]|[A-Za-z0-9_ .()-]+\.(?:[A-Za-z0-9]{1,12})(?: #[A-Za-z0-9:-]+)?$)/.test(target)) return null;
+  const verbs = { Viewing: "Просмотр", Reading: "Чтение", Editing: "Редактирование", Read: "Чтение", Find: "Поиск", Search: "Поиск", Tail: "Просмотр конца файла" };
+  return verbs[match[1]] + " " + target;
+}
+
 function translateDynamicUiText(value) {
   const modelShortcut = /^Select model with ((?:(?:Ctrl|Control|Alt|Option|Shift|Cmd|Command|Meta)[+]){1,4}[A-Za-z0-9])$/.exec(value);
   if (modelShortcut) return `Выберите модель сочетанием ${modelShortcut[1]}`;
@@ -802,6 +832,7 @@ function makePreloadScript(dictionary) {
   const PERMISSION_PREFIXES = ${JSON.stringify(PERMISSION_PREFIXES)};
   const TASK_ACTIVITY_TITLES = ${JSON.stringify(TASK_ACTIVITY_TITLES)};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
+  const translateActivityTitle = ${translateActivityTitle.toString()};
   const translateScopedUiText = ${translateScopedUiText.toString()};
   const CATALOG_DESCRIPTIONS = ${JSON.stringify(CATALOG_DESCRIPTIONS)};
   const translateCatalogDescription = ${translateCatalogDescription.toString()};
@@ -884,10 +915,24 @@ function makePreloadScript(dictionary) {
     }
     return false;
   };
+  const isActivityTitleUi = (node) => {
+    let current = node && (node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement);
+    let header = null;
+    while (current) {
+      // Rendered command and file-name spans are never translation targets.
+      const classes = typeof current.className === "string" ? current.className : "";
+      if (classes.split(/\\s+/).includes("font-mono")) return false;
+      if (current.tagName === "BUTTON" && current.getAttribute("data-testid") === "tool-group-collapsible") return true;
+      if (classes.includes("min-h-8") && classes.includes("select-none")) header = current;
+      if (current.getAttribute("data-testid") === "run-command-step") return !!header && current.children[0] === header;
+      current = current.parentElement;
+    }
+    return false;
+  };
   const translateText = (node) => {
     if (!node || isBlocked(node)) return;
     const source = node.nodeValue;
-    const translated = translationFor(source, isNotificationUi(node), isPlanHintUi(node));
+    const translated = (isActivityTitleUi(node) && translateActivityTitle(source.trim())) || translationFor(source, isNotificationUi(node), isPlanHintUi(node));
     if (!translated || translated === source) return;
     const leading = (source.match(/^\\s*/) || [""])[0];
     const trailing = (source.match(/\\s*$/) || [""])[0];
@@ -900,7 +945,7 @@ function makePreloadScript(dictionary) {
     for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder"]) {
       if (isFormField && attribute !== "placeholder" && attribute !== "aria-placeholder") continue;
       const source = element.getAttribute(attribute);
-      const translated = translationFor(source, false, false, true);
+      const translated = (attribute === "aria-label" && element.tagName === "BUTTON" && element.getAttribute("data-testid") === "tool-group-collapsible" && translateActivityTitle(source)) || translationFor(source, false, false, true);
       if (translated && translated !== source) element.setAttribute(attribute, translated);
     }
   };
@@ -1119,6 +1164,7 @@ function restore() {
 }
 
 function selfTestPreloadDom(injected) {
+  const activityCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-activity-fixtures.json"), "utf8"));
   const reviewedCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-copy-fixtures.json"), "utf8"));
   const dynamicCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-dynamic-fixtures.json"), "utf8"));
   if (reviewedCopy.appVersion !== SUPPORTED_APP_VERSION || reviewedCopy.cases.length < 400) fail("Reviewed UI copy inventory is missing or incomplete.");
@@ -1279,7 +1325,15 @@ function selfTestPreloadDom(injected) {
       element("div", {role:"tooltip",class:"markdown prose"}, [label]), attributes, outside,
       element("div", {class:"assistant-message"}, [element("div", {role:"tooltip"}, [protectedMessage])]), element("code", {}, [protectedCode])])};
   });
+  const activityCopyNodes = activityCopy.map(([source, expected]) => {
+    const title = text(source), groupTitle = text(source), output = text(source), command = text(source), message = text(source), outside = text(source);
+    const group = element("button", { "data-testid": "tool-group-collapsible", "aria-label": source }, [groupTitle]);
+    const header = element("div", { class: "group min-h-8 select-none" }, [element("span", {}, [title]), element("span", { class: "font-mono" }, [command])]);
+    const container = element("div", {}, [group, element("div", { "data-testid": "run-command-step" }, [header, element("div", {}, [output])]), element("div", { class: "assistant-message" }, [message]), outside]);
+    return { source, expected, title, groupTitle, group, output, command, message, outside, container };
+  });
   const root = element("html", {}, [element("body", {}, [
+    ...activityCopyNodes.map(item => item.container),
     element("div", {}, [uiLabel, uiCount, quotaRefresh, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
     element("div", { "data-testid": "nux-card" }, [searchNotificationTitle, element("div", { class: "markdown prose" }, [splitSearchNotification[0], searchIcons[0], splitSearchNotification[1], element("br"), splitSearchNotification[2], searchIcons[1], splitSearchNotification[3], unknownNotification, element("code", {}, [notificationCode]), element("div", { class: "assistant-message" }, [notificationPrivateText])])]),
@@ -1308,6 +1362,16 @@ function selfTestPreloadDom(injected) {
   };
   flush();
   const assert = (condition, message) => { if (!condition) fail("Preload DOM test: " + message); };
+  for (const item of activityCopyNodes) {
+    assert(item.title.nodeValue === item.expected && item.groupTitle.nodeValue === item.expected, "activity heading: " + item.source);
+    assert(item.group.getAttribute("aria-label") === item.expected, "activity accessibility label: " + item.source);
+    for (const node of [item.output, item.command, item.message, item.outside]) assert(node.nodeValue === item.source, "activity rule leaked into content: " + item.source);
+    assert(item.title.writes <= 1 && item.groupTitle.writes <= 1, "activity translation did not settle");
+  }
+  const changedActivity = activityCopyNodes[0];
+  changedActivity.title.nodeValue = "Check paths";
+  flush();
+  assert(changedActivity.title.nodeValue === "Проверка путей", "updated activity heading was missed");
   assert(uiLabel.nodeValue === "Изменения в доступе к сторонним моделям", "notification translation failed");
   assert(uiCount.nodeValue === "Инструментов включено: 24", "tool count translation failed");
   assert(quotaRefresh.nodeValue === "Вы использовали часть недельного лимита. Он полностью восстановится через 4 дня, 19 часов.", "weekly quota refresh translation failed");
