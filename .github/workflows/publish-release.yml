@@ -1,0 +1,64 @@
+name: publish checked release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing reviewed release tag
+        required: true
+      commit:
+        description: Exact release source commit
+        required: true
+      ci_run:
+        description: Successful three-platform CI run for that commit
+        required: true
+      release_id:
+        description: Existing draft release ID
+        required: true
+      zip_sha256:
+        description: Reviewed local ZIP SHA256
+        required: true
+      tar_sha256:
+        description: Reviewed local TAR.GZ SHA256
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Build, verify and publish existing draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          RELEASE_COMMIT: ${{ inputs.commit }}
+          CI_RUN: ${{ inputs.ci_run }}
+          RELEASE_ID: ${{ inputs.release_id }}
+          ZIP_SHA256: ${{ inputs.zip_sha256 }}
+          TAR_SHA256: ${{ inputs.tar_sha256 }}
+        run: >-
+          python3 scripts/publish-release.py
+          --tag "$RELEASE_TAG" --commit "$RELEASE_COMMIT"
+          --ci-run "$CI_RUN" --release-id "$RELEASE_ID"
+          --zip-sha256 "$ZIP_SHA256" --tar-sha256 "$TAR_SHA256"
+          --output "$RUNNER_TEMP/release-assets" --publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: release-evidence-${{ github.run_id }}
+          path: ${{ runner.temp }}/release-assets
+          if-no-files-found: ignore

@@ -3,6 +3,17 @@
 Run this checklist before creating a GitHub release or merging a public pull
 request.
 
+For publication without a browser upload, use the manual **publish checked
+release** workflow. Supply an existing tag, its exact commit, the successful
+three-platform CI run, the existing draft release ID and locally verified ZIP
+and TAR.GZ SHA256 values. `scripts/publish-release.py` builds only tracked UTF-8
+source from that tag, preserves Unix executable bits, checks the CI and remote
+tag, uploads only missing matching assets, verifies their sizes and digests,
+then publishes the draft. It never replaces or deletes existing assets and
+does not install anything on the user's PC. Build the same artifacts locally
+first with `python scripts/publish-release.py --tag <tag> --commit <sha>
+--output <evidence-directory>`; omit `--publish` for local packaging.
+
 - [ ] Confirm the change contains only source, dictionary entries and documents
       that we have the right to distribute.
 - [ ] Confirm no Antigravity binary, `app.asar`, backup, account data, prompt,

@@ -23,6 +23,7 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm test
+      - run: python scripts/test-publish-release.py
       - if: runner.os != 'Windows'
         run: npm run platform-smoke-test
       - if: runner.os == 'Linux'
