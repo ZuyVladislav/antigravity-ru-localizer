@@ -29,7 +29,7 @@ first with `python scripts/publish-release.py --tag <tag> --commit <sha>
 - [ ] Run a secret scan of the complete reachable Git history, not only the
       working tree.
 - [ ] Test install and `--restore` on a disposable copy of the matching
-      Antigravity 2.24.0 installation. Do not test on an active work profile.
+      Antigravity 2.25.0 installation. Do not test on an active work profile.
 - [ ] Confirm the GitHub Actions matrix passes on Windows, Linux and macOS,
       including the Linux/macOS synthetic `install -> verify -> restore` smoke
       test and macOS ad-hoc signature verification.

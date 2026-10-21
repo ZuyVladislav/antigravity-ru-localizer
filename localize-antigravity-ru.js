@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.24.0.
+// Local, static Russian UI localization for Google Antigravity 2.25.0.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.24.0";
+const SUPPORTED_APP_VERSION = "2.25.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -743,6 +743,9 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   ];
   // Specific templates must precede broad action prefixes.
   let match;
+  if ((match = /^Open ([^\r\n]{1,200}) skill$/.exec(value))) return `Открыть навык «${match[1]}»`;
+  if ((match = /^Source ([1-9][0-9]*)$/.exec(value))) return `Источник ${match[1]}`;
+  if ((match = /^Make ([^\r\n]{1,160}?) the default ([^\r\n]{1,100}) account$/.exec(value))) return `Использовать аккаунт ${match[1]} по умолчанию для ${match[2]}`;
   if ((match = /^No cloud plugins found for "(.+)"\.$/.exec(value))) return `Облачные плагины по запросу «${match[1]}» не найдены.`;
   if ((match = /^Switch environment \(([^\r\n]{1,160})\)$/.exec(value))) return `Переключить среду (${match[1]})`;
   if ((match = /^Turn ([1-9][0-9]*) of ([1-9][0-9]*)$/.exec(value))) return `Ход ${match[1]} из ${match[2]}`;
@@ -1665,7 +1668,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.1", "2.25.0"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.0", "2.24.1", "2.25.1", "2.26.0"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {

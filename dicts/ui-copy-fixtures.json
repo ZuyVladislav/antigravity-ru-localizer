@@ -1,6 +1,6 @@
 {
-  "appVersion": "2.24.0",
-  "sourceBundleSha256": "7a0bf9576e8ffd8e9fb39716368b1c79c2ccd965da65e049fe846100f34edf88",
+  "appVersion": "2.25.0",
+  "sourceBundleSha256": "91c2d259d53a16b0cb9afe87e5d9f173ba613a46a076032a179ac5eca5101463",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "cases": [
     {
@@ -1878,6 +1878,258 @@
     {
       "source": "Refresh all credentials",
       "expected": "Обновить авторизацию всех автоматизаций"
+    },
+    {
+      "source": "Mark This Conversation as Read",
+      "expected": "Отметить этот диалог как прочитанный"
+    },
+    {
+      "source": "Mark This Conversation as Unread",
+      "expected": "Отметить этот диалог как непрочитанный"
+    },
+    {
+      "source": "Services this plugin connects to on your behalf. Credentials stay on this machine and are only sent to the domains listed.",
+      "expected": "Сервисы, к которым этот плагин подключается от вашего имени. Данные авторизации остаются на этом компьютере и передаются только указанным доменам."
+    },
+    {
+      "source": "Reconnect",
+      "expected": "Подключить заново"
+    },
+    {
+      "source": "Make default",
+      "expected": "Использовать по умолчанию"
+    },
+    {
+      "source": "Remote Control isn't active on this instance. Enable it in",
+      "expected": "Удалённое управление не включено в этом экземпляре. Включите его в"
+    },
+    {
+      "source": "Unpin",
+      "expected": "Открепить"
+    },
+    {
+      "source": "Pin",
+      "expected": "Закрепить"
+    },
+    {
+      "source": "Artifact updated by agent",
+      "expected": "Агент обновил артефакт"
+    },
+    {
+      "source": "Dismiss artifact update notice",
+      "expected": "Закрыть уведомление об обновлении артефакта"
+    },
+    {
+      "source": "Failed to export file:",
+      "expected": "Не удалось экспортировать файл:"
+    },
+    {
+      "source": "Document",
+      "expected": "Документ"
+    },
+    {
+      "source": "Uploading to Google Drive…",
+      "expected": "Загрузка в Google Drive…"
+    },
+    {
+      "source": "Uploaded to Google Drive",
+      "expected": "Загружено в Google Drive"
+    },
+    {
+      "source": "Link copied to clipboard.",
+      "expected": "Ссылка скопирована в буфер обмена."
+    },
+    {
+      "source": "Failed to upload HTML artifact to Drive",
+      "expected": "Не удалось загрузить HTML-артефакт в Google Drive"
+    },
+    {
+      "source": "Uploading to Drive…",
+      "expected": "Загрузка в Google Drive…"
+    },
+    {
+      "source": "Upload to Google Drive",
+      "expected": "Загрузить в Google Drive"
+    },
+    {
+      "source": "Saved!",
+      "expected": "Сохранено!"
+    },
+    {
+      "source": "Inline PDF preview is not available in this environment.",
+      "expected": "Встроенный просмотр PDF недоступен в этой среде."
+    },
+    {
+      "source": "Preview is not available for this file type.",
+      "expected": "Предпросмотр недоступен для этого типа файлов."
+    },
+    {
+      "source": "No message text",
+      "expected": "Нет текста сообщения"
+    },
+    {
+      "source": "Conversation turns",
+      "expected": "Ходы диалога"
+    },
+    {
+      "source": "There was an error with your authentication. To log in, click",
+      "expected": "Произошла ошибка авторизации. Для входа нажмите"
+    },
+    {
+      "source": "To use the agent, please login",
+      "expected": "Для работы с агентом войдите в аккаунт"
+    },
+    {
+      "source": "Dismissed",
+      "expected": "Отклонено"
+    },
+    {
+      "source": "This conversation is also open in another app. Sending messages from both may cause conflicts.",
+      "expected": "Этот диалог также открыт в другом приложении. Отправка сообщений из обоих приложений может вызвать конфликты."
+    },
+    {
+      "source": "Authentication expired",
+      "expected": "Срок действия авторизации истёк"
+    },
+    {
+      "source": "Your session has expired. Please log back in to continue.",
+      "expected": "Срок действия сеанса истёк. Войдите снова, чтобы продолжить."
+    },
+    {
+      "source": "Log back in",
+      "expected": "Войти снова"
+    },
+    {
+      "source": "Autonomous mode active: the agent works independently and does not ask questions or request new permissions.",
+      "expected": "Автономный режим включён: агент работает самостоятельно, не задаёт вопросов и не запрашивает новые разрешения."
+    },
+    {
+      "source": "Magic Workspace capability is not available",
+      "expected": "Возможность Magic Workspace недоступна"
+    },
+    {
+      "source": "Worktrees are a git feature. This folder is shared as is.",
+      "expected": "Рабочие копии — функция Git. Эта папка используется совместно без создания копии."
+    },
+    {
+      "source": "Search past worktrees...",
+      "expected": "Поиск прежних рабочих копий…"
+    },
+    {
+      "source": "Fig share",
+      "expected": "Общая папка Fig"
+    },
+    {
+      "source": "The suggested plugin isn't in the marketplace.",
+      "expected": "Предложенного плагина нет в каталоге."
+    },
+    {
+      "source": "Expensive",
+      "expected": "Повышенный расход"
+    },
+    {
+      "source": "Start voice",
+      "expected": "Начать голосовой ввод"
+    },
+    {
+      "source": "Voice on",
+      "expected": "Голосовой ввод включён"
+    },
+    {
+      "source": "End voice",
+      "expected": "Завершить голосовой ввод"
+    },
+    {
+      "source": "Voice recording is unavailable while the Chief of Staff mic is on",
+      "expected": "Запись голоса недоступна, пока включён микрофон главного помощника"
+    },
+    {
+      "source": "Initializing...",
+      "expected": "Подготовка…"
+    },
+    {
+      "source": "Cancel (⌃C)",
+      "expected": "Отмена (⌃C)"
+    },
+    {
+      "source": "Pairs (arm order may be shuffled)",
+      "expected": "Пары вариантов (порядок может меняться)"
+    },
+    {
+      "source": "Select modes",
+      "expected": "Выбрать режимы"
+    },
+    {
+      "source": "The agent works with autonomy-enhancing features and does not ask questions or request new permissions.",
+      "expected": "Агент использует функции автономной работы, не задаёт вопросов и не запрашивает новые разрешения."
+    },
+    {
+      "source": "Folder",
+      "expected": "Папка"
+    },
+    {
+      "source": "Collapse queued messages",
+      "expected": "Свернуть сообщения в очереди"
+    },
+    {
+      "source": "Expand queued messages",
+      "expected": "Развернуть сообщения в очереди"
+    },
+    {
+      "source": "Message subagent, @ to mention",
+      "expected": "Напишите субагенту, @ для упоминания"
+    },
+    {
+      "source": "Ask anything, @ to mention",
+      "expected": "Спросите что угодно, @ для упоминания"
+    },
+    {
+      "source": "You don't have access to this Google Drive file, so its title couldn't be added. The link was kept as-is.",
+      "expected": "У вас нет доступа к этому файлу Google Drive, поэтому не удалось добавить его название. Ссылка сохранена без изменений."
+    },
+    {
+      "source": "Unmount workspace",
+      "expected": "Отключить рабочую область"
+    },
+    {
+      "source": "Remount workspace",
+      "expected": "Переподключить рабочую область"
+    },
+    {
+      "source": "Custom Order",
+      "expected": "Свой порядок"
+    },
+    {
+      "source": "Sort By",
+      "expected": "Сортировка"
+    },
+    {
+      "source": "Search Recent Workspaces",
+      "expected": "Поиск недавних рабочих областей"
+    },
+    {
+      "source": "Search Projects",
+      "expected": "Поиск проектов"
+    },
+    {
+      "source": "Empty section",
+      "expected": "Пустой раздел"
+    },
+    {
+      "source": "Size",
+      "expected": "Размер"
+    },
+    {
+      "source": "Serialized size of the step as received by this view, which subscribes at FULL verbosity (untruncated). The production UI receives smaller payloads: at PROD_UI verbosity the server strips fields it does not render (raw tool outputs, planner tool calls, thinking signatures, ...).",
+      "expected": "Размер шага, полученного этой панелью в полном виде (FULL), без сокращений. Основной интерфейс получает меньше данных: в режиме PROD_UI сервер удаляет поля, которые не отображаются — исходный вывод инструментов, вызовы инструментов планировщика, подписи рассуждений и другие служебные данные."
+    },
+    {
+      "source": "Language server release channel",
+      "expected": "Канал обновления языкового сервера"
+    },
+    {
+      "source": "Web App Version | Language Server Version",
+      "expected": "Версия веб-приложения | Версия языкового сервера"
     }
   ],
   "exclusions": [
@@ -2184,17 +2436,93 @@
     {
       "source": "Flash",
       "reason": "Model designation, intentionally preserved in English"
+    },
+    {
+      "source": "NotificationsIcon",
+      "reason": "React component displayName, not rendered text"
+    },
+    {
+      "source": "FileExplorerIcon",
+      "reason": "React component displayName, not rendered text"
+    },
+    {
+      "source": "AgentInputBanner",
+      "reason": "React component displayName, not rendered text"
+    },
+    {
+      "source": "AgentInputCard",
+      "reason": "React component displayName, not rendered text"
+    },
+    {
+      "source": "TriggerButton",
+      "reason": "React component displayName, not rendered text"
+    },
+    {
+      "source": "AgentManagerInputBox",
+      "reason": "React component instrumentation name, not rendered text"
+    },
+    {
+      "source": "ArrowDown",
+      "reason": "KeyboardEvent.key identifier; must not be changed"
+    },
+    {
+      "source": "Antigravity",
+      "reason": "Product name; preserve original spelling"
+    },
+    {
+      "source": "Thinking",
+      "reason": "Model reasoning mode designation; preserve original spelling, including shared debug label"
+    },
+    {
+      "source": "BoN",
+      "reason": "Model selection mode abbreviation Best of N; preserve the mode designation"
+    },
+    {
+      "source": "UploadToDrive returned an empty link.",
+      "reason": "Internal exception text; rendered upload failure message is separately translated"
+    },
+    {
+      "source": "Failed to copy conversation markdown:",
+      "reason": "Console diagnostic prefix; not rendered UI"
+    },
+    {
+      "source": "Failed to search conversations:",
+      "reason": "Console diagnostic prefix; not rendered UI"
+    },
+    {
+      "source": "Failed to send feedback to extension:",
+      "reason": "Console diagnostic prefix; not rendered UI"
+    },
+    {
+      "source": "Check pending conversations in the last 3 days that require action from me.",
+      "reason": "Suggested agent instruction payload; preserve original instructions, not executed by audit"
+    },
+    {
+      "source": "Check CLs that require my attention and fix them in their respective conversations.",
+      "reason": "Suggested agent instruction payload; preserve original instructions, not executed by audit"
+    },
+    {
+      "source": "Learn from my conversation history to write a personalized set of rules for future agentic interactions.",
+      "reason": "Suggested agent instruction payload; preserve original instructions, audit never reads conversation history"
+    },
+    {
+      "source": "Use my conversation history to tell me which skills and plugins would be helpful for me.",
+      "reason": "Suggested agent instruction payload; preserve original instructions, audit never reads conversation history"
     }
   ],
   "observedTemplates": [
+    "Agent finished: ${q.summary}",
+    "Conversation ${f.slice(0,8)}",
+    "Open ${a} skill",
+    "Source ${b+1}",
     "Select model with ${c}",
     "Install ${b}",
     "More actions for ${a}",
     "Configure ${a.title}",
-    "Failed to save configuration: ${G}",
+    "Failed to save configuration: ${F}",
     "Set up ${K}",
     "Review permissions for ${K}",
-    "Install folder \"${aX(a.plugin)}\" is already in use",
+    "Install folder \"${uW(a.plugin)}\" is already in use",
     "Configure ${c.serverName}",
     "The ${c.serverName} MCP server requires configuration parameters before it can be started.",
     "Add ${L} ${L===1?\"plugin\":\"plugins\"} from ${a}",
@@ -2215,11 +2543,12 @@
     "See ${e} more ${c}",
     "See ${e} more",
     "See more ${c}",
-    "Filter skills and rules: ${NX[a]}",
+    "Filter skills and rules: ${gX[a]}",
     "Toggle ${e}",
-    "Authorization code for ${M.provider}",
-    "Secret for ${M.provider}",
-    "Secret for a new ${M.provider} account",
+    "Secret for ${ea.provider}",
+    "Make ${ha.identity||ha.alias} the default ${ea.provider} account",
+    "Secret for a new ${ea.provider} account",
+    "Authorization code for ${a}",
     "Adding plugins from ${n}",
     "Add ${c} ${c===1?\"plugin\": \"plugins\"} from ${n}",
     "Add all \\u00b7 ${c}",
@@ -2229,8 +2558,8 @@
     "Couldn't ${b} conversation",
     "Failed to ${b} conversation",
     "Go to slide ${l+1}",
-    "Open conversation ${J}",
-    "Open the ${J} plugin",
+    "Open conversation ${N}",
+    "Open the ${N} plugin",
     "Opens external link: ${a}",
     "View Diff for ${f}",
     "Open ${m}",
@@ -2239,47 +2568,45 @@
     "Cost summary: ${n}",
     "Searched for \"${a.query}\"",
     "Searched for files: ${a.pattern}",
-    "Creating workspace \"${R}\"...",
+    "Creating workspace \"${J}\"...",
     "Marked ${q} conversations as read",
     "Trajectory not found (${H?\"displayed\":\"not displayed\"}).",
-    "Open ${E}",
-    "Open ${c.config.title}",
+    "Open ${e.config.title}",
     "For ${m}, telemetry is force disabled.",
     "For ${l?",
     "When toggled on, ${b.product.nameShort} collects usage data to help Google enhance performance and features.",
     "Receive product updates, tips, and promotions from Google ${b.product.nameShort} via email.",
-    "Sign in to use ${zQb}!",
+    "Sign in to use ${fRb}!",
     "Add new ${a} item",
     "Confirm add ${a} item",
     "Option ${v} not found in options",
     "Manage ${c} app settings.",
     "Reset ${c} override${c===1?\"\":\"s\"}",
-    "Changes the base URL on each extension page. You must restart ${b.nameShort} to use the new marketplace after changing this value.",
-    "Changes the base URL for marketplace search results. You must restart ${b.nameShort} to use the new marketplace after changing this value.",
+    "Changes the base URL on each extension page. You must restart ${c.nameShort} to use the new marketplace after changing this value.",
+    "Changes the base URL for marketplace search results. You must restart ${c.nameShort} to use the new marketplace after changing this value.",
     "Shared with: ${b.join(\", \")}",
-    "When toggled on, ${h} will use your AI credits to fulfill model requests once you're out of model quota. ${h} will always use your model quota first before using AI credits.",
+    "When toggled on, ${g} will use your AI credits to fulfill model requests once you're out of model quota. ${g} will always use your model quota first before using AI credits.",
     "Failed to remove agent: ${u}",
     "Toggle ${a}",
     "Build with ${a} Plugins",
     "Auth code for ${x}",
-    "Failed to save project Google3 configuration: ${Fp(u)}",
-    "Failed to resolve folder: ${w}",
+    "Failed to save project Google3 configuration: ${tq(u)}",
+    "Failed to resolve folder: ${D}",
     "Delete ${h.capitalized}",
-    "Failed to delete ${C.lowercase}: ${Fp(Qa)}",
+    "Failed to delete ${C.lowercase}: ${tq(Va)}",
     "Duplicate ${C.lowercase} name",
-    "Failed to save project: ${Fp(Wa)}",
-    "Cannot add folder: \"${Na}\" is not a valid folder location.",
-    "Failed to resolve folder: ${cb} (${Fp(Ma)})",
-    "Cannot add folder with unparseable URI: ${cb}",
-    "Failed to save project settings: ${Fp(rb)}",
-    "Failed to save project permissions: ${Fp(rb)}",
+    "Failed to save project: ${tq(Vb)}",
+    "Cannot add folder: \"${Ma}\" is not a valid folder location.",
+    "Failed to resolve folder: ${Xb} (${tq(Za)})",
+    "Cannot add folder with unparseable URI: ${Xb}",
+    "Failed to save project settings: ${tq(xb)}",
+    "Failed to save project permissions: ${tq(xb)}",
     "Edit ${C.lowercase} name",
     "Agent settings and permissions for conversations outside of ${C.lowercasePlural}.",
     "Manage ${C.lowercase} ${Ja?\"resources\":\"folders\"}, agent settings, and permissions.",
     "Delete ${C.capitalized}",
     "All changes since ${l}",
-    "Project ${L} has ${Q.length} unparseable resource URI(s): ${Q.join(\", \")}",
-    "Conversation ${f.slice(0,8)}",
+    "Project ${J} has ${Q.length} unparseable resource URI(s): ${Q.join(\", \")}",
     "Switch environment (${a})",
     "Edit comment: ${a.comment}",
     "Load older messages, showing ${b} of ${c}",
@@ -2290,63 +2617,63 @@
     "Question ${t+1} of ${r.length}",
     "Thought for ${Math.max(1,Number(H.seconds))}s",
     "Trajectory ID: ${f}\\nError: ${g.fullError||g.shortError}",
-    "Failed to save project settings: ${Fp(C)}",
-    "Failed to save settings: ${Fp(w)}",
+    "Failed to save project settings: ${tq(C)}",
+    "Failed to save settings: ${tq(w)}",
     "This ${a.lowercase} overrides your global permission settings.",
     "Agent permissions preset selector, current: ${l}",
-    "Failed to create project: ${Fp(u)}",
+    "Failed to create project: ${tq(u)}",
     "Generating ${e.envName} name took > 7 seconds",
     "Using default ${e.envName} name",
     "Creating project ${e.envName} took > 7 seconds",
     "Failed to create ${e.envName}",
-    "Failed to create ${e.envName}: ${G}",
+    "Failed to create ${e.envName}: ${F}",
     "Failed to create ${e.envName}: ${J}",
-    "Failed to save project branch: ${Fp(H)}",
-    "Work locally on ${g.map(h=>Nr(h)).join(\", \")}",
-    "Worktree from ${n.map(r=>Nr(r)).join(\", \")}",
+    "Failed to save project branch: ${tq(H)}",
+    "Work locally on ${g.map(h=>Wl(h)).join(\", \")}",
+    "Worktree from ${n.map(r=>Wl(r)).join(\", \")}",
+    "Open ${H}",
     "Select model, current: ${v}${x?",
     "Open ${D}",
     "Remove ${D}",
     "Environment: ${w}",
     "Select harnesses, current: ${f}",
-    "Best of N (${J4b(a)})",
+    "Best of N (${q6b(a)})",
     "Select modes, current: ${g.join(\", \")}",
     "View ${f}",
     "View ${h}",
     "Send now: ${e}",
-    "Unable to search @${ia.trigger}",
-    "Failed to save project: ${Fp(t)}",
-    "Failed to save project: ${Fp(x)}",
+    "Unable to search @${aa.trigger}",
+    "Failed to save project: ${tq(t)}",
+    "Failed to save project: ${tq(y)}",
     "Cannot add folder: \"${f}\" is not a valid folder location.",
     "Select project, current: ${x}",
-    "Select workspace, current: ${h??\"Select workspace...\"}",
-    "Failed to unarchive project: ${Ep(Fp(y))}",
+    "Failed to unarchive project: ${sq(tq(y))}",
     "Failed to select workspace: ${x}",
     "Failed to create workspace: ${H}",
-    "Use custom repository: \"${G}\"",
-    "Unmount workspace ${N.label}",
-    "Remount workspace ${N.label}",
-    "Delete workspace ${N.label}",
+    "Use custom repository: \"${F}\"",
+    "Unmount workspace ${M.label}",
+    "Remount workspace ${M.label}",
+    "Delete workspace ${M.label}",
     "Failed to archive ${x.lowercase}",
     "Failed to delete ${x.lowercase}",
-    "Worked for ${jO(l.lastModifiedAtMs-l.createdAtMs)}",
+    "Worked for ${QN(m.lastModifiedAtMs-m.createdAtMs)}",
     "Close ${k}",
     "Close ${B}",
     "Unpin ${B}",
     "Triggered ${u}",
     "Failed to update \"${r.displayName}\"",
-    "Failed to save \"${Z.displayName}\"",
-    "Failed to save \"${u}\"",
-    "Restarted \"${u}\".",
-    "Enable ${u}",
-    "Delete ${u}",
-    "Deleted \"${u}\".",
-    "Failed to delete \"${u}\"",
-    "Created automation \"${F.trim()}\".",
-    "Failed to create ${fa}.",
+    "Failed to save \"${ma.displayName}\"",
+    "Failed to save \"${x}\"",
+    "Restarted \"${x}\".",
+    "Enable ${x}",
+    "Delete ${x}",
+    "Deleted \"${x}\".",
+    "Failed to delete \"${x}\"",
+    "Created automation \"${Q.trim()}\".",
+    "Failed to create ${la}.",
     "New ${k}",
-    "Deleted \"${da}\".",
-    "Failed to delete \"${da}\"",
+    "Deleted \"${ia}\".",
+    "Failed to delete \"${ia}\"",
     "Add ${r.emptyMessageSingular}",
     "Navigate to step ${x}",
     "Artifacts (${c.length} Files for Conversation)",
@@ -2355,8 +2682,8 @@
     "Terminal (${c})",
     "System Prompt: ${U.title||",
     "Tool Definition: ${U.name||\"unknown\"}",
-    "Step #${V} (${ea})",
-    "Step #${V}: ${na} (${ea})",
+    "Step #${V} (${ka})",
+    "Step #${V}: ${ea} (${ka})",
     "Unused capacity: ${r.toLocaleString()} tokens",
     "Error serializing JSON: ${b}",
     "Maximize ${a}",
@@ -2365,11 +2692,11 @@
     "Section ${fa+1}",
     "Tool ${fa+1}",
     "Sherlog (Retry #${J})",
-    "Execution Run: ${ia}",
-    "Invocation: ${qa}",
-    "Idle ${f7(g.endMs-g.startMs)} \\u00b7 ${zmc(g.startMs)} \\u2192 ${zmc(g.endMs)}",
+    "Execution Run: ${aa}",
+    "Invocation: ${oa}",
+    "Idle ${k7(g.endMs-g.startMs)} \\u00b7 ${voc(g.startMs)} \\u2192 ${voc(g.endMs)}",
     "Navigate up to parent: ${t}",
     "Add ${a.name}"
   ],
-  "templateScope": "Reviewed current 2.24.0 template inventory: 76 changes individually classified; clipboard diagnostic content is intentionally preserved. Rendering is separately validated in ui-dynamic-fixtures.json."
+  "templateScope": "2.25.0: 62 changed templates individually reviewed; 58 binding renames, three scoped UI templates and one preserved native OS notification containing generated agent summary. Native notification payload is not rewritten by the DOM translator."
 }

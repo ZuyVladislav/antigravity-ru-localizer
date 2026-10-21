@@ -350,5 +350,25 @@
   [
     "Thinking for 1m 2s",
     "Думает: 1 мин. 2 с."
+  ],
+  [
+    "Open example-skill skill",
+    "Открыть навык «example-skill»"
+  ],
+  [
+    "Open C:\\Tools\\user-skill skill",
+    "Открыть навык «C:\\Tools\\user-skill»"
+  ],
+  [
+    "Source 3",
+    "Источник 3"
+  ],
+  [
+    "Make account@example.test the default Google account",
+    "Использовать аккаунт account@example.test по умолчанию для Google"
+  ],
+  [
+    "Make Work Account the default Example Provider account",
+    "Использовать аккаунт Work Account по умолчанию для Example Provider"
   ]
 ]
