@@ -2,6 +2,10 @@
   "appVersion": "2.25.0",
   "sourceBundleSha256": "91c2d259d53a16b0cb9afe87e5d9f173ba613a46a076032a179ac5eca5101463",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
+  "activityStatusCases": [
+    {"source": "Thinking", "expected": "Думает"},
+    {"source": "Exited with code", "expected": "Завершено с кодом"}
+  ],
   "cases": [
     {
       "source": "Inline Actions",

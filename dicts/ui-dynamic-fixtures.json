@@ -1,4 +1,10 @@
 [
+  ["Exited with code 1", "Завершено с кодом 1", "activity-status"],
+  ["Exited with code 0", "Завершено с кодом 0", "activity-status"],
+  ["Exited with code -1.", "Завершено с кодом -1.", "activity-status"],
+  ["· Exited with code 127", "· Завершено с кодом 127", "activity-status"],
+  ["Thinking about code", "Thinking about code", "activity-status"],
+  ["Exited with code 1; echo secret", "Exited with code 1; echo secret", "activity-status"],
   [
     "Configure My server",
     "Настроить My server"

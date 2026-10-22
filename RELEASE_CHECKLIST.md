@@ -19,6 +19,10 @@ first with `python scripts/publish-release.py --tag <tag> --commit <sha>
 - [ ] Confirm no Antigravity binary, `app.asar`, backup, account data, prompt,
       chat, screenshot with private content, manifest or local path is tracked.
 - [ ] Run `npm ci` and `npm test` with Node.js 22.12+.
+- [ ] Check activity-only statuses in ordinary, compact and animated headers,
+      including attribute-only animation updates. `Thinking` model modes,
+      thoughts, command text/output and unrelated animation slots must remain
+      unchanged; numerical exit codes and punctuation must be preserved.
 - [ ] Run `node scripts/audit-ui-copy.js --binary <application resources/bin/language_server[.exe]> --out <local evidence>/ui-copy-audit.json` on the exact new application version. Review all missing UI copy and explicit exclusions before publishing; do not commit the extracted application bundle. Preserve model names, modes, commands and private content.
 - [ ] If the app is already running, run `node scripts/audit-runtime-ui.js --port-file <existing DevToolsActivePort> --out <local evidence>/runtime-ui-copy.json` to check server-provided model badges and loaded system notices, including disabled models. Do not launch or interact with the app just for this check; preserve incomplete coverage and review unknown notices rather than treating them as translated.
 - [ ] Test install and rollback on an isolated copy of `app.asar` together

@@ -816,6 +816,15 @@ function translateCatalogDescription(value) {
   return null;
 }
 
+// Ambiguous labels belong only to the application's activity headers. In
+// particular, the model mode named Thinking must retain its original spelling.
+function translateActivityStatus(value) {
+  if (value === "Thinking") return "Думает";
+  const exit = /^([·•] ?)?Exited with code(?: (-?[0-9]+)(\.)?)?$/.exec(value);
+  if (exit) return `${exit[1] || ""}Завершено с кодом${exit[2] ? " " + exit[2] : ""}${exit[3] || ""}`;
+  return null;
+}
+
 function makePreloadScript(dictionary) {
   const dictionaryJson = JSON.stringify(dictionary);
   return `${START}
@@ -836,6 +845,7 @@ function makePreloadScript(dictionary) {
   const TASK_ACTIVITY_TITLES = ${JSON.stringify(TASK_ACTIVITY_TITLES)};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
   const translateActivityTitle = ${translateActivityTitle.toString()};
+  const translateActivityStatus = ${translateActivityStatus.toString()};
   const translateScopedUiText = ${translateScopedUiText.toString()};
   const CATALOG_DESCRIPTIONS = ${JSON.stringify(CATALOG_DESCRIPTIONS)};
   const translateCatalogDescription = ${translateCatalogDescription.toString()};
@@ -926,6 +936,10 @@ function makePreloadScript(dictionary) {
       const classes = typeof current.className === "string" ? current.className : "";
       if (classes.split(/\\s+/).includes("font-mono")) return false;
       if (current.tagName === "BUTTON" && current.getAttribute("data-testid") === "tool-group-collapsible") return true;
+      if (current.getAttribute("data-testid") === "thinking-collapsible-trigger") return true;
+      // The compact (non-verbose) thinking indicator has no test id in 2.25.
+      if (current.tagName === "DIV" && ["tabular-nums", "min-h-8", "select-none", "text-muted-foreground", "rounded-lg", "text-left", "gap-1.5"].every(token => classes.split(/\\s+/).includes(token))) return true;
+      if (current.tagName === "DIV" && ["rounded-t-lg", "-m-1", "mb-0.5", "transition-colors", "border-border", "bg-muted"].every(token => classes.split(/\\s+/).includes(token))) return true;
       if (classes.includes("min-h-8") && classes.includes("select-none")) header = current;
       if (current.getAttribute("data-testid") === "run-command-step") return !!header && current.children[0] === header;
       current = current.parentElement;
@@ -935,7 +949,7 @@ function makePreloadScript(dictionary) {
   const translateText = (node) => {
     if (!node || isBlocked(node)) return;
     const source = node.nodeValue;
-    const translated = (isActivityTitleUi(node) && translateActivityTitle(source.trim())) || translationFor(source, isNotificationUi(node), isPlanHintUi(node));
+    const translated = (isActivityTitleUi(node) && (translateActivityStatus(source.trim()) || translateActivityTitle(source.trim()))) || translationFor(source, isNotificationUi(node), isPlanHintUi(node));
     if (!translated || translated === source) return;
     const leading = (source.match(/^\\s*/) || [""])[0];
     const trailing = (source.match(/\\s*$/) || [""])[0];
@@ -945,10 +959,11 @@ function makePreloadScript(dictionary) {
   const translateAttributes = (element) => {
     const isFormField = element && /^(INPUT|TEXTAREA)$/.test(element.tagName);
     if (!element || isBlocked(element, isFormField)) return;
-    for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder"]) {
+    const activityUi = isActivityTitleUi(element);
+    for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder", ...(activityUi ? ["data-slot-in", "data-slot-out"] : [])]) {
       if (isFormField && attribute !== "placeholder" && attribute !== "aria-placeholder") continue;
       const source = element.getAttribute(attribute);
-      const translated = ((attribute === "title" || attribute === "aria-label") && isActivityTitleUi(element) && translateActivityTitle(source)) || translationFor(source, false, false, true);
+      const translated = (activityUi && (translateActivityStatus(source) || translateActivityTitle(source))) || translationFor(source, false, false, true);
       if (translated && translated !== source) element.setAttribute(attribute, translated);
     }
   };
@@ -1000,7 +1015,7 @@ function makePreloadScript(dictionary) {
     }
   };
   const observe = () => {
-    new MutationObserver(handleMutations).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "aria-placeholder", "data-placeholder"] });
+    new MutationObserver(handleMutations).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "aria-placeholder", "data-placeholder", "data-slot-in", "data-slot-out"] });
     schedule(document.documentElement);
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observe, { once: true });
@@ -1170,6 +1185,7 @@ function selfTestPreloadDom(injected) {
   const activityCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-activity-fixtures.json"), "utf8"));
   const reviewedCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-copy-fixtures.json"), "utf8"));
   const dynamicCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-dynamic-fixtures.json"), "utf8"));
+  if (dynamicCopy.some(row => row.length !== 2 && !(row.length === 3 && row[2] === "activity-status"))) fail("Unknown dynamic fixture scope; review it instead of skipping it.");
   if (reviewedCopy.appVersion !== SUPPORTED_APP_VERSION || reviewedCopy.cases.length < 400) fail("Reviewed UI copy inventory is missing or incomplete.");
   // Execute the actual generated preload against a minimal DOM fixture.
   // The fixture contains no application data and requires no browser process.
@@ -1180,9 +1196,11 @@ function selfTestPreloadDom(injected) {
   const scannedRoots = [];
   let mutationCallback;
   let observing = false;
+  let observedAttributes = [];
   let pendingMutations = [];
   const emitMutation = (record) => {
     if (!observing) return;
+    if (record.type === "attributes" && !observedAttributes.includes(record.attributeName)) return;
     pendingMutations.push(record);
     if (pendingMutations.length === 1) jobs.push(() => {
       const records = pendingMutations;
@@ -1326,7 +1344,7 @@ function selfTestPreloadDom(injected) {
   const planHint = [text("Type"), text("and select"), text("to have the agent generate a plan.")];
   const planCommand = text("plan");
   const planHintOutside = text("Type");
-  const auditedDynamic = dynamicCopy.map(([source, expected]) => {
+  const auditedDynamic = dynamicCopy.filter(row => !row[2]).map(([source, expected]) => {
     const label = text(source), outside = text(source), protectedMessage = text(source), protectedCode = text(source);
     const attributes = element("button", {title:source,"aria-label":source});
     return {source,expected,label,outside,protectedMessage,protectedCode,attributes,container:element("div", {}, [
@@ -1340,7 +1358,23 @@ function selfTestPreloadDom(injected) {
     const container = element("div", {}, [group, element("div", { "data-testid": "run-command-step" }, [header, element("div", {}, [output])]), element("div", { class: "assistant-message" }, [message]), outside]);
     return { source, expected, title, groupTitle, group, output, command, message, outside, container };
   });
+  const statusCopy = [...reviewedCopy.activityStatusCases.map(item => [item.source, item.expected]), ...dynamicCopy.filter(row => row[2] === "activity-status")];
+  const statusCopyNodes = statusCopy.map(([source, expected]) => {
+    const header = text(source), group = text(source), compact = text(source), thinking = text(source), statusBar = text(source);
+    const output = text(source), command = text(source), outside = text(source), model = text(source), thought = text(source);
+    const groupButton = element("button", {"data-testid":"tool-group-collapsible", "aria-label":source, "data-slot-in":source, "data-slot-out":source}, [group]);
+    const unrelatedSlots = element("span", {"data-slot-in":source, "data-slot-out":source});
+    return {source,expected,header,group,compact,thinking,statusBar,output,command,outside,model,thought,groupButton,unrelatedSlots,
+      container:element("div", {}, [
+        element("div", {"data-testid":"run-command-step"}, [element("div", {class:"min-h-8 select-none"}, [header, element("span", {class:"font-mono"}, [command])]), output]),
+        groupButton, element("button", {"data-testid":"thinking-collapsible-trigger"}, [thinking]),
+        element("div", {class:"flex w-full items-center gap-1.5 px-2 min-h-8 text-left text-sm rounded-lg text-muted-foreground tabular-nums select-none"}, [compact]),
+        element("div", {class:"flex items-center rounded-t-lg border-b px-1.5 py-0.5 -m-1 mb-0.5 text-sm font-medium transition-colors border-border bg-muted"}, [statusBar]),
+        element("button", {"data-testid":"model-selector-trigger"}, [model]), unrelatedSlots,
+        element("div", {class:"cursor-edit group relative text-secondary-foreground pl-2"}, [element("button", {"data-testid":"thinking-collapsible-trigger"}, [thought])]), outside])};
+  });
   const root = element("html", {}, [element("body", {}, [
+    ...statusCopyNodes.map(item => item.container),
     ...activityCopyNodes.map(item => item.container),
     element("div", {}, [uiLabel, uiCount, quotaRefresh, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
     input, textarea, element("div", { "data-ag-localization-skip": "" }, [protectedInput]), ...protectedContainers,
@@ -1359,7 +1393,7 @@ function selfTestPreloadDom(injected) {
       if (!(delay > 0)) fail("Preload DOM test: localization must yield to the renderer event loop");
       jobs.push(callback);
     },
-    MutationObserver: class { constructor(callback) { mutationCallback = callback; } observe() { observing = true; } },
+    MutationObserver: class { constructor(callback) { mutationCallback = callback; } observe(_root, options) { observing = true; observedAttributes = options.attributeFilter; } },
   });
   const flush = () => {
     let executed = 0;
@@ -1370,6 +1404,21 @@ function selfTestPreloadDom(injected) {
   };
   flush();
   const assert = (condition, message) => { if (!condition) fail("Preload DOM test: " + message); };
+  for (const item of statusCopyNodes) {
+    for (const node of [item.header,item.group,item.compact,item.thinking,item.statusBar]) assert(node.nodeValue === item.expected, "activity status: " + item.source);
+    assert(item.groupButton.getAttribute("aria-label") === item.expected, "activity status accessible name");
+    for (const attribute of ["data-slot-in", "data-slot-out"]) {
+      assert(item.groupButton.getAttribute(attribute) === item.expected, "animated activity status: " + item.source);
+      assert(item.unrelatedSlots.getAttribute(attribute) === item.source, "animated status rule leaked outside its header");
+    }
+    for (const node of [item.output,item.command,item.outside,item.model,item.thought]) assert(node.nodeValue === item.source, "activity status changed protected or unrelated text: " + item.source);
+    assert(item.header.writes <= 1, "activity status translation did not settle");
+  }
+  statusCopyNodes[0].thinking.nodeValue = "Thinking for 2s";
+  statusCopyNodes[0].groupButton.setAttribute("data-slot-in", "Exited with code 2");
+  flush();
+  assert(statusCopyNodes[0].thinking.nodeValue === "Думает: 2 с.", "streamed thinking status update was missed");
+  assert(statusCopyNodes[0].groupButton.getAttribute("data-slot-in") === "Завершено с кодом 2", "animated status attribute update was missed");
   for (const item of activityCopyNodes) {
     assert(item.title.nodeValue === item.expected && item.groupTitle.nodeValue === item.expected, "activity heading: " + item.source);
     assert(item.group.getAttribute("aria-label") === item.expected, "activity accessibility label: " + item.source);
