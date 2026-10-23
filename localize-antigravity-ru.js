@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.25.0";
+const SUPPORTED_APP_VERSION = "2.26.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -804,6 +804,17 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   if ((match = /^View ([0-9]+) side questions?$/.exec(value))) return `Показать дополнительные вопросы (${match[1]})`;
   if ((match = /^(Subagents|Terminal|Changes Overview) \((.+)\)$/.exec(value))) return `${({Subagents:"Субагенты",Terminal:"Терминал","Changes Overview":"Обзор изменений"})[match[1]]} (${match[2]})`;
   if ((match = /^Build with (.+) Plugins$/.exec(value))) return `Разработка с плагинами ${match[1]}`;
+  if ((match = /^Configure ([^\r\n]{1,180}), values missing$/.exec(value))) return `Настроить ${match[1]}: не все параметры заполнены`;
+  if ((match = /^(Reconnect|Disconnect) ([^\r\n]{1,180})$/.exec(value))) return `${match[1] === "Reconnect" ? "Переподключить" : "Отключить"} ${match[2]}`;
+  if ((match = /^Cancel Questionnaire and Stop the Agent \(([^\r\n]{1,40})\)$/.exec(value))) return `Отменить опрос и остановить агента (${match[1]})`;
+  if ((match = /^App view for ([^\r\n]{1,180})$/.exec(value))) return `Панель приложения для ${match[1]}`;
+  if ((match = /^Open URL in system browser: ([^\r\n]{1,2000})$/.exec(value))) return `Открыть адрес в системном браузере: ${match[1]}`;
+  if ((match = /^(Suggested sending|Error sending|Sending) (input|termination request) to command$/.exec(value))) return `${({"Suggested sending":"Предложена отправка", "Error sending":"Ошибка отправки", "Sending":"Отправка"})[match[1]]} ${match[2] === "input" ? "ввода" : "запроса завершения"} команде`;
+  if ((match = /^Chunk ([0-9]+)$/.exec(value))) return `Фрагмент ${match[1]}`;
+  if ((match = /^(Generating with|Generated with|Generate with) ([^\r\n]{1,160}) 🍌$/.exec(value))) return `${({"Generating with":"Создание с помощью", "Generated with":"Создано с помощью", "Generate with":"Создать с помощью"})[match[1]]} ${match[2]} 🍌`;
+  if ((match = /^Sort and filter conversations \(([0-9]+) active\)$/.exec(value))) return `Сортировка и фильтр диалогов (активных: ${match[1]})`;
+  if ((match = /^Go to turn ([0-9]+) of ([0-9]+)$/.exec(value))) return `Перейти к ходу ${match[1]} из ${match[2]}`;
+  if ((match = /^No (plugin|agent|server|skill|rule|project) found for$/.exec(value))) return `Не найден ${({plugin:"плагин",agent:"агент",server:"сервер",skill:"навык",rule:"правило",project:"проект"})[match[1]]} для`;
   if (!allowActionPrefixes) return null;
   for (const [source, translation] of prefixes.sort((a,b)=>b[0].length-a[0].length)) if (value.startsWith(source) && value.length > source.length) return translation + value.slice(source.length);
   return null;
@@ -1717,7 +1728,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.0", "2.24.1", "2.25.1", "2.26.0"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.0", "2.24.1", "2.25.0", "2.25.1", "2.26.1", "2.27.0"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {

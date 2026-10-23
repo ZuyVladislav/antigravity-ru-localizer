@@ -1,10 +1,34 @@
 [
-  ["Exited with code 1", "Завершено с кодом 1", "activity-status"],
-  ["Exited with code 0", "Завершено с кодом 0", "activity-status"],
-  ["Exited with code -1.", "Завершено с кодом -1.", "activity-status"],
-  ["· Exited with code 127", "· Завершено с кодом 127", "activity-status"],
-  ["Thinking about code", "Thinking about code", "activity-status"],
-  ["Exited with code 1; echo secret", "Exited with code 1; echo secret", "activity-status"],
+  [
+    "Exited with code 1",
+    "Завершено с кодом 1",
+    "activity-status"
+  ],
+  [
+    "Exited with code 0",
+    "Завершено с кодом 0",
+    "activity-status"
+  ],
+  [
+    "Exited with code -1.",
+    "Завершено с кодом -1.",
+    "activity-status"
+  ],
+  [
+    "· Exited with code 127",
+    "· Завершено с кодом 127",
+    "activity-status"
+  ],
+  [
+    "Thinking about code",
+    "Thinking about code",
+    "activity-status"
+  ],
+  [
+    "Exited with code 1; echo secret",
+    "Exited with code 1; echo secret",
+    "activity-status"
+  ],
   [
     "Configure My server",
     "Настроить My server"
@@ -376,5 +400,69 @@
   [
     "Make Work Account the default Example Provider account",
     "Использовать аккаунт Work Account по умолчанию для Example Provider"
+  ],
+  [
+    "Configure My Server, values missing",
+    "Настроить My Server: не все параметры заполнены"
+  ],
+  [
+    "Reconnect Gemini",
+    "Переподключить Gemini"
+  ],
+  [
+    "Disconnect Claude",
+    "Отключить Claude"
+  ],
+  [
+    "Cancel Questionnaire and Stop the Agent (Esc)",
+    "Отменить опрос и остановить агента (Esc)"
+  ],
+  [
+    "App view for my_tool",
+    "Панель приложения для my_tool"
+  ],
+  [
+    "Open URL in system browser: https://example.test/a?b=2",
+    "Открыть адрес в системном браузере: https://example.test/a?b=2"
+  ],
+  [
+    "Suggested sending input to command",
+    "Предложена отправка ввода команде"
+  ],
+  [
+    "Error sending termination request to command",
+    "Ошибка отправки запроса завершения команде"
+  ],
+  [
+    "Sending input to command",
+    "Отправка ввода команде"
+  ],
+  [
+    "Chunk 2",
+    "Фрагмент 2"
+  ],
+  [
+    "Generating with Gemini 🍌",
+    "Создание с помощью Gemini 🍌"
+  ],
+  [
+    "Generated with Gemini 🍌",
+    "Создано с помощью Gemini 🍌"
+  ],
+  [
+    "Generate with Gemini 🍌",
+    "Создать с помощью Gemini 🍌"
+  ],
+  [
+    "Sort and filter conversations (2 active)",
+    "Сортировка и фильтр диалогов (активных: 2)"
+  ],
+  [
+    "Go to turn 3 of 12",
+    "Перейти к ходу 3 из 12"
+  ],
+  [
+    "No plugin found for",
+    "Не найден плагин для"
   ]
 ]
