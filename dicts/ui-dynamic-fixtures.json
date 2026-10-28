@@ -464,5 +464,85 @@
   [
     "No plugin found for",
     "Не найден плагин для"
+  ],
+  [
+    "Unfold lines 2-20",
+    "Развернуть строки 2–20"
+  ],
+  [
+    "Fold lines 2-20",
+    "Свернуть строки 2–20"
+  ],
+  [
+    "Label for Работа",
+    "Метка для Работа"
+  ],
+  [
+    "Sign in to GitHub",
+    "Войти в GitHub"
+  ],
+  [
+    "Sign in to GitHub on this computer",
+    "Войти в GitHub на этом компьютере"
+  ],
+  [
+    "Sign in to GitHub in the cloud",
+    "Войти в GitHub в облаке"
+  ],
+  [
+    "Account this MCP server uses: user@example.com",
+    "Аккаунт этого сервера MCP: user@example.com"
+  ],
+  [
+    "More for C:\\folder  with  spaces",
+    "Дополнительные действия для C:\\folder  with  spaces"
+  ],
+  [
+    "Low contrast ratio (2.3:1). Text may be hard to read.",
+    "Низкая контрастность (2.3:1). Текст может быть трудно читать."
+  ],
+  [
+    "Trajectory not found (displayed).",
+    "Траектория не найдена (отображалась)."
+  ],
+  [
+    "Trajectory not found (not displayed).",
+    "Траектория не найдена (не отображалась)."
+  ],
+  [
+    "Open C:\\Project\\file.py",
+    "Открыть C:\\Project\\file.py"
+  ],
+  [
+    "User uploaded media 2",
+    "Медиафайл пользователя 2"
+  ],
+  [
+    "Set up My Server",
+    "Настроить My Server"
+  ],
+  [
+    "Agents created by this plugin run in a dedicated project with its own permissions. You can change the permissions in the project settings page.",
+    "Агенты, созданные этим плагином, работают в отдельном проекте со своими разрешениями. Разрешения можно изменить в настройках проекта."
+  ],
+  [
+    "Failed to update \"My server\"",
+    "Не удалось обновить «My server»."
+  ],
+  [
+    "Install My Plugin",
+    "Установить My Plugin"
+  ],
+  [
+    "Auth code for C:\\Tools\\Server",
+    "Код авторизации для C:\\Tools\\Server"
+  ],
+  [
+    "Review permissions for Workspace X",
+    "Проверить разрешения для Workspace X"
+  ],
+  [
+    "Agents created by this automation run in a dedicated workspace with its own permissions. You can change the permissions in the workspace settings page.",
+    "Агенты, созданные этой автоматизацией, работают в отдельной рабочей области со своими разрешениями. Разрешения можно изменить в настройках рабочей области."
   ]
 ]

@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.26.0";
+const SUPPORTED_APP_VERSION = "2.28.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -365,7 +365,12 @@ function removeMarkedBlock(source, start, end) {
     if (first < 0) return cleaned;
     const last = cleaned.indexOf(end, first);
     if (last < 0) fail(`Found ${start} without its closing marker.`);
-    cleaned = cleaned.slice(0, first) + cleaned.slice(last + end.length);
+    // Remove the separator introduced by each injection, so reapplying the
+    // same patch does not accumulate blank lines in the host archive.
+    const removeBefore = (start === START || start === TRAY_START) && cleaned[first - 1] === "\n";
+    const after = last + end.length;
+    const removeAfter = (start === START || start === MENU_START) && cleaned[after] === "\n";
+    cleaned = cleaned.slice(0, first - (removeBefore ? 1 : 0)) + cleaned.slice(after + (removeAfter ? 1 : 0));
   }
 }
 
@@ -752,7 +757,7 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   if ((match = /^Unable to search @([A-Za-z0-9._-]{1,120})$/.exec(value))) return `Не удалось выполнить поиск @${match[1]}`;
   if ((match = /^(Section|Tool) ([1-9][0-9]*)$/.exec(value))) return `${match[1] === "Section" ? "Раздел" : "Инструмент"} ${match[2]}`;
   if ((match = /^Secret for a new (.+) account$/.exec(value))) return `Секрет для нового аккаунта ${match[1]}`;
-  if ((match = /^Agents created by this (plugin|bundle) run in a dedicated (project|workspace) with its own permissions\. You can change the permissions in the \2 settings page\.$/.exec(value))) return `Агенты, созданные ${match[1]==="plugin"?"этим плагином":"этим набором"}, работают ${match[2]==="project"?"в отдельном проекте":"в отдельной рабочей области"} со своими разрешениями. Разрешения можно изменить в настройках ${match[2]==="project"?"проекта":"рабочей области"}.`;
+  if ((match = /^Agents created by this (plugin|bundle|automation) run in a dedicated (project|workspace) with its own permissions\. You can change the permissions in the \2 settings page\.$/.exec(value))) return `Агенты, созданные ${({plugin:"этим плагином",bundle:"этим набором",automation:"этой автоматизацией"})[match[1]]}, работают ${match[2]==="project"?"в отдельном проекте":"в отдельной рабочей области"} со своими разрешениями. Разрешения можно изменить в настройках ${match[2]==="project"?"проекта":"рабочей области"}.`;
   if ((match = /^When toggled on, (.+) collects usage data to help Google enhance performance and features\.$/.exec(value))) return `При включении ${match[1]} собирает данные об использовании, чтобы помочь Google улучшать производительность и функции.`;
   if ((match = /^Receive product updates, tips, and promotions from Google (.+) via email\.$/.exec(value))) return `Получать новости, советы и специальные предложения Google ${match[1]} по электронной почте.`;
   if ((match = /^Changes the base URL (on each extension page|for marketplace search results)\. You must restart (.+) to use the new marketplace after changing this value\.$/.exec(value))) return `Изменяет базовый адрес ${match[1]==="on each extension page"?"страниц расширений":"результатов поиска в каталоге"}. После изменения перезапустите ${match[2]}, чтобы использовать новый каталог.`;
@@ -784,11 +789,20 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   if ((match = /^(Load older messages|No more older messages), showing ([0-9]+) of ([0-9]+)$/.exec(value))) return `${match[1]==="Load older messages"?"Загрузить более ранние сообщения":"Более ранних сообщений нет"}; показано ${match[2]} из ${match[3]}`;
   if ((match = /^Scroll to: (.+) on page ([0-9]+)$/.exec(value))) return `Перейти к «${match[1]}» на странице ${match[2]}`;
   if ((match = /^Page ([0-9]+) failed to load$/.exec(value))) return `Не удалось загрузить страницу ${match[1]}`;
+  if ((match = /^(Unfold|Fold) lines ([0-9]+)-([0-9]+)$/.exec(value))) return `${match[1] === "Unfold" ? "Развернуть" : "Свернуть"} строки ${match[2]}–${match[3]}`;
+  if ((match = /^Label for ([^\r\n]{1,180})$/.exec(value))) return `Метка для ${match[1]}`;
+  if ((match = /^Sign in to ([^\r\n]{1,180}) on this computer$/.exec(value))) return `Войти в ${match[1]} на этом компьютере`;
+  if ((match = /^Sign in to ([^\r\n]{1,180}) in the cloud$/.exec(value))) return `Войти в ${match[1]} в облаке`;
+  if ((match = /^Account this MCP server uses: ([^\r\n]{1,180})$/.exec(value))) return `Аккаунт этого сервера MCP: ${match[1]}`;
+  if ((match = /^More for ([^\r\n]{1,180})$/.exec(value))) return `Дополнительные действия для ${match[1]}`;
+  if ((match = /^Low contrast ratio \(([0-9]+(?:\.[0-9]+)?):1\)\. Text may be hard to read\.$/.exec(value))) return `Низкая контрастность (${match[1]}:1). Текст может быть трудно читать.`;
+  if ((match = /^Trajectory not found \((displayed|not displayed)\)\.$/.exec(value))) return `Траектория не найдена (${match[1] === "displayed" ? "отображалась" : "не отображалась"}).`;
   if ((match = /^Open the (.+) plugin$/.exec(value))) return `Открыть плагин ${match[1]}`;
   if ((match = /^Creating workspace "(.+)"\.\.\.$/.exec(value))) return `Создание рабочей области «${match[1]}»…`;
   if ((match = /^Searched for "(.+)"$/.exec(value))) return `Поиск «${match[1]}»`;
   if ((match = /^For (.+), telemetry is force disabled\.$/.exec(value))) return `Для ${match[1]} телеметрия принудительно отключена.`;
   if ((match = /^Sign in to use (.+)!$/.exec(value))) return `Войдите, чтобы использовать ${match[1]}!`;
+  if ((match = /^Sign in to ([^\r\n]{1,180})$/.exec(value))) return `Войти в ${match[1]}`;
   if ((match = /^Manage (.+) app settings\.$/.exec(value))) return `Управление настройками приложения ${match[1]}.`;
   if ((match = /^Reset ([0-9]+) overrides?$/.exec(value))) return `Сбросить переопределения (${match[1]})`;
   if ((match = /^(Add new|Confirm add) (.+) item$/.exec(value))) return `${match[1]==="Add new"?"Добавить новый элемент":"Подтвердить добавление элемента"}: ${match[2]}`;
@@ -978,8 +992,35 @@ function makePreloadScript(dictionary) {
       if (translated && translated !== source) element.setAttribute(attribute, translated);
     }
   };
+  // Only the app-generated accessible labels on attachment controls are
+  // changed inside user messages. Message text, file names and custom alt
+  // text stay untouched.
+  const scanAttachmentLabels = (root) => {
+    if (!root || root.nodeType !== Node.ELEMENT_NODE || typeof root.querySelectorAll !== "function") return;
+    const candidates = [root, ...root.querySelectorAll("[data-testid='user-message-document-chip'], img[alt]")];
+    for (const element of candidates) {
+      if (!element || element.nodeType !== Node.ELEMENT_NODE) continue;
+      let parent = element, inUserMessage = false, forbidden = false;
+      while (parent) {
+        const classes = typeof parent.className === "string" ? parent.className : "";
+        if (classes.includes("user-message") || parent.matches("[data-testid='user-message']")) inUserMessage = true;
+        if (blockedTags.has(parent.tagName) || parent.getAttribute("translate") === "no" || parent.matches("[contenteditable='true']") || parent.matches("[data-ag-localization-skip]") || parent.matches("[data-testid*='assistant-message']") || ["assistant-message", "markdown", "prose", "terminal", "editor-container"].some(name => classes.includes(name))) forbidden = true;
+        parent = parent.parentElement;
+      }
+      if (!inUserMessage || forbidden) continue;
+      if (element.tagName === "BUTTON" && element.getAttribute("data-testid") === "user-message-document-chip") {
+        const source = element.getAttribute("aria-label");
+        if (source && /^Open [^\\r\\n]{1,200}$/.test(source)) element.setAttribute("aria-label", "Открыть " + source.slice(5));
+      } else if (element.tagName === "IMG" && element.parentElement?.tagName === "BUTTON") {
+        const source = element.getAttribute("alt"), tooltip = element.parentElement.getAttribute("data-tooltip-id") || "";
+        const media = /^User uploaded media ([0-9]+)$/.exec(source || ""), index = /-img-([0-9]+)$/.exec(tooltip);
+        if (media && index && Number(media[1]) === Number(index[1]) + 1) element.setAttribute("alt", "Медиафайл пользователя " + media[1]);
+      }
+    }
+  };
   const scan = (root) => {
     if (!root || !document.documentElement) return;
+    scanAttachmentLabels(root);
     const owner = root.ownerDocument || document;
     const walker = owner.createTreeWalker(root, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
@@ -1004,6 +1045,7 @@ function makePreloadScript(dictionary) {
   const pendingRoots = new Set();
   const schedule = (root) => {
     if (!root || root.isConnected === false) return;
+    scanAttachmentLabels(root);
     const isFormField = root.nodeType === Node.ELEMENT_NODE && /^(INPUT|TEXTAREA)$/.test(root.tagName);
     if (isBlocked(root, isFormField)) return;
     pendingRoots.add(root);
@@ -1026,7 +1068,7 @@ function makePreloadScript(dictionary) {
     }
   };
   const observe = () => {
-    new MutationObserver(handleMutations).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "placeholder", "aria-placeholder", "data-placeholder", "data-slot-in", "data-slot-out"] });
+    new MutationObserver(handleMutations).observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["title", "aria-label", "alt", "placeholder", "aria-placeholder", "data-placeholder", "data-slot-in", "data-slot-out"] });
     schedule(document.documentElement);
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observe, { once: true });
@@ -1229,6 +1271,17 @@ function selfTestPreloadDom(injected) {
         this.attributes[name] = value;
         emitMutation({ type: "attributes", target: this, attributeName: name });
       },
+      querySelectorAll(selector) {
+        if (selector !== "[data-testid='user-message-document-chip'], img[alt]") throw new Error("Unexpected fixture selector: " + selector);
+        const result = [];
+        const visit = child => {
+          if (child.nodeType !== Node.ELEMENT_NODE) return;
+          if (child.getAttribute("data-testid") === "user-message-document-chip" || (child.tagName === "IMG" && child.getAttribute("alt") !== null)) result.push(child);
+          for (const nested of child.children || []) visit(nested);
+        };
+        for (const child of this.children || []) visit(child);
+        return result;
+      },
       matches(selector) {
         if (!selector.startsWith("[")) return selector === this.tagName.toLowerCase();
         const match = /^\[([\w-]+)(?:(\*?=)'([^']*)')?\]$/.exec(selector);
@@ -1384,7 +1437,24 @@ function selfTestPreloadDom(injected) {
         element("button", {"data-testid":"model-selector-trigger"}, [model]), unrelatedSlots,
         element("div", {class:"cursor-edit group relative text-secondary-foreground pl-2"}, [element("button", {"data-testid":"thinking-collapsible-trigger"}, [thought])]), outside])};
   });
+  const attachmentName = text("Open C:\\Private\\report.txt");
+  const attachmentButton = element("button", {"data-testid":"user-message-document-chip", "aria-label":"Open C:\\Private\\report.txt"}, [attachmentName]);
+  const mediaImage = element("img", {alt:"User uploaded media 2"});
+  const customImage = element("img", {alt:"User uploaded media 3"});
+  const assistantImage = element("img", {alt:"User uploaded media 2"});
+  const skippedImage = element("img", {alt:"User uploaded media 2", translate:"no"});
+  const assistantTestIdImage = element("img", {alt:"User uploaded media 2"});
+  const genericMessageImage = element("img", {alt:"User uploaded media 2"});
+  const privateMessage = text("Open C:\\Private\\report.txt");
+  const attachmentFixture = element("div", {"data-message-id":"user-fixture",class:"user-message"}, [privateMessage, attachmentButton,
+    element("button", {"data-tooltip-id":"fixture-img-1"}, [mediaImage]),
+    element("button", {"data-tooltip-id":"fixture-img-1"}, [customImage]),
+    element("button", {"data-tooltip-id":"fixture-img-1"}, [skippedImage]),
+    element("div", {"data-testid":"assistant-message"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [assistantTestIdImage])]),
+    element("div", {class:"assistant-message"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [assistantImage])])]);
   const root = element("html", {}, [element("body", {}, [
+    attachmentFixture,
+    element("div", {"data-message-id":"unknown"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [genericMessageImage])]),
     ...statusCopyNodes.map(item => item.container),
     ...activityCopyNodes.map(item => item.container),
     element("div", {}, [uiLabel, uiCount, quotaRefresh, ...spacedBrandLabels, spacedUiLabel, ...activityLabels.map(label => label.node), description, ...catalogueCards.map(card => card.node), unknownDescription, splitPlan[0], element("code", {}, [splitPlan[1]]), splitPlan[2], ...preservedModels, ...preservedNames]),
@@ -1415,6 +1485,11 @@ function selfTestPreloadDom(injected) {
   };
   flush();
   const assert = (condition, message) => { if (!condition) fail("Preload DOM test: " + message); };
+  assert(attachmentButton.getAttribute("aria-label") === "Открыть C:\\Private\\report.txt", "generated attachment label was not translated");
+  assert(mediaImage.getAttribute("alt") === "Медиафайл пользователя 2", "generated media label was not translated");
+  assert(privateMessage.nodeValue === "Open C:\\Private\\report.txt" && attachmentName.nodeValue === "Open C:\\Private\\report.txt", "attachment translation changed user text or file name");
+  assert(customImage.getAttribute("alt") === "User uploaded media 3" && assistantImage.getAttribute("alt") === "User uploaded media 2", "attachment translation changed unrelated content");
+  assert(skippedImage.getAttribute("alt") === "User uploaded media 2" && assistantTestIdImage.getAttribute("alt") === "User uploaded media 2" && genericMessageImage.getAttribute("alt") === "User uploaded media 2", "attachment translation bypassed a protected or unidentified message");
   for (const item of statusCopyNodes) {
     for (const node of [item.header,item.group,item.compact,item.thinking,item.statusBar]) assert(node.nodeValue === item.expected, "activity status: " + item.source);
     assert(item.groupButton.getAttribute("aria-label") === item.expected, "activity status accessible name");
@@ -1704,11 +1779,13 @@ function selfTest() {
   }
   const menuFixture = "const menu = { items: [] };\nelectron_1.Menu.setApplicationMenu(menu);";
   const twicePatchedMenu = patchMenu(patchMenu(menuFixture));
+  if (twicePatchedMenu !== patchMenu(menuFixture)) fail("Menu patch changed on repeated application.");
   if ((twicePatchedMenu.match(/ANTIGRAVITY_RU_MENU_START/g) || []).length !== 1) {
     fail("Menu patch is not idempotent.");
   }
   const trayFixture = "function createTray(actions, onClick) {}\nfunction insertTrayMenuItem(position, options) {}";
   const twicePatchedTray = patchTray(patchTray(trayFixture));
+  if (twicePatchedTray !== patchTray(trayFixture)) fail("Tray patch changed on repeated application.");
   if ((twicePatchedTray.match(/ANTIGRAVITY_RU_TRAY_START/g) || []).length !== 2) {
     fail("Tray patch is not idempotent.");
   }
@@ -1728,7 +1805,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.0", "2.24.1", "2.25.0", "2.25.1", "2.26.1", "2.27.0"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.0", "2.24.1", "2.25.0", "2.25.1", "2.26.0", "2.26.1", "2.27.0", "2.28.1"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {
@@ -1760,10 +1837,16 @@ module.exports = { translateAuditedUiCopy };
 if (require.main === module) try {
   if (process.argv.includes("--self-test")) selfTest();
   else if (process.argv.includes("--dependency-check") || process.argv.includes("--npx-self-test")) dependencyCheck();
-  else if (process.argv.includes("--verify")) verifyInstallation();
-  else if (process.argv.includes("--inspect")) inspect();
-  else if (process.argv.includes("--restore")) restore();
-  else install();
+  else {
+    const operation = process.argv.includes("--verify") ? "verify" : process.argv.includes("--inspect") ? "inspect" : process.argv.includes("--restore") ? "restore" : "install";
+    const handled = require("./compat/bettergravity.js").handle({ resources: resolveResources(), operation, scriptDirectory: SCRIPT_DIR, manifestPath: resolveManifestPath() });
+    if (!handled) {
+      if (operation === "verify") verifyInstallation();
+      else if (operation === "inspect") inspect();
+      else if (operation === "restore") restore();
+      else install();
+    }
+  }
 } catch (error) {
   console.error(`Localization was not installed: ${error.message}`);
   process.exitCode = 1;

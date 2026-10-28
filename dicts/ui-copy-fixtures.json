@@ -1,6 +1,6 @@
 {
-  "appVersion": "2.26.0",
-  "sourceBundleSha256": "94abc09ac34dcae3a98f5e0fb74b66c87f8a8ad6ad214136544f924da2099e5e",
+  "appVersion": "2.28.0",
+  "sourceBundleSha256": "4d2d2f3ab5aaaeda254ec4b773593fc5db683f0b5ddf81225c65a5f60e644038",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
     {
@@ -2324,6 +2324,386 @@
     {
       "source": "Inherit Editor",
       "expected": "Использовать настройки редактора"
+    },
+    {
+      "source": "Owner",
+      "expected": "Владелец"
+    },
+    {
+      "source": "Remote Control link",
+      "expected": "Ссылка Remote Control"
+    },
+    {
+      "source": "Voice Mode",
+      "expected": "Голосовой режим"
+    },
+    {
+      "source": "Voice engine",
+      "expected": "Голосовой движок"
+    },
+    {
+      "source": "Voice engine address",
+      "expected": "Адрес голосового движка"
+    },
+    {
+      "source": "Chime volume",
+      "expected": "Громкость уведомлений"
+    },
+    {
+      "source": "Sound",
+      "expected": "Звук"
+    },
+    {
+      "source": "Press keys...",
+      "expected": "Нажмите клавиши..."
+    },
+    {
+      "source": "Stop Editing",
+      "expected": "Завершить редактирование"
+    },
+    {
+      "source": "Reset to Default",
+      "expected": "Восстановить по умолчанию"
+    },
+    {
+      "source": "Search shortcuts...",
+      "expected": "Поиск сочетаний клавиш..."
+    },
+    {
+      "source": "Previous voice",
+      "expected": "Предыдущий голос"
+    },
+    {
+      "source": "Next voice",
+      "expected": "Следующий голос"
+    },
+    {
+      "source": "Voices",
+      "expected": "Голоса"
+    },
+    {
+      "source": "System default",
+      "expected": "По умолчанию в системе"
+    },
+    {
+      "source": "Voice",
+      "expected": "Голос"
+    },
+    {
+      "source": "Not set",
+      "expected": "Не задано"
+    },
+    {
+      "source": "Microphone",
+      "expected": "Микрофон"
+    },
+    {
+      "source": "Voice volume",
+      "expected": "Громкость голоса"
+    },
+    {
+      "source": "Untitled project",
+      "expected": "Проект без названия"
+    },
+    {
+      "source": "Permission Details",
+      "expected": "Сведения о разрешениях"
+    },
+    {
+      "source": "Built-in Browser",
+      "expected": "Встроенный браузер"
+    },
+    {
+      "source": "Browser Subagent",
+      "expected": "Браузерный субагент"
+    },
+    {
+      "source": "Failed to load resources",
+      "expected": "Не удалось загрузить ресурсы"
+    },
+    {
+      "source": "Filter resources...",
+      "expected": "Фильтр ресурсов..."
+    },
+    {
+      "source": "Upload Files",
+      "expected": "Загрузить файлы"
+    },
+    {
+      "source": "Resources",
+      "expected": "Ресурсы"
+    },
+    {
+      "source": "Markdown view mode",
+      "expected": "Режим просмотра Markdown"
+    },
+    {
+      "source": "Sign in needed",
+      "expected": "Требуется вход"
+    },
+    {
+      "source": "The skill is now available",
+      "expected": "Навык теперь доступен"
+    },
+    {
+      "source": "Connections",
+      "expected": "Подключения"
+    },
+    {
+      "source": "Signed in",
+      "expected": "Вход выполнен"
+    },
+    {
+      "source": "Not connected",
+      "expected": "Не подключено"
+    },
+    {
+      "source": "Background Commands",
+      "expected": "Фоновые команды"
+    },
+    {
+      "source": "Kill Terminal",
+      "expected": "Завершить терминал"
+    },
+    {
+      "source": "Live chat in progress",
+      "expected": "Идёт живой чат"
+    },
+    {
+      "source": "Drop to attach",
+      "expected": "Перетащите сюда для вложения"
+    },
+    {
+      "source": "Message this chat",
+      "expected": "Написать в этот чат"
+    },
+    {
+      "source": "Write a message",
+      "expected": "Напишите сообщение"
+    },
+    {
+      "source": "End Live chat",
+      "expected": "Завершить живой чат"
+    },
+    {
+      "source": "Copied version details",
+      "expected": "Сведения о версии скопированы"
+    },
+    {
+      "source": "Show or Hide Extensions",
+      "expected": "Показать или скрыть расширения"
+    },
+    {
+      "source": "Show in Sidebar",
+      "expected": "Показать на боковой панели"
+    },
+    {
+      "source": "Failed to update remote control setting:",
+      "expected": "Не удалось обновить настройку Remote Control:"
+    },
+    {
+      "source": "Console Telemetry",
+      "expected": "Телеметрия в консоли"
+    },
+    {
+      "source": "Print telemetry to the console",
+      "expected": "Выводить телеметрию в консоль"
+    },
+    {
+      "source": "Reset overrides",
+      "expected": "Сбросить переопределения"
+    },
+    {
+      "source": "This client was started with no custom flags.",
+      "expected": "Клиент запущен без пользовательских флагов."
+    },
+    {
+      "source": "No custom flag matches your search.",
+      "expected": "Пользовательские флаги по вашему запросу не найдены."
+    },
+    {
+      "source": "Custom…",
+      "expected": "Другой…"
+    },
+    {
+      "source": "Type any voice server address.",
+      "expected": "Введите адрес голосового сервера."
+    },
+    {
+      "source": "Failed to compress diagnostics logs for feedback:",
+      "expected": "Не удалось сжать диагностические журналы для обратной связи:"
+    },
+    {
+      "source": "Set the volume of agent sounds.",
+      "expected": "Настройте громкость звуков агента."
+    },
+    {
+      "source": "Search shortcuts",
+      "expected": "Поиск сочетаний клавиш"
+    },
+    {
+      "source": "Reset All to Defaults",
+      "expected": "Восстановить все значения по умолчанию"
+    },
+    {
+      "source": "Reset all shortcuts to defaults",
+      "expected": "Восстановить все сочетания клавиш по умолчанию"
+    },
+    {
+      "source": "No keyboard shortcuts found matching your filter.",
+      "expected": "Сочетания клавиш по вашему запросу не найдены."
+    },
+    {
+      "source": "The voice Jetski speaks with.",
+      "expected": "Голос, которым говорит Jetski."
+    },
+    {
+      "source": "Input device for voice mode.",
+      "expected": "Устройство ввода для голосового режима."
+    },
+    {
+      "source": "How loud Jetski's voice is.",
+      "expected": "Громкость голоса Jetski."
+    },
+    {
+      "source": "Enter target...",
+      "expected": "Введите адрес..."
+    },
+    {
+      "source": "Modify permissions for file and terminal tools.",
+      "expected": "Изменить разрешения для файловых инструментов и терминала."
+    },
+    {
+      "source": "Inherit Global",
+      "expected": "Использовать общие настройки"
+    },
+    {
+      "source": "Terminal sandbox is not supported in this environment",
+      "expected": "Песочница терминала не поддерживается в этой среде"
+    },
+    {
+      "source": "Side Panel Preview",
+      "expected": "Предпросмотр боковой панели"
+    },
+    {
+      "source": "The browser subagent has been disabled by your administrator. Contact your administrator to enable browser use.",
+      "expected": "Администратор отключил браузерного субагента. Обратитесь к администратору, чтобы включить браузер."
+    },
+    {
+      "source": "For help, visit",
+      "expected": "Для получения помощи посетите"
+    },
+    {
+      "source": "Stored and mounted in your cloud environment",
+      "expected": "Хранятся и подключаются в облачной среде"
+    },
+    {
+      "source": "Connected Google Drive and GitHub resources",
+      "expected": "Подключённые ресурсы Google Диска и GitHub"
+    },
+    {
+      "source": "Manage and delete your data anytime",
+      "expected": "Управляйте данными и удаляйте их в любое время"
+    },
+    {
+      "source": "Files and resources in cloud workspaces",
+      "expected": "Файлы и ресурсы в облачных рабочих пространствах"
+    },
+    {
+      "source": "Folder doesn't exist",
+      "expected": "Папка не существует"
+    },
+    {
+      "source": "Cannot parse folder URI.",
+      "expected": "Не удалось разобрать адрес папки."
+    },
+    {
+      "source": "Failed to resolve folder",
+      "expected": "Не удалось найти папку"
+    },
+    {
+      "source": "No plugin loads from this folder.",
+      "expected": "Из этой папки не загружается ни один плагин."
+    },
+    {
+      "source": "Couldn't load the suggested plugin.",
+      "expected": "Не удалось загрузить предложенный плагин."
+    },
+    {
+      "source": "Sign in to finish setting up this plugin.",
+      "expected": "Войдите, чтобы завершить настройку плагина."
+    },
+    {
+      "source": "Its customizations are now available",
+      "expected": "Его настройки теперь доступны"
+    },
+    {
+      "source": "Resume it to open a new terminal. Anything that was running in this one has stopped.",
+      "expected": "Возобновите работу, чтобы открыть новый терминал. Все процессы, выполнявшиеся в прежнем терминале, остановлены."
+    },
+    {
+      "source": "Search tabs, files, extensions, subagents, artifacts, commands...",
+      "expected": "Поиск вкладок, файлов, расширений, субагентов, артефактов и команд..."
+    },
+    {
+      "source": "Search tabs, files, extensions, artifacts, commands...",
+      "expected": "Поиск вкладок, файлов, расширений, артефактов и команд..."
+    },
+    {
+      "source": "projectManagementService is not available",
+      "expected": "Сервис управления проектами недоступен"
+    },
+    {
+      "source": "script source must not be empty",
+      "expected": "Текст сценария не может быть пустым"
+    },
+    {
+      "source": "Failed to resolve context URI",
+      "expected": "Не удалось определить адрес контекста"
+    },
+    {
+      "source": "Logs each telemetry event to the browser's DevTools console as it fires, with the click or key that caused it. Stays on across reloads until you turn it off.",
+      "expected": "Записывает события телеметрии в консоль инструментов разработчика браузера вместе с вызвавшим их нажатием. Настройка сохраняется после перезагрузки, пока вы её не выключите."
+    },
+    {
+      "source": "Default (Mendel)",
+      "expected": "По умолчанию (Mendel)"
+    },
+    {
+      "source": "Whatever the voice-engine-addr flag serves you.",
+      "expected": "Используется адрес, указанный во флаге voice-engine-addr."
+    },
+    {
+      "source": "Talker + Narrator (relay)",
+      "expected": "Talker + Narrator (через посредника)"
+    },
+    {
+      "source": "A fast Talker acks; Jetski answers; a Narrator reads it out.",
+      "expected": "Talker быстро подтверждает запрос, Jetski отвечает, а Narrator зачитывает ответ."
+    },
+    {
+      "source": "One live model talks and hands real lookups to Jetski.",
+      "expected": "Модель ведёт разговор и передаёт поиск данных Jetski."
+    },
+    {
+      "source": "e.g., https://example.com",
+      "expected": "например, https://example.com"
+    },
+    {
+      "source": "Uploaded project files and in-chat attachments are stored on Google servers and mounted into your cloud sandbox so your agent can read and work with them.",
+      "expected": "Загруженные файлы проекта и вложения из чата хранятся на серверах Google и подключаются к облачной песочнице, чтобы агент мог с ними работать."
+    },
+    {
+      "source": "Files, folders, and repositories you connect are accessible to your agent in this project, including during background or scheduled runs.",
+      "expected": "Подключённые файлы, папки и репозитории доступны агенту в этом проекте, в том числе при фоновых и запланированных запусках."
+    },
+    {
+      "source": "Work in Google3. Create conversations in new and existing workspaces.",
+      "expected": "Работайте в Google3. Создавайте диалоги в новых и существующих рабочих пространствах."
+    },
+    {
+      "source": "e.g. work",
+      "expected": "например, работа"
     }
   ],
   "exclusions": [
@@ -2718,6 +3098,78 @@
     {
       "source": "A color string given in the format 'rgb' or 'rrggbb' (no #). This option determines the color of errors rendered by the -t option.",
       "reason": "Third-party command-line parser option metadata; not application DOM copy."
+    },
+    {
+      "source": "Ignoring terminal content: terminal tabs are derived",
+      "reason": "Console warning for internal tab reducer."
+    },
+    {
+      "source": "Cannot store content under the reserved new-tab id",
+      "reason": "Console warning for internal tab identifier."
+    },
+    {
+      "source": "Cannot transform the reserved new-tab id",
+      "reason": "Console warning for internal tab identifier."
+    },
+    {
+      "source": "ToggleGroupItem",
+      "reason": "React component displayName."
+    },
+    {
+      "source": "ToggleGroupRoot",
+      "reason": "React component displayName."
+    },
+    {
+      "source": "a2a (ttv2)",
+      "reason": "Named voice engine protocol identifier."
+    },
+    {
+      "source": "ButtonLink",
+      "reason": "React component displayName."
+    },
+    {
+      "source": "Alt",
+      "reason": "Keyboard modifier name; preserve shortcut semantics."
+    },
+    {
+      "source": "Piper",
+      "reason": "Named workspace backend."
+    },
+    {
+      "source": "Fig",
+      "reason": "Named workspace backend."
+    },
+    {
+      "source": "FastPick",
+      "reason": "React component displayName."
+    },
+    {
+      "source": "formatting",
+      "reason": "Internal date formatting context identifier."
+    },
+    {
+      "source": "ProjectNameStep",
+      "reason": "React component displayName."
+    },
+    {
+      "source": "ArrowLeft",
+      "reason": "Keyboard event identifier."
+    },
+    {
+      "source": "ArrowRight",
+      "reason": "Keyboard event identifier."
+    },
+    {
+      "source": "ArrowUp",
+      "reason": "Keyboard event identifier."
+    },
+    {
+      "source": "Alt+ArrowLeft Alt+ArrowRight Alt+ArrowUp Alt+ArrowDown",
+      "reason": "ARIA keyboard shortcut identifiers."
+    },
+    {
+      "source": "VmNotRunning",
+      "reason": "Internal error classification identifier."
     }
   ],
   "observedTemplates": [
@@ -2989,7 +3441,37 @@
     "Worked for ${QN(m.lastModifiedAtMs-m.createdAtMs)}",
     "Worked for ${mO(m.lastModifiedAtMs-m.createdAtMs)}",
     "Worktree from ${n.map(r=>Wl(r)).join(\", \")}",
-    "Worktree from ${n.map(r=>jm(r)).join(\", \")}"
+    "Worktree from ${n.map(r=>jm(r)).join(\", \")}",
+    "Unfold lines ${a+1}-${r.endLine}",
+    "Fold lines ${a+1}-${r.endLine}",
+    "Label for ${a}",
+    "Sign in to ${Q}",
+    "Account this MCP server uses: ${k.label}",
+    "Sign in to ${a} on this computer",
+    "Sign in to ${a} in the cloud",
+    "More for ${a}",
+    "Low contrast ratio (${D.toFixed(1)}:1). Text may be hard to read.",
+    "Trajectory not found (${q?\"displayed\":\"not displayed\"}).",
+    "Set up ${I}",
+    "Review permissions for ${I}",
+    "Agents created by this ${k} run in a dedicated ${d.lowercase} with its own permissions. You can change the permissions in the ${d.lowercase} settings page.",
+    "Restarted \"${z}\".",
+    "Failed to update \"${z}\"",
+    "Sort and filter conversations (${d.length} active)",
+    "Open ${g.title}",
+    "Install folder \"${d}\" is already in use",
+    "Make ${Ja.identity||Ja.alias} the default ${Ba.provider} account",
+    "Configure ${E}, values missing",
+    "Configure ${E}",
+    "More actions for ${E}",
+    "Auth code for ${E}",
+    "Install ${a}",
+    "Configure ${Ub.serverName}",
+    "Scroll to: ${b} on page ${c}",
+    "Page ${a} failed to load",
+    "Go to page ${k}",
+    "Open ${n}",
+    "User uploaded media ${b+1}"
   ],
   "templateScope": "2.26.0: 83 changed templates reviewed individually; 64 equivalent literal shapes, 16 specific UI templates, three static transport diagnostics. Native generated notification payload remains original."
 }

@@ -1,0 +1,29 @@
+"use strict";
+const path = require("node:path");
+const { app } = require("electron");
+
+const resources = path.join(__dirname, "..");
+const originalAsar = path.join(resources, "_app.asar");
+const originalPackage = require(path.join(originalAsar, "package.json"));
+const originalMain = path.join(originalAsar, originalPackage.main);
+
+// Restore the host's identity before anything derives a name-dependent
+// value: app.getName() feeds both the userData path and the deep-link
+// protocol, so a mismatch here silently orphans user data.
+app.setName(originalPackage.productName || originalPackage.name);
+app.setAppPath(originalAsar);
+
+global.BetterGravity = Object.freeze({
+  version: "3.0.0",
+  hostVersion: originalPackage.version,
+  runtimeDirectory: path.join(resources, ".bettergravity")
+});
+
+try {
+  require(path.join(global.BetterGravity.runtimeDirectory, "runtime", "main.cjs")).activate(global.BetterGravity);
+} catch (error) {
+  console.error("[BetterGravity] Runtime failed to start; continuing without it.", error);
+}
+
+require.main.filename = originalMain;
+require(originalMain);
