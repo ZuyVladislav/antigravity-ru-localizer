@@ -7,3 +7,4 @@
 *.npmrc text eol=lf
 *.sh text eol=lf
 *.command text eol=lf
+scripts/fixtures/bettergravity-bootstrap-3.0.0.txt text eol=lf

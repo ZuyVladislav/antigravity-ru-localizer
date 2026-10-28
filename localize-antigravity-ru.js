@@ -1839,7 +1839,7 @@ if (require.main === module) try {
   else if (process.argv.includes("--dependency-check") || process.argv.includes("--npx-self-test")) dependencyCheck();
   else {
     const operation = process.argv.includes("--verify") ? "verify" : process.argv.includes("--inspect") ? "inspect" : process.argv.includes("--restore") ? "restore" : "install";
-    const handled = require("./compat/bettergravity.js").handle({ resources: resolveResources(), operation, scriptDirectory: SCRIPT_DIR, manifestPath: resolveManifestPath() });
+    const handled = process.platform === "win32" && require("./compat/bettergravity.js").handle({ resources: resolveResources(), operation, scriptDirectory: SCRIPT_DIR, manifestPath: resolveManifestPath() });
     if (!handled) {
       if (operation === "verify") verifyInstallation();
       else if (operation === "inspect") inspect();
