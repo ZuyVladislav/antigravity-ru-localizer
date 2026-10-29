@@ -544,5 +544,9 @@
   [
     "Agents created by this automation run in a dedicated workspace with its own permissions. You can change the permissions in the workspace settings page.",
     "Агенты, созданные этой автоматизацией, работают в отдельной рабочей области со своими разрешениями. Разрешения можно изменить в настройках рабочей области."
+  ],
+  [
+    "Make Account 2 the default Google account",
+    "Использовать аккаунт Account 2 по умолчанию для Google"
   ]
 ]

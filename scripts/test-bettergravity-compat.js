@@ -21,7 +21,7 @@ function pack(dir, out, ...args) { const r = command([cli, "pack", dir, out, ...
 function fixture(name) {
   const local = path.join(work, name), resources = path.join(local, "Programs/antigravity/resources"), source = path.join(local, "source");
   fs.mkdirSync(path.join(source, "dist"), { recursive: true }); fs.mkdirSync(resources, { recursive: true });
-  fs.writeFileSync(path.join(source, "package.json"), JSON.stringify({ name: "antigravity", productName: "Antigravity", version: "2.28.0", main: "dist/main.js" }));
+  fs.writeFileSync(path.join(source, "package.json"), JSON.stringify({ name: "antigravity", productName: "Antigravity", version: "2.28.1", main: "dist/main.js" }));
   fs.writeFileSync(path.join(source, "dist/main.js"), "'use strict';\n");
   fs.writeFileSync(path.join(source, "dist/preload.js"), "'use strict';\n");
   fs.writeFileSync(path.join(source, "dist/menu.js"), "const menu = { items: [] };\nelectron_1.Menu.setApplicationMenu(menu);\n");
@@ -37,8 +37,8 @@ function bootstrap(f, hostAlreadyMoved = false, extra = {}) {
   if (!hostAlreadyMoved) { asar.uncacheAll(); fs.copyFileSync(f.archive, path.join(f.resources, "_app.asar")); }
   const source = path.join(f.local, "bootstrap"); fs.mkdirSync(source, { recursive: true });
   fs.copyFileSync(path.join(__dirname, "fixtures/bettergravity-bootstrap-3.0.0.txt"), path.join(source, "index.js"));
-  fs.writeFileSync(path.join(source, "package.json"), JSON.stringify({ name: "antigravity", productName: "Antigravity", version: "2.28.0", private: true, main: "index.js" }, null, 2));
-  fs.writeFileSync(path.join(source, ".bettergravity.json"), JSON.stringify({ schemaVersion: 1, betterGravityVersion: "3.0.0", antigravityVersion: "2.28.0", originalAsarSha256: sha(path.join(f.resources, "_app.asar")), installedAt: "fixture", ...extra }, null, 2));
+  fs.writeFileSync(path.join(source, "package.json"), JSON.stringify({ name: "antigravity", productName: "Antigravity", version: "2.28.1", private: true, main: "index.js" }, null, 2));
+  fs.writeFileSync(path.join(source, ".bettergravity.json"), JSON.stringify({ schemaVersion: 1, betterGravityVersion: "3.0.0", antigravityVersion: "2.28.1", originalAsarSha256: sha(path.join(f.resources, "_app.asar")), installedAt: "fixture", ...extra }, null, 2));
   pack(source, f.archive);
   // @electron/asar 4 clears stale sidecars; the upstream 3.4 installer preserves
   // the canonical unpacked directory when writing its bootstrap.

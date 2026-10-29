@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.28.0";
+const SUPPORTED_APP_VERSION = "2.28.1";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -1805,7 +1805,7 @@ function selfTest() {
     if (assertSupportedAppVersion(versionFixture) !== SUPPORTED_APP_VERSION) {
       fail("Supported Antigravity version detection is invalid.");
     }
-    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.0", "2.24.1", "2.25.0", "2.25.1", "2.26.0", "2.26.1", "2.27.0", "2.28.1"]) {
+    for (const unsupportedVersion of ["0.0.0", "2.19.1", "2.20.0", "2.21.0", "2.21.1", "2.21.2", "2.22.0", "2.22.1", "2.23.0", "2.23.1", "2.23.2", "2.24.0", "2.24.1", "2.25.0", "2.25.1", "2.26.0", "2.26.1", "2.27.0", "2.28.0"]) {
       fs.writeFileSync(path.join(versionFixture, "package.json"), JSON.stringify({ version: unsupportedVersion }), "utf8");
       let rejected = false;
       try {

@@ -1,6 +1,6 @@
 {
-  "appVersion": "2.28.0",
-  "sourceBundleSha256": "4d2d2f3ab5aaaeda254ec4b773593fc5db683f0b5ddf81225c65a5f60e644038",
+  "appVersion": "2.28.1",
+  "sourceBundleSha256": "ed358594a9adcd0b129eb5b0c202cb3bfff67fe4523c62b26eb204b94461cf82",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
     {
@@ -2704,6 +2704,14 @@
     {
       "source": "e.g. work",
       "expected": "например, работа"
+    },
+    {
+      "source": "Website",
+      "expected": "Веб-сайт"
+    },
+    {
+      "source": "Repository",
+      "expected": "Репозиторий"
     }
   ],
   "exclusions": [
@@ -3471,7 +3479,8 @@
     "Page ${a} failed to load",
     "Go to page ${k}",
     "Open ${n}",
-    "User uploaded media ${b+1}"
+    "User uploaded media ${b+1}",
+    "Make ${Ja.identity||Ja.alias} the default ${Fa.provider} account"
   ],
   "templateScope": "2.26.0: 83 changed templates reviewed individually; 64 equivalent literal shapes, 16 specific UI templates, three static transport diagnostics. Native generated notification payload remains original."
 }

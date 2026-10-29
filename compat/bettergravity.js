@@ -42,17 +42,17 @@ function readBootstrap(resources) {
   try { bytes = asar.extractFile(archive, ".bettergravity.json"); }
   catch { return null; }
   const marker = JSON.parse(bytes.toString("utf8"));
-  check(marker.schemaVersion === 1 && marker.betterGravityVersion === "3.0.0" && marker.antigravityVersion === "2.28.0", "Unsupported BetterGravity marker; preserve both bundles");
+  check(marker.schemaVersion === 1 && marker.betterGravityVersion === "3.0.0" && marker.antigravityVersion === "2.28.1", "Unsupported BetterGravity marker; preserve both bundles");
   const entries = asar.listPackage(archive).map(x => x.replace(/\\/g, "/").replace(/^\//, "")).sort();
   check(JSON.stringify(entries) === JSON.stringify([".bettergravity.json", "index.js", "package.json"]), "Unexpected BetterGravity bootstrap contents");
   const pkg = JSON.parse(asar.extractFile(archive, "package.json"));
   const index = asar.extractFile(archive, "index.js");
-  check(pkg.name === "antigravity" && pkg.productName === "Antigravity" && pkg.version === "2.28.0" && pkg.main === "index.js", "Bootstrap identity mismatch");
+  check(pkg.name === "antigravity" && pkg.productName === "Antigravity" && pkg.version === "2.28.1" && pkg.main === "index.js", "Bootstrap identity mismatch");
   check(hash(index) === "cc8edd756e5b2a37a2b7cdc5b679c7c507231315ffb85e0694b15923a14febb6", "Unrecognized BetterGravity 3.0.0 bootstrap entry point");
   const host = path.join(resources, "_app.asar");
   regular(host);
   const hostPkg = JSON.parse(asar.extractFile(host, "package.json"));
-  check(hostPkg.name === "antigravity" && hostPkg.productName === "Antigravity" && hostPkg.version === "2.28.0" && hostPkg.main === "dist/main.js", "Original host identity mismatch");
+  check(hostPkg.name === "antigravity" && hostPkg.productName === "Antigravity" && hostPkg.version === "2.28.1" && hostPkg.main === "dist/main.js", "Original host identity mismatch");
   for (const name of ["main.cjs", "preload.cjs", "repair.cjs", "overlay.html"]) regular(path.join(resources, ".bettergravity", "runtime", name));
   return { archive, host, marker, pkg, index };
 }
@@ -92,7 +92,7 @@ function handle({ resources, operation, scriptDirectory, manifestPath }) {
   check(bootstrap.marker.originalAsarSha256 === targetSha, "BetterGravity marker does not match its original bundle");
   if (!state) check(!fs.existsSync(bootBackup), "Preserving an existing bootstrap backup without compatibility state");
   if (operation === "inspect") {
-    console.log(JSON.stringify({ resources, betterGravity: "3.0.0", appVersion: "2.28.0", appAsar: bootstrap.archive, appAsarSha256: bootSha, hostAsar: bootstrap.host, hostAsarSha256: targetSha, backupExists: fs.existsSync(backup), compatibilityState: state?.status || "not-installed" }, null, 2));
+    console.log(JSON.stringify({ resources, betterGravity: "3.0.0", appVersion: "2.28.1", appAsar: bootstrap.archive, appAsarSha256: bootSha, hostAsar: bootstrap.host, hostAsarSha256: targetSha, backupExists: fs.existsSync(backup), compatibilityState: state?.status || "not-installed" }, null, 2));
     return true;
   }
   if (operation === "verify") check(state?.status === "localized", "BetterGravity localization has no completed compatibility transaction");
@@ -135,7 +135,7 @@ function handle({ resources, operation, scriptDirectory, manifestPath }) {
       fs.copyFileSync(stageBackup, backup);
       fs.copyFileSync(stageHost, bootstrap.host);
       fs.writeFileSync(bootstrap.archive, desiredBootstrap);
-      state = { schemaVersion: 1, betterGravity: "3.0.0", appVersion: "2.28.0", status: operation === "restore" ? "restored" : "localized", originalSha256: originalSha, hostSha256: newHostSha, bootstrapSha256: sha(bootstrap.archive), bootstrapBackupSha256: sha(bootBackup), nativeDigest: hash(JSON.stringify(tree(native))), aliasCreated, updatedAt: new Date().toISOString() };
+      state = { schemaVersion: 1, betterGravity: "3.0.0", appVersion: "2.28.1", status: operation === "restore" ? "restored" : "localized", originalSha256: originalSha, hostSha256: newHostSha, bootstrapSha256: sha(bootstrap.archive), bootstrapBackupSha256: sha(bootBackup), nativeDigest: hash(JSON.stringify(tree(native))), aliasCreated, updatedAt: new Date().toISOString() };
       fs.writeFileSync(stateFile, JSON.stringify(state, null, 2) + "\n");
       check(sha(bootstrap.host) === newHostSha && sameTree(native, alias), "Compatibility commit verification failed");
       if (operation === "install") {

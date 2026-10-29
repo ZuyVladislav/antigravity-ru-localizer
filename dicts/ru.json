@@ -5008,5 +5008,7 @@
   "Uploaded project files and in-chat attachments are stored on Google servers and mounted into your cloud sandbox so your agent can read and work with them.": "Загруженные файлы проекта и вложения из чата хранятся на серверах Google и подключаются к облачной песочнице, чтобы агент мог с ними работать.",
   "Files, folders, and repositories you connect are accessible to your agent in this project, including during background or scheduled runs.": "Подключённые файлы, папки и репозитории доступны агенту в этом проекте, в том числе при фоновых и запланированных запусках.",
   "Work in Google3. Create conversations in new and existing workspaces.": "Работайте в Google3. Создавайте диалоги в новых и существующих рабочих пространствах.",
-  "e.g. work": "например, работа"
+  "e.g. work": "например, работа",
+  "Website": "Веб-сайт",
+  "Repository": "Репозиторий"
 }
