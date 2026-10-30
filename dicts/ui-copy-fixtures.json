@@ -1,5 +1,5 @@
 {
-  "appVersion": "2.28.1",
+  "appVersion": "2.28.2",
   "sourceBundleSha256": "ed358594a9adcd0b129eb5b0c202cb3bfff67fe4523c62b26eb204b94461cf82",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
