@@ -1,6 +1,6 @@
 {
-  "appVersion": "2.28.1",
-  "sourceBundleSha256": "ed358594a9adcd0b129eb5b0c202cb3bfff67fe4523c62b26eb204b94461cf82",
+  "appVersion": "2.29.0",
+  "sourceBundleSha256": "8d1196a22cd3eb9779e8faf5c31eb732d3df8d9d037b685733ed4e3d6cdfb5a2",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
     {
@@ -2712,6 +2712,622 @@
     {
       "source": "Repository",
       "expected": "Репозиторий"
+    },
+    {
+      "source": "Other conversation",
+      "expected": "Другой диалог"
+    },
+    {
+      "source": "No conversation",
+      "expected": "Нет диалога"
+    },
+    {
+      "source": "Requesting your permission:",
+      "expected": "Запрос разрешения:"
+    },
+    {
+      "source": "Group Chat",
+      "expected": "Групповой чат"
+    },
+    {
+      "source": "Members",
+      "expected": "Участники"
+    },
+    {
+      "source": "From",
+      "expected": "От"
+    },
+    {
+      "source": "Sent",
+      "expected": "Отправлено"
+    },
+    {
+      "source": "Grant repository access",
+      "expected": "Предоставить доступ к репозиторию"
+    },
+    {
+      "source": "Author",
+      "expected": "Автор"
+    },
+    {
+      "source": "Chat",
+      "expected": "Чат"
+    },
+    {
+      "source": "Chat Width",
+      "expected": "Ширина чата"
+    },
+    {
+      "source": "Accessibility",
+      "expected": "Специальные возможности"
+    },
+    {
+      "source": "Chat Input",
+      "expected": "Поле ввода"
+    },
+    {
+      "source": "External Browser",
+      "expected": "Внешний браузер"
+    },
+    {
+      "source": "Project 4K interface without developer tooling.",
+      "expected": "Интерфейс Project 4K без инструментов разработчика."
+    },
+    {
+      "source": "The full developer experience.",
+      "expected": "Полный набор инструментов разработчика."
+    },
+    {
+      "source": "Enter to Send",
+      "expected": "Enter для отправки"
+    },
+    {
+      "source": "Send messages with the keyboard's Enter key instead of starting a new line.",
+      "expected": "Отправлять сообщения клавишей Enter вместо перехода на новую строку."
+    },
+    {
+      "source": "Auto",
+      "expected": "Автоматически"
+    },
+    {
+      "source": "The agent never asks for confirmation before executing terminal commands (except those in the Deny list). This provides the agent with the maximum ability to operate over long periods without intervention, but also has the highest risk of the agent executing an unsafe terminal command.",
+      "expected": "Агент не запрашивает подтверждение перед выполнением команд терминала, кроме запрещенных. Это дает ему максимальную автономность, но повышает риск выполнения небезопасной команды."
+    },
+    {
+      "source": "Terminal command automatically proceeds if the command runs inside the sandbox. Otherwise, it requests review.",
+      "expected": "Команда выполняется автоматически внутри песочницы. В остальных случаях требуется подтверждение."
+    },
+    {
+      "source": "The agent never asks for review. This maximizes the autonomy of the agent, but also has the highest risk of the agent operating over unsafe or injected artifact content.",
+      "expected": "Агент не запрашивает подтверждение. Это дает максимальную автономность, но повышает риск работы с небезопасным или внедренным содержимым."
+    },
+    {
+      "source": "Play a sound when your action is needed or the agent finishes.",
+      "expected": "Воспроизводить звук, когда требуется ваше действие или агент завершил работу."
+    },
+    {
+      "source": "Show system notifications when your action is needed or the agent finishes.",
+      "expected": "Показывать системные уведомления, когда требуется ваше действие или агент завершил работу."
+    },
+    {
+      "source": "Conversation Steps",
+      "expected": "Шаги диалога"
+    },
+    {
+      "source": "Choose how much detail is shown during a conversation.",
+      "expected": "Выберите подробность отображения шагов диалога."
+    },
+    {
+      "source": "Verbose",
+      "expected": "Подробно"
+    },
+    {
+      "source": "Screen Reader Mode",
+      "expected": "Режим экранного диктора"
+    },
+    {
+      "source": "Optimize the interface and terminal output for screen readers.",
+      "expected": "Оптимизировать интерфейс и терминал для экранных дикторов."
+    },
+    {
+      "source": "Fill",
+      "expected": "Заполнить"
+    },
+    {
+      "source": "Terminal Placement",
+      "expected": "Расположение терминала"
+    },
+    {
+      "source": "Choose where terminal sessions appear.",
+      "expected": "Выберите, где показывать сеансы терминала."
+    },
+    {
+      "source": "Bottom Panel",
+      "expected": "Нижняя панель"
+    },
+    {
+      "source": "Side Panel",
+      "expected": "Боковая панель"
+    },
+    {
+      "source": "Context and Quota Indicator",
+      "expected": "Индикатор контекста и квоты"
+    },
+    {
+      "source": "Show how full the context window is next to the send button. Click it for a breakdown and to see your model quota.",
+      "expected": "Показывать заполненность контекстного окна рядом с кнопкой отправки. Нажмите, чтобы увидеть подробности и квоту модели."
+    },
+    {
+      "source": "Choose where links open by default when clicked.",
+      "expected": "Выберите, где открывать ссылки по умолчанию."
+    },
+    {
+      "source": "VCS used when creating a new workspace, including workspaces generated based off your initial prompt.",
+      "expected": "Система контроля версий для новых рабочих пространств, включая созданные по вашему запросу."
+    },
+    {
+      "source": "e.g., chromium/src",
+      "expected": "Например, chromium/src"
+    },
+    {
+      "source": "e.g., main or refs/heads/main",
+      "expected": "Например, main или refs/heads/main"
+    },
+    {
+      "source": "Extension (Antigravity IDE)",
+      "expected": "Расширение (Antigravity IDE)"
+    },
+    {
+      "source": "Type a voice variant name, such as rev27.",
+      "expected": "Введите название варианта голоса, например rev27."
+    },
+    {
+      "source": "Sets the `workspaceUri` URL parameter and reloads, repointing the active workspace. Pick a folder from an existing project or enter a custom URI (e.g. file:///path/to/workspace).",
+      "expected": "Задает параметр URL workspaceUri и перезагружает активное рабочее пространство. Выберите папку проекта или введите свой URI, например file:///path/to/workspace."
+    },
+    {
+      "source": "Running (Dev only)",
+      "expected": "Выполняется (только для разработки)"
+    },
+    {
+      "source": "Background tasks and terminals agents left running, across all conversations.",
+      "expected": "Фоновые задачи и терминалы агентов во всех диалогах."
+    },
+    {
+      "source": "The voice used in Voice mode. Powered by Gemini Live.",
+      "expected": "Голос для голосового режима. Работает на Gemini Live."
+    },
+    {
+      "source": "Input device for voice mode and dictation.",
+      "expected": "Устройство ввода для голосового режима и диктовки."
+    },
+    {
+      "source": "Save audio recordings",
+      "expected": "Сохранять аудиозаписи"
+    },
+    {
+      "source": "Only stored on your machine.",
+      "expected": "Хранятся только на этом компьютере."
+    },
+    {
+      "source": "Recordings",
+      "expected": "Записи"
+    },
+    {
+      "source": "How loud Antigravity's voice is.",
+      "expected": "Громкость голоса Antigravity."
+    },
+    {
+      "source": "Cloud Permissions",
+      "expected": "Разрешения в облаке"
+    },
+    {
+      "source": "Controls permissions for remote conversations.",
+      "expected": "Управление разрешениями для удаленных диалогов."
+    },
+    {
+      "source": "Download Location",
+      "expected": "Папка загрузок"
+    },
+    {
+      "source": "Folder where files downloaded in the built-in browser are saved.",
+      "expected": "Папка для файлов, загруженных во встроенном браузере."
+    },
+    {
+      "source": "CitC workspace paths are world-readable and permanently snapshotted. Choose a local folder outside CitC.",
+      "expected": "Пути рабочих пространств CitC доступны всем пользователям для чтения, их снимки сохраняются навсегда. Выберите локальную папку вне CitC."
+    },
+    {
+      "source": "Change…",
+      "expected": "Изменить…"
+    },
+    {
+      "source": "Browsing History",
+      "expected": "История просмотров"
+    },
+    {
+      "source": "Clear visited URLs and autocomplete suggestions from side panel preview.",
+      "expected": "Очистить посещенные адреса и подсказки в предварительном просмотре боковой панели."
+    },
+    {
+      "source": "Clear visited URLs and autocomplete suggestions from the built-in browser.",
+      "expected": "Очистить посещенные адреса и подсказки во встроенном браузере."
+    },
+    {
+      "source": "Which workspace the New Conversation button and keyboard shortcut start you in.",
+      "expected": "Выберите рабочее пространство для кнопки и сочетания клавиш «Новый диалог»."
+    },
+    {
+      "source": "Copied transcript",
+      "expected": "Скопированная расшифровка"
+    },
+    {
+      "source": "Live transcript",
+      "expected": "Расшифровка в реальном времени"
+    },
+    {
+      "source": "Voice transcript",
+      "expected": "Расшифровка голоса"
+    },
+    {
+      "source": "This link wants to open an app on your device.",
+      "expected": "Ссылка пытается открыть приложение на вашем устройстве."
+    },
+    {
+      "source": "Scrollable table",
+      "expected": "Таблица с прокруткой"
+    },
+    {
+      "source": "Live",
+      "expected": "Прямой эфир"
+    },
+    {
+      "source": "Couldn't edit queued message",
+      "expected": "Не удалось изменить сообщение в очереди"
+    },
+    {
+      "source": "It was already sent or couldn't be removed from the queue.",
+      "expected": "Оно уже отправлено или его не удалось убрать из очереди."
+    },
+    {
+      "source": "The full developer experience with code and tooling.",
+      "expected": "Полная среда разработчика с кодом и инструментами."
+    },
+    {
+      "source": "General work",
+      "expected": "Общие задачи"
+    },
+    {
+      "source": "Research, writing, and everyday tasks, without code.",
+      "expected": "Исследования, тексты и повседневные задачи без кода."
+    },
+    {
+      "source": "Build new features",
+      "expected": "Создать новые функции"
+    },
+    {
+      "source": "Hand off a feature and come back to working code.",
+      "expected": "Поручите разработку функции и вернитесь к готовому коду."
+    },
+    {
+      "source": "Debug and fix",
+      "expected": "Найти и исправить ошибку"
+    },
+    {
+      "source": "Automatically reproduce bugs, trace causes, test fixes.",
+      "expected": "Воспроизведение ошибок, поиск причин и проверка исправлений."
+    },
+    {
+      "source": "Research anything",
+      "expected": "Исследовать любую тему"
+    },
+    {
+      "source": "Ask about your code or any topic, get clear answers.",
+      "expected": "Задавайте вопросы о коде или любой другой теме и получайте ответы."
+    },
+    {
+      "source": "Write and edit docs",
+      "expected": "Создавать и редактировать документы"
+    },
+    {
+      "source": "Draft documents, emails, and notes that sound like you.",
+      "expected": "Черновики документов, писем и заметок в вашем стиле."
+    },
+    {
+      "source": "Runs remotely",
+      "expected": "Выполняется удаленно"
+    },
+    {
+      "source": "Disabled. Open Details to finish setup or enable.",
+      "expected": "Отключено. Откройте подробности, чтобы завершить настройку или включить."
+    },
+    {
+      "source": "Featured",
+      "expected": "Рекомендуемое"
+    },
+    {
+      "source": "More Plugins",
+      "expected": "Другие плагины"
+    },
+    {
+      "source": "Explore other marketplace customizations",
+      "expected": "Другие расширения в каталоге"
+    },
+    {
+      "source": "Marketplace notice",
+      "expected": "Уведомление каталога"
+    },
+    {
+      "source": "Sort Workspaces",
+      "expected": "Сортировать рабочие пространства"
+    },
+    {
+      "source": "Sort Projects",
+      "expected": "Сортировать проекты"
+    },
+    {
+      "source": "This page is going away soon",
+      "expected": "Эта страница скоро исчезнет"
+    },
+    {
+      "source": "Search conversations with",
+      "expected": "Ищите диалоги с помощью"
+    },
+    {
+      "source": "Goals",
+      "expected": "Цели"
+    },
+    {
+      "source": "Links",
+      "expected": "Ссылки"
+    },
+    {
+      "source": "Chief of Staff Dashboard",
+      "expected": "Панель главного помощника"
+    },
+    {
+      "source": "Updating…",
+      "expected": "Обновление…"
+    },
+    {
+      "source": "Connect an account so the agent can run automations.",
+      "expected": "Подключите аккаунт, чтобы агент мог выполнять автоматизации."
+    },
+    {
+      "source": "Previous card",
+      "expected": "Предыдущая карточка"
+    },
+    {
+      "source": "Card",
+      "expected": "Карточка"
+    },
+    {
+      "source": "Next card",
+      "expected": "Следующая карточка"
+    },
+    {
+      "source": "Announcements and tips",
+      "expected": "Объявления и советы"
+    },
+    {
+      "source": "Started during",
+      "expected": "Началось во время"
+    },
+    {
+      "source": "Started from",
+      "expected": "Началось из"
+    },
+    {
+      "source": "Side Question",
+      "expected": "Дополнительный вопрос"
+    },
+    {
+      "source": "Cannot promote while side question is running",
+      "expected": "Нельзя перенести вопрос, пока он выполняется"
+    },
+    {
+      "source": "Stop side question",
+      "expected": "Остановить дополнительный вопрос"
+    },
+    {
+      "source": "Stop Side Question",
+      "expected": "Остановить дополнительный вопрос"
+    },
+    {
+      "source": "Promote to conversation",
+      "expected": "Перенести в диалог"
+    },
+    {
+      "source": "Search or enter a URL",
+      "expected": "Поиск или ввод адреса"
+    },
+    {
+      "source": "Search tabs, files and more",
+      "expected": "Поиск по вкладкам, файлам и другому"
+    },
+    {
+      "source": "End Voice mode",
+      "expected": "Завершить голосовой режим"
+    },
+    {
+      "source": "Voice mode in progress",
+      "expected": "Голосовой режим активен"
+    },
+    {
+      "source": "Every hour",
+      "expected": "Каждый час"
+    },
+    {
+      "source": "Every day",
+      "expected": "Каждый день"
+    },
+    {
+      "source": "Every weekday",
+      "expected": "По будням"
+    },
+    {
+      "source": "Every week",
+      "expected": "Каждую неделю"
+    },
+    {
+      "source": "hours",
+      "expected": "часов"
+    },
+    {
+      "source": "week",
+      "expected": "неделя"
+    },
+    {
+      "source": "month",
+      "expected": "месяц"
+    },
+    {
+      "source": "Days",
+      "expected": "Дни"
+    },
+    {
+      "source": "Reads",
+      "expected": "Чтения"
+    },
+    {
+      "source": "Change schedule",
+      "expected": "Изменить расписание"
+    },
+    {
+      "source": "Change model",
+      "expected": "Сменить модель"
+    },
+    {
+      "source": "Paused. Resume it to schedule the next run.",
+      "expected": "Приостановлено. Возобновите для запуска по расписанию."
+    },
+    {
+      "source": "What should the agent do on each run?",
+      "expected": "Что агент должен делать при каждом запуске?"
+    },
+    {
+      "source": "One or more, comma-separated",
+      "expected": "Один или несколько через запятую"
+    },
+    {
+      "source": "When",
+      "expected": "Когда"
+    },
+    {
+      "source": "Search filters…",
+      "expected": "Фильтры поиска…"
+    },
+    {
+      "source": "On a schedule",
+      "expected": "По расписанию"
+    },
+    {
+      "source": "When something happens",
+      "expected": "При наступлении события"
+    },
+    {
+      "source": "When it runs",
+      "expected": "Когда запустится"
+    },
+    {
+      "source": "Run Now",
+      "expected": "Запустить сейчас"
+    },
+    {
+      "source": "Untrusted sidecar",
+      "expected": "Недоверенный процесс"
+    },
+    {
+      "source": "Approximate; may start a few minutes later",
+      "expected": "Приблизительно; запуск может задержаться на несколько минут"
+    },
+    {
+      "source": "No runs yet",
+      "expected": "Запусков пока нет"
+    },
+    {
+      "source": "Where",
+      "expected": "Где"
+    },
+    {
+      "source": "Search triggers…",
+      "expected": "Поиск триггеров…"
+    },
+    {
+      "source": "Instructions",
+      "expected": "Инструкции"
+    },
+    {
+      "source": "What should the agent do on each run? For example: summarize new bugs assigned to me and anything that changed overnight.",
+      "expected": "Что агент должен делать при каждом запуске? Например, сводить новые ошибки и изменения за ночь."
+    },
+    {
+      "source": "Runs as",
+      "expected": "Запуск от имени"
+    },
+    {
+      "source": "What should it do?",
+      "expected": "Что нужно делать?"
+    },
+    {
+      "source": "For example: every morning, summarize new bugs assigned to me and anything that changed overnight.",
+      "expected": "Например, каждое утро составлять сводку ошибок команды."
+    },
+    {
+      "source": "For example: Morning bug summary",
+      "expected": "Например, утренняя сводка ошибок"
+    },
+    {
+      "source": "Where should it run?",
+      "expected": "Где запускать?"
+    },
+    {
+      "source": "Creates a local automation that runs on this computer",
+      "expected": "Создает локальную автоматизацию на этом компьютере"
+    },
+    {
+      "source": "Font",
+      "expected": "Шрифт"
+    },
+    {
+      "source": "Connect GitHub",
+      "expected": "Подключить GitHub"
+    },
+    {
+      "source": "Connect GitHub: Run gh auth login in a terminal",
+      "expected": "Подключить GitHub. Выполните gh auth login в терминале"
+    },
+    {
+      "source": "Token rejected",
+      "expected": "Токен отклонен"
+    },
+    {
+      "source": "Repository access required",
+      "expected": "Нужен доступ к репозиторию"
+    },
+    {
+      "source": "Amend staged changes into the current commit",
+      "expected": "Добавить подготовленные изменения к текущему коммиту"
+    },
+    {
+      "source": "Stage and amend all changes into the current commit",
+      "expected": "Подготовить все изменения и добавить их к текущему коммиту"
+    },
+    {
+      "source": "Committing...",
+      "expected": "Создание коммита..."
+    },
+    {
+      "source": "5h limit",
+      "expected": "Лимит на 5 часов"
+    },
+    {
+      "source": "Give Feedback",
+      "expected": "Оставить отзыв"
+    },
+    {
+      "source": "% left",
+      "expected": "% осталось"
     }
   ],
   "exclusions": [
@@ -3178,6 +3794,58 @@
     {
       "source": "VmNotRunning",
       "reason": "Internal error classification identifier."
+    },
+    {
+      "source": "protobuf",
+      "reason": "Ключ внутреннего соответствия языков синтаксиса"
+    },
+    {
+      "source": "Failed to open media in a new tab:",
+      "reason": "Техническое сообщение console.warn"
+    },
+    {
+      "source": "Ignoring sideQuestionView content: side-question tabs are derived",
+      "reason": "Техническое сообщение console.warn"
+    },
+    {
+      "source": "reference",
+      "reason": "Идентификатор библиотеки позиционирования"
+    },
+    {
+      "source": "VerticalScrollFade",
+      "reason": "Имя компонента"
+    },
+    {
+      "source": "Google Chat",
+      "reason": "Собственное название сервиса и метка резолвера"
+    },
+    {
+      "source": "Cog (GoB)",
+      "reason": "Название системы контроля версий"
+    },
+    {
+      "source": "rev27",
+      "reason": "Идентификатор варианта голоса, должен сохраняться"
+    },
+    {
+      "source": "invisible",
+      "reason": "Внутреннее значение состояния шага"
+    },
+    {
+      "source": "SidePanelContent",
+      "reason": "Имя компонента"
+    },
+    {
+      "source": "proto",
+      "reason": "Технический идентификатор языка"
+    },
+    {
+      "source": "latex",
+      "reason": "Технический идентификатор языка"
+    },
+    {
+      "source": "EntryNotFound",
+      "reason": "Внутренний код ошибки"
     }
   ],
   "observedTemplates": [
@@ -3480,7 +4148,27 @@
     "Go to page ${k}",
     "Open ${n}",
     "User uploaded media ${b+1}",
-    "Make ${Ja.identity||Ja.alias} the default ${Fa.provider} account"
+    "Make ${Ja.identity||Ja.alias} the default ${Fa.provider} account",
+    "Show ${c} earlier steps",
+    "Unknown message type: ${JSON.stringify(d)}",
+    "Unsupported model context block type: ${l.type}",
+    "Failed to create project: ${Ip(z)}",
+    "Project ${N} has ${Y.length} unparseable resource URI(s): ${Y.join(\", \")}",
+    "App view for ${f||\"tool\"}",
+    "Trajectory not found (${p?\"displayed\":\"not displayed\"}).",
+    "Worked for ${Pv(l.lastModifiedAtMs-l.createdAtMs)}",
+    "Sign in to ${R}",
+    "Configure ${Sa.serverName}",
+    "Low contrast ratio (${l.toFixed(1)}:1). Text may be hard to read.",
+    "Google Chat: ${g}",
+    "GitHub: ${a.message}",
+    "Committed to ${y}.",
+    "Push ${c} commit${c===1?\"\":\"s\"} to ${b}",
+    "Publish ${a.currentRef} to origin",
+    "Pushed ${z} commit${z===1?\"\":\"s\"} to ${y}.",
+    "Pushed to ${y}.",
+    "Published ${k.currentRef} to origin.",
+    "All changes since ${b}"
   ],
   "templateScope": "2.26.0: 83 changed templates reviewed individually; 64 equivalent literal shapes, 16 specific UI templates, three static transport diagnostics. Native generated notification payload remains original."
 }

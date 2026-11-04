@@ -548,5 +548,57 @@
   [
     "Make Account 2 the default Google account",
     "Использовать аккаунт Account 2 по умолчанию для Google"
+  ],
+  [
+    "Show 7 earlier steps",
+    "Показать предыдущие шаги (7)"
+  ],
+  [
+    "Failed to create project: offline",
+    "Не удалось создать проект: offline"
+  ],
+  [
+    "App view for tool",
+    "Панель приложения для tool"
+  ],
+  [
+    "Sign in to Google",
+    "Войти в Google"
+  ],
+  [
+    "Configure Server-1",
+    "Настроить Server-1"
+  ],
+  [
+    "Low contrast ratio (3.1:1). Text may be hard to read.",
+    "Низкая контрастность (3.1:1). Текст может быть трудно читать."
+  ],
+  [
+    "Committed to main.",
+    "Коммит создан в main."
+  ],
+  [
+    "Push 2 commits to origin/main",
+    "Отправить коммиты (2) в origin/main"
+  ],
+  [
+    "Publish feature/test to origin",
+    "Опубликовать feature/test в origin"
+  ],
+  [
+    "Pushed 2 commits to origin/main.",
+    "Отправлено коммитов: 2 в origin/main."
+  ],
+  [
+    "Pushed to origin/main.",
+    "Отправлено в origin/main."
+  ],
+  [
+    "Published feature/test to origin.",
+    "Опубликовано feature/test в origin."
+  ],
+  [
+    "All changes since main",
+    "Все изменения с main"
   ]
 ]

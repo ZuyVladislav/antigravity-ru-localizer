@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.28.1";
+const SUPPORTED_APP_VERSION = "2.29.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -458,6 +458,19 @@ function translateActivityTitle(value) {
 }
 
 function translateDynamicUiText(value) {
+  let match2290;
+  if ((match2290 = /^Show (\d{1,5}) earlier steps$/.exec(value))) return `Показать предыдущие шаги (${match2290[1]})`;
+  if ((match2290 = /^Failed to create project: ([^\r\n]{1,240})$/.exec(value))) return `Не удалось создать проект: ${match2290[1]}`;
+  if ((match2290 = /^Sign in to ([A-Za-z0-9_.-]{1,80})$/.exec(value))) return `Войти в ${match2290[1]}`;
+  if ((match2290 = /^Configure ([A-Za-z0-9_.-]{1,80})$/.exec(value))) return `Настроить ${match2290[1]}`;
+  if ((match2290 = /^Low contrast ratio \((\d{1,2}\.\d):1\)\. Text may be hard to read\.$/.exec(value))) return `Низкая контрастность (${match2290[1]}:1). Текст может быть трудно читать.`;
+  if ((match2290 = /^Committed to ([A-Za-z0-9_.\/-]{1,180})\.$/.exec(value))) return `Коммит создан в ${match2290[1]}.`;
+  if ((match2290 = /^Push (\d{1,5}) commits? to ([A-Za-z0-9_.\/-]{1,180})$/.exec(value))) return `Отправить коммиты (${match2290[1]}) в ${match2290[2]}`;
+  if ((match2290 = /^Publish ([A-Za-z0-9_.\/-]{1,180}) to origin$/.exec(value))) return `Опубликовать ${match2290[1]} в origin`;
+  if ((match2290 = /^Pushed (\d{1,5}) commits? to ([A-Za-z0-9_.\/-]{1,180})\.$/.exec(value))) return `Отправлено коммитов: ${match2290[1]} в ${match2290[2]}.`;
+  if ((match2290 = /^Pushed to ([A-Za-z0-9_.\/-]{1,180})\.$/.exec(value))) return `Отправлено в ${match2290[1]}.`;
+  if ((match2290 = /^Published ([A-Za-z0-9_.\/-]{1,180}) to origin\.$/.exec(value))) return `Опубликовано ${match2290[1]} в origin.`;
+  if ((match2290 = /^All changes since ([A-Za-z0-9_.\/-]{1,180})$/.exec(value))) return `Все изменения с ${match2290[1]}`;
   const modelShortcut = /^Select model with ((?:(?:Ctrl|Control|Alt|Option|Shift|Cmd|Command|Meta)[+]){1,4}[A-Za-z0-9])$/.exec(value);
   if (modelShortcut) return `Выберите модель сочетанием ${modelShortcut[1]}`;
   // Fixed model-access notice templates; preserve the model name as opaque text.
@@ -974,6 +987,12 @@ function makePreloadScript(dictionary) {
   const translateText = (node) => {
     if (!node || isBlocked(node)) return;
     const source = node.nodeValue;
+    const greeting = node.parentElement?.closest?.("[data-testid='home-greeting']");
+    if (greeting && !node.parentElement.closest("[data-message-id], [data-testid='planner-response-text'], [data-testid='user-message-bubble']")) {
+      const named = /^Hi ([^\\s,\\r\\n]{1,80}), what can we get done today\\?$/.exec(source.trim());
+      if (named) { node.nodeValue = "Привет, " + named[1] + ", что сделаем сегодня?"; return; }
+      if (source.trim() === "What can we get done today?") { node.nodeValue = "Что сделаем сегодня?"; return; }
+    }
     const translated = (isActivityTitleUi(node) && (translateActivityStatus(source.trim()) || translateActivityTitle(source.trim()))) || translationFor(source, isNotificationUi(node), isPlanHintUi(node));
     if (!translated || translated === source) return;
     const leading = (source.match(/^\\s*/) || [""])[0];
