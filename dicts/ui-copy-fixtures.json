@@ -1,5 +1,5 @@
 {
-  "appVersion": "2.29.0",
+  "appVersion": "2.31.0",
   "sourceBundleSha256": "8d1196a22cd3eb9779e8faf5c31eb732d3df8d9d037b685733ed4e3d6cdfb5a2",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
@@ -2079,11 +2079,11 @@
     },
     {
       "source": "Collapse queued messages",
-      "expected": "Свернуть сообщения в очереди"
+      "expected": "Свернуть очередь сообщений"
     },
     {
       "source": "Expand queued messages",
-      "expected": "Развернуть сообщения в очереди"
+      "expected": "Развернуть очередь сообщений"
     },
     {
       "source": "Message subagent, @ to mention",
@@ -3328,6 +3328,542 @@
     {
       "source": "% left",
       "expected": "% осталось"
+    },
+    {
+      "source": "Link Settings",
+      "expected": "Настройки ссылок"
+    },
+    {
+      "source": "Google Search",
+      "expected": "Поиск Google"
+    },
+    {
+      "source": "Your connection to this site is not secure",
+      "expected": "Соединение с этим сайтом не защищено"
+    },
+    {
+      "source": "You should not enter any sensitive information on this site (for example, passwords or credit cards), because it could be stolen by attackers.",
+      "expected": "Не вводите на этом сайте конфиденциальные сведения, например пароли или номера банковских карт: злоумышленники могут их похитить."
+    },
+    {
+      "source": "Not secure",
+      "expected": "Не защищено"
+    },
+    {
+      "source": "Your connection to this site is not fully secure",
+      "expected": "Соединение с этим сайтом защищено не полностью"
+    },
+    {
+      "source": "Attackers might be able to see the images you're looking at on this site and trick you by modifying them.",
+      "expected": "Злоумышленники могут видеть изображения, которые вы просматриваете на этом сайте, и подменять их, чтобы ввести вас в заблуждение."
+    },
+    {
+      "source": "Connection is secure",
+      "expected": "Соединение защищено"
+    },
+    {
+      "source": "Your information (for example, passwords or credit card numbers) is private when it is sent to this site.",
+      "expected": "При передаче на этот сайт ваши сведения, например пароли или номера банковских карт, защищены."
+    },
+    {
+      "source": "Address bar suggestions",
+      "expected": "Подсказки в адресной строке"
+    },
+    {
+      "source": "Chat Layout",
+      "expected": "Расположение диалога"
+    },
+    {
+      "source": "General Appearance Shortcuts Notifications Models Customizations Browser Developer Running",
+      "expected": "Общие Вид Горячие клавиши Уведомления Модели Кастомизация Браузер Разработчик Выполняется"
+    },
+    {
+      "source": "Failed to inspect license for this project",
+      "expected": "Не удалось проверить лицензию для этого проекта"
+    },
+    {
+      "source": "Your Antigravity use will be associated with provided project. Make sure you trust the project ID before proceeding. Account activity and data may be logged by your organization.",
+      "expected": "Использование Antigravity будет связано с указанным проектом. Прежде чем продолжить, убедитесь, что доверяете идентификатору проекта. Организация может сохранять действия и данные аккаунта."
+    },
+    {
+      "source": "Select Billing Model",
+      "expected": "Выберите модель оплаты"
+    },
+    {
+      "source": "Subscription",
+      "expected": "Подписка"
+    },
+    {
+      "source": "Use Antigravity through your Gemini subscription.",
+      "expected": "Используйте Antigravity по подписке Gemini."
+    },
+    {
+      "source": "Pay only for the tokens you use, billed through Gemini platform.",
+      "expected": "Платите только за использованные токены через платформу Gemini."
+    },
+    {
+      "source": "Verify that these licenses were provided by your administrator and that you trust the project ID before proceeding. Account activity and data may be logged by your organization.",
+      "expected": "Прежде чем продолжить, убедитесь, что лицензии предоставлены вашим администратором и вы доверяете идентификатору проекта. Организация может сохранять действия и данные аккаунта."
+    },
+    {
+      "source": "Auto-assignment not configured",
+      "expected": "Автоматическое назначение не настроено"
+    },
+    {
+      "source": "Remote Agents Data",
+      "expected": "Данные удаленных агентов"
+    },
+    {
+      "source": "Permanently delete your remote conversations, projects, scheduled tasks, connected plugins and settings. Data in the desktop app and your Google account are not affected.",
+      "expected": "Безвозвратно удалить удаленные диалоги, проекты, задания по расписанию, подключенные плагины и настройки. Данные приложения на компьютере и аккаунта Google не затрагиваются."
+    },
+    {
+      "source": "Your Plan",
+      "expected": "Ваш тариф"
+    },
+    {
+      "source": "Authenticated via Enterprise Gateway",
+      "expected": "Вход через корпоративный шлюз"
+    },
+    {
+      "source": "Google One Referral",
+      "expected": "Приглашения Google One"
+    },
+    {
+      "source": "Share your referral link with friends",
+      "expected": "Поделитесь пригласительной ссылкой с друзьями"
+    },
+    {
+      "source": "Invite a Friend",
+      "expected": "Пригласить друга"
+    },
+    {
+      "source": "Project Required",
+      "expected": "Требуется проект"
+    },
+    {
+      "source": "License Required",
+      "expected": "Требуется лицензия"
+    },
+    {
+      "source": "A Google Cloud project is required to use Antigravity.",
+      "expected": "Для использования Antigravity требуется проект Google Cloud."
+    },
+    {
+      "source": "A license or project selection is required to use Antigravity.",
+      "expected": "Для использования Antigravity требуется лицензия или выбор проекта."
+    },
+    {
+      "source": "Manage License",
+      "expected": "Управление лицензией"
+    },
+    {
+      "source": "Developer: Reset Onboarding",
+      "expected": "Разработчик: сбросить первоначальную настройку"
+    },
+    {
+      "source": "Developer: Reset NUX",
+      "expected": "Разработчик: сбросить подсказки для новых пользователей"
+    },
+    {
+      "source": "Side Questions",
+      "expected": "Дополнительные вопросы"
+    },
+    {
+      "source": "Hi there.",
+      "expected": "Привет."
+    },
+    {
+      "source": "Dismiss suggestion",
+      "expected": "Отклонить подсказку"
+    },
+    {
+      "source": "Send a message in the main conversation first to start a side question",
+      "expected": "Чтобы задать дополнительный вопрос, сначала отправьте сообщение в основном диалоге"
+    },
+    {
+      "source": "Keep Open",
+      "expected": "Оставить открытым"
+    },
+    {
+      "source": "Match when the principal belongs to the specified MDB group.",
+      "expected": "Совпадает, если субъект входит в указанную группу MDB."
+    },
+    {
+      "source": "Match when the principal equals any listed username or belongs to any listed mdb/ group.",
+      "expected": "Совпадает, если субъект соответствует одному из указанных пользователей или входит в одну из указанных групп mdb/."
+    },
+    {
+      "source": "Ignore events triggered by the automation owner to avoid self-trigger loops.",
+      "expected": "Игнорировать события владельца автоматизации, чтобы избежать циклических запусков."
+    },
+    {
+      "source": "Ignore events emitted by automated review or robot accounts (groupagent-*).",
+      "expected": "Игнорировать события автоматических проверок и аккаунтов роботов (groupagent-*)."
+    },
+    {
+      "source": "Match when any modified file path starts with the given depot prefix.",
+      "expected": "Совпадает, если путь любого измененного файла начинается с указанного префикса хранилища."
+    },
+    {
+      "source": "Match when push_def equals or is a child of the given PushDef prefix.",
+      "expected": "Совпадает, если push_def равен указанному префиксу PushDef или находится внутри него."
+    },
+    {
+      "source": "Match when the issue component equals or is under the given Buganizer component ID.",
+      "expected": "Совпадает, если компонент задачи соответствует указанному идентификатору компонента Buganizer или вложен в него."
+    },
+    {
+      "source": "Inserts:",
+      "expected": "Вставки:"
+    },
+    {
+      "source": "Optional boolean filter",
+      "expected": "Необязательный логический фильтр"
+    },
+    {
+      "source": "Available CEL field tokens and helpers",
+      "expected": "Доступные поля и вспомогательные функции CEL"
+    },
+    {
+      "source": "Helpers",
+      "expected": "Вспомогательные функции"
+    },
+    {
+      "source": "Indexed CEL helper functions",
+      "expected": "Индексированные вспомогательные функции CEL"
+    },
+    {
+      "source": "Toggles:",
+      "expected": "Переключатели:"
+    },
+    {
+      "source": "Available CEL helper functions",
+      "expected": "Доступные вспомогательные функции CEL"
+    },
+    {
+      "source": "Environments",
+      "expected": "Среды"
+    },
+    {
+      "source": "Cancel Sending Message",
+      "expected": "Отменить отправку сообщения"
+    },
+    {
+      "source": "Expand message",
+      "expected": "Развернуть сообщение"
+    },
+    {
+      "source": "When Turbo mode is on, the agent will automatically capture screenshots in the Browser without explicit user input. You can toggle this setting in Antigravity's settings.",
+      "expected": "В режиме Турбо агент автоматически делает снимки экрана браузера без отдельного запроса пользователя. Это можно изменить в настройках Antigravity."
+    },
+    {
+      "source": "Expand questionnaire",
+      "expected": "Развернуть опрос"
+    },
+    {
+      "source": "Collapse questionnaire",
+      "expected": "Свернуть опрос"
+    },
+    {
+      "source": "Expand Questionnaire",
+      "expected": "Развернуть опрос"
+    },
+    {
+      "source": "Collapse Questionnaire",
+      "expected": "Свернуть опрос"
+    },
+    {
+      "source": "Hide earlier steps",
+      "expected": "Скрыть предыдущие шаги"
+    },
+    {
+      "source": "Show 1 earlier step",
+      "expected": "Показать 1 предыдущий шаг"
+    },
+    {
+      "source": "Browser steps",
+      "expected": "Действия в браузере"
+    },
+    {
+      "source": "Needs your approval",
+      "expected": "Требуется ваше подтверждение"
+    },
+    {
+      "source": "Messaging",
+      "expected": "Отправка сообщения"
+    },
+    {
+      "source": "Messaged",
+      "expected": "Сообщение отправлено"
+    },
+    {
+      "source": "Browser Use",
+      "expected": "Работа с браузером"
+    },
+    {
+      "source": "Working directory:",
+      "expected": "Рабочая папка:"
+    },
+    {
+      "source": "Interrupted",
+      "expected": "Прервано"
+    },
+    {
+      "source": "Connection closed",
+      "expected": "Соединение закрыто"
+    },
+    {
+      "source": "Method not found",
+      "expected": "Метод не найден"
+    },
+    {
+      "source": "Invalid JSON-RPC message received:",
+      "expected": "Получено некорректное сообщение JSON-RPC:"
+    },
+    {
+      "source": "Sending message",
+      "expected": "Отправка сообщения"
+    },
+    {
+      "source": "Cog workspace creation returned no URI",
+      "expected": "При создании рабочей области Cog не получен адрес URI"
+    },
+    {
+      "source": "Could not create Cog workspace",
+      "expected": "Не удалось создать рабочую область Cog"
+    },
+    {
+      "source": "Remote agents are busy",
+      "expected": "Удаленные агенты заняты"
+    },
+    {
+      "source": "Daily environment time used",
+      "expected": "Дневной лимит времени среды исчерпан"
+    },
+    {
+      "source": "Too many environments running",
+      "expected": "Запущено слишком много сред"
+    },
+    {
+      "source": "Plan upgrade required",
+      "expected": "Требуется расширенный тариф"
+    },
+    {
+      "source": "Daily conversation limit reached",
+      "expected": "Дневной лимит диалогов исчерпан"
+    },
+    {
+      "source": "Conversation limit reached",
+      "expected": "Лимит диалогов исчерпан"
+    },
+    {
+      "source": "Failed to send side question",
+      "expected": "Не удалось отправить дополнительный вопрос"
+    },
+    {
+      "source": "Failed to start side question",
+      "expected": "Не удалось начать дополнительный вопрос"
+    },
+    {
+      "source": "A folder in this project could not be loaded because its location is invalid.",
+      "expected": "Не удалось загрузить папку проекта: указан некорректный путь."
+    },
+    {
+      "source": "Conversation Unarchived",
+      "expected": "Диалог возвращен из архива"
+    },
+    {
+      "source": "Message from",
+      "expected": "Сообщение от"
+    },
+    {
+      "source": "Fork in Shared Workspace",
+      "expected": "Создать ветку в общей рабочей области"
+    },
+    {
+      "source": "Fork in New Workspace",
+      "expected": "Создать ветку в новой рабочей области"
+    },
+    {
+      "source": "Shares this repository, with a working copy of its own. Uncommitted changes stay behind.",
+      "expected": "Использует этот репозиторий с отдельной рабочей копией. Незакоммиченные изменения не переносятся."
+    },
+    {
+      "source": "A full copy of this workspace, uncommitted changes included.",
+      "expected": "Полная копия этой рабочей области, включая незакоммиченные изменения."
+    },
+    {
+      "source": "Rewinds the conversation only. Files in this workspace stay as they are now.",
+      "expected": "Возвращает только диалог к предыдущему состоянию. Файлы рабочей области остаются без изменений."
+    },
+    {
+      "source": "Keeps working in this workspace. Nothing is copied.",
+      "expected": "Работа продолжается в этой рабочей области. Копии не создаются."
+    },
+    {
+      "source": "Creating workspace for the forked conversation...",
+      "expected": "Создание рабочей области для ответвления диалога..."
+    },
+    {
+      "source": "Creating the forked conversation...",
+      "expected": "Создание ответвления диалога..."
+    },
+    {
+      "source": "Browser downloads",
+      "expected": "Загрузки браузера"
+    },
+    {
+      "source": "Type to search file contents",
+      "expected": "Введите текст для поиска по содержимому файлов"
+    },
+    {
+      "source": "Sort and filter conversations",
+      "expected": "Сортировка и фильтр диалогов"
+    },
+    {
+      "source": "Search conversations, commands, and code...",
+      "expected": "Поиск диалогов, команд и кода..."
+    },
+    {
+      "source": "Marked 1 conversation as read",
+      "expected": "1 диалог отмечен как прочитанный"
+    },
+    {
+      "source": "Couldn't mark conversations as read",
+      "expected": "Не удалось отметить диалоги как прочитанные"
+    },
+    {
+      "source": "A few things to know, and a couple settings to review.",
+      "expected": "Полезная информация и несколько настроек для проверки."
+    },
+    {
+      "source": "Optimized for you",
+      "expected": "Настроено под вас"
+    },
+    {
+      "source": "Customize your experience across the agent, plugins, and product from the settings and marketplace. We won't show you ads or let advertisers influence what",
+      "expected": "Настройте агента, плагины и приложение через настройки и каталог. Мы не показываем рекламу и не позволяем рекламодателям влиять на ответы"
+    },
+    {
+      "source": "Built to help, not hurt",
+      "expected": "Создано для помощи и безопасности"
+    },
+    {
+      "source": "Automated safeguards help to protect your conversations from insecure or unsafe content. That being said, users should be aware of potential agentic risks, including data exfiltration.",
+      "expected": "Автоматические механизмы защиты помогают оградить диалоги от небезопасного содержимого. При этом следует учитывать возможные риски работы агентов, включая утечку данных."
+    },
+    {
+      "source": "You are in control",
+      "expected": "Вы управляете настройками"
+    },
+    {
+      "source": "Allow Google to collect and use your Interactions data, subject to the",
+      "expected": "Разрешить Google собирать и использовать данные взаимодействий в соответствии с"
+    },
+    {
+      "source": "Stay up to date.",
+      "expected": "Будьте в курсе."
+    },
+    {
+      "source": "Sign up for newsletters, tips and tricks, and other notifications about",
+      "expected": "Подпишитесь на новости, советы и другие уведомления о"
+    },
+    {
+      "source": "Build with one agent or a team",
+      "expected": "Создавайте с одним агентом или командой"
+    },
+    {
+      "source": "Describe what you want. Your agent plans and builds it, and brings in other agents when needed.",
+      "expected": "Опишите желаемый результат. Агент составит план, выполнит работу и при необходимости подключит других агентов."
+    },
+    {
+      "source": "Review plans and walkthroughs",
+      "expected": "Проверяйте планы и отчеты о работе"
+    },
+    {
+      "source": "Comment on the plan before your agent starts, and get a walkthrough when it finishes.",
+      "expected": "Комментируйте план до начала работы агента и получайте отчет после завершения."
+    },
+    {
+      "source": "Set the rules, define the boundaries.",
+      "expected": "Установите правила и границы."
+    },
+    {
+      "source": "By default, agents work in folders you choose and ask before sensitive changes. Adjust this anytime in Settings.",
+      "expected": "По умолчанию агенты работают в выбранных вами папках и запрашивают разрешение перед значимыми изменениями. Это можно изменить в настройках."
+    },
+    {
+      "source": "Getting started with Google Antigravity",
+      "expected": "Начало работы с Google Antigravity"
+    },
+    {
+      "source": "Tip:",
+      "expected": "Совет:"
+    },
+    {
+      "source": "The conversation could not be loaded because its data was not found.",
+      "expected": "Не удалось загрузить диалог: его данные не найдены."
+    },
+    {
+      "source": "Failed to export artifact",
+      "expected": "Не удалось экспортировать артефакт"
+    },
+    {
+      "source": "Paste authorization code",
+      "expected": "Вставьте код авторизации"
+    },
+    {
+      "source": "Choose icon and color",
+      "expected": "Выберите значок и цвет"
+    },
+    {
+      "source": "Couldn't create the coordinator. Try again.",
+      "expected": "Не удалось создать координатора. Попробуйте еще раз."
+    },
+    {
+      "source": "e.g. Release helper",
+      "expected": "Например, помощник по выпускам"
+    },
+    {
+      "source": "Coordinator name",
+      "expected": "Название координатора"
+    },
+    {
+      "source": "What should this coordinator accomplish?",
+      "expected": "Какую задачу должен выполнить координатор?"
+    },
+    {
+      "source": "Coordinator goal",
+      "expected": "Цель координатора"
+    },
+    {
+      "source": "Coordinator settings",
+      "expected": "Настройки координатора"
+    },
+    {
+      "source": "Project location",
+      "expected": "Расположение проекта"
+    },
+    {
+      "source": "Account connection was not completed.",
+      "expected": "Подключение аккаунта не завершено."
+    },
+    {
+      "source": "Refreshing credentials...",
+      "expected": "Обновление данных авторизации..."
+    },
+    {
+      "source": "Rate limited",
+      "expected": "Превышена частота запросов"
+    },
+    {
+      "source": "Request failed",
+      "expected": "Ошибка запроса"
+    },
+    {
+      "source": "Limited time",
+      "expected": "Ограниченное время"
     }
   ],
   "exclusions": [
@@ -3846,6 +4382,218 @@
     {
       "source": "EntryNotFound",
       "reason": "Внутренний код ошибки"
+    },
+    {
+      "source": "http://localhost:8080",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "Popover.Item",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "Shift+Delete",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "has_path_prefix(modified_files, ...)",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "has_push_def_prefix(push_def, ...)",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "has_subcomponent(component_id, ...)",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "Expected function, string, or object as test",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Markdown components must render within a CustomMarkdown.",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "CustomMarkdown",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "PillButton",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "CortexStepBody",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "lock",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "ZodDiscriminatedUnion",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "McpError",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "True if the download failed (e.g., user cancelled or host denied).",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "True if the host rejected or failed to deliver the message.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Complete tool call arguments as key-value pairs.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Partial tool call arguments (incomplete, may change).",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host supports resource content blocks.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host supports resource link content blocks.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host supports structured content.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Experimental features (structure TBD).",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host supports file downloads via ui/download-file.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host supports tools/list_changed notifications.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host can proxy tool calls to the MCP server.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host supports resources/list_changed notifications.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host can proxy resource reads to the MCP server.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Host accepts log messages.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "App supports tools/list_changed notifications.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "App exposes MCP-style tools that the host can call.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Display modes the app supports.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Content Security Policy configuration for UI resources.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Resource contents to download — embedded (inline data) or linked (host fetches). Uses standard MCP resource types.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Message content blocks (text, image, etc.).",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Sandbox permissions from resource metadata.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Standard MCP tool execution result.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Bottom safe area inset in pixels.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Left safe area inset in pixels.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Mobile safe area boundaries in pixels.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Partial context update containing only changed fields.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Context content blocks (text, image, etc.).",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Structured content for machine-readable context data.",
+      "reason": "MCP protocol schema documentation, not a UI label; keep original machine-facing schema."
+    },
+    {
+      "source": "Gemini Flash Next",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "planner-response-text",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "text-muted-foreground",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Toast.Root",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Toast.Content",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Toast.Title",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Toast.Description",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Toast.Close",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Toast.Action",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "ToastItem",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "Command Shift A",
+      "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
     }
   ],
   "observedTemplates": [
@@ -4168,7 +4916,142 @@
     "Pushed ${z} commit${z===1?\"\":\"s\"} to ${y}.",
     "Pushed to ${y}.",
     "Published ${k.currentRef} to origin.",
-    "All changes since ${b}"
+    "All changes since ${b}",
+    "Open ${q}",
+    "View ${v.toLowerCase()} ${b+1}",
+    "Help us improve ${a}.",
+    "Showing first ${q} references",
+    "Unfold lines ${a+1}-${q.endLine}",
+    "Fold lines ${a+1}-${q.endLine}",
+    "Worked for ${us(l.lastModifiedAtMs-l.createdAtMs)}",
+    "Unable to search @${a.trigger}",
+    "Searching as ${za.searchingAs}",
+    "Where the agent runs, current: ${t}",
+    "Failed to save project: ${dn(u)}",
+    "Failed to save project: ${dn(x)}",
+    "Select project, current: ${hb}",
+    "Remove context from ${f.label}",
+    "View ${k} help${k===1?\"\":\" items\"}",
+    "View ${k} side question${k===1?\"\":\"s\"}",
+    "Question ${y+1} of ${x.length}",
+    "Thought for ${Math.max(1,Number(T.seconds))}s",
+    "Failed to save project settings: ${dn(ra)}",
+    "Failed to save settings: ${dn(Y)}",
+    "Agent permissions preset: ${y}, ${g}",
+    "Agent permissions preset selector, current: ${y}",
+    "Generating ${d.envName} name took > 7 seconds",
+    "Using default ${d.envName} name",
+    "Creating project ${d.envName} took > 7 seconds",
+    "Failed to create ${d.envName}",
+    "Failed to create ${d.envName}: ${G}",
+    "Failed to create ${d.envName}: ${K}",
+    "Couldn't switch to ${K}: ${dn(P)}",
+    "Branch ${K} no longer exists",
+    "Couldn't save base branch: ${dn(P)}",
+    "Branch, current: ${a}${w?",
+    "Work locally on ${f.map(g=>nq(g)).join(\", \")}",
+    "Worktree from ${m.map(p=>nq(p)).join(\", \")}",
+    "Select model, current: ${y}${A?",
+    "Open ${M}",
+    "Remove ${M}",
+    "Environment: ${v}",
+    "Voice Speed, ${",
+    "Unmute ${c}",
+    "Mute ${c}",
+    "Voice speed, ${",
+    "Best of N (${bKc(a)})",
+    "Select modes, current: ${b.join(\", \")}",
+    "View ${g}",
+    "View ${k}",
+    "Send now: ${d}",
+    "Hey ${g?.trim().split(/\\s+/)[0]||\"there\"}!",
+    "More actions for ${d}",
+    "Run ${a.displayName} now",
+    "See ${d} more ${c}",
+    "See ${d} more",
+    "Filter skills and rules: ${j5[a]}",
+    "Toggle ${d}",
+    "Adding ${a}",
+    "Add ${a}",
+    "Blocked: ${a.disabledReason}",
+    "Details for ${a.readableTitle}",
+    "Plugins in ${c}",
+    "Delete side question: ${a}",
+    "Open Subagent: ${l}",
+    "Hi ${a}.",
+    "Edit side question title: ${a}",
+    "Close ${u}",
+    "Unpin ${u}",
+    "Remove ${na.description||\"file\"}",
+    "Send ${t.status}",
+    "Remove ${s6(z)}",
+    "Remove ${B0c(z.displayName||z.name)}",
+    "Failed to update \"${y}\"",
+    "See ${g.untrustedSidecarDocLinkText}: ${g.untrustedSidecarDocUrl}",
+    "Triggered ${t}",
+    "Failed to update \"${A.displayName}\"",
+    "Failed to save \"${Va.displayName}\"",
+    "Failed to save \"${D}\"",
+    "Restarted \"${D}\".",
+    "Enable ${D}",
+    "Run ${D} now",
+    "Delete ${D}",
+    "Deleted \"${D}\".",
+    "Failed to delete \"${D}\"",
+    "Restarted \"${u}\".",
+    "Restart ${u}",
+    "Run ${u} now",
+    "Pause ${u}",
+    "Resume ${u}",
+    "Pause ${a.displayName}",
+    "Resume ${a.displayName}",
+    "Created automation \"${aa.trim()}\".",
+    "Failed to create ${Za}.",
+    "New ${Za}",
+    "Deleted \"${Fa}\".",
+    "Failed to delete \"${Fa}\"",
+    "See [${c.untrustedSidecarDocLinkText}](${c.untrustedSidecarDocUrl}).",
+    "Add ${u.emptyMessageSingular}",
+    "Worked for ${Is(l.lastModifiedAtMs-l.createdAtMs)}",
+    "Searching as ${sa.searchingAs}",
+    "Where the agent runs, current: ${u}",
+    "Failed to save project: ${on(t)}",
+    "Failed to save project: ${on(x)}",
+    "Select project, current: ${nb}",
+    "Auth code for ${da.name}",
+    "Failed to save project settings: ${on(pa)}",
+    "Failed to save settings: ${on(ea)}",
+    "Couldn't switch to ${K}: ${on(O)}",
+    "Couldn't save base branch: ${on(O)}",
+    "Work locally on ${f.map(g=>Aq(g)).join(\", \")}",
+    "Worktree from ${m.map(p=>Aq(p)).join(\", \")}",
+    "Filter skills and rules: ${w6[a]}",
+    "Coordinator ${D.toLowerCase()}",
+    "Hey ${a}, what should we build today?",
+    "Close ${t}",
+    "Unpin ${t}",
+    "Remove ${ia.description||\"file\"}",
+    "Send ${u.status}",
+    "Remove ${F4c(z)}",
+    "Remove ${E4c(z.displayName||z.name)}",
+    "Failed to save \"${Pa.displayName}\"",
+    "Failed to save \"${H}\"",
+    "Restarted \"${H}\".",
+    "Enable ${H}",
+    "Run ${H} now",
+    "Delete ${H}",
+    "Deleted \"${H}\".",
+    "Failed to delete \"${H}\"",
+    "Restarted \"${t}\".",
+    "Restart ${t}",
+    "Run ${t} now",
+    "Pause ${t}",
+    "Resume ${t}",
+    "Failed to create ${eb}.",
+    "New ${eb}",
+    "Deleted \"${Ca}\".",
+    "Failed to delete \"${Ca}\"",
+    "Add ${t.emptyMessageSingular}"
   ],
   "templateScope": "2.26.0: 83 changed templates reviewed individually; 64 equivalent literal shapes, 16 specific UI templates, three static transport diagnostics. Native generated notification payload remains original."
 }

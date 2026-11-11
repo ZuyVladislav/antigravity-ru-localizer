@@ -12,7 +12,7 @@ import tarfile
 import zipfile
 
 REPO = "ZuyVladislav/antigravity-ru-localizer"
-PLATFORMS = {"test (windows-latest)", "test (ubuntu-latest)", "test (macos-14)"}
+PLATFORMS = {"test (windows-latest)", "test (ubuntu-latest)", "test (macos-15)"}
 
 
 def run(*args):
