@@ -1,5 +1,5 @@
 {
-  "appVersion": "2.29.0",
+  "appVersion": "2.30.0",
   "sourceBundleSha256": "8d1196a22cd3eb9779e8faf5c31eb732d3df8d9d037b685733ed4e3d6cdfb5a2",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
@@ -2079,11 +2079,11 @@
     },
     {
       "source": "Collapse queued messages",
-      "expected": "Свернуть сообщения в очереди"
+      "expected": "Свернуть очередь сообщений"
     },
     {
       "source": "Expand queued messages",
-      "expected": "Развернуть сообщения в очереди"
+      "expected": "Развернуть очередь сообщений"
     },
     {
       "source": "Message subagent, @ to mention",
@@ -3328,6 +3328,222 @@
     {
       "source": "% left",
       "expected": "% осталось"
+    },
+    {
+      "source": "Link Settings",
+      "expected": "Настройки ссылок"
+    },
+    {
+      "source": "Google Search",
+      "expected": "Поиск Google"
+    },
+    {
+      "source": "Your connection to this site is not secure",
+      "expected": "Соединение с этим сайтом не защищено"
+    },
+    {
+      "source": "You should not enter any sensitive information on this site (for example, passwords or credit cards), because it could be stolen by attackers.",
+      "expected": "Не вводите на этом сайте конфиденциальные сведения, например пароли или номера банковских карт: злоумышленники могут их похитить."
+    },
+    {
+      "source": "Not secure",
+      "expected": "Не защищено"
+    },
+    {
+      "source": "Your connection to this site is not fully secure",
+      "expected": "Соединение с этим сайтом защищено не полностью"
+    },
+    {
+      "source": "Attackers might be able to see the images you're looking at on this site and trick you by modifying them.",
+      "expected": "Злоумышленники могут видеть изображения, которые вы просматриваете на этом сайте, и подменять их, чтобы ввести вас в заблуждение."
+    },
+    {
+      "source": "Connection is secure",
+      "expected": "Соединение защищено"
+    },
+    {
+      "source": "Your information (for example, passwords or credit card numbers) is private when it is sent to this site.",
+      "expected": "При передаче на этот сайт ваши сведения, например пароли или номера банковских карт, защищены."
+    },
+    {
+      "source": "Address bar suggestions",
+      "expected": "Подсказки в адресной строке"
+    },
+    {
+      "source": "Chat Layout",
+      "expected": "Расположение диалога"
+    },
+    {
+      "source": "General Appearance Shortcuts Notifications Models Customizations Browser Developer Running",
+      "expected": "Общие Вид Горячие клавиши Уведомления Модели Кастомизация Браузер Разработчик Выполняется"
+    },
+    {
+      "source": "Failed to inspect license for this project",
+      "expected": "Не удалось проверить лицензию для этого проекта"
+    },
+    {
+      "source": "Your Antigravity use will be associated with provided project. Make sure you trust the project ID before proceeding. Account activity and data may be logged by your organization.",
+      "expected": "Использование Antigravity будет связано с указанным проектом. Прежде чем продолжить, убедитесь, что доверяете идентификатору проекта. Организация может сохранять действия и данные аккаунта."
+    },
+    {
+      "source": "Select Billing Model",
+      "expected": "Выберите модель оплаты"
+    },
+    {
+      "source": "Subscription",
+      "expected": "Подписка"
+    },
+    {
+      "source": "Use Antigravity through your Gemini subscription.",
+      "expected": "Используйте Antigravity по подписке Gemini."
+    },
+    {
+      "source": "Pay only for the tokens you use, billed through Gemini platform.",
+      "expected": "Платите только за использованные токены через платформу Gemini."
+    },
+    {
+      "source": "Verify that these licenses were provided by your administrator and that you trust the project ID before proceeding. Account activity and data may be logged by your organization.",
+      "expected": "Прежде чем продолжить, убедитесь, что лицензии предоставлены вашим администратором и вы доверяете идентификатору проекта. Организация может сохранять действия и данные аккаунта."
+    },
+    {
+      "source": "Auto-assignment not configured",
+      "expected": "Автоматическое назначение не настроено"
+    },
+    {
+      "source": "Remote Agents Data",
+      "expected": "Данные удаленных агентов"
+    },
+    {
+      "source": "Permanently delete your remote conversations, projects, scheduled tasks, connected plugins and settings. Data in the desktop app and your Google account are not affected.",
+      "expected": "Безвозвратно удалить удаленные диалоги, проекты, задания по расписанию, подключенные плагины и настройки. Данные приложения на компьютере и аккаунта Google не затрагиваются."
+    },
+    {
+      "source": "Your Plan",
+      "expected": "Ваш тариф"
+    },
+    {
+      "source": "Authenticated via Enterprise Gateway",
+      "expected": "Вход через корпоративный шлюз"
+    },
+    {
+      "source": "Google One Referral",
+      "expected": "Приглашения Google One"
+    },
+    {
+      "source": "Share your referral link with friends",
+      "expected": "Поделитесь пригласительной ссылкой с друзьями"
+    },
+    {
+      "source": "Invite a Friend",
+      "expected": "Пригласить друга"
+    },
+    {
+      "source": "Project Required",
+      "expected": "Требуется проект"
+    },
+    {
+      "source": "License Required",
+      "expected": "Требуется лицензия"
+    },
+    {
+      "source": "A Google Cloud project is required to use Antigravity.",
+      "expected": "Для использования Antigravity требуется проект Google Cloud."
+    },
+    {
+      "source": "A license or project selection is required to use Antigravity.",
+      "expected": "Для использования Antigravity требуется лицензия или выбор проекта."
+    },
+    {
+      "source": "Manage License",
+      "expected": "Управление лицензией"
+    },
+    {
+      "source": "Developer: Reset Onboarding",
+      "expected": "Разработчик: сбросить первоначальную настройку"
+    },
+    {
+      "source": "Developer: Reset NUX",
+      "expected": "Разработчик: сбросить подсказки для новых пользователей"
+    },
+    {
+      "source": "Side Questions",
+      "expected": "Дополнительные вопросы"
+    },
+    {
+      "source": "Hi there.",
+      "expected": "Привет."
+    },
+    {
+      "source": "Dismiss suggestion",
+      "expected": "Отклонить подсказку"
+    },
+    {
+      "source": "Send a message in the main conversation first to start a side question",
+      "expected": "Чтобы задать дополнительный вопрос, сначала отправьте сообщение в основном диалоге"
+    },
+    {
+      "source": "Keep Open",
+      "expected": "Оставить открытым"
+    },
+    {
+      "source": "Match when the principal belongs to the specified MDB group.",
+      "expected": "Совпадает, если субъект входит в указанную группу MDB."
+    },
+    {
+      "source": "Match when the principal equals any listed username or belongs to any listed mdb/ group.",
+      "expected": "Совпадает, если субъект соответствует одному из указанных пользователей или входит в одну из указанных групп mdb/."
+    },
+    {
+      "source": "Ignore events triggered by the automation owner to avoid self-trigger loops.",
+      "expected": "Игнорировать события владельца автоматизации, чтобы избежать циклических запусков."
+    },
+    {
+      "source": "Ignore events emitted by automated review or robot accounts (groupagent-*).",
+      "expected": "Игнорировать события автоматических проверок и аккаунтов роботов (groupagent-*)."
+    },
+    {
+      "source": "Match when any modified file path starts with the given depot prefix.",
+      "expected": "Совпадает, если путь любого измененного файла начинается с указанного префикса хранилища."
+    },
+    {
+      "source": "Match when push_def equals or is a child of the given PushDef prefix.",
+      "expected": "Совпадает, если push_def равен указанному префиксу PushDef или находится внутри него."
+    },
+    {
+      "source": "Match when the issue component equals or is under the given Buganizer component ID.",
+      "expected": "Совпадает, если компонент задачи соответствует указанному идентификатору компонента Buganizer или вложен в него."
+    },
+    {
+      "source": "Inserts:",
+      "expected": "Вставки:"
+    },
+    {
+      "source": "Optional boolean filter",
+      "expected": "Необязательный логический фильтр"
+    },
+    {
+      "source": "Available CEL field tokens and helpers",
+      "expected": "Доступные поля и вспомогательные функции CEL"
+    },
+    {
+      "source": "Helpers",
+      "expected": "Вспомогательные функции"
+    },
+    {
+      "source": "Indexed CEL helper functions",
+      "expected": "Индексированные вспомогательные функции CEL"
+    },
+    {
+      "source": "Toggles:",
+      "expected": "Переключатели:"
+    },
+    {
+      "source": "Available CEL helper functions",
+      "expected": "Доступные вспомогательные функции CEL"
+    },
+    {
+      "source": "Limited time",
+      "expected": "Ограниченное время"
     }
   ],
   "exclusions": [
@@ -3846,6 +4062,30 @@
     {
       "source": "EntryNotFound",
       "reason": "Внутренний код ошибки"
+    },
+    {
+      "source": "http://localhost:8080",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "Popover.Item",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "Shift+Delete",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "has_path_prefix(modified_files, ...)",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "has_push_def_prefix(push_def, ...)",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
+    },
+    {
+      "source": "has_subcomponent(component_id, ...)",
+      "reason": "Reviewed 2.30.0 technical literal: URL, component identifier, keyboard chord or CEL expression; preserve exact syntax."
     }
   ],
   "observedTemplates": [
@@ -4168,7 +4408,102 @@
     "Pushed ${z} commit${z===1?\"\":\"s\"} to ${y}.",
     "Pushed to ${y}.",
     "Published ${k.currentRef} to origin.",
-    "All changes since ${b}"
+    "All changes since ${b}",
+    "Open ${q}",
+    "View ${v.toLowerCase()} ${b+1}",
+    "Help us improve ${a}.",
+    "Showing first ${q} references",
+    "Unfold lines ${a+1}-${q.endLine}",
+    "Fold lines ${a+1}-${q.endLine}",
+    "Worked for ${us(l.lastModifiedAtMs-l.createdAtMs)}",
+    "Unable to search @${a.trigger}",
+    "Searching as ${za.searchingAs}",
+    "Where the agent runs, current: ${t}",
+    "Failed to save project: ${dn(u)}",
+    "Failed to save project: ${dn(x)}",
+    "Select project, current: ${hb}",
+    "Remove context from ${f.label}",
+    "View ${k} help${k===1?\"\":\" items\"}",
+    "View ${k} side question${k===1?\"\":\"s\"}",
+    "Question ${y+1} of ${x.length}",
+    "Thought for ${Math.max(1,Number(T.seconds))}s",
+    "Failed to save project settings: ${dn(ra)}",
+    "Failed to save settings: ${dn(Y)}",
+    "Agent permissions preset: ${y}, ${g}",
+    "Agent permissions preset selector, current: ${y}",
+    "Generating ${d.envName} name took > 7 seconds",
+    "Using default ${d.envName} name",
+    "Creating project ${d.envName} took > 7 seconds",
+    "Failed to create ${d.envName}",
+    "Failed to create ${d.envName}: ${G}",
+    "Failed to create ${d.envName}: ${K}",
+    "Couldn't switch to ${K}: ${dn(P)}",
+    "Branch ${K} no longer exists",
+    "Couldn't save base branch: ${dn(P)}",
+    "Branch, current: ${a}${w?",
+    "Work locally on ${f.map(g=>nq(g)).join(\", \")}",
+    "Worktree from ${m.map(p=>nq(p)).join(\", \")}",
+    "Select model, current: ${y}${A?",
+    "Open ${M}",
+    "Remove ${M}",
+    "Environment: ${v}",
+    "Voice Speed, ${",
+    "Unmute ${c}",
+    "Mute ${c}",
+    "Voice speed, ${",
+    "Best of N (${bKc(a)})",
+    "Select modes, current: ${b.join(\", \")}",
+    "View ${g}",
+    "View ${k}",
+    "Send now: ${d}",
+    "Hey ${g?.trim().split(/\\s+/)[0]||\"there\"}!",
+    "More actions for ${d}",
+    "Run ${a.displayName} now",
+    "See ${d} more ${c}",
+    "See ${d} more",
+    "Filter skills and rules: ${j5[a]}",
+    "Toggle ${d}",
+    "Adding ${a}",
+    "Add ${a}",
+    "Blocked: ${a.disabledReason}",
+    "Details for ${a.readableTitle}",
+    "Plugins in ${c}",
+    "Delete side question: ${a}",
+    "Open Subagent: ${l}",
+    "Hi ${a}.",
+    "Edit side question title: ${a}",
+    "Close ${u}",
+    "Unpin ${u}",
+    "Remove ${na.description||\"file\"}",
+    "Send ${t.status}",
+    "Remove ${s6(z)}",
+    "Remove ${B0c(z.displayName||z.name)}",
+    "Failed to update \"${y}\"",
+    "See ${g.untrustedSidecarDocLinkText}: ${g.untrustedSidecarDocUrl}",
+    "Triggered ${t}",
+    "Failed to update \"${A.displayName}\"",
+    "Failed to save \"${Va.displayName}\"",
+    "Failed to save \"${D}\"",
+    "Restarted \"${D}\".",
+    "Enable ${D}",
+    "Run ${D} now",
+    "Delete ${D}",
+    "Deleted \"${D}\".",
+    "Failed to delete \"${D}\"",
+    "Restarted \"${u}\".",
+    "Restart ${u}",
+    "Run ${u} now",
+    "Pause ${u}",
+    "Resume ${u}",
+    "Pause ${a.displayName}",
+    "Resume ${a.displayName}",
+    "Created automation \"${aa.trim()}\".",
+    "Failed to create ${Za}.",
+    "New ${Za}",
+    "Deleted \"${Fa}\".",
+    "Failed to delete \"${Fa}\"",
+    "See [${c.untrustedSidecarDocLinkText}](${c.untrustedSidecarDocUrl}).",
+    "Add ${u.emptyMessageSingular}"
   ],
   "templateScope": "2.26.0: 83 changed templates reviewed individually; 64 equivalent literal shapes, 16 specific UI templates, three static transport diagnostics. Native generated notification payload remains original."
 }

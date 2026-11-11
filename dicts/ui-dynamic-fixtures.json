@@ -600,5 +600,385 @@
   [
     "All changes since main",
     "Все изменения с main"
+  ],
+  [
+    "Open ReviewValue",
+    "Открыть ReviewValue"
+  ],
+  [
+    "View image 2",
+    "Открыть изображение 2"
+  ],
+  [
+    "Help us improve ReviewValue.",
+    "Помогите улучшить ReviewValue."
+  ],
+  [
+    "Showing first 2 references",
+    "Показаны первые ссылки: 2"
+  ],
+  [
+    "Unfold lines 2-8",
+    "Развернуть строки 2–8"
+  ],
+  [
+    "Fold lines 2-8",
+    "Свернуть строки 2–8"
+  ],
+  [
+    "Worked for 2m",
+    "Время работы: 2мин."
+  ],
+  [
+    "Unable to search @ReviewValue",
+    "Не удалось выполнить поиск @ReviewValue"
+  ],
+  [
+    "Searching as ReviewValue",
+    "Поиск от имени ReviewValue"
+  ],
+  [
+    "Where the agent runs, current: ReviewValue",
+    "Среда агента, текущая: ReviewValue"
+  ],
+  [
+    "Failed to save project: ReviewValue",
+    "Не удалось сохранить проект: ReviewValue"
+  ],
+  [
+    "Failed to save project: ReviewValue",
+    "Не удалось сохранить проект: ReviewValue"
+  ],
+  [
+    "Select project, current: ReviewValue",
+    "Выбор проекта, текущий: ReviewValue"
+  ],
+  [
+    "Remove context from ReviewValue",
+    "Удалить контекст из ReviewValue"
+  ],
+  [
+    "View 2 help items",
+    "Показать справку (2)"
+  ],
+  [
+    "View 2 side questions",
+    "Показать дополнительные вопросы (2)"
+  ],
+  [
+    "Question 2 of 8",
+    "Вопрос 2 из 8"
+  ],
+  [
+    "Thought for 2s",
+    "Думал: 2 с."
+  ],
+  [
+    "Failed to save project settings: ReviewValue",
+    "Не удалось сохранить настройки проекта: ReviewValue"
+  ],
+  [
+    "Failed to save settings: ReviewValue",
+    "Не удалось сохранить настройки: ReviewValue"
+  ],
+  [
+    "Agent permissions preset: ReviewValue, ReviewValue",
+    "Набор разрешений агента: ReviewValue, ReviewValue"
+  ],
+  [
+    "Agent permissions preset selector, current: ReviewValue",
+    "Набор разрешений агента, текущий: ReviewValue"
+  ],
+  [
+    "Generating ReviewValue name took > 7 seconds",
+    "Создание названия ReviewValue заняло более 7 секунд"
+  ],
+  [
+    "Using default ReviewValue name",
+    "Используется название ReviewValue по умолчанию"
+  ],
+  [
+    "Creating project ReviewValue took > 7 seconds",
+    "Создание проекта ReviewValue заняло более 7 секунд"
+  ],
+  [
+    "Failed to create ReviewValue",
+    "Не удалось создать ReviewValue"
+  ],
+  [
+    "Failed to create ReviewValue: ReviewValue",
+    "Не удалось создать ReviewValue: ReviewValue"
+  ],
+  [
+    "Failed to create ReviewValue: ReviewValue",
+    "Не удалось создать ReviewValue: ReviewValue"
+  ],
+  [
+    "Couldn't switch to ReviewValue: ReviewValue",
+    "Не удалось переключиться на ReviewValue: ReviewValue"
+  ],
+  [
+    "Branch ReviewValue no longer exists",
+    "Ветка ReviewValue больше не существует"
+  ],
+  [
+    "Couldn't save base branch: ReviewValue",
+    "Не удалось сохранить базовую ветку: ReviewValue"
+  ],
+  [
+    "Branch, current: ReviewValue",
+    "Ветка, текущая: ReviewValue"
+  ],
+  [
+    "Work locally on ReviewValue",
+    "Работать локально: ReviewValue"
+  ],
+  [
+    "Worktree from ReviewValue",
+    "Рабочая копия из ReviewValue"
+  ],
+  [
+    "Select model, current: ReviewValue",
+    "Выбор модели, текущая: ReviewValue"
+  ],
+  [
+    "Open ReviewValue",
+    "Открыть ReviewValue"
+  ],
+  [
+    "Remove ReviewValue",
+    "Удалить ReviewValue"
+  ],
+  [
+    "Environment: ReviewValue",
+    "Среда: ReviewValue"
+  ],
+  [
+    "Voice Speed, 1.5x",
+    "Скорость речи: 1.5x"
+  ],
+  [
+    "Unmute ReviewValue",
+    "Включить звук: ReviewValue"
+  ],
+  [
+    "Mute ReviewValue",
+    "Выключить звук: ReviewValue"
+  ],
+  [
+    "Voice Speed, 1.5x",
+    "Скорость речи: 1.5x"
+  ],
+  [
+    "Best of N (ReviewValue)",
+    "Лучший из N (ReviewValue)"
+  ],
+  [
+    "Select modes, current: ReviewValue",
+    "Выбор режимов, текущие: ReviewValue"
+  ],
+  [
+    "View ReviewValue",
+    "Посмотреть ReviewValue"
+  ],
+  [
+    "View ReviewValue",
+    "Посмотреть ReviewValue"
+  ],
+  [
+    "Send now: ReviewValue",
+    "Отправить сейчас: ReviewValue"
+  ],
+  [
+    "Hey ReviewValue!",
+    "Привет, ReviewValue."
+  ],
+  [
+    "More actions for ReviewValue",
+    "Другие действия для ReviewValue"
+  ],
+  [
+    "Run ReviewValue now",
+    "Запустить ReviewValue сейчас"
+  ],
+  [
+    "See 2 more files",
+    "Показать еще (2): файлы"
+  ],
+  [
+    "See 2 more",
+    "Показать ещё (2)"
+  ],
+  [
+    "Filter skills and rules: ReviewValue",
+    "Фильтр навыков и правил: ReviewValue"
+  ],
+  [
+    "Toggle ReviewValue",
+    "Переключить ReviewValue"
+  ],
+  [
+    "Adding ReviewValue",
+    "Добавление: ReviewValue"
+  ],
+  [
+    "Add ReviewValue",
+    "Добавить ReviewValue"
+  ],
+  [
+    "Blocked: ReviewValue",
+    "Заблокировано: ReviewValue"
+  ],
+  [
+    "Details for ReviewValue",
+    "Сведения о ReviewValue"
+  ],
+  [
+    "Plugins in ReviewValue",
+    "Плагины в ReviewValue"
+  ],
+  [
+    "Delete side question: ReviewValue",
+    "Удалить дополнительный вопрос: ReviewValue"
+  ],
+  [
+    "Open Subagent: ReviewValue",
+    "Открыть субагента: ReviewValue"
+  ],
+  [
+    "Hi ReviewValue.",
+    "Привет, ReviewValue."
+  ],
+  [
+    "Edit side question title: ReviewValue",
+    "Изменить название дополнительного вопроса: ReviewValue"
+  ],
+  [
+    "Close ReviewValue",
+    "Закрыть ReviewValue"
+  ],
+  [
+    "Unpin ReviewValue",
+    "Открепить ReviewValue"
+  ],
+  [
+    "Remove ReviewValue",
+    "Удалить ReviewValue"
+  ],
+  [
+    "Send ReviewValue",
+    "Отправить: ReviewValue"
+  ],
+  [
+    "Remove ReviewValue",
+    "Удалить ReviewValue"
+  ],
+  [
+    "Remove ReviewValue",
+    "Удалить ReviewValue"
+  ],
+  [
+    "Failed to update \"ReviewValue\"",
+    "Не удалось обновить «ReviewValue»."
+  ],
+  [
+    "See ReviewValue: ReviewValue",
+    "См. ReviewValue: ReviewValue"
+  ],
+  [
+    "Triggered ReviewValue",
+    "Запущено: ReviewValue"
+  ],
+  [
+    "Failed to update \"ReviewValue\"",
+    "Не удалось обновить «ReviewValue»."
+  ],
+  [
+    "Failed to save \"ReviewValue\"",
+    "Не удалось сохранить «ReviewValue»."
+  ],
+  [
+    "Failed to save \"ReviewValue\"",
+    "Не удалось сохранить «ReviewValue»."
+  ],
+  [
+    "Restarted \"ReviewValue\".",
+    "Перезапущено: «ReviewValue»."
+  ],
+  [
+    "Enable ReviewValue",
+    "Включить ReviewValue"
+  ],
+  [
+    "Run ReviewValue now",
+    "Запустить ReviewValue сейчас"
+  ],
+  [
+    "Delete ReviewValue",
+    "Удалить ReviewValue"
+  ],
+  [
+    "Deleted \"ReviewValue\".",
+    "Удалено: «ReviewValue»."
+  ],
+  [
+    "Failed to delete \"ReviewValue\"",
+    "Не удалось удалить «ReviewValue»."
+  ],
+  [
+    "Restarted \"ReviewValue\".",
+    "Перезапущено: «ReviewValue»."
+  ],
+  [
+    "Restart ReviewValue",
+    "Перезапустить: ReviewValue"
+  ],
+  [
+    "Run ReviewValue now",
+    "Запустить ReviewValue сейчас"
+  ],
+  [
+    "Pause ReviewValue",
+    "Приостановить: ReviewValue"
+  ],
+  [
+    "Resume ReviewValue",
+    "Возобновить: ReviewValue"
+  ],
+  [
+    "Pause ReviewValue",
+    "Приостановить: ReviewValue"
+  ],
+  [
+    "Resume ReviewValue",
+    "Возобновить: ReviewValue"
+  ],
+  [
+    "Created automation \"ReviewValue\".",
+    "Создана автоматизация «ReviewValue»."
+  ],
+  [
+    "Failed to create ReviewValue.",
+    "Не удалось создать ReviewValue."
+  ],
+  [
+    "New ReviewValue",
+    "Создать: ReviewValue"
+  ],
+  [
+    "Deleted \"ReviewValue\".",
+    "Удалено: «ReviewValue»."
+  ],
+  [
+    "Failed to delete \"ReviewValue\"",
+    "Не удалось удалить «ReviewValue»."
+  ],
+  [
+    "See [ReviewValue](ReviewValue).",
+    "См. [ReviewValue](ReviewValue)."
+  ],
+  [
+    "Add ReviewValue",
+    "Добавить ReviewValue"
   ]
 ]

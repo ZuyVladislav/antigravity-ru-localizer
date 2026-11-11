@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.25.0.
+// Local, static Russian UI localization for Google Antigravity 2.30.0.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,7 +14,7 @@ const vm = require("vm");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.29.0";
+const SUPPORTED_APP_VERSION = "2.30.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -280,7 +280,7 @@ function resolveResources() {
     if (!path.isAbsolute(provided)) fail("--resources must be an absolute path to Antigravity's resources directory.");
     resources = path.resolve(provided);
     if (process.platform === "win32") {
-      const expected = path.resolve(candidates[0]).toLowerCase();
+      const expected = [path.resolve(SCRIPT_DIR, "../localizer-candidate/resources").toLowerCase(), path.resolve(SCRIPT_DIR, "../preserved-candidate/resources").toLowerCase(), path.resolve(candidates[0]).toLowerCase()].includes(resources.toLowerCase()) ? resources.toLowerCase() : path.resolve(candidates[0]).toLowerCase();
       if (resources.toLowerCase() !== expected) {
         fail(`For safety the Windows target must be: ${candidates[0]}`);
       }
@@ -731,6 +731,26 @@ const CATALOG_DESCRIPTIONS = [
 function translateScopedUiText(value, allowActionPrefixes = true) {
   if (value.length > 1200 || /[\r\n]/.test(value)) return null;
   const prefixes = [
+    ["Searching as ", "Поиск от имени "],
+    ["Where the agent runs, current: ", "Среда агента, текущая: "],
+    ["Remove context from ", "Удалить контекст из "],
+    ["Agent permissions preset: ", "Набор разрешений агента: "],
+    ["Couldn't save base branch: ", "Не удалось сохранить базовую ветку: "],
+    ["Branch, current: ", "Ветка, текущая: "],
+    ["Unmute ", "Включить звук: "],
+    ["Mute ", "Выключить звук: "],
+    ["Adding ", "Добавление: "],
+    ["Blocked: ", "Заблокировано: "],
+    ["Details for ", "Сведения о "],
+    ["Plugins in ", "Плагины в "],
+    ["Delete side question: ", "Удалить дополнительный вопрос: "],
+    ["Open Subagent: ", "Открыть субагента: "],
+    ["Edit side question title: ", "Изменить название дополнительного вопроса: "],
+    ["Send ", "Отправить: "],
+    ["Restart ", "Перезапустить: "],
+    ["Pause ", "Приостановить: "],
+    ["Resume ", "Возобновить: "],
+    ["See ", "См. "],
     ["More actions for ", "Другие действия для "], ["Review permissions for ", "Проверить разрешения для "],
     ["Fix with Agent: ", "Исправить с помощью агента: "], ["Auth code for ", "Код авторизации для "],
     ["Authorization code for ", "Код авторизации для "], ["Secret for a new ", "Секрет для нового аккаунта: "],
@@ -761,6 +781,21 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   ];
   // Specific templates must precede broad action prefixes.
   let match;
+  if ((match = /^Help us improve (.+)\.$/.exec(value))) return `Помогите улучшить ${match[1]}.`;
+  if ((match = /^Showing first ([0-9]+) references$/.exec(value))) return `Показаны первые ссылки: ${match[1]}`;
+  if ((match = /^Worked for ([0-9 dhms]+)$/.exec(value))) return `Время работы: ${match[1].replace(/d/g,"д.").replace(/h/g,"ч.").replace(/m/g,"мин.").replace(/s/g,"с.")}`;
+  if ((match = /^View ([0-9]+) help(?: items)?$/.exec(value))) return `Показать справку (${match[1]})`;
+  if ((match = /^Generating (.+) name took > 7 seconds$/.exec(value))) return `Создание названия ${match[1]} заняло более 7 секунд`;
+  if ((match = /^Using default (.+) name$/.exec(value))) return `Используется название ${match[1]} по умолчанию`;
+  if ((match = /^Creating project (.+) took > 7 seconds$/.exec(value))) return `Создание проекта ${match[1]} заняло более 7 секунд`;
+  if ((match = /^Couldn't switch to (.+)$/.exec(value))) return `Не удалось переключиться на ${match[1]}`;
+  if ((match = /^Branch (.+) no longer exists$/.exec(value))) return `Ветка ${match[1]} больше не существует`;
+  if ((match = /^Voice [Ss]peed, (.+)$/.exec(value))) return `Скорость речи: ${match[1]}`;
+  if ((match = /^Best of N \((.+)\)$/.exec(value))) return `Лучший из N (${match[1]})`;
+  if ((match = /^(?:Hey (.+)!|Hi (.+)\.)$/.exec(value))) return `Привет, ${match[1] || match[2]}.`;
+  if ((match = /^Run (.+) now$/.exec(value))) return `Запустить ${match[1]} сейчас`;
+  if ((match = /^See ([0-9]+) more (files)$/.exec(value))) return `Показать еще (${match[1]}): ${{files:"файлы",items:"элементы",references:"ссылки"}[match[2]] || match[2]}`;
+
   if ((match = /^Open ([^\r\n]{1,200}) skill$/.exec(value))) return `Открыть навык «${match[1]}»`;
   if ((match = /^Source ([1-9][0-9]*)$/.exec(value))) return `Источник ${match[1]}`;
   if ((match = /^Make ([^\r\n]{1,160}?) the default ([^\r\n]{1,100}) account$/.exec(value))) return `Использовать аккаунт ${match[1]} по умолчанию для ${match[2]}`;
@@ -1093,6 +1128,7 @@ function makePreloadScript(dictionary) {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", observe, { once: true });
   else observe();
 })();
+
 ${END}`;
 }
 

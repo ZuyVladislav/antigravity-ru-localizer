@@ -42,7 +42,7 @@ class PublicationGates(unittest.TestCase):
 
     def test_macos_signing_smoke_cannot_be_skipped(self):
         jobs = copy.deepcopy(self.jobs)
-        next(job for job in jobs if job["name"] == "test (macos-14)")["steps"][1]["conclusion"] = "skipped"
+        next(job for job in jobs if job["name"] == "test (macos-15)")["steps"][1]["conclusion"] = "skipped"
         with self.assertRaises(ValueError):
             publisher.validate_ci(self.workflow, jobs, self.commit)
 
