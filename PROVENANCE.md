@@ -56,3 +56,13 @@ bundles.
 The structural audit extends the existing offline audit with Acorn 8.19.0
 (MIT), installed from the pinned npm lock file. It parses the local static
 application source; it does not run the application or access a user profile.
+
+## 2.31.2-r3 catalog completion
+
+The additional catalog translations are locally authored for reviewed public
+product descriptions. Complete reviewed descriptions precede broad action
+prefixes; four explicit aliases repair the previously mixed-language output.
+The displayed Fast speed badge is localized without changing model IDs.
+Hidden native-component checks use a separate test profile and recorded system
+metadata. Application binaries, extracted frontend components, screenshots and
+local test profiles remain outside the public repository and release assets.

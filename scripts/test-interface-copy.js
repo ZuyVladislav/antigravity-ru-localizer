@@ -11,6 +11,7 @@ const { mergeModelCopies } = require("./audit-runtime-ui.js");
 const { audit } = require("./audit-structural-ui.js");
 const specs = require("../dicts/ui-template-copy-2.31.2.json");
 const catalog = require("../dicts/catalog-copy-2.31.2.json");
+const marketplace = require("../dicts/marketplace-copy-2.31.2.json");
 const templateTranslator = createTemplates(specs);
 const serialized = vm.runInNewContext("(" + createTemplates.toString() + ")")(specs);
 
@@ -34,6 +35,7 @@ assert.equal(templateTranslator("Your Plan: value\nPRIVATE_INPUT"), null);
 
 const golden = [
   ["Version 2.31.2", "Версия 2.31.2"],
+  ["Fast", "Быстрая"],
   ["Carbon that may offload routine steps to Hydrogen. Same Carbon-level quality, fewer tokens used.", "Carbon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Carbon, а расход токенов снижается."],
   ["Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used.", "Argon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Argon, а расход токенов снижается."],
   ["No matching workspaces", "Нет подходящих рабочих пространств"],
@@ -62,6 +64,21 @@ for (const entry of catalog) {
   assert.equal(translate(source + "..."), entry.translation);
   assert.equal(translate(entry.id), null, "Skill identifier changed");
 }
+assert.equal(marketplace.length, 41);
+for (const entry of marketplace) {
+  for (const source of [entry.source, ...(entry.aliases || [])]) {
+    assert.equal(translate(source), entry.translation, "A complete catalog description lost to an action prefix");
+    assert.equal(translate(source + " More details."), entry.translation);
+    assert.equal(translate(source + "..."), entry.translation);
+    assert.equal(translate(source + "…"), entry.translation);
+  }
+  assert.equal(translate(entry.id), null, "A marketplace identifier changed");
+}
+assert.equal(translate("Connect C:/PRIVATE_PATH/O'Neil"), "Подключить C:/PRIVATE_PATH/O'Neil", "Unrelated action labels lost their opaque value");
+const fastAudit = mergeModelCopies([{ providerFound:true, notificationCards:0, modelLabels:["Gemini 3.8 Flash (Medium)"], rows:[{model:"Gemini 3.8 Flash (Medium)",field:"tagTitle",text:"Fast"}] }]);
+assert.equal(fastAudit.rows[0].translation, "Быстрая");
+assert.equal(fastAudit.rows[0].preservedMode, false, "The speed badge must be localized");
+assert.equal(fastAudit.missing.length, 0);
 assert.equal(translateUiFragment("with", [{ text: "PRIVATE_project_name" }]), null);
 assert.equal(translateUiFragment("and", [{ text: "Terms of Service and Privacy Policy" }]), "и");
 assert.equal(translateUiFragment("in ExampleProduct", [{ text: "Plugins are packaged collections of skills and MCPs to help the Agent in ExampleProduct work with Google developer products." }]), "в ExampleProduct");

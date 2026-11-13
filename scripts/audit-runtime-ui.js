@@ -76,7 +76,7 @@ function collectModelCopy(document) {
 }
 
 function analyzeModelCopy(collected) {
-  const preservedBadges=new Set(["Medium","Thinking","Economy","High","High accuracy","Low","Fast"]);
+  const preservedBadges=new Set(["Medium","Thinking","Economy","High","High accuracy","Low"]);
   const rows=collected.rows.map(row=>{
     const translation=translateAuditedUiCopy(row.text);
     return {...row,translation,preservedMode:row.field==="tagTitle"&&preservedBadges.has(row.text),requiresReview:!translation&&/[A-Za-z]/.test(row.text)&&!(row.field==="tagTitle"&&preservedBadges.has(row.text))};

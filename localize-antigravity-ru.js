@@ -642,6 +642,7 @@ function translateDynamicUiText(value) {
 // before it reaches the DOM; show a fixed Russian summary for those entries.
 // These mappings never edit a skill's source, instructions, ID or server name.
 const CATALOG_DESCRIPTIONS = [
+  ...require("./dicts/marketplace-copy-2.31.2.json").flatMap(({ source, aliases = [], translation }) => [source, ...aliases].map(value => [value, translation])),
   ...require("./dicts/catalog-copy-2.31.2.json").filter(item => !item.nameSuffix).map(({ source, translation }) => [source, translation]),
   ["Interactive guide to design and create a scheduled background automation.", "Руководство по созданию фоновых задач по расписанию: ежедневные сводки, еженедельные списки дел и другие повторяющиеся задания. Также открывается командой /automation."],
   ["Manage the separately connected second Gmail account used as a reserve mailbox and for service registrations, security notices, and account recovery.", "Работа с отдельно подключенным вторым Gmail для регистраций в сервисах, уведомлений безопасности и восстановления доступа. Поиск и чтение писем, очистка, метки, архивирование, вложения и подготовка сообщений в указанном втором ящике."],
@@ -1018,6 +1019,9 @@ function makePreloadScript(dictionary) {
     const normalized = normalize(value);
     if (!normalized) return null;
     if (planHintUi && planHintFragments.has(normalized)) return planHintFragments.get(normalized);
+    // A reviewed complete description wins over broad action prefixes such as Connect.
+    const catalogTranslation = translateCatalogDescription(normalized);
+    if (catalogTranslation) return catalogTranslation;
     const dynamicTranslation = translateDynamicUiText(String(value || "").trim()) || translateDynamicUiText(normalized);
     if (dynamicTranslation) return dynamicTranslation;
     const permissionTranslation = translatePermissionText(normalized);
@@ -1499,7 +1503,7 @@ function selfTestPreloadDom(injected) {
     ["div", { "data-testid": "planner-response-text" }],
     ["div", { contenteditable: "true" }], ["div", { translate: "no" }],
   ]) {
-    const leaves = [text("Model"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
+    const leaves = [text("Model"), text("Fast"), text("24 tools enabled"), text("Search Across Conversations"), text("Search conversations with "), text("Close other tabs"), text("You have used some of your weekly limit, it will fully refresh in 4 days, 19 hours."), ...CATALOG_DESCRIPTIONS.map(([source]) => text(source + "..."))];
     leaves.push(text("Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Opus 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("GPT-OSS 120B is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Opus 5.5 and Sonnet 5.5 are available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Notice"), text("Sonnet 5.5 is now available on paid Pro and Ultra plans. Third-party model access will no longer be available on your current plan starting on November 2, 2026."), text("Use Global Settings"), text("Fix with Agent"), text("Running commands"), text("Running python -c \"print('fixture')\""));
     if (attributes.class === "assistant-message markdown") {
       leaves.push(text("Playwright isn't installed. Identified the Yandex Browser executable path."));
@@ -1793,7 +1797,8 @@ function selfTest() {
   for (const [source, expected] of screenshotTranslations) {
     if (dictionary[source] !== expected) fail("Screenshot UI translation is missing for " + JSON.stringify(source) + ".");
   }
-  const preserveModelTerms = ["Economy", "Fast", "High", "Low", "Medium", "Thinking", "high", "low", "medium", "High capability", "High Capability", "High accuracy", "High intelligence", "Flash", "Flash Lite"];
+  if (dictionary.Fast !== "Быстрая") fail("Fast speed badge translation is missing");
+  const preserveModelTerms = ["Economy", "High", "Low", "Medium", "Thinking", "high", "low", "medium", "High capability", "High Capability", "High accuracy", "High intelligence", "Flash", "Flash Lite"];
   for (const term of preserveModelTerms) {
     if (Object.prototype.hasOwnProperty.call(dictionary, term)) fail("A model label should remain in English: " + term + ".");
   }
@@ -1993,9 +1998,9 @@ function explainAuditedUiCopy(value) {
   }
   const raw = String(value || "").trim();
   for (const [kind, translation] of [
+    ["catalog", translateCatalogDescription(normalized)],
     ["dynamic", translateDynamicUiText(raw)],
     ["dictionary", auditedUiDictionary.get(normalized) || auditedUiLowercase.get(normalized.toLowerCase())],
-    ["catalog", translateCatalogDescription(normalized)],
     ["scoped", translateScopedUiText(raw, true, false)],
     ["template", translateUiTemplate(raw)],
     ["generic-prefix", translateScopedUiText(raw)],
