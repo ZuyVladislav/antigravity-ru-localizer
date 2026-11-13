@@ -1,0 +1,467 @@
+[
+  {
+    "source": "Playback speed ${value}x",
+    "translation": "Скорость воспроизведения ${0}x",
+    "scope": "ui"
+  },
+  {
+    "source": "Zoom ${value}%, reset to fit",
+    "translation": "Масштаб ${0}%, сбросить по размеру окна",
+    "scope": "ui"
+  },
+  {
+    "source": "Nothing is running on port ${value}",
+    "translation": "На порту ${0} ничего не запущено",
+    "scope": "ui"
+  },
+  {
+    "source": "No server is listening on port ${value} inside the remote workspace. Start it, or ask the agent to, then retry.",
+    "translation": "В удаленном рабочем пространстве нет сервера на порту ${0}. Запустите его самостоятельно или попросите агента, затем повторите попытку.",
+    "scope": "ui"
+  },
+  {
+    "source": "script timed out after ${value}ms",
+    "translation": "Время ожидания сценария истекло через ${0} мс",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}. View site information",
+    "translation": "${0}. Сведения о сайте",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} download progress",
+    "translation": "Ход загрузки ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Show ${value} in folder",
+    "translation": "Показать ${0} в папке",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} could not find the requested page.",
+    "translation": "${0}: запрошенная страница не найдена.",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} is currently unable to handle this request.",
+    "translation": "${0}: сейчас не удается обработать этот запрос.",
+    "scope": "ui"
+  },
+  {
+    "source": "Give each Best of N fork a full clone of your workspace, including its local commit history. Choosing a winner then gives your workspace that fork's state, so the commits it made are kept. Forks take longer to create than the default CitC clone.${value}",
+    "translation": "Каждое ответвление сравнения Best of N получает полную копию рабочего пространства, включая локальную историю коммитов. При выборе лучшего варианта рабочее пространство принимает его состояние, сохраняя созданные коммиты. Создание таких ответвлений занимает больше времени, чем стандартное копирование CitC.${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Give each Best of N fork its own clone of your Git repository instead of a copy-on-write overlay. Each fork is then a real repository, so commits it makes are kept when you choose it as the winner. Forks take longer to create, and the wait grows with the size of your repository.${value}",
+    "translation": "Каждое ответвление сравнения Best of N получает отдельную копию репозитория Git вместо слоя копирования при записи. Коммиты ответвления сохраняются при выборе его лучшим вариантом. Копирование занимает больше времени, и ожидание растет с размером репозитория.${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Your Plan: ${value}",
+    "translation": "Ваш тариф: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Sign in from the ${value} panel.",
+    "translation": "Войдите через панель «${0}».",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} (disabled by admin)",
+    "translation": "${0} (отключено администратором)",
+    "scope": "ui"
+  },
+  {
+    "source": "Microphone blocked. Allow in ${value}.",
+    "translation": "Микрофон заблокирован. Разрешите доступ в ${0}.",
+    "scope": "ui"
+  },
+  {
+    "source": "Available AI Credits: ${value}",
+    "translation": "Доступно кредитов ИИ: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Recording shortcut for ${value}. Press keys to bind, Enter to save, Escape to cancel.",
+    "translation": "Назначение сочетания для «${0}». Нажмите нужные клавиши, Enter для сохранения или Escape для отмены.",
+    "scope": "ui"
+  },
+  {
+    "source": "Reset ${value} to default",
+    "translation": "Восстановить настройку «${0}» по умолчанию",
+    "scope": "ui"
+  },
+  {
+    "source": "This deletes ${value} (${value}) from your machine. You can't undo this.",
+    "translation": "С компьютера будут удалены ${0} (${1}). Это действие нельзя отменить.",
+    "scope": "ui"
+  },
+  {
+    "source": "Failed to save cloud permission settings: ${value}",
+    "translation": "Не удалось сохранить облачные разрешения: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} on this computer",
+    "translation": "${0} на этом компьютере",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} lines added, ${value} lines removed",
+    "translation": "Добавлено строк: ${0}, удалено строк: ${1}",
+    "scope": "ui"
+  },
+  {
+    "source": "Amended commit on ${value}.",
+    "translation": "Коммит в ${0} изменен.",
+    "scope": "ui"
+  },
+  {
+    "source": "A file already exists at ${value}.",
+    "translation": "По пути ${0} уже существует файл.",
+    "scope": "ui"
+  },
+  {
+    "source": "Can’t create this path — “${value}” is a file, not a folder.",
+    "translation": "Невозможно создать этот путь. «${0}» является файлом, а не папкой.",
+    "scope": "ui"
+  },
+  {
+    "source": "The folder “${value}” does not exist. Would you like to create it?",
+    "translation": "Папка «${0}» не существует. Создать ее?",
+    "scope": "ui"
+  },
+  {
+    "source": "“${value}” isn’t a valid folder name.",
+    "translation": "«${0}» не является допустимым названием папки.",
+    "scope": "ui"
+  },
+  {
+    "source": "Error while ${value}",
+    "translation": "Ошибка при ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Environment paused. Click to resume it and load the ${value}.",
+    "translation": "Среда приостановлена. Нажмите для возобновления и загрузки ${0}.",
+    "scope": "ui"
+  },
+  {
+    "source": "Agent needs permission to act on ${value}",
+    "translation": "Агенту требуется разрешение для действий с ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Skip (${value}), Skip All (${value})",
+    "translation": "Пропустить (${0}), пропустить все (${1})",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} folders in this project could not be loaded because their locations are invalid.",
+    "translation": "Не удалось загрузить папок в проекте: ${0}. Их расположения недопустимы.",
+    "scope": "ui"
+  },
+  {
+    "source": "On top of those defaults, ${value} requests the access below.",
+    "translation": "Помимо этих разрешений по умолчанию, ${0} запрашивает указанный ниже доступ.",
+    "scope": "ui"
+  },
+  {
+    "source": "Agents created by this ${value} run in a dedicated ${value} with its own permissions. You can change the permissions in the ${value} settings page.",
+    "translation": "Агенты, созданные этим ${0}, работают в отдельной ${1} с собственными разрешениями. Изменить их можно в настройках ${2}.",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}, setup required",
+    "translation": "${0}, требуется настройка",
+    "scope": "ui"
+  },
+  {
+    "source": "Preview unavailable — ${value}",
+    "translation": "Предпросмотр недоступен: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Move to Group: ${value}",
+    "translation": "Переместить в группу: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Forked from ${value}",
+    "translation": "Ответвление от ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Compare responses from ${value} models side-by-side to find the best result.",
+    "translation": "Сравните ответы ${0} моделей рядом и выберите лучший результат.",
+    "scope": "ui"
+  },
+  {
+    "source": "No connectors match “${value}”",
+    "translation": "Нет подключений по запросу «${0}»",
+    "scope": "ui"
+  },
+  {
+    "source": "+${value} more (Show all)",
+    "translation": "Еще ${0} (показать все)",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}. Starting in local workspace.",
+    "translation": "${0}. Запуск в локальном рабочем пространстве.",
+    "scope": "ui"
+  },
+  {
+    "source": "Detached at ${value}",
+    "translation": "Без привязки к ветке: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "System default (${value})",
+    "translation": "Системный по умолчанию (${0})",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}. Switch microphone.",
+    "translation": "${0}. Сменить микрофон.",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}. Switch mic",
+    "translation": "${0}. Сменить микрофон",
+    "scope": "ui"
+  },
+  {
+    "source": "Welcome to ${value}!",
+    "translation": "Добро пожаловать в ${0}!",
+    "scope": "ui"
+  },
+  {
+    "source": "No MCP servers found for \"${value}\"",
+    "translation": "Не найдены серверы MCP по запросу «${0}»",
+    "scope": "ui"
+  },
+  {
+    "source": "Search for \"${value}\" in the Marketplace",
+    "translation": "Найти «${0}» в каталоге",
+    "scope": "ui"
+  },
+  {
+    "source": "No plugins found for \"${value}\".",
+    "translation": "Не найдены плагины по запросу «${0}».",
+    "scope": "ui"
+  },
+  {
+    "source": "You have ${value} conversations in progress. Updating will interrupt them, and they will automatically resume once the update completes.",
+    "translation": "Сейчас выполняется диалогов: ${0}. Обновление прервет их, а после завершения они продолжатся автоматически.",
+    "scope": "ui"
+  },
+  {
+    "source": "You have ${value} conversations in progress. Updating will cancel them and you'll need to manually restart them.",
+    "translation": "Сейчас выполняется диалогов: ${0}. Обновление отменит их, и потребуется запустить их заново вручную.",
+    "scope": "ui"
+  },
+  {
+    "source": "Managed by the ${value} automation",
+    "translation": "Управляется автоматизацией «${0}»",
+    "scope": "ui"
+  },
+  {
+    "source": "Managed by the ${value} plugin",
+    "translation": "Управляется плагином «${0}»",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}. Show in ${value}",
+    "translation": "${0}. Показать в ${1}",
+    "scope": "ui"
+  },
+  {
+    "source": "Search Google for \"${value}\"",
+    "translation": "Найти в Google «${0}»",
+    "scope": "ui"
+  },
+  {
+    "source": "Connect an account for ${value} so the agent can run automations.",
+    "translation": "Подключите аккаунт для ${0}, чтобы агент мог запускать автоматизации.",
+    "scope": "ui"
+  },
+  {
+    "source": "Running for ${value}",
+    "translation": "Выполняется ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Endpoint ${value} not implemented",
+    "translation": "Конечная точка ${0} не поддерживается",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} color picker",
+    "translation": "Выбор цвета ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Failed to evict annotation index for page ${value}",
+    "translation": "Не удалось удалить индекс аннотаций страницы ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}. This commit is already pushed; amending will require a force push.",
+    "translation": "${0}. Этот коммит уже отправлен. Для изменения потребуется принудительная отправка.",
+    "scope": "ui"
+  },
+  {
+    "source": "Exited with code ${value}.",
+    "translation": "Завершено с кодом ${0}.",
+    "scope": "activity"
+  },
+  {
+    "source": "Waiting for command completion (up to ${value} seconds)",
+    "translation": "Ожидание завершения команды (до ${0} секунд)",
+    "scope": "activity"
+  },
+  {
+    "source": "Typing '${value}' in Browser",
+    "translation": "Ввод «${0}» в браузере",
+    "scope": "activity"
+  },
+  {
+    "source": "Typed '${value}' in Browser",
+    "translation": "Введено «${0}» в браузере",
+    "scope": "activity"
+  },
+  {
+    "source": "Message from ${value}",
+    "translation": "Сообщение от ${0}",
+    "scope": "activity"
+  },
+  {
+    "source": "Using browser · ${value}",
+    "translation": "Использует браузер · ${0}",
+    "scope": "activity"
+  },
+  {
+    "source": "${value} CEL values",
+    "translation": "Значения CEL: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} (Default)",
+    "translation": "${0} (по умолчанию)",
+    "scope": "ui"
+  },
+  {
+    "source": "Cancel ${value}",
+    "translation": "Отменить ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Stop ${value}?",
+    "translation": "Остановить «${0}»?",
+    "scope": "ui"
+  },
+  {
+    "source": "Stop ${value}",
+    "translation": "Остановить ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Shortcut ${value} for ${value}",
+    "translation": "Сочетание ${0} для ${1}",
+    "scope": "ui"
+  },
+  {
+    "source": "Choose ${value}'s Voice",
+    "translation": "Выбрать голос для ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value}, voice ${value} of ${value}",
+    "translation": "${0}, голос ${1} из ${2}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} (Experimental)",
+    "translation": "${0} (экспериментально)",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} (Remote)",
+    "translation": "${0} (удаленно)",
+    "scope": "ui"
+  },
+  {
+    "source": "Connect ${value}",
+    "translation": "Подключить ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} Failed",
+    "translation": "Не удалось выполнить: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Loading ${value}...",
+    "translation": "Загрузка ${0}…",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} failed",
+    "translation": "Не удалось выполнить: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} header",
+    "translation": "Заголовок ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} tab",
+    "translation": "Вкладка ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Select ${value} Theme",
+    "translation": "Выбрать тему «${0}»",
+    "scope": "ui"
+  },
+  {
+    "source": "Error: ${value}",
+    "translation": "Ошибка: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} archived",
+    "translation": "Архивировано: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} deleted",
+    "translation": "Удалено: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "Keep: ${value}",
+    "translation": "Оставить: ${0}",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} (unavailable)",
+    "translation": "${0} (недоступно)",
+    "scope": "ui"
+  },
+  {
+    "source": "${value} (latest)",
+    "translation": "${0} (актуальная версия)",
+    "scope": "ui"
+  },
+  {
+    "source": "Up ${value}",
+    "translation": "Работает ${0}",
+    "scope": "ui"
+  }
+]

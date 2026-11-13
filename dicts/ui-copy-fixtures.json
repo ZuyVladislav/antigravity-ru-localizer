@@ -1,6 +1,6 @@
 {
   "appVersion": "2.31.2",
-  "sourceBundleSha256": "8d1196a22cd3eb9779e8faf5c31eb732d3df8d9d037b685733ed4e3d6cdfb5a2",
+  "sourceBundleSha256": "00c7aa77bcd1f0bce710f98a97be1e10c0b0fe91770d79216c94b47f2e591308",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
     {
@@ -419,7 +419,7 @@
     },
     {
       "source": "Remove all",
-      "expected": "Удалить всё"
+      "expected": "Удалить все"
     },
     {
       "source": "Loading...",
@@ -703,7 +703,7 @@
     },
     {
       "source": "Signed-in accounts",
-      "expected": "Подключённые аккаунты"
+      "expected": "Подключенные аккаунты"
     },
     {
       "source": "Add account",
@@ -979,7 +979,7 @@
     },
     {
       "source": "Files Changed",
-      "expected": "Изменённые файлы"
+      "expected": "Измененные файлы"
     },
     {
       "source": "Killed",
@@ -1279,7 +1279,7 @@
     },
     {
       "source": "Chief of Staff voice mode stopped",
-      "expected": "Голосовой режим главного помощника завершён"
+      "expected": "Голосовой режим главного помощника завершен"
     },
     {
       "source": "View",
@@ -1311,7 +1311,7 @@
     },
     {
       "source": "Chief of Staff is listening — each spoken turn is sent to the Chief of Staff agent. Turn off: Ctrl+Shift+M",
-      "expected": "Руководитель штаба слушает — каждая произнесённая реплика отправляется его агенту. Выключить: Ctrl+Shift+M"
+      "expected": "Руководитель штаба слушает — каждая произнесенная реплика отправляется его агенту. Выключить: Ctrl+Shift+M"
     },
     {
       "source": "Turn on the Chief of Staff mic (always-on listener). Ctrl+Shift+M — hold for push-to-talk",
@@ -1371,7 +1371,7 @@
     },
     {
       "source": "Automation credentials expiring soon",
-      "expected": "Срок действия авторизации автоматизации скоро истечёт"
+      "expected": "Срок действия авторизации автоматизации скоро истечет"
     },
     {
       "source": "Settings",
@@ -1391,7 +1391,7 @@
     },
     {
       "source": "Your changes were not saved. Please try again.",
-      "expected": "Изменения не сохранены. Попробуйте ещё раз."
+      "expected": "Изменения не сохранены. Попробуйте еще раз."
     },
     {
       "source": "Edit automation title",
@@ -1419,11 +1419,11 @@
     },
     {
       "source": "Credential expires in less than 1 week. Click to refresh TDAT",
-      "expected": "Срок действия авторизации истечёт менее чем через неделю. Нажмите, чтобы обновить TDAT."
+      "expected": "Срок действия авторизации истечет менее чем через неделю. Нажмите, чтобы обновить TDAT."
     },
     {
       "source": "Credential expired. Click to refresh TDAT",
-      "expected": "Срок действия авторизации истёк. Нажмите, чтобы обновить TDAT."
+      "expected": "Срок действия авторизации истек. Нажмите, чтобы обновить TDAT."
     },
     {
       "source": "Search conversations...",
@@ -1467,7 +1467,7 @@
     },
     {
       "source": "Sets the all font styles of the rule: 'italic', 'bold', 'underline' or 'strikethrough' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-      "expected": "Задаёт стили шрифта правила: italic (курсив), bold (полужирный), underline (подчёркнутый), strikethrough (зачёркнутый) или их сочетание. Неуказанные стили отключаются. Пустая строка отключает все стили."
+      "expected": "Задает стили шрифта правила: italic (курсив), bold (полужирный), underline (подчеркнутый), strikethrough (зачеркнутый) или их сочетание. Неуказанные стили отключаются. Пустая строка отключает все стили."
     },
     {
       "source": "Sets or unsets the font style to bold. Note, the presence of 'fontStyle' overrides this setting.",
@@ -1479,11 +1479,11 @@
     },
     {
       "source": "Sets or unsets the font style to underline. Note, the presence of 'fontStyle' overrides this setting.",
-      "expected": "Включает или отключает подчёркивание. Параметр fontStyle имеет приоритет над этой настройкой."
+      "expected": "Включает или отключает подчеркивание. Параметр fontStyle имеет приоритет над этой настройкой."
     },
     {
       "source": "Sets or unsets the font style to strikethrough. Note, the presence of 'fontStyle' overrides this setting.",
-      "expected": "Включает или отключает зачёркивание. Параметр fontStyle имеет приоритет над этой настройкой."
+      "expected": "Включает или отключает зачеркивание. Параметр fontStyle имеет приоритет над этой настройкой."
     },
     {
       "source": "Environment Status",
@@ -1555,7 +1555,7 @@
     },
     {
       "source": "Switch to Dark Mode",
-      "expected": "Включить тёмную тему"
+      "expected": "Включить темную тему"
     },
     {
       "source": "Light Mode",
@@ -1563,7 +1563,7 @@
     },
     {
       "source": "Dark Mode",
-      "expected": "Тёмная тема"
+      "expected": "Темная тема"
     },
     {
       "source": "Fit to Width",
@@ -1619,7 +1619,7 @@
     },
     {
       "source": "More",
-      "expected": "Ещё"
+      "expected": "Еще"
     },
     {
       "source": "Navigation",
@@ -1703,7 +1703,7 @@
     },
     {
       "source": "Forward 5s (→)",
-      "expected": "Вперёд на 5 с (→)"
+      "expected": "Вперед на 5 с (→)"
     },
     {
       "source": "Volume",
@@ -1799,11 +1799,11 @@
     },
     {
       "source": "Credentials expiring soon. Refresh credentials to keep this automation running",
-      "expected": "Срок действия авторизации скоро истечёт. Обновите авторизацию, чтобы автоматизация продолжала работать"
+      "expected": "Срок действия авторизации скоро истечет. Обновите авторизацию, чтобы автоматизация продолжала работать"
     },
     {
       "source": "Credentials expired. This automation will not run until credentials are refreshed",
-      "expected": "Срок действия авторизации истёк. Автоматизация не будет выполняться до обновления авторизации"
+      "expected": "Срок действия авторизации истек. Автоматизация не будет выполняться до обновления авторизации"
     },
     {
       "source": "Runs in the cloud",
@@ -1835,7 +1835,7 @@
     },
     {
       "source": "Remote",
-      "expected": "Удалённые"
+      "expected": "Удаленные"
     },
     {
       "source": "Customizations source",
@@ -1847,7 +1847,7 @@
     },
     {
       "source": "No cloud plugins connected.",
-      "expected": "Нет подключённых облачных плагинов."
+      "expected": "Нет подключенных облачных плагинов."
     },
     {
       "source": "Cloud plugins error:",
@@ -1911,7 +1911,7 @@
     },
     {
       "source": "Remote Control isn't active on this instance. Enable it in",
-      "expected": "Удалённое управление не включено в этом экземпляре. Включите его в"
+      "expected": "Удаленное управление не включено в этом экземпляре. Включите его в"
     },
     {
       "source": "Unpin",
@@ -1999,11 +1999,11 @@
     },
     {
       "source": "Authentication expired",
-      "expected": "Срок действия авторизации истёк"
+      "expected": "Срок действия авторизации истек"
     },
     {
       "source": "Your session has expired. Please log back in to continue.",
-      "expected": "Срок действия сеанса истёк. Войдите снова, чтобы продолжить."
+      "expected": "Срок действия сеанса истек. Войдите снова, чтобы продолжить."
     },
     {
       "source": "Log back in",
@@ -2011,7 +2011,7 @@
     },
     {
       "source": "Autonomous mode active: the agent works independently and does not ask questions or request new permissions.",
-      "expected": "Автономный режим включён: агент работает самостоятельно, не задаёт вопросов и не запрашивает новые разрешения."
+      "expected": "Автономный режим включен: агент работает самостоятельно, не задает вопросов и не запрашивает новые разрешения."
     },
     {
       "source": "Magic Workspace capability is not available",
@@ -2043,7 +2043,7 @@
     },
     {
       "source": "Voice on",
-      "expected": "Голосовой ввод включён"
+      "expected": "Голосовой ввод включен"
     },
     {
       "source": "End voice",
@@ -2051,7 +2051,7 @@
     },
     {
       "source": "Voice recording is unavailable while the Chief of Staff mic is on",
-      "expected": "Запись голоса недоступна, пока включён микрофон главного помощника"
+      "expected": "Запись голоса недоступна, пока включен микрофон главного помощника"
     },
     {
       "source": "Initializing...",
@@ -2071,7 +2071,7 @@
     },
     {
       "source": "The agent works with autonomy-enhancing features and does not ask questions or request new permissions.",
-      "expected": "Агент использует функции автономной работы, не задаёт вопросов и не запрашивает новые разрешения."
+      "expected": "Агент использует функции автономной работы, не задает вопросов и не запрашивает новые разрешения."
     },
     {
       "source": "Folder",
@@ -2159,7 +2159,7 @@
     },
     {
       "source": "Create a project whose conversations run remotely.",
-      "expected": "Создать проект, диалоги которого выполняются удалённо."
+      "expected": "Создать проект, диалоги которого выполняются удаленно."
     },
     {
       "source": "Currently installed",
@@ -2199,7 +2199,7 @@
     },
     {
       "source": "Account connected.",
-      "expected": "Аккаунт подключён."
+      "expected": "Аккаунт подключен."
     },
     {
       "source": "This plugin requires authentication before the agent can use its tools.",
@@ -2227,7 +2227,7 @@
     },
     {
       "source": "Connected apps",
-      "expected": "Подключённые приложения"
+      "expected": "Подключенные приложения"
     },
     {
       "source": "Sign in once and your agent can use these apps on any device. Nothing is installed on this computer.",
@@ -2239,7 +2239,7 @@
     },
     {
       "source": "No apps connected yet. Connect one from Marketplace.",
-      "expected": "Приложения ещё не подключены. Подключите приложение из каталога."
+      "expected": "Приложения еще не подключены. Подключите приложение из каталога."
     },
     {
       "source": "Apps",
@@ -2291,7 +2291,7 @@
     },
     {
       "source": "Failed to validate the saved GitHub token.",
-      "expected": "Не удалось проверить сохранённый токен GitHub."
+      "expected": "Не удалось проверить сохраненный токен GitHub."
     },
     {
       "source": "Failed to save GitHub PAT token:",
@@ -2467,7 +2467,7 @@
     },
     {
       "source": "Live chat in progress",
-      "expected": "Идёт живой чат"
+      "expected": "Идет живой чат"
     },
     {
       "source": "Drop to attach",
@@ -2599,7 +2599,7 @@
     },
     {
       "source": "Connected Google Drive and GitHub resources",
-      "expected": "Подключённые ресурсы Google Диска и GitHub"
+      "expected": "Подключенные ресурсы Google Диска и GitHub"
     },
     {
       "source": "Manage and delete your data anytime",
@@ -2663,7 +2663,7 @@
     },
     {
       "source": "Logs each telemetry event to the browser's DevTools console as it fires, with the click or key that caused it. Stays on across reloads until you turn it off.",
-      "expected": "Записывает события телеметрии в консоль инструментов разработчика браузера вместе с вызвавшим их нажатием. Настройка сохраняется после перезагрузки, пока вы её не выключите."
+      "expected": "Записывает события телеметрии в консоль инструментов разработчика браузера вместе с вызвавшим их нажатием. Настройка сохраняется после перезагрузки, пока вы ее не выключите."
     },
     {
       "source": "Default (Mendel)",
@@ -2683,7 +2683,7 @@
     },
     {
       "source": "One live model talks and hands real lookups to Jetski.",
-      "expected": "Модель ведёт разговор и передаёт поиск данных Jetski."
+      "expected": "Модель ведет разговор и передает поиск данных Jetski."
     },
     {
       "source": "e.g., https://example.com",
@@ -2695,7 +2695,7 @@
     },
     {
       "source": "Files, folders, and repositories you connect are accessible to your agent in this project, including during background or scheduled runs.",
-      "expected": "Подключённые файлы, папки и репозитории доступны агенту в этом проекте, в том числе при фоновых и запланированных запусках."
+      "expected": "Подключенные файлы, папки и репозитории доступны агенту в этом проекте, в том числе при фоновых и запланированных запусках."
     },
     {
       "source": "Work in Google3. Create conversations in new and existing workspaces.",
@@ -3932,6 +3932,2186 @@
     {
       "source": "No plugins installed.",
       "expected": "Нет установленных плагинов."
+    },
+    {
+      "source": "Reopen Closed Tab",
+      "expected": "Открыть закрытую вкладку"
+    },
+    {
+      "source": "Move Conversation Up",
+      "expected": "Переместить диалог вверх"
+    },
+    {
+      "source": "Move Conversation Down",
+      "expected": "Переместить диалог вниз"
+    },
+    {
+      "source": "Previous Side Panel Tab",
+      "expected": "Предыдущая вкладка боковой панели"
+    },
+    {
+      "source": "Next Side Panel Tab",
+      "expected": "Следующая вкладка боковой панели"
+    },
+    {
+      "source": "Save Video",
+      "expected": "Сохранить видео"
+    },
+    {
+      "source": "Muted",
+      "expected": "Звук выключен"
+    },
+    {
+      "source": "Playback speed (< / >)",
+      "expected": "Скорость воспроизведения (< / >)"
+    },
+    {
+      "source": "Exit fullscreen (f)",
+      "expected": "Выйти из полноэкранного режима (f)"
+    },
+    {
+      "source": "Fullscreen (f)",
+      "expected": "Полный экран (f)"
+    },
+    {
+      "source": "Download video",
+      "expected": "Скачать видео"
+    },
+    {
+      "source": "Download image",
+      "expected": "Скачать изображение"
+    },
+    {
+      "source": "in a terminal",
+      "expected": "в терминале"
+    },
+    {
+      "source": "to upload",
+      "expected": "для загрузки"
+    },
+    {
+      "source": "Upload to Agent",
+      "expected": "Загрузить агенту"
+    },
+    {
+      "source": ". If a page fails to load, use the",
+      "expected": ". Если страница не загружается, используйте"
+    },
+    {
+      "source": "icon in the URL bar.",
+      "expected": "значок в адресной строке."
+    },
+    {
+      "source": "The remote workspace is not running",
+      "expected": "Удаленное рабочее пространство не запущено"
+    },
+    {
+      "source": "This page is taking longer than expected to load, or it may be blocking embedded views (via X-Frame-Options or CSP).",
+      "expected": "Страница загружается дольше обычного или запрещает встроенный просмотр через X-Frame-Options либо CSP."
+    },
+    {
+      "source": "We'll keep waiting, or you can open it directly in a new tab.",
+      "expected": "Можно подождать или открыть страницу напрямую в новой вкладке."
+    },
+    {
+      "source": "Some sites block embedding (via X-Frame-Options or CSP) and will show a fallback message. Blocked-page detection is best-effort (based on a load timeout), so it may occasionally be wrong. Use \"Open in new tab\" if a page doesn't load.",
+      "expected": "Некоторые сайты запрещают встраивание через X-Frame-Options или CSP. В этом случае появится сообщение об ограничении. Определение блокировки по времени ожидания загрузки может ошибаться. Если страница не загружается, используйте «Открыть в новой вкладке»."
+    },
+    {
+      "source": "PageAgent batch call failed",
+      "expected": "Не удалось выполнить пакет действий PageAgent"
+    },
+    {
+      "source": "This page is blocked in the built-in browser by your organization's Context-Aware Access policy.",
+      "expected": "Политика контекстного доступа вашей организации запрещает эту страницу во встроенном браузере."
+    },
+    {
+      "source": "Your connection is not private",
+      "expected": "Подключение не защищено"
+    },
+    {
+      "source": "Attackers might be trying to steal your information from",
+      "expected": "Злоумышленники могут пытаться получить ваши данные с сайта"
+    },
+    {
+      "source": "(for example, passwords, messages, or credit cards).",
+      "expected": "(например, пароли, сообщения или данные банковских карт)."
+    },
+    {
+      "source": "Hide advanced",
+      "expected": "Скрыть дополнительные сведения"
+    },
+    {
+      "source": "Back to safety",
+      "expected": "Вернуться на безопасную страницу"
+    },
+    {
+      "source": "normally uses encryption to protect your information. When the browser tried to connect to",
+      "expected": "обычно шифрует передаваемые данные. При попытке подключения к"
+    },
+    {
+      "source": "this time, the website sent back unusual and incorrect credentials.",
+      "expected": "в этот раз сайт предоставил необычные и некорректные учетные данные."
+    },
+    {
+      "source": "Proceed to",
+      "expected": "Перейти на"
+    },
+    {
+      "source": "(unsafe)",
+      "expected": "(небезопасно)"
+    },
+    {
+      "source": "No compatible devices found.",
+      "expected": "Совместимые устройства не найдены."
+    },
+    {
+      "source": "Issued to",
+      "expected": "Кому выдан"
+    },
+    {
+      "source": "Issued by",
+      "expected": "Кем выдан"
+    },
+    {
+      "source": "Valid until",
+      "expected": "Действителен до"
+    },
+    {
+      "source": "Protocol",
+      "expected": "Протокол"
+    },
+    {
+      "source": "Security",
+      "expected": "Безопасность"
+    },
+    {
+      "source": "Clearing cookies and site data for",
+      "expected": "Удаление файлов cookie и данных сайта"
+    },
+    {
+      "source": "may sign you out of this site.",
+      "expected": "может привести к выходу из аккаунта на этом сайте."
+    },
+    {
+      "source": "Clear cookies and site data",
+      "expected": "Удалить файлы cookie и данные сайта"
+    },
+    {
+      "source": "Site data cleared for",
+      "expected": "Удалены данные сайта"
+    },
+    {
+      "source": "Could not clear site data for",
+      "expected": "Не удалось удалить данные сайта"
+    },
+    {
+      "source": "Certificate details",
+      "expected": "Сведения о сертификате"
+    },
+    {
+      "source": "Cookies and site data",
+      "expected": "Файлы cookie и данные сайта"
+    },
+    {
+      "source": "Downloads, in progress",
+      "expected": "Загрузки выполняются"
+    },
+    {
+      "source": "Downloads",
+      "expected": "Загрузки"
+    },
+    {
+      "source": "No recent downloads",
+      "expected": "Недавних загрузок нет"
+    },
+    {
+      "source": "Show in folder",
+      "expected": "Показать в папке"
+    },
+    {
+      "source": "Cancel download",
+      "expected": "Отменить загрузку"
+    },
+    {
+      "source": "Exit inspect element mode (Esc)",
+      "expected": "Выйти из режима выбора элемента (Esc)"
+    },
+    {
+      "source": "Inspect element to comment",
+      "expected": "Выбрать элемент для комментария"
+    },
+    {
+      "source": "Controls whether terminal commands require your approval before running. Note: A change to this setting will only apply to new messages sent to the agent. In-progress responses will use the previous setting value.",
+      "expected": "Определяет, нужно ли ваше разрешение перед выполнением команд в терминале. Изменение применяется только к новым сообщениям агенту. Уже выполняющиеся ответы используют прежнее значение."
+    },
+    {
+      "source": "Choose a Subscription",
+      "expected": "Выберите подписку"
+    },
+    {
+      "source": "Other License",
+      "expected": "Другая лицензия"
+    },
+    {
+      "source": "Confirm Selection",
+      "expected": "Подтвердить выбор"
+    },
+    {
+      "source": "This permanently deletes all of your Remote Agents conversations, projects, scheduled tasks, connected plugins and settings, and stops any running remote agents. It can't be undone. Data in the desktop app and your Google account are not affected, and you can keep using Remote Agents afterwards.",
+      "expected": "Все диалоги, проекты, задания по расписанию, подключенные плагины и настройки удаленных агентов будут удалены без возможности восстановления. Работающие удаленные агенты остановятся. Данные настольного приложения и аккаунта Google не затрагиваются. После удаления вы сможете продолжить пользоваться удаленными агентами."
+    },
+    {
+      "source": "Couldn't delete your data. Try again.",
+      "expected": "Не удалось удалить данные. Повторите попытку."
+    },
+    {
+      "source": "QR code",
+      "expected": "QR-код"
+    },
+    {
+      "source": "The app is currently connected to a WSL distro. Reopening locally relaunches it directly on Windows.",
+      "expected": "Приложение подключено к дистрибутиву WSL. Команда «Открыть локально» перезапустит его непосредственно в Windows."
+    },
+    {
+      "source": "Reopen Locally",
+      "expected": "Открыть локально"
+    },
+    {
+      "source": "Validation timed out.",
+      "expected": "Время ожидания проверки истекло."
+    },
+    {
+      "source": "⚠️ Warning: \"Always Proceed\" is enabled without sandbox protection. This is very dangerous and we do not recommend doing this.",
+      "expected": "⚠️ Внимание: режим «Всегда продолжать» включен без защиты изолированной среды. Это очень опасно, и мы не рекомендуем такой режим."
+    },
+    {
+      "source": "Download files",
+      "expected": "Скачивание файлов"
+    },
+    {
+      "source": "Allow/deny agent browser file downloads from specific sites.",
+      "expected": "Разрешение или запрет скачивания файлов браузерным агентом с отдельных сайтов."
+    },
+    {
+      "source": "e.g., example.com",
+      "expected": "Например, example.com"
+    },
+    {
+      "source": "Flags come from Mendel experiments and from the host app. Overrides are local to this browser and change how every feature gated on the flag resolves. Some features are only read at startup — reload the window if a change does not take effect.",
+      "expected": "Флаги задаются экспериментами Mendel и основным приложением. Переопределения действуют только в этом браузере и меняют работу всех функций, зависящих от флага. Некоторые функции читают флаг только при запуске. Если изменение не сработало, перезагрузите окно."
+    },
+    {
+      "source": ". Reload the window if a change does not take effect.",
+      "expected": ". Если изменение не сработало, перезагрузите окно."
+    },
+    {
+      "source": "Couldn't connect",
+      "expected": "Не удалось подключиться"
+    },
+    {
+      "source": "(not set)",
+      "expected": "(не задано)"
+    },
+    {
+      "source": ". Active workspace URI:",
+      "expected": ". Адрес активного рабочего пространства:"
+    },
+    {
+      "source": "(none)",
+      "expected": "(нет)"
+    },
+    {
+      "source": ". Applying or clearing reloads the window. Suggestions come from your recent workspaces and the folders of your existing projects and their environments",
+      "expected": ". Применение или сброс перезагружает окно. Подсказки берутся из недавних рабочих пространств, папок существующих проектов и их сред"
+    },
+    {
+      "source": "(still loading…)",
+      "expected": "(загрузка продолжается…)"
+    },
+    {
+      "source": "Developer-only tools. These settings do not affect other users.",
+      "expected": "Инструменты разработчика. Эти настройки не влияют на других пользователей."
+    },
+    {
+      "source": "Please describe the feature you'd like to see. The more detailed the requirements, the easier it will be for our team to incorporate your ideas. Some helpful information includes:",
+      "expected": "Опишите желаемую функцию. Чем подробнее требования, тем проще нашей команде учесть ваши идеи. Полезно указать следующее:"
+    },
+    {
+      "source": "Use this form if you cannot connect to Remote Control. If your instance is already connected and you are experiencing issues in the browser, report directly from the Remote Control web page so that relevant logs are included. Some helpful information includes:",
+      "expected": "Используйте эту форму, если не удается подключиться к удаленному управлению. Если подключение уже работает, а проблема возникает в браузере, отправьте отчет со страницы удаленного управления, чтобы приложить нужные журналы. Полезно указать следующее:"
+    },
+    {
+      "source": "Join the Google Chat space",
+      "expected": "Присоединиться к пространству Google Chat"
+    },
+    {
+      "source": "Ask questions, report issues, and discuss features",
+      "expected": "Задавайте вопросы, сообщайте о проблемах и обсуждайте функции"
+    },
+    {
+      "source": "Visit",
+      "expected": "Откройте"
+    },
+    {
+      "source": "Legal Help",
+      "expected": "Юридическая помощь"
+    },
+    {
+      "source": "to ask for content changes for legal reasons.",
+      "expected": "для запроса на изменение контента по юридическим основаниям."
+    },
+    {
+      "source": "selected",
+      "expected": "выбрано"
+    },
+    {
+      "source": "Nothing is running right now",
+      "expected": "Сейчас ничего не выполняется"
+    },
+    {
+      "source": "Running processes are killed. This cannot be undone.",
+      "expected": "Работающие процессы будут завершены. Это действие нельзя отменить."
+    },
+    {
+      "source": "Select all in",
+      "expected": "Выбрать все в"
+    },
+    {
+      "source": "Stopping…",
+      "expected": "Остановка…"
+    },
+    {
+      "source": "Still running",
+      "expected": "Продолжает работать"
+    },
+    {
+      "source": "Excluded",
+      "expected": "Исключено"
+    },
+    {
+      "source": "tokens (",
+      "expected": "токенов ("
+    },
+    {
+      "source": "Powered by Gemini Live ·",
+      "expected": "На базе Gemini Live ·"
+    },
+    {
+      "source": "You can change this in",
+      "expected": "Это можно изменить в"
+    },
+    {
+      "source": "later.",
+      "expected": "позже."
+    },
+    {
+      "source": "when working",
+      "expected": "при работе"
+    },
+    {
+      "source": "automation.",
+      "expected": "автоматизацией."
+    },
+    {
+      "source": "managed by your organization",
+      "expected": "управляется вашей организацией"
+    },
+    {
+      "source": "Your agent’s ability to execute commands is also controlled by enterprise security policies.",
+      "expected": "Возможность агента выполнять команды также регулируется политиками безопасности организации."
+    },
+    {
+      "source": "plugins available.",
+      "expected": "доступных плагинов."
+    },
+    {
+      "source": "Organization MCP Allowlist (Read-Only)",
+      "expected": "Разрешенные серверы MCP организации (только чтение)"
+    },
+    {
+      "source": "+ Add Hook",
+      "expected": "+ Добавить обработчик"
+    },
+    {
+      "source": "No MCP servers found for \"",
+      "expected": "Не найдены серверы MCP по запросу «"
+    },
+    {
+      "source": "If you add multiple accounts, MCP servers use the one marked Default.",
+      "expected": "Если добавлено несколько аккаунтов, серверы MCP используют аккаунт по умолчанию."
+    },
+    {
+      "source": "Waiting for you to finish signing in…",
+      "expected": "Ожидание завершения входа…"
+    },
+    {
+      "source": "Sign-in failed:",
+      "expected": "Не удалось войти:"
+    },
+    {
+      "source": "Needs re-auth",
+      "expected": "Требуется повторный вход"
+    },
+    {
+      "source": "No sign-in needed",
+      "expected": "Вход не требуется"
+    },
+    {
+      "source": "Domains:",
+      "expected": "Домены:"
+    },
+    {
+      "source": "Finish signing in in your browser.",
+      "expected": "Завершите вход в браузере."
+    },
+    {
+      "source": "Checking…",
+      "expected": "Проверка…"
+    },
+    {
+      "source": "Used for:",
+      "expected": "Используется для:"
+    },
+    {
+      "source": "Get API key",
+      "expected": "Получить ключ API"
+    },
+    {
+      "source": "Paste the code shown after you sign in.",
+      "expected": "Вставьте код, полученный после входа."
+    },
+    {
+      "source": "Loading resources...",
+      "expected": "Загрузка ресурсов…"
+    },
+    {
+      "source": "Connect your account to browse",
+      "expected": "Подключите аккаунт для просмотра"
+    },
+    {
+      "source": "No matching resources found.",
+      "expected": "Подходящие ресурсы не найдены."
+    },
+    {
+      "source": "Here's how uploaded files, attachments, and connected resources work in your cloud environment",
+      "expected": "Как загруженные файлы, вложения и подключенные ресурсы используются в облачной среде"
+    },
+    {
+      "source": "Avoid uploading highly sensitive data and verify actions taken by your agent. Make sure you have the",
+      "expected": "Не загружайте особо конфиденциальные данные и проверяйте действия агента. Убедитесь, что у вас есть"
+    },
+    {
+      "source": "necessary rights",
+      "expected": "необходимые права"
+    },
+    {
+      "source": "to any content or files that you upload, including content of minors. Don't generate content that infringes on others' rights, including content that deceives, harasses, or harms. When using Antigravity, you must comply with Google's",
+      "expected": "на любой загружаемый контент и файлы, включая контент с участием несовершеннолетних. Не создавайте контент, нарушающий чужие права, вводящий в заблуждение, преследующий людей или причиняющий вред. При использовании Antigravity необходимо соблюдать"
+    },
+    {
+      "source": "Prohibited Use Policy",
+      "expected": "Правила допустимого использования Google"
+    },
+    {
+      "source": ". Your use is subject to the",
+      "expected": ". Использование также регулируется"
+    },
+    {
+      "source": "Google Antigravity Terms of Service",
+      "expected": "Условиями использования Google Antigravity"
+    },
+    {
+      "source": "Uploaded files and connected resources are mounted in your cloud environment.",
+      "expected": "Загруженные файлы и подключенные ресурсы доступны в вашей облачной среде."
+    },
+    {
+      "source": "with this name already exists.",
+      "expected": "с таким названием уже существует."
+    },
+    {
+      "source": "No resources added yet.",
+      "expected": "Ресурсы пока не добавлены."
+    },
+    {
+      "source": "is managed by the",
+      "expected": "управляется"
+    },
+    {
+      "source": "automation and can only be deleted by deleting that automation.",
+      "expected": "автоматизацией и удаляется только вместе с ней."
+    },
+    {
+      "source": "including",
+      "expected": "включая"
+    },
+    {
+      "source": "Show Less",
+      "expected": "Показать меньше"
+    },
+    {
+      "source": "Summarizing call…",
+      "expected": "Подготовка сводки звонка…"
+    },
+    {
+      "source": "Nothing said yet",
+      "expected": "Пока ничего не сказано"
+    },
+    {
+      "source": "Failed to revert conversation",
+      "expected": "Не удалось откатить диалог"
+    },
+    {
+      "source": "from AI Studio",
+      "expected": "из AI Studio"
+    },
+    {
+      "source": "Failed to download Firebase skill.",
+      "expected": "Не удалось скачать навык Firebase."
+    },
+    {
+      "source": "Error occurred during import.",
+      "expected": "При импорте произошла ошибка."
+    },
+    {
+      "source": "more...",
+      "expected": "еще…"
+    },
+    {
+      "source": "Canvas · written by your Chief of Staff · display only",
+      "expected": "Холст · подготовлен вашим координатором · только просмотр"
+    },
+    {
+      "source": "Canvas page · display only",
+      "expected": "Страница холста · только просмотр"
+    },
+    {
+      "source": "Suggested plugin:",
+      "expected": "Рекомендуемый плагин:"
+    },
+    {
+      "source": "insertion",
+      "expected": "добавление"
+    },
+    {
+      "source": "deletion",
+      "expected": "удаление"
+    },
+    {
+      "source": "Cancel Questionnaire and Stop the Agent",
+      "expected": "Отменить опрос и остановить агента"
+    },
+    {
+      "source": "results",
+      "expected": "результатов"
+    },
+    {
+      "source": "above hidden)",
+      "expected": "выше скрыто)"
+    },
+    {
+      "source": "Internal error",
+      "expected": "Внутренняя ошибка"
+    },
+    {
+      "source": "Could not load the app view:",
+      "expected": "Не удалось загрузить представление приложения:"
+    },
+    {
+      "source": "AI Credits are used when you've exceeded your model quota. Keep track of your current AI Credits in the",
+      "expected": "Кредиты ИИ используются после исчерпания лимита модели. Остаток кредитов ИИ можно посмотреть в"
+    },
+    {
+      "source": "above hidden",
+      "expected": "выше скрыто"
+    },
+    {
+      "source": "image",
+      "expected": "изображение"
+    },
+    {
+      "source": "result",
+      "expected": "результат"
+    },
+    {
+      "source": "element \"",
+      "expected": "элемент «"
+    },
+    {
+      "source": "web",
+      "expected": "веб"
+    },
+    {
+      "source": "(skipped)",
+      "expected": "(пропущено)"
+    },
+    {
+      "source": "question",
+      "expected": "вопрос"
+    },
+    {
+      "source": "Using browser",
+      "expected": "Использует браузер"
+    },
+    {
+      "source": "· estimated",
+      "expected": "· оценка"
+    },
+    {
+      "source": "needs a few details from you before it can run.",
+      "expected": "требует нескольких уточнений перед запуском."
+    },
+    {
+      "source": "Resolving...",
+      "expected": "Определение…"
+    },
+    {
+      "source": "Agents created by",
+      "expected": "Агенты, созданные"
+    },
+    {
+      "source": "run in a dedicated",
+      "expected": "работают в отдельной"
+    },
+    {
+      "source": "with its own permissions, which you can change anytime in the",
+      "expected": "с собственными разрешениями. Их можно изменить в любой момент на"
+    },
+    {
+      "source": "settings page.",
+      "expected": "странице настроек."
+    },
+    {
+      "source": "Show submitted (",
+      "expected": "Показать отправленные ("
+    },
+    {
+      "source": "Disk is full. Search will no longer match in conversation bodies until you clear up space and restart.",
+      "expected": "Диск заполнен. Поиск по тексту диалогов не будет работать, пока вы не освободите место и не перезапустите приложение."
+    },
+    {
+      "source": "Only Archived",
+      "expected": "Только архивные"
+    },
+    {
+      "source": "Only Automations",
+      "expected": "Только автоматизации"
+    },
+    {
+      "source": "Only Scheduled",
+      "expected": "Только запланированные"
+    },
+    {
+      "source": "does not collect any of your prompts, content, or model responses but does collect general usage patterns such as feature adoption and active user counts (“product analytics”). Telemetry data will be handled in accordance with the Google Privacy Policy.",
+      "expected": "не собирает ваши запросы, контент или ответы моделей, но собирает общую статистику использования функций и количества активных пользователей. Данные телеметрии обрабатываются в соответствии с Политикой конфиденциальности Google."
+    },
+    {
+      "source": "(excluding product analytics data)",
+      "expected": "(кроме статистики использования продукта)"
+    },
+    {
+      "source": "One last thing before getting started…",
+      "expected": "Последний шаг перед началом…"
+    },
+    {
+      "source": "says.",
+      "expected": "говорит."
+    },
+    {
+      "source": "’s agents are powerful and will help you get a lot done better and faster than before, but still make sure to verify the actions taken by the agent.",
+      "expected": "помогут выполнять больше задач качественнее и быстрее. При этом всегда проверяйте действия агента."
+    },
+    {
+      "source": "does not collect any of your prompts, content, or model responses but will still collect general usage patterns (e.g., feature adoption, active user counts).",
+      "expected": "не собирает ваши запросы, контент или ответы моделей, но собирает общую статистику, например использование функций и количество активных пользователей."
+    },
+    {
+      "source": ". You can control this from your settings at any point.",
+      "expected": ". Это можно в любой момент изменить в настройках."
+    },
+    {
+      "source": "Here's how you and your agents work together",
+      "expected": "Как вы и ваши агенты работаете вместе"
+    },
+    {
+      "source": "Press",
+      "expected": "Нажмите"
+    },
+    {
+      "source": "to switch to the Gemini app. Your agents keep working in the background.",
+      "expected": "для перехода в приложение Gemini. Агенты продолжат работать в фоне."
+    },
+    {
+      "source": "panel",
+      "expected": "панель"
+    },
+    {
+      "source": "Could not load",
+      "expected": "Не удалось загрузить"
+    },
+    {
+      "source": "References",
+      "expected": "Ссылки"
+    },
+    {
+      "source": "Unable to load PDF:",
+      "expected": "Не удалось загрузить PDF:"
+    },
+    {
+      "source": "Don't enter corp passwords",
+      "expected": "Не вводите корпоративные пароли"
+    },
+    {
+      "source": "Artifacts like Google Docs, PDFs, Office documents (Word, Excel, PowerPoint), etc. Everything else the agent creates is under Artifacts.",
+      "expected": "Материалы, например Google Docs, PDF и документы Office (Word, Excel, PowerPoint). Все остальное, что создает агент, находится в разделе «Материалы»."
+    },
+    {
+      "source": "Something went wrong.",
+      "expected": "Произошла ошибка."
+    },
+    {
+      "source": "This conversation grew too large, so the history before this point may be missing or incomplete.",
+      "expected": "Диалог стал слишком большим. История до этой точки может отсутствовать или быть неполной."
+    },
+    {
+      "source": "You said",
+      "expected": "Вы сказали"
+    },
+    {
+      "source": "Agent working",
+      "expected": "Агент работает"
+    },
+    {
+      "source": "Agent said",
+      "expected": "Агент сказал"
+    },
+    {
+      "source": "Replacing removes the currently installed plugin and installs the new one in its place.",
+      "expected": "При замене установленный плагин будет удален, а новый установлен на его место."
+    },
+    {
+      "source": "Replacing...",
+      "expected": "Замена…"
+    },
+    {
+      "source": "Replace",
+      "expected": "Заменить"
+    },
+    {
+      "source": "Local only",
+      "expected": "Только локально"
+    },
+    {
+      "source": "Remote only",
+      "expected": "Только удаленно"
+    },
+    {
+      "source": "Couldn't switch accounts:",
+      "expected": "Не удалось переключить аккаунт:"
+    },
+    {
+      "source": ". To use another account, add it in the",
+      "expected": ". Чтобы использовать другой аккаунт, добавьте его в"
+    },
+    {
+      "source": "and make it the default.",
+      "expected": "и сделайте аккаунтом по умолчанию."
+    },
+    {
+      "source": "Signed in as",
+      "expected": "Выполнен вход как"
+    },
+    {
+      "source": ". To add another account, go to the",
+      "expected": ". Чтобы добавить другой аккаунт, откройте"
+    },
+    {
+      "source": "Event:",
+      "expected": "Событие:"
+    },
+    {
+      "source": "Target Tools:",
+      "expected": "Целевые инструменты:"
+    },
+    {
+      "source": "Definition:",
+      "expected": "Определение:"
+    },
+    {
+      "source": "No logs available.",
+      "expected": "Журналы отсутствуют."
+    },
+    {
+      "source": "Side Pane UI Available",
+      "expected": "Доступна панель интерфейса"
+    },
+    {
+      "source": "Stream and control",
+      "expected": "Поток и управление"
+    },
+    {
+      "source": "directly in the side pane.",
+      "expected": "непосредственно в боковой панели."
+    },
+    {
+      "source": "Recent Events",
+      "expected": "Последние события"
+    },
+    {
+      "source": "Full Logs",
+      "expected": "Полные журналы"
+    },
+    {
+      "source": "No events recorded",
+      "expected": "События не записаны"
+    },
+    {
+      "source": "Events and stdout streams will appear here as they occur.",
+      "expected": "События и вывод программы появятся здесь по мере поступления."
+    },
+    {
+      "source": "This automation is currently stopped. Events and stdout streams will appear here once started.",
+      "expected": "Автоматизация остановлена. События и вывод программы появятся после запуска."
+    },
+    {
+      "source": "This extension is currently stopped. Events and stdout streams will appear here once started.",
+      "expected": "Расширение остановлено. События и вывод программы появятся после запуска."
+    },
+    {
+      "source": "Start Automation",
+      "expected": "Запустить автоматизацию"
+    },
+    {
+      "source": "Start Extension",
+      "expected": "Запустить расширение"
+    },
+    {
+      "source": "Managed by plugin",
+      "expected": "Управляется плагином"
+    },
+    {
+      "source": "Pick one of these themes under Preset in Settings > Appearance.",
+      "expected": "Выберите одну из этих тем в разделе «Настройки > Оформление > Готовая тема»."
+    },
+    {
+      "source": "Accounts tab",
+      "expected": "Вкладка «Аккаунты»"
+    },
+    {
+      "source": "To switch accounts, sign out in the",
+      "expected": "Для переключения аккаунта выйдите из него на"
+    },
+    {
+      "source": "and sign in again.",
+      "expected": "и войдите снова."
+    },
+    {
+      "source": "This server needs you to sign in before the agent can use its tools.",
+      "expected": "Войдите в аккаунт, чтобы агент мог использовать инструменты этого сервера."
+    },
+    {
+      "source": "These servers need you to sign in before the agent can use their tools.",
+      "expected": "Войдите в аккаунты, чтобы агент мог использовать инструменты этих серверов."
+    },
+    {
+      "source": "Configured servers",
+      "expected": "Настроенные серверы"
+    },
+    {
+      "source": "This plugin was force disabled.",
+      "expected": "Этот плагин принудительно отключен."
+    },
+    {
+      "source": "Search Google Drive",
+      "expected": "Поиск в Google Drive"
+    },
+    {
+      "source": "Docs, Sheets, Slides, and folders",
+      "expected": "Документы, таблицы, презентации и папки"
+    },
+    {
+      "source": "Browse MCP resources",
+      "expected": "Просмотр ресурсов MCP"
+    },
+    {
+      "source": "Browse rules",
+      "expected": "Просмотр правил"
+    },
+    {
+      "source": "Attach terminal output",
+      "expected": "Прикрепить вывод терминала"
+    },
+    {
+      "source": "line",
+      "expected": "строка"
+    },
+    {
+      "source": "lines",
+      "expected": "строк"
+    },
+    {
+      "source": "Empty table",
+      "expected": "Таблица пуста"
+    },
+    {
+      "source": "Filter rows...",
+      "expected": "Фильтр строк…"
+    },
+    {
+      "source": "Filter rows",
+      "expected": "Фильтр строк"
+    },
+    {
+      "source": "Clear row filter",
+      "expected": "Сбросить фильтр строк"
+    },
+    {
+      "source": "This chat's environment is paused",
+      "expected": "Среда этого диалога приостановлена"
+    },
+    {
+      "source": "Resuming environment…",
+      "expected": "Возобновление среды…"
+    },
+    {
+      "source": "Find References",
+      "expected": "Найти ссылки"
+    },
+    {
+      "source": "Filter files...",
+      "expected": "Фильтр файлов…"
+    },
+    {
+      "source": "Filter files",
+      "expected": "Фильтр файлов"
+    },
+    {
+      "source": "Clear file filter",
+      "expected": "Сбросить фильтр файлов"
+    },
+    {
+      "source": "No matching files",
+      "expected": "Подходящие файлы не найдены"
+    },
+    {
+      "source": "Untracked",
+      "expected": "Не отслеживается"
+    },
+    {
+      "source": "Disable Word Wrap (Alt+Z)",
+      "expected": "Отключить перенос строк (Alt+Z)"
+    },
+    {
+      "source": "Raw",
+      "expected": "Исходный вид"
+    },
+    {
+      "source": "Password Prompt Blocked",
+      "expected": "Запрос пароля заблокирован"
+    },
+    {
+      "source": "Entering your corp password in the web terminal triggers a Chrome Password Alert (Watchword) forced password reset, so this prompt was automatically cancelled.",
+      "expected": "Ввод корпоративного пароля в веб-терминале вызывает предупреждение Chrome Password Alert (Watchword) и принудительный сброс пароля, поэтому этот запрос автоматически отменен."
+    },
+    {
+      "source": "For corp passwords (such as",
+      "expected": "Для корпоративных паролей, например"
+    },
+    {
+      "source": "), use an external SSH session",
+      "expected": "используйте внешнее подключение SSH"
+    },
+    {
+      "source": ". For non-corp passwords or SSH passphrases, allow the next prompt and re-run your command.",
+      "expected": ". Для остальных паролей или парольных фраз SSH разрешите следующий запрос и повторите команду."
+    },
+    {
+      "source": "Allow Next Non-Corp Prompt",
+      "expected": "Разрешить следующий запрос некорпоративного пароля"
+    },
+    {
+      "source": "No extensions available",
+      "expected": "Нет доступных расширений"
+    },
+    {
+      "source": "Telemetry",
+      "expected": "Телеметрия"
+    },
+    {
+      "source": "Forked conversation",
+      "expected": "Ответвление диалога"
+    },
+    {
+      "source": "No coordinators",
+      "expected": "Нет координаторов"
+    },
+    {
+      "source": "Coordinators",
+      "expected": "Координаторы"
+    },
+    {
+      "source": "More cloud environments",
+      "expected": "Другие облачные среды"
+    },
+    {
+      "source": "GitHub Repositories",
+      "expected": "Репозитории GitHub"
+    },
+    {
+      "source": "Loading Repositories…",
+      "expected": "Загрузка репозиториев…"
+    },
+    {
+      "source": "No matching repositories",
+      "expected": "Подходящие репозитории не найдены"
+    },
+    {
+      "source": "No repositories found",
+      "expected": "Репозитории не найдены"
+    },
+    {
+      "source": "Missing a repository? Configure on GitHub",
+      "expected": "Не хватает репозитория? Настроить на GitHub"
+    },
+    {
+      "source": "Remote Projects",
+      "expected": "Удаленные проекты"
+    },
+    {
+      "source": "found",
+      "expected": "найдено"
+    },
+    {
+      "source": "Uses your local clone,",
+      "expected": "Используется ваша локальная копия,"
+    },
+    {
+      "source": "Waiting for tool permission approval — click Open in full conversation (↗) to approve",
+      "expected": "Ожидание разрешения для инструмента. Нажмите «Открыть полный диалог» (↗), чтобы подтвердить"
+    },
+    {
+      "source": "Reply to /help",
+      "expected": "Ответить на /help"
+    },
+    {
+      "source": "Waiting for response... (Esc to minimize)",
+      "expected": "Ожидание ответа… (Esc для сворачивания)"
+    },
+    {
+      "source": "Reply to /help... (Esc to minimize)",
+      "expected": "Ответить на /help… (Esc для сворачивания)"
+    },
+    {
+      "source": "Help:",
+      "expected": "Помощь:"
+    },
+    {
+      "source": "Checking...",
+      "expected": "Проверка…"
+    },
+    {
+      "source": "Check again",
+      "expected": "Проверить снова"
+    },
+    {
+      "source": "on for this conversation",
+      "expected": "включено для этого диалога"
+    },
+    {
+      "source": "Search connectors",
+      "expected": "Поиск подключений"
+    },
+    {
+      "source": "Fix",
+      "expected": "Исправить"
+    },
+    {
+      "source": "Finish signing in to",
+      "expected": "Завершите вход в"
+    },
+    {
+      "source": "in your browser.",
+      "expected": "в браузере."
+    },
+    {
+      "source": "Paste a code instead",
+      "expected": "Вставить код вручную"
+    },
+    {
+      "source": "No connectors available in this project",
+      "expected": "В этом проекте нет доступных подключений"
+    },
+    {
+      "source": "Loading connectors…",
+      "expected": "Загрузка подключений…"
+    },
+    {
+      "source": "Browse Connectors",
+      "expected": "Просмотр подключений"
+    },
+    {
+      "source": "Unknown error.",
+      "expected": "Неизвестная ошибка."
+    },
+    {
+      "source": "Workflows are changing on October 19th—stay tuned for updates. You can use the agent to migrate your workflows.",
+      "expected": "Рабочие процессы изменятся 19 октября. Следите за обновлениями. Для переноса рабочих процессов можно использовать агента."
+    },
+    {
+      "source": "This conversation is in a different workspace.",
+      "expected": "Этот диалог находится в другом рабочем пространстве."
+    },
+    {
+      "source": "This project is associated with a different workspace.",
+      "expected": "Этот проект связан с другим рабочим пространством."
+    },
+    {
+      "source": "Snooze for 24 Hours",
+      "expected": "Отложить на 24 часа"
+    },
+    {
+      "source": "Chrome on the machine you are controlling is not accepting remote debugging. Complete these steps on that machine, not in this tab:",
+      "expected": "Chrome на управляемом компьютере не принимает подключения для удаленной отладки. Выполните следующие действия на том компьютере, а не в этой вкладке:"
+    },
+    {
+      "source": "If that machine is a cloudtop, reach it via",
+      "expected": "Если это облачный рабочий компьютер, подключитесь к нему через"
+    },
+    {
+      "source": ", open Chrome",
+      "expected": "и откройте Chrome"
+    },
+    {
+      "source": "that runs Jetski Web.",
+      "expected": "в котором работает Jetski Web."
+    },
+    {
+      "source": "\"Allow remote debugging for this browser instance\"",
+      "expected": "«Разрешить удаленную отладку для этого экземпляра браузера»"
+    },
+    {
+      "source": "Search branches",
+      "expected": "Поиск веток"
+    },
+    {
+      "source": "Worktree Branches",
+      "expected": "Ветки отдельных рабочих копий"
+    },
+    {
+      "source": "Work in a New Worktree",
+      "expected": "Работать в новой рабочей копии Git"
+    },
+    {
+      "source": "Keeps your checkout untouched",
+      "expected": "Основная рабочая копия останется без изменений"
+    },
+    {
+      "source": "Local Checkout",
+      "expected": "Локальная рабочая копия"
+    },
+    {
+      "source": "JJ worktree",
+      "expected": "Рабочая копия JJ"
+    },
+    {
+      "source": "Switch mic",
+      "expected": "Сменить микрофон"
+    },
+    {
+      "source": "Dismiss microphone warning",
+      "expected": "Скрыть предупреждение о микрофоне"
+    },
+    {
+      "source": "Voice speed",
+      "expected": "Скорость речи"
+    },
+    {
+      "source": "Voice Speed",
+      "expected": "Скорость речи"
+    },
+    {
+      "source": "Live chat",
+      "expected": "Голосовой диалог"
+    },
+    {
+      "source": "Sending transcribed message...",
+      "expected": "Отправка распознанного сообщения…"
+    },
+    {
+      "source": "Agent:",
+      "expected": "Агент:"
+    },
+    {
+      "source": ". Change it in the model menu.",
+      "expected": ". Измените модель в меню выбора модели."
+    },
+    {
+      "source": "Set up",
+      "expected": "Настроить"
+    },
+    {
+      "source": "Connectors",
+      "expected": "Подключения"
+    },
+    {
+      "source": "1 comment",
+      "expected": "1 комментарий"
+    },
+    {
+      "source": "You",
+      "expected": "Вы"
+    },
+    {
+      "source": "Listening. Ask anything.",
+      "expected": "Слушаю. Задайте вопрос."
+    },
+    {
+      "source": "Zipping",
+      "expected": "Создание ZIP-архива"
+    },
+    {
+      "source": "Timed out fetching the Google Drive file's title. The link was kept as-is.",
+      "expected": "Истекло время ожидания названия файла Google Drive. Ссылка сохранена без изменений."
+    },
+    {
+      "source": "Couldn't fetch the Google Drive file's title. The link was kept as-is.",
+      "expected": "Не удалось получить название файла Google Drive. Ссылка сохранена без изменений."
+    },
+    {
+      "source": "Trouble signing in? Enter authorization code",
+      "expected": "Не удается войти? Введите код авторизации"
+    },
+    {
+      "source": "Sign in in your browser, then paste the authorization code shown on the callback page.",
+      "expected": "Войдите в браузере, затем вставьте код авторизации со страницы обратного вызова."
+    },
+    {
+      "source": "Authorization code",
+      "expected": "Код авторизации"
+    },
+    {
+      "source": "Submit code",
+      "expected": "Отправить код"
+    },
+    {
+      "source": "Last Used",
+      "expected": "Последнее использование"
+    },
+    {
+      "source": "Business Account Sign In",
+      "expected": "Вход в корпоративный аккаунт"
+    },
+    {
+      "source": "Use this if your admin gave you a WIF config. Paste it below to sign in.",
+      "expected": "Если администратор выдал вам конфигурацию WIF, вставьте ее ниже для входа."
+    },
+    {
+      "source": "Sign In with SSO",
+      "expected": "Войти через SSO"
+    },
+    {
+      "source": "Learn more by visiting our",
+      "expected": "Подробнее на странице"
+    },
+    {
+      "source": "Get Anything Done with",
+      "expected": "Решайте любые задачи с"
+    },
+    {
+      "source": "Let's tailor the experience for you. What best describes your work?",
+      "expected": "Настроим приложение под вас. Что лучше всего описывает вашу работу?"
+    },
+    {
+      "source": "Each plugin can be managed on its own.",
+      "expected": "Каждым плагином можно управлять отдельно."
+    },
+    {
+      "source": "This bundle has no plugins yet.",
+      "expected": "В этом наборе пока нет плагинов."
+    },
+    {
+      "source": "? This removes it from your config directory.",
+      "expected": "? Он будет удален из папки конфигурации."
+    },
+    {
+      "source": "This skill came from the marketplace, so you can add it again whenever you need it.",
+      "expected": "Этот навык установлен из каталога. При необходимости его можно добавить снова."
+    },
+    {
+      "source": "Source",
+      "expected": "Источник"
+    },
+    {
+      "source": "Sign in required",
+      "expected": "Требуется вход"
+    },
+    {
+      "source": "No matching plugins found.",
+      "expected": "Подходящие плагины не найдены."
+    },
+    {
+      "source": "Apps connected to your account",
+      "expected": "Приложения, подключенные к аккаунту"
+    },
+    {
+      "source": "Go to Home",
+      "expected": "На главную"
+    },
+    {
+      "source": "Decorations",
+      "expected": "Оформление"
+    },
+    {
+      "source": "Auto Pin",
+      "expected": "Автоматическое закрепление"
+    },
+    {
+      "source": "Archived Only",
+      "expected": "Только архивные"
+    },
+    {
+      "source": "in the top left.",
+      "expected": "в левом верхнем углу."
+    },
+    {
+      "source": "menu)",
+      "expected": "меню)"
+    },
+    {
+      "source": "Are you sure you want to delete this side question? This action cannot be undone.",
+      "expected": "Удалить этот дополнительный вопрос? Это действие нельзя отменить."
+    },
+    {
+      "source": "You have a conversation in progress. Updating will interrupt it, and it will automatically resume once the update completes.",
+      "expected": "Сейчас выполняется диалог. Обновление прервет его, а после завершения он продолжится автоматически."
+    },
+    {
+      "source": "You have a conversation in progress. Updating will cancel it and you'll need to manually restart it.",
+      "expected": "Сейчас выполняется диалог. Обновление отменит его, и потребуется запустить его заново вручную."
+    },
+    {
+      "source": "Updating will restart the server and apply the latest changes.",
+      "expected": "Обновление перезапустит сервер и применит последние изменения."
+    },
+    {
+      "source": "Update Anyway",
+      "expected": "Все равно обновить"
+    },
+    {
+      "source": "Create Coordinator",
+      "expected": "Создать координатора"
+    },
+    {
+      "source": "Resolving link…",
+      "expected": "Обработка ссылки…"
+    },
+    {
+      "source": ", then reopen this dialog.",
+      "expected": "и снова откройте это окно."
+    },
+    {
+      "source": "Error: Artifacts from remote conversations are not available here.",
+      "expected": "Ошибка: материалы из удаленных диалогов здесь недоступны."
+    },
+    {
+      "source": "Couldn't load message",
+      "expected": "Не удалось загрузить сообщение"
+    },
+    {
+      "source": "Ask /btw",
+      "expected": "Задать вопрос через /btw"
+    },
+    {
+      "source": "Credentials for one or more automations have expired.",
+      "expected": "Срок действия учетных данных одной или нескольких автоматизаций истек."
+    },
+    {
+      "source": "Credentials for one or more automations expire in less than a week.",
+      "expected": "Срок действия учетных данных одной или нескольких автоматизаций истекает менее чем через неделю."
+    },
+    {
+      "source": "to add to Agent",
+      "expected": "для добавления агенту"
+    },
+    {
+      "source": "Couldn't start the coordinator:",
+      "expected": "Не удалось запустить координатора:"
+    },
+    {
+      "source": "Loading conversations...",
+      "expected": "Загрузка диалогов…"
+    },
+    {
+      "source": "Unknown Project",
+      "expected": "Неизвестный проект"
+    },
+    {
+      "source": "No pinned conversations",
+      "expected": "Нет закрепленных диалогов"
+    },
+    {
+      "source": "Drop to add to group",
+      "expected": "Перетащите для добавления в группу"
+    },
+    {
+      "source": "Ask a side question without interrupting the main conversation",
+      "expected": "Задать дополнительный вопрос, не прерывая основной диалог"
+    },
+    {
+      "source": "Starting terminal…",
+      "expected": "Запуск терминала…"
+    },
+    {
+      "source": "Browser is currently being operated by this conversation in another Hub window",
+      "expected": "Этот диалог управляет браузером в другом окне Hub"
+    },
+    {
+      "source": "Drag to move",
+      "expected": "Перетащите для перемещения"
+    },
+    {
+      "source": "Repeat every",
+      "expected": "Повторять каждые"
+    },
+    {
+      "source": "Saved",
+      "expected": "Сохранено"
+    },
+    {
+      "source": "on this computer.",
+      "expected": "на этом компьютере."
+    },
+    {
+      "source": "Pick a model to change it.",
+      "expected": "Выберите модель для изменения."
+    },
+    {
+      "source": "No upcoming run.",
+      "expected": "Следующий запуск не запланирован."
+    },
+    {
+      "source": "No instructions.",
+      "expected": "Нет инструкций."
+    },
+    {
+      "source": ", read-only",
+      "expected": "только чтение"
+    },
+    {
+      "source": "All runs",
+      "expected": "Все запуски"
+    },
+    {
+      "source": "Runs",
+      "expected": "Запуски"
+    },
+    {
+      "source": "Loading runs…",
+      "expected": "Загрузка запусков…"
+    },
+    {
+      "source": "Only for",
+      "expected": "Только для"
+    },
+    {
+      "source": "Scope",
+      "expected": "Область действия"
+    },
+    {
+      "source": "Match Condition (CEL)",
+      "expected": "Условие соответствия (CEL)"
+    },
+    {
+      "source": "Needs Target",
+      "expected": "Требуется цель"
+    },
+    {
+      "source": "Invalid CEL",
+      "expected": "Некорректное выражение CEL"
+    },
+    {
+      "source": "Valid CEL",
+      "expected": "Корректное выражение CEL"
+    },
+    {
+      "source": "CEL Expression Reference",
+      "expected": "Справочник выражений CEL"
+    },
+    {
+      "source": "Include at least one positive",
+      "expected": "Добавьте хотя бы одно положительное"
+    },
+    {
+      "source": "anchor clause on",
+      "expected": "условие привязки к"
+    },
+    {
+      "source": "Equality and list membership (e.g.",
+      "expected": "Равенство и принадлежность списку (например,"
+    },
+    {
+      "source": "Boolean AND, OR, and negation",
+      "expected": "Логические И, ИЛИ и отрицание"
+    },
+    {
+      "source": "Substring or list check (e.g.",
+      "expected": "Проверка подстроки или списка (например,"
+    },
+    {
+      "source": "CEL Reference",
+      "expected": "Справочник CEL"
+    },
+    {
+      "source": "✓ Target set",
+      "expected": "✓ Цель задана"
+    },
+    {
+      "source": "Target",
+      "expected": "Цель"
+    },
+    {
+      "source": "— specify at least one user, team, component, or resource (joined with",
+      "expected": "укажите хотя бы одного пользователя, команду, компонент или ресурс (объединяются с помощью"
+    },
+    {
+      "source": "Set at least one scope filter",
+      "expected": "Задайте хотя бы один фильтр области действия"
+    },
+    {
+      "source": "Optional",
+      "expected": "Необязательно"
+    },
+    {
+      "source": "Conditions",
+      "expected": "Условия"
+    },
+    {
+      "source": "— narrow matched events by status, priority, or event details",
+      "expected": "ограничивают события по статусу, приоритету или подробностям"
+    },
+    {
+      "source": "Show less",
+      "expected": "Показать меньше"
+    },
+    {
+      "source": "Fields",
+      "expected": "Поля"
+    },
+    {
+      "source": "Variables",
+      "expected": "Переменные"
+    },
+    {
+      "source": "Execution Identity",
+      "expected": "Учетная запись выполнения"
+    },
+    {
+      "source": "Task \"",
+      "expected": "Задание «"
+    },
+    {
+      "source": "\" not found.",
+      "expected": "» не найдено."
+    },
+    {
+      "source": "Runs a command",
+      "expected": "Выполняет команду"
+    },
+    {
+      "source": ", always on.",
+      "expected": "и работает постоянно."
+    },
+    {
+      "source": "Could not start.",
+      "expected": "Не удалось запустить."
+    },
+    {
+      "source": "Paused.",
+      "expected": "Приостановлено."
+    },
+    {
+      "source": "Next run",
+      "expected": "Следующий запуск"
+    },
+    {
+      "source": "Last run",
+      "expected": "Последний запуск"
+    },
+    {
+      "source": "See",
+      "expected": "См."
+    },
+    {
+      "source": "with ID",
+      "expected": "с идентификатором"
+    },
+    {
+      "source": "already exists.",
+      "expected": "уже существует."
+    },
+    {
+      "source": "with the ID “",
+      "expected": "с идентификатором «"
+    },
+    {
+      "source": "” already exists.",
+      "expected": "» уже существует."
+    },
+    {
+      "source": "Trigger",
+      "expected": "Условие запуска"
+    },
+    {
+      "source": "with this name already exists on this computer. Run it remotely, or go back and rename it.",
+      "expected": "с таким названием уже существует на этом компьютере. Запустите удаленно или вернитесь и переименуйте."
+    },
+    {
+      "source": "When should it run?",
+      "expected": "Когда запускать?"
+    },
+    {
+      "source": "Create a project first.",
+      "expected": "Сначала создайте проект."
+    },
+    {
+      "source": "Creating…",
+      "expected": "Создание…"
+    },
+    {
+      "source": "match “",
+      "expected": "соответствует «"
+    },
+    {
+      "source": "yet",
+      "expected": "пока"
+    },
+    {
+      "source": "Run a prompt on a schedule, like a morning summary of yesterday's changes. Runs show up here.",
+      "expected": "Запускайте запрос по расписанию, например утреннюю сводку вчерашних изменений. Результаты запусков появятся здесь."
+    },
+    {
+      "source": "Run command step not found",
+      "expected": "Шаг выполнения команды не найден"
+    },
+    {
+      "source": "Lost connection to the remote instance. Please wait a minute or refresh the page.",
+      "expected": "Связь с удаленным экземпляром потеряна. Подождите минуту или обновите страницу."
+    },
+    {
+      "source": "Lost connection to the language server. Agent features may not work.",
+      "expected": "Связь с сервером моделей потеряна. Некоторые функции агента могут не работать."
+    },
+    {
+      "source": ". It is not visible in the agent's sandbox and is shared across all your projects.",
+      "expected": ". Она недоступна в изолированной среде агента и используется во всех ваших проектах."
+    },
+    {
+      "source": "+ Add issue policy",
+      "expected": "+ Добавить правило для задач"
+    },
+    {
+      "source": "+ Add pull request policy",
+      "expected": "+ Добавить правило для запросов на слияние"
+    },
+    {
+      "source": "Grant the selected actions on the listed branch names — a comma-separated list like main, dev, prod (glob patterns like fix-* allowed), or * for all.",
+      "expected": "Разрешить выбранные действия для указанных веток. Укажите названия через запятую, например main, dev, prod. Допускаются шаблоны вроде fix-* или * для всех веток."
+    },
+    {
+      "source": "+ Add branch policy",
+      "expected": "+ Добавить правило для веток"
+    },
+    {
+      "source": "Each rule lets the agent run the listed workflow files on the listed refs — each a comma-separated list like ci.yml, deploy.yml and main, dev (glob patterns like fix-* allowed), or * for all. Both fields must be set for a rule to grant anything.",
+      "expected": "Каждое правило разрешает агенту запускать указанные файлы рабочих процессов на указанных ветках или метках. В обоих полях значения разделяются запятыми, например ci.yml, deploy.yml и main, dev. Допускаются шаблоны вроде fix-* или * для всех значений. Для выдачи разрешения оба поля должны быть заполнены."
+    },
+    {
+      "source": "+ Add workflow run policy",
+      "expected": "+ Добавить правило запуска рабочих процессов"
+    },
+    {
+      "source": "+ Add Repository policy",
+      "expected": "+ Добавить правило для репозитория"
+    },
+    {
+      "source": "Code Preview",
+      "expected": "Предпросмотр кода"
+    },
+    {
+      "source": "⚠️ Failed to render LaTeX:",
+      "expected": "⚠️ Не удалось отобразить LaTeX:"
+    },
+    {
+      "source": "Online",
+      "expected": "В сети"
+    },
+    {
+      "source": "Offline",
+      "expected": "Не в сети"
+    },
+    {
+      "source": "No instances yet.",
+      "expected": "Экземпляров пока нет."
+    },
+    {
+      "source": "Get started with Remote Control",
+      "expected": "Начать работу с удаленным управлением"
+    },
+    {
+      "source": "Loading instances...",
+      "expected": "Загрузка экземпляров…"
+    },
+    {
+      "source": "Remote Control Instances",
+      "expected": "Экземпляры удаленного управления"
+    },
+    {
+      "source": "Bounding box",
+      "expected": "Область элемента"
+    },
+    {
+      "source": "⚠️ Failed to render Mermaid diagram:",
+      "expected": "⚠️ Не удалось отобразить диаграмму Mermaid:"
+    },
+    {
+      "source": "Carbon that may offload routine steps to Hydrogen. Same Carbon-level quality, fewer tokens used.",
+      "expected": "Carbon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Carbon, а расход токенов снижается."
+    },
+    {
+      "source": "Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used.",
+      "expected": "Argon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Argon, а расход токенов снижается."
+    },
+    {
+      "source": "Duplicate project name",
+      "expected": "Название проекта уже используется"
+    },
+    {
+      "source": "Duplicate workspace name",
+      "expected": "Название рабочего пространства уже используется"
+    },
+    {
+      "source": "Duplicate worktree name",
+      "expected": "Название рабочей копии уже используется"
+    },
+    {
+      "source": "example: source ~/.jetski_shell_setup",
+      "expected": "Например: source ~/.jetski_shell_setup"
+    },
+    {
+      "source": "Enter automation name...",
+      "expected": "Введите название автоматизации…"
+    },
+    {
+      "source": "Enter extension name...",
+      "expected": "Введите название расширения…"
+    },
+    {
+      "source": "Enter coordinator name...",
+      "expected": "Введите название координатора…"
+    },
+    {
+      "source": "Create Automation",
+      "expected": "Создать автоматизацию"
+    },
+    {
+      "source": "Create Extension",
+      "expected": "Создать расширение"
+    },
+    {
+      "source": "this project",
+      "expected": "этот проект"
+    },
+    {
+      "source": "this workspace",
+      "expected": "это рабочее пространство"
+    },
+    {
+      "source": "this worktree",
+      "expected": "эту рабочую копию"
+    },
+    {
+      "source": "this plugin",
+      "expected": "этот плагин"
+    },
+    {
+      "source": "this skill",
+      "expected": "этот навык"
+    },
+    {
+      "source": "this rule",
+      "expected": "это правило"
+    },
+    {
+      "source": "this automation",
+      "expected": "эту автоматизацию"
+    },
+    {
+      "source": "this extension",
+      "expected": "это расширение"
+    },
+    {
+      "source": "e.g. in_mdb(author, \"mdb/my-team\") && !is_watching_user(actor)",
+      "expected": "Например: in_mdb(author, \"mdb/my-team\") && !is_watching_user(actor)"
+    },
+    {
+      "source": "Mute Voice Mic",
+      "expected": "Выключить микрофон"
+    },
+    {
+      "source": "Mute Voice Speaker",
+      "expected": "Выключить динамик"
+    },
+    {
+      "source": "Toggle Maximize Side Panel",
+      "expected": "Развернуть боковую панель или вернуть обычный размер"
+    },
+    {
+      "source": "Unmute (m)",
+      "expected": "Включить звук (m)"
+    },
+    {
+      "source": "Mute (m)",
+      "expected": "Выключить звук (m)"
+    },
+    {
+      "source": "Open In",
+      "expected": "Открыть в"
+    },
+    {
+      "source": "Copy gh auth login command",
+      "expected": "Скопировать команду gh auth login"
+    },
+    {
+      "source": "Remove from history",
+      "expected": "Удалить из истории"
+    },
+    {
+      "source": "Remove from history (Shift+Delete)",
+      "expected": "Удалить из истории (Shift+Delete)"
+    },
+    {
+      "source": "Open the page in system browser",
+      "expected": "Открыть страницу в системном браузере"
+    },
+    {
+      "source": "View site information",
+      "expected": "Сведения о сайте"
+    },
+    {
+      "source": "Close downloads",
+      "expected": "Закрыть загрузки"
+    },
+    {
+      "source": "Remove from list",
+      "expected": "Удалить из списка"
+    },
+    {
+      "source": "Add screenshot to conversation",
+      "expected": "Добавить снимок экрана в диалог"
+    },
+    {
+      "source": "Open Link in New Tab",
+      "expected": "Открыть ссылку в новой вкладке"
+    },
+    {
+      "source": "Open Link in External Browser",
+      "expected": "Открыть ссылку во внешнем браузере"
+    },
+    {
+      "source": "Copy Link Address",
+      "expected": "Скопировать адрес ссылки"
+    },
+    {
+      "source": "Open Image in New Tab",
+      "expected": "Открыть изображение в новой вкладке"
+    },
+    {
+      "source": "Copy Image Address",
+      "expected": "Скопировать адрес изображения"
+    },
+    {
+      "source": "Open in Side Panel",
+      "expected": "Открыть в боковой панели"
+    },
+    {
+      "source": "Copy error messages",
+      "expected": "Скопировать сообщения об ошибках"
+    },
+    {
+      "source": "Open Links In",
+      "expected": "Открывать ссылки в"
+    },
+    {
+      "source": "Toggle Google Cloud projects",
+      "expected": "Показать или скрыть проекты Google Cloud"
+    },
+    {
+      "source": "Delete All Remote Agents Data",
+      "expected": "Удалить все данные удаленных агентов"
+    },
+    {
+      "source": "Delete All Remote Agents Data?",
+      "expected": "Удалить все данные удаленных агентов?"
+    },
+    {
+      "source": "Delete All Data",
+      "expected": "Удалить все данные"
+    },
+    {
+      "source": "Edit Shortcut",
+      "expected": "Изменить сочетание клавиш"
+    },
+    {
+      "source": "Remove Shortcut",
+      "expected": "Удалить сочетание клавиш"
+    },
+    {
+      "source": "Add Shortcut",
+      "expected": "Добавить сочетание клавиш"
+    },
+    {
+      "source": "Open Conversation in New Tab",
+      "expected": "Открыть диалог в новой вкладке"
+    },
+    {
+      "source": "Delete all",
+      "expected": "Удалить все"
+    },
+    {
+      "source": "Delete all recordings?",
+      "expected": "Удалить все записи?"
+    },
+    {
+      "source": "Enable Sandbox Mode",
+      "expected": "Включить изолированную среду"
+    },
+    {
+      "source": "New Conversation Button",
+      "expected": "Кнопка нового диалога"
+    },
+    {
+      "source": "Enable this plugin to manage its accounts.",
+      "expected": "Включите плагин, чтобы управлять его аккаунтами."
+    },
+    {
+      "source": "Add label",
+      "expected": "Добавить метку"
+    },
+    {
+      "source": "Enable the plugin to sign in.",
+      "expected": "Включите плагин для входа в аккаунт."
+    },
+    {
+      "source": "Remove resource",
+      "expected": "Удалить ресурс"
+    },
+    {
+      "source": "Remove individual uploaded files or connected resources in Project Settings, or delete a project or conversation to remove its stored files.",
+      "expected": "Отдельные загруженные файлы и подключенные ресурсы можно удалить в настройках проекта. Чтобы удалить все сохраненные файлы проекта или диалога, удалите сам проект или диалог."
+    },
+    {
+      "source": "Edit title",
+      "expected": "Изменить заголовок"
+    },
+    {
+      "source": "Copy transcript",
+      "expected": "Скопировать расшифровку"
+    },
+    {
+      "source": "Open link",
+      "expected": "Открыть ссылку"
+    },
+    {
+      "source": "Failed to create folder. Please try again.",
+      "expected": "Не удалось создать папку. Повторите попытку."
+    },
+    {
+      "source": "Copy as Markdown",
+      "expected": "Скопировать как Markdown"
+    },
+    {
+      "source": "Open video preview",
+      "expected": "Открыть предпросмотр видео"
+    },
+    {
+      "source": "Open image preview",
+      "expected": "Открыть предпросмотр изображения"
+    },
+    {
+      "source": "Open Source Code",
+      "expected": "Открыть исходный код"
+    },
+    {
+      "source": "Open in side pane",
+      "expected": "Открыть в боковой панели"
+    },
+    {
+      "source": "Close references",
+      "expected": "Закрыть ссылки"
+    },
+    {
+      "source": "Add an optional message, ⏎ to submit comments",
+      "expected": "Можно добавить сообщение. Нажмите ⏎, чтобы отправить комментарии"
+    },
+    {
+      "source": "Add Terminal",
+      "expected": "Добавить терминал"
+    },
+    {
+      "source": "Open in New Window",
+      "expected": "Открыть в новом окне"
+    },
+    {
+      "source": "Open in Side Pane",
+      "expected": "Открыть в боковой панели"
+    },
+    {
+      "source": "Open Appearance",
+      "expected": "Открыть настройки оформления"
+    },
+    {
+      "source": "Set up authentication",
+      "expected": "Настроить вход в аккаунт"
+    },
+    {
+      "source": "Install or enable the Google Drive plugin in Customizations to search files with @drive: or paste Drive links",
+      "expected": "Установите или включите плагин Google Drive в разделе «Кастомизация», чтобы искать файлы через @drive: или вставлять ссылки Google Drive"
+    },
+    {
+      "source": "Resume environment",
+      "expected": "Возобновить среду"
+    },
+    {
+      "source": "Resume it to load this file.",
+      "expected": "Возобновите ее работу, чтобы загрузить этот файл."
+    },
+    {
+      "source": "Enable Word Wrap (Alt+Z)",
+      "expected": "Включить перенос строк (Alt+Z)"
+    },
+    {
+      "source": "Open Blame in Code Search",
+      "expected": "Открыть историю авторов строк в поиске по коду"
+    },
+    {
+      "source": "Edit Conversation Title",
+      "expected": "Изменить название диалога"
+    },
+    {
+      "source": "Enable telemetry in Settings before changing per-conversation telemetry.",
+      "expected": "Включите телеметрию в настройках, прежде чем менять ее для отдельного диалога."
+    },
+    {
+      "source": "Failed to create remote project",
+      "expected": "Не удалось создать удаленный проект"
+    },
+    {
+      "source": "Open in full conversation",
+      "expected": "Открыть полный диалог"
+    },
+    {
+      "source": "Send reply",
+      "expected": "Отправить ответ"
+    },
+    {
+      "source": "View Branches",
+      "expected": "Просмотреть ветки"
+    },
+    {
+      "source": "New chats will be grouped by workspace.",
+      "expected": "Новые диалоги будут группироваться по рабочему пространству."
+    },
+    {
+      "source": "Add All",
+      "expected": "Добавить все"
+    },
+    {
+      "source": "Copy the folder elsewhere first if you might want it back.",
+      "expected": "Если папка может понадобиться позже, сначала скопируйте ее в другое место."
+    },
+    {
+      "source": "See less in Bundles",
+      "expected": "Показать меньше наборов"
+    },
+    {
+      "source": "See more in Bundles",
+      "expected": "Показать больше наборов"
+    },
+    {
+      "source": "See more in Plugins",
+      "expected": "Показать больше плагинов"
+    },
+    {
+      "source": "See less in Plugins",
+      "expected": "Показать меньше плагинов"
+    },
+    {
+      "source": "View archived in the sidebar",
+      "expected": "Архивные диалоги доступны в боковой панели"
+    },
+    {
+      "source": "Toggle Terminal Panel",
+      "expected": "Показать или скрыть панель терминала"
+    },
+    {
+      "source": "Failed to delete side question",
+      "expected": "Не удалось удалить дополнительный вопрос"
+    },
+    {
+      "source": "New Coordinator",
+      "expected": "Новый координатор"
+    },
+    {
+      "source": "View archived in the sidebar (![filter](icon://filter_list) menu).",
+      "expected": "Архивные диалоги доступны в боковой панели (меню ![фильтр](icon://filter_list))."
+    },
+    {
+      "source": "New coordinator",
+      "expected": "Новый координатор"
+    },
+    {
+      "source": "New Side Question",
+      "expected": "Новый дополнительный вопрос"
+    },
+    {
+      "source": "Close Tabs to the Left",
+      "expected": "Закрыть вкладки слева"
+    },
+    {
+      "source": "Add files",
+      "expected": "Добавить файлы"
+    },
+    {
+      "source": "Close message",
+      "expected": "Закрыть сообщение"
+    },
+    {
+      "source": "Toggle Side Panel",
+      "expected": "Показать или скрыть боковую панель"
+    },
+    {
+      "source": "Add filter",
+      "expected": "Добавить фильтр"
+    },
+    {
+      "source": "Remove trigger",
+      "expected": "Удалить условие запуска"
+    },
+    {
+      "source": "Add schedule",
+      "expected": "Добавить расписание"
+    },
+    {
+      "source": "Add trigger",
+      "expected": "Добавить условие запуска"
+    },
+    {
+      "source": "Open Mermaid diagram preview",
+      "expected": "Открыть предпросмотр диаграммы Mermaid"
+    },
+    {
+      "source": "Sign in to an app once and your agent can use it on any device. Open an app to see the account it uses or to disconnect it.",
+      "expected": "Войдите в приложение один раз, и агент сможет использовать его на любом устройстве. Откройте приложение, чтобы посмотреть используемый аккаунт или отключить его."
     }
   ],
   "exclusions": [

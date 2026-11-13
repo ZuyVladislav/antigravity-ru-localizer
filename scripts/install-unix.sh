@@ -70,8 +70,8 @@ fi
 
 if [[ "$ACTION" = install || "$ACTION" = verify ]]; then
   if [[ ! -f "$SCRIPT_DIR/node_modules/@electron/asar/package.json" ]]; then
-    command -v npm >/dev/null 2>&1 || die "не найден npm; он нужен для установки закреплённой зависимости @electron/asar"
-    printf 'Устанавливаю закреплённые зависимости локализатора...\n'
+    command -v npm >/dev/null 2>&1 || die "не найден npm; он нужен для установки закрепленной зависимости @electron/asar"
+    printf 'Устанавливаю закрепленные зависимости локализатора...\n'
     (cd "$SCRIPT_DIR" && npm ci --ignore-scripts)
   fi
 fi

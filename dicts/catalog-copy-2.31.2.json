@@ -1,0 +1,90 @@
+[
+  {
+    "id": "apple-autopilot",
+    "source": "Headless cross-compilation, packaging and management of iOS (.ipa) and macOS (.app) applications on Windows",
+    "translation": "Фоновая сборка, упаковка и управление приложениями iOS (.ipa) и macOS (.app) в Windows через WSL2, Swift, xtool и официальный SDK Apple без физического Mac."
+  },
+  {
+    "id": "write-like-vlad",
+    "source": "Draft, rewrite, shorten, or adapt messages in ",
+    "translation": "Подготовка, переработка и сокращение сообщений в привычном стиле автора для почты, Profi.ru, Telegram и VK. Для переписки с клиентами, обсуждения стоимости и условий, сообщений о готовности работы и личных диалогов.",
+    "nameSuffix": "'s established communication style across email, Profi.ru, Telegram, and VK."
+  },
+  {
+    "id": "anydesk-mcp-control",
+    "source": "AnyDesk Autopilot — fail-closed robotic control of declared AnyDesk, RuDesktop and RustDesk sessions",
+    "translation": "Управление указанными сеансами AnyDesk, RuDesktop и RustDesk с локального клиента Windows или macOS. Подключение к заданному устройству, ограниченные действия мышью и клавиатурой и проверка доступных возможностей. При неопределенности действия останавливаются."
+  },
+  {
+    "id": "cookie-debugging",
+    "source": "Uses Chrome DevTools MCP for inspecting, debugging, and testing cookies, session state, authentication issues, and cookie consent compliance.",
+    "translation": "Проверка файлов cookie, сеансов, входа в аккаунт и согласия на использование cookie через Chrome DevTools MCP. Диагностика ошибок 401/403, перенаправлений, завершения сеансов, заголовков Cookie/Set-Cookie и ограничений SameSite."
+  },
+  {
+    "id": "memory-leak-debugging",
+    "source": "Diagnoses and resolves memory leaks in JavaScript/Node.js applications.",
+    "translation": "Поиск и устранение утечек памяти в приложениях JavaScript и Node.js. Проверка высокого расхода памяти, ошибок нехватки памяти и снимков кучи через Chrome DevTools MCP."
+  },
+  {
+    "id": "doc-autopilot",
+    "source": "Unified headless Doc Autopilot 2026 Suite",
+    "translation": "Единый набор Doc Autopilot 2026 для фоновой работы с документами. Word: подготовка и правка DOCX, требования, библиография и экспорт PDF. Scholar: научная логика, стиль и аннотации. Point: презентации. Excel: таблицы, формулы и проверки."
+  },
+  {
+    "id": "gmail",
+    "source": "Read, search, send, and manage Gmail messages, drafts, labels, and emoji reactions using a Go CLI.",
+    "translation": "Чтение, поиск, отправка и управление письмами Gmail через программу на Go. Черновики, метки, реакции, пересылка, автоответчик и вложения. Не предназначен для сообщений Google Chat и приглашений Календаря."
+  },
+  {
+    "id": "mail-hub",
+    "source": "Coordinate the user's five connected email accounts as one Mail Hub:",
+    "translation": "Единый центр для пяти подключенных почтовых аккаунтов: основной и резервный Gmail, Mail.ru и два ящика Яндекса. Общая сводка, поиск по нескольким ящикам, разбор входящих, очистка и подготовка сообщений после определения нужного аккаунта."
+  },
+  {
+    "id": "mailru-mail",
+    "source": "Manage the separately connected Mail.ru mailbox through the local MCP.",
+    "translation": "Работа с отдельно подключенным ящиком Mail.ru через локальный MCP. Поиск, чтение и сводки писем, восстановление цепочек, очистка, папки, отметки, черновики, ответы, отправка и вложения."
+  },
+  {
+    "id": "yandex-marina-mail",
+    "source": "Manage ",
+    "translation": "Работа с отдельно подключенной рабочей почтой Яндекса через локальный MCP. Поиск, чтение и сводки писем, переписка с заказчиками, очистка, папки, черновики, ответы и вложения.",
+    "nameSuffix": "'s separately connected working Yandex mailbox through the local MCP."
+  },
+  {
+    "id": "yandex-slava-mail",
+    "source": "Manage ",
+    "translation": "Работа с отдельно подключенной личной почтой Яндекса через локальный MCP. Поиск, чтение и сводки писем, восстановление цепочек, очистка, папки, отметки, черновики, ответы, отправка и вложения.",
+    "nameSuffix": "'s separately connected personal Yandex mailbox through the local MCP."
+  },
+  {
+    "id": "seo-audit",
+    "source": "Audit the approved public SL Dental website for technical and on-page SEO, inspect evidence reports, compare audits,",
+    "translation": "Технический аудит и проверка страниц согласованного открытого сайта SL Dental для поискового продвижения. Просмотр и сравнение отчетов, работа со сводными данными Search Console и GA4 без платных источников."
+  },
+  {
+    "id": "migrate-agent-settings",
+    "source": "Migrates the user's MCP servers, skills, slash commands, subagents, and instruction files from other coding agents",
+    "translation": "Перенос серверов MCP, навыков, команд, субагентов и файлов инструкций из Claude Code, Codex, Cursor или Gemini CLI в новый плагин Antigravity. Для установки готовых плагинов и создания плагина с нуля используется отдельный навык управления плагинами."
+  },
+  {
+    "id": "swarm",
+    "source": "(Preview & Quota Heavy) Run a swarm: several agents working in parallel on one task,",
+    "translation": "Предварительная функция с высоким расходом лимита. Несколько агентов параллельно решают одну задачу в отдельных диалогах и обмениваются результатами на общей доске. Подходит для независимых частей работы и дополнительной проверки результата."
+  },
+  {
+    "id": "run-workflow",
+    "source": "How to write and run a dynamic workflow script with the `run_workflow` tool:",
+    "translation": "Создание и запуск сценариев Python через run_workflow для согласованной работы нескольких агентов. Параллельные задания, конвейеры и этапы с последующим объединением результатов. Для одного поручения используется субагент; старые файлы рабочих процессов переносятся отдельным навыком."
+  },
+  {
+    "id": "swarm_monitor",
+    "source": "ONLY for the native-swarm worker whose brief says it is the monitor.",
+    "translation": "Только для агента группы, которому явно назначена роль наблюдателя. Периодически проверяет, не остановилась ли работа всей группы, и обращается к участнику, способному устранить задержку. Координаторы и остальные участники этот навык не загружают."
+  },
+  {
+    "id": "swarm_narrator",
+    "source": "ONLY for the native-swarm worker whose brief says it is the narrator.",
+    "translation": "Только для агента группы, которому явно назначена роль ведущего сводки. Наблюдает за общей доской и поддерживает актуальные сведения для пользовательского обзора view.json. Координаторы и остальные участники этот навык не загружают."
+  }
+]

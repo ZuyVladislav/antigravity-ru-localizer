@@ -12,6 +12,11 @@ const os = require("os");
 const path = require("path");
 const vm = require("vm");
 const translateSettingsExtra = require("./scripts/settings-copy.js");
+const translateUiCount = require("./scripts/ui-counts.js");
+const createUiTemplateTranslator = require("./scripts/interpolated-copy.js");
+const UI_TEMPLATE_COPY = require("./dicts/ui-template-copy-2.31.2.json");
+const translateUiTemplate = createUiTemplateTranslator(UI_TEMPLATE_COPY);
+const { sources: UI_FRAGMENT_SOURCES, translateUiFragment } = require("./scripts/ui-fragments.js");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.2";
@@ -375,6 +380,10 @@ function removeMarkedBlock(source, start, end) {
   }
 }
 
+function normalizeUiCopy(value) {
+  return String(value || "").replace(/\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
+}
+
 function loadDictionary() {
   const dictionaryPath = path.join(SCRIPT_DIR, "dicts", "ru.json");
   const dictionary = JSON.parse(fs.readFileSync(dictionaryPath, "utf8"));
@@ -433,6 +442,8 @@ const TASK_ACTIVITY_TITLES = Object.freeze({
 function translateActivityTitle(value) {
   if (typeof value !== "string" || value.length > 180 || /[\r\n]/.test(value)) return null;
   if (/&&|\|\||[;`$<>]/.test(value)) return null;
+  const reviewedActivity = translateUiTemplate(value, "activity");
+  if (reviewedActivity !== null) return reviewedActivity;
   const fixed = {
     "Check paths": "Проверка путей", "Get task action": "Получение действия задачи",
     "Get task info": "Получение сведений о задаче", "Check task status": "Проверка состояния задачи",
@@ -461,6 +472,12 @@ function translateActivityTitle(value) {
 function translateDynamicUiText(value) {
   const extraSettingsTranslation = translateSettingsExtra(value);
   if (extraSettingsTranslation) return extraSettingsTranslation;
+  const moreSubagents = /^Show ([0-9]{1,5}) more subagents?$/.exec(value);
+  if (moreSubagents) return "Показать других субагентов (" + moreSubagents[1] + ")";
+  const failedConversation = /^(?:Failed to|Couldn't) (archive|unarchive|delete|restore|revert|update) conversation$/.exec(value);
+  if (failedConversation) return "Не удалось " + ({ archive: "архивировать", unarchive: "вернуть из архива", delete: "удалить", restore: "восстановить", revert: "откатить", update: "обновить" })[failedConversation[1]] + " диалог";
+  const emptyProjects = /^No (matching|remote) (projects|workspaces)$/.exec(value);
+  if (emptyProjects) return "Нет " + (emptyProjects[1] === "matching" ? "подходящих " : "удаленных ") + (emptyProjects[2] === "projects" ? "проектов" : "рабочих пространств");
   let match2290;
   if ((match2290 = /^Show (\d{1,5}) earlier steps$/.exec(value))) return `Показать предыдущие шаги (${match2290[1]})`;
   if ((match2290 = /^Failed to create project: ([^\r\n]{1,240})$/.exec(value))) return `Не удалось создать проект: ${match2290[1]}`;
@@ -569,7 +586,7 @@ function translateDynamicUiText(value) {
   const finishedTask = /^(.+) finished$/i.exec(value);
   if (finishedTask) {
     const title = TASK_ACTIVITY_TITLES[finishedTask[1]];
-    if (title === "Поиск исполняемого файла Яндекс Браузера") return `${title} завершён`;
+    if (title === "Поиск исполняемого файла Яндекс Браузера") return `${title} завершен`;
     if (title === "Проверка глобальных пакетов npm") return `${title} завершена`;
     if (title) return `Задача «${title}» завершена`;
     return `Задача завершена: ${finishedTask[1]}`;
@@ -582,7 +599,7 @@ function translateDynamicUiText(value) {
   if (match) {
     const n = Number(match[1]);
     const word = n % 100 >= 11 && n % 100 <= 14 ? "запросов" : n % 10 === 1 ? "запрос" : n % 10 >= 2 && n % 10 <= 4 ? "запроса" : "запросов";
-    return `Идёт поиск: ${match[1]} ${word}`;
+    return `Идет поиск: ${match[1]} ${word}`;
   }
   match = /^Ran\s+(\d+)\s+commands?$/i.exec(value);
   if (match) return `Выполнено команд: ${match[1]}`;
@@ -618,42 +635,43 @@ function translateDynamicUiText(value) {
       }).join(" ");
     }
   }
-  return null;
+  return translateUiCount(value);
 }
 
 // Known public catalogue descriptions only. Some cards truncate their text
 // before it reaches the DOM; show a fixed Russian summary for those entries.
 // These mappings never edit a skill's source, instructions, ID or server name.
 const CATALOG_DESCRIPTIONS = [
+  ...require("./dicts/catalog-copy-2.31.2.json").filter(item => !item.nameSuffix).map(({ source, translation }) => [source, translation]),
   ["Interactive guide to design and create a scheduled background automation.", "Руководство по созданию фоновых задач по расписанию: ежедневные сводки, еженедельные списки дел и другие повторяющиеся задания. Также открывается командой /automation."],
-  ["Manage the separately connected second Gmail account used as a reserve mailbox and for service registrations, security notices, and account recovery.", "Работа с отдельно подключённым вторым Gmail для регистраций в сервисах, уведомлений безопасности и восстановления доступа. Поиск и чтение писем, очистка, метки, архивирование, вложения и подготовка сообщений в указанном втором ящике."],
+  ["Manage the separately connected second Gmail account used as a reserve mailbox and for service registrations, security notices, and account recovery.", "Работа с отдельно подключенным вторым Gmail для регистраций в сервисах, уведомлений безопасности и восстановления доступа. Поиск и чтение писем, очистка, метки, архивирование, вложения и подготовка сообщений в указанном втором ящике."],
   ["How to manage and create plugins — namespaced bundles of skills, agents, rules, MCP servers and hooks", "Управление и создание плагинов — комплектов навыков, агентов, правил, серверов MCP и обработчиков, которые устанавливаются, включаются и отключаются вместе. Установка, удаление и создание плагинов; команда /plugin. Для отдельных навыков и правил используйте руководство по кастомизации."],
   ["Build, package, run, and debug UI extensions for Antigravity:", "Создание, сборка, запуск и отладка расширений интерфейса Antigravity: интерактивных веб-панелей в боковой области. Панели обслуживаются отдельным процессом Node.js через встроенный Sidecar SDK."],
   ["Discover UI plugin panels relevant to the current task and surface a one-click pill in chat", "Поиск панелей плагинов, полезных для текущей задачи, и добавление в чат кнопки для открытия панели в боковой области. Также используется после включения новой панели плагина."],
-  ["The Cloud Audit Manager remote MCP server allows you to enroll projects, generate audit and scope reports, and check resource enrollment statuses", "Удалённый сервер MCP Cloud Audit Manager позволяет подключать проекты к аудиту, создавать отчёты об аудите и его области и проверять состояние подключения ресурсов."],
-  ["Investigate and fix software issues using AI-powered root cause analysis. This MCP server connects to your Antimetal account", "Поиск и исправление проблем программного обеспечения с помощью ИИ-анализа причин. Сервер MCP подключается к аккаунту Antimetal для поиска проблем и чтения отчётов расследования."],
+  ["The Cloud Audit Manager remote MCP server allows you to enroll projects, generate audit and scope reports, and check resource enrollment statuses", "Удаленный сервер MCP Cloud Audit Manager позволяет подключать проекты к аудиту, создавать отчеты об аудите и его области и проверять состояние подключения ресурсов."],
+  ["Investigate and fix software issues using AI-powered root cause analysis. This MCP server connects to your Antimetal account", "Поиск и исправление проблем программного обеспечения с помощью ИИ-анализа причин. Сервер MCP подключается к аккаунту Antimetal для поиска проблем и чтения отчетов расследования."],
   ["Query and act on your marketing, analytics, CRM, e-commerce, and warehouse data across 325+ connectors", "Запросы и операции с данными маркетинга, аналитики, CRM, интернет-магазинов и хранилищ через более 325 подключений, включая Meta Ads, Google Ads, TikTok Ads, GA4 и HubSpot."],
   ["Query your GitLab SDLC as a knowledge graph. Orbit indexes", "Запросы к данным жизненного цикла разработки в GitLab в виде графа знаний. Orbit объединяет группы, проекты, исходный код, запросы на слияние, сборки, задачи и результаты проверок безопасности."],
-  ["Enable Antigravity to deploy apps to Google Cloud Run.", "Развёртывание приложений в Google Cloud Run через Antigravity."],
+  ["Enable Antigravity to deploy apps to Google Cloud Run.", "Развертывание приложений в Google Cloud Run через Antigravity."],
   ["Ask questions. Get answers. The MCP is a server", "Задавайте вопросы о данных PostHog прямо в редакторе: сервер MCP выполняет запросы и возвращает ответы без SQL и панелей с графиками. Например: сколько уникальных пользователей зарегистрировалось за последние 7 дней по дням; создать A/B-тест страницы цен с оценкой переходов к оплате; найти 5 самых частых ошибок проекта за неделю."],
   ["Search and reference over 600,000 real-world app", "Поиск и использование более 600 000 экранов реальных приложений, пользовательских сценариев и шаблонов интерфейса Mobbin прямо в инструментах ИИ."],
-  ["Build, edit, deploy, and manage full-stack web apps with Lovable,", "Создание, редактирование, развёртывание и управление веб-приложениями с Lovable на естественном языке. Подключение клиента ИИ к проектам и рабочим пространствам, отправка заданий агенту Lovable, просмотр изменений кода и дерева файлов, чтение и запись знаний проекта, управление базами Postgres и подключениями."],
-  ["Let your agents talk to your Splunk data.", "Работа агентов с данными Splunk: задавайте обычным языком вопросы о сбоях, их причинах и изменениях. Агенты ищут события, находят полезные сохранённые поиски и справочники и составляют запросы SPL."],
-  ["The Wiz MCP Server connects multiple security data sources", "Сервер MCP Wiz объединяет источники данных безопасности в единое представление для расследования, реагирования на инциденты и устранения проблем. Доступ к облачным ресурсам, конфигурациям и проблемам безопасности с учётом бизнес-контекста помогает выбирать приоритетные меры защиты."],
-  ["The GKE remote MCP server provides read write access", "Удалённый сервер MCP GKE предоставляет доступ для чтения и записи ресурсов Kubernetes в GKE. Агент ИИ может изучать и наблюдать за вашей средой."],
+  ["Build, edit, deploy, and manage full-stack web apps with Lovable,", "Создание, редактирование, развертывание и управление веб-приложениями с Lovable на естественном языке. Подключение клиента ИИ к проектам и рабочим пространствам, отправка заданий агенту Lovable, просмотр изменений кода и дерева файлов, чтение и запись знаний проекта, управление базами Postgres и подключениями."],
+  ["Let your agents talk to your Splunk data.", "Работа агентов с данными Splunk: задавайте обычным языком вопросы о сбоях, их причинах и изменениях. Агенты ищут события, находят полезные сохраненные поиски и справочники и составляют запросы SPL."],
+  ["The Wiz MCP Server connects multiple security data sources", "Сервер MCP Wiz объединяет источники данных безопасности в единое представление для расследования, реагирования на инциденты и устранения проблем. Доступ к облачным ресурсам, конфигурациям и проблемам безопасности с учетом бизнес-контекста помогает выбирать приоритетные меры защиты."],
+  ["The GKE remote MCP server provides read write access", "Удаленный сервер MCP GKE предоставляет доступ для чтения и записи ресурсов Kubernetes в GKE. Агент ИИ может изучать и наблюдать за вашей средой."],
   ["The Dart and Flutter MCP server exposes", "Сервер MCP Dart и Flutter предоставляет совместимым клиентам ИИ-помощников действия инструментов разработки Dart и Flutter."],
   ["The Firebase Model Context Protocol (MCP) Server gives", "Сервер Firebase Model Context Protocol (MCP) позволяет инструментам разработки с ИИ работать с вашими проектами Firebase и кодом приложения."],
   ["The Genkit Model Context Protocol (MCP) Server gives", "Сервер Genkit Model Context Protocol (MCP) позволяет инструментам разработки с ИИ создавать, отлаживать и изучать приложение Genkit."],
   ["The gopls Model Context Protocol (MCP) server provides", "Сервер gopls Model Context Protocol (MCP) предоставляет инструменты семантического анализа кода, текущей диагностики и преобразования кода Go."],
   ["Interact with your BigQuery data using natural language.", "Работа с данными BigQuery на естественном языке: безопасное подключение к наборам данных, поиск, просмотр метаданных таблиц, выполнение SQL, прогнозирование временных рядов и анализ вклада факторов прямо из инструментов ИИ."],
-  ["The AlloyDB for PostgreSQL remote MCP server lets", "Удалённый сервер MCP AlloyDB for PostgreSQL предоставляет инструменты управления кластерами, экземплярами и пользователями AlloyDB, создания и восстановления резервных копий, импорта и экспорта данных и выполнения SQL из сред разработки и платформ агентов ИИ."],
-  ["The Bigtable Admin remote MCP server lets", "Удалённый сервер MCP Bigtable Admin позволяет управлять ресурсами Bigtable."],
-  ["Manage Google Cloud resources with gcloud and bq CLI tools", "Управление ресурсами Google Cloud с помощью инструментов командной строки gcloud и bq в удалённой изолированной среде."],
-  ["The Cloud SQL remote MCP server lets", "Удалённый сервер MCP Cloud SQL предоставляет инструменты управления экземплярами и пользователями Cloud SQL, создания и восстановления резервных копий, импорта и экспорта данных и выполнения SQL из сред разработки и платформ агентов ИИ."],
-  ["The Spanner remote MCP server lets", "Удалённый сервер MCP Spanner предоставляет инструменты создания ресурсов Spanner, управления ими и выполнения запросов из сред разработки и платформ агентов ИИ."],
-  ["The Apigee API hub remote MCP server lets", "Удалённый сервер MCP Apigee API hub позволяет на естественном языке создавать, читать, обновлять, удалять и искать API, версии, спецификации, операции, развёртывания, атрибуты, внешние API и зависимости, зарегистрированные в вашем API hub."],
-  ["Connect your AI assistants to Looker business intelligence.", "Подключение ИИ-помощников к аналитике Looker: запросы на естественном языке, запуск сохранённых Looks, создание панелей и управление ими, проверка состояния экземпляра Looker."],
-  ["Connect your AI assistants to the Knowledge Catalog", "Подключение ИИ-помощников к Knowledge Catalog (прежнее название — Dataplex). Поиск ресурсов данных, получение подробных метаданных, включая схемы и владельцев, и изучение типов аспектов распределённых данных."],
+  ["The AlloyDB for PostgreSQL remote MCP server lets", "Удаленный сервер MCP AlloyDB for PostgreSQL предоставляет инструменты управления кластерами, экземплярами и пользователями AlloyDB, создания и восстановления резервных копий, импорта и экспорта данных и выполнения SQL из сред разработки и платформ агентов ИИ."],
+  ["The Bigtable Admin remote MCP server lets", "Удаленный сервер MCP Bigtable Admin позволяет управлять ресурсами Bigtable."],
+  ["Manage Google Cloud resources with gcloud and bq CLI tools", "Управление ресурсами Google Cloud с помощью инструментов командной строки gcloud и bq в удаленной изолированной среде."],
+  ["The Cloud SQL remote MCP server lets", "Удаленный сервер MCP Cloud SQL предоставляет инструменты управления экземплярами и пользователями Cloud SQL, создания и восстановления резервных копий, импорта и экспорта данных и выполнения SQL из сред разработки и платформ агентов ИИ."],
+  ["The Spanner remote MCP server lets", "Удаленный сервер MCP Spanner предоставляет инструменты создания ресурсов Spanner, управления ими и выполнения запросов из сред разработки и платформ агентов ИИ."],
+  ["The Apigee API hub remote MCP server lets", "Удаленный сервер MCP Apigee API hub позволяет на естественном языке создавать, читать, обновлять, удалять и искать API, версии, спецификации, операции, развертывания, атрибуты, внешние API и зависимости, зарегистрированные в вашем API hub."],
+  ["Connect your AI assistants to Looker business intelligence.", "Подключение ИИ-помощников к аналитике Looker: запросы на естественном языке, запуск сохраненных Looks, создание панелей и управление ими, проверка состояния экземпляра Looker."],
+  ["Connect your AI assistants to the Knowledge Catalog", "Подключение ИИ-помощников к Knowledge Catalog (прежнее название — Dataplex). Поиск ресурсов данных, получение подробных метаданных, включая схемы и владельцев, и изучение типов аспектов распределенных данных."],
   ["The MCP Toolbox for Databases is an open-source MCP server", "MCP Toolbox for Databases — сервер MCP с открытым исходным кодом для упрощения и защиты разработки инструментов работы с базами данных."],
   ["Interact with your Oracle Database data using natural language.", "Работа с данными Oracle Database на естественном языке: безопасное подключение к базам, выполнение SQL, просмотр схем таблиц и диагностика проблем производительности прямо из инструментов ИИ."],
   ["The Dev Mode MCP Server brings Figma directly", "Сервер MCP Dev Mode предоставляет агентам ИИ данные и контекст дизайна Figma для генерации кода по файлам дизайна прямо в рабочем процессе."],
@@ -665,10 +683,10 @@ const CATALOG_DESCRIPTIONS = [
   ["A Model Context Protocol server for interacting with MongoDB Atlas.", "Сервер Model Context Protocol для работы с MongoDB Atlas."],
   ["Official Notion MCP Server that allows", "Официальный сервер MCP Notion для работы с рабочими пространствами, страницами, базами данных и комментариями через API Notion."],
   ["Official Linear.app MCP Server for interacting", "Официальный сервер MCP Linear.app для работы с проектами, задачами и рабочими процессами Linear."],
-  ["An MCP server implementation that integrates the Perplexity Sonar API", "Сервер MCP с интеграцией API Perplexity Sonar для исследования информации во всём интернете в реальном времени."],
+  ["An MCP server implementation that integrates the Perplexity Sonar API", "Сервер MCP с интеграцией API Perplexity Sonar для исследования информации во всем интернете в реальном времени."],
   ["Official PayPal MCP Server that allows", "Официальный сервер MCP PayPal для работы с API PayPal: обработка платежей, управление транзакциями и операции с аккаунтом."],
   ["The Heroku Platform MCP Server enables", "Сервер MCP Heroku Platform позволяет языковым моделям просматривать ресурсы Heroku Platform, управлять приложениями, дополнениями, базами данных и другими ресурсами и выполнять операции с ними."],
-  ["The Pinecone MCP Server enables AI tools", "Сервер MCP Pinecone позволяет инструментам ИИ искать документацию Pinecone, настраивать индексы, генерировать код с учётом конфигурации индекса, добавлять и обновлять данные и выполнять поиск в индексах."],
+  ["The Pinecone MCP Server enables AI tools", "Сервер MCP Pinecone позволяет инструментам ИИ искать документацию Pinecone, настраивать индексы, генерировать код с учетом конфигурации индекса, добавлять и обновлять данные и выполнять поиск в индексах."],
   ["Connect your Supabase projects to AI assistants.", "Подключение проектов Supabase к ИИ-помощникам: управление таблицами, получение конфигурации, выполнение SQL, управление edge-функциями и работа со схемой базы данных."],
   ["The Prisma MCP Server enables AI tools", "Сервер MCP Prisma позволяет инструментам ИИ работать с Prisma для создания баз данных Postgres и управления ими."],
   ["The Locofy MCP Server enables Locofy.ai code", "Сервер MCP Locofy позволяет интегрировать и расширять код Locofy.ai в вашей IDE."],
@@ -676,11 +694,11 @@ const CATALOG_DESCRIPTIONS = [
   ["Atlassian MCP Server for interacting with Atlassian products.", "Сервер MCP Atlassian для работы с продуктами Atlassian."],
   ["Interact with your Harness account using natural language.", "Работа с аккаунтом Harness на естественном языке: изучение и управление конвейерами CI/CD, запусками, сервисами, средами, подключениями, флагами функций, облачными расходами, результатами проверок безопасности, экспериментами отказоустойчивости и другими ресурсами Harness."],
   ["SonarQube MCP Server enables AI assistants", "Сервер MCP SonarQube позволяет ИИ-помощникам работать с экземплярами SonarQube: анализировать качество кода, управлять проектами и выполнять операции с проверками качества."],
-  ["Netlify MCP Server enables AI assistants", "Сервер MCP Netlify позволяет ИИ-помощникам управлять сайтами, развёртываниями, доменами и другими рабочими процессами веб-разработки в Netlify."],
+  ["Netlify MCP Server enables AI assistants", "Сервер MCP Netlify позволяет ИИ-помощникам управлять сайтами, развертываниями, доменами и другими рабочими процессами веб-разработки в Netlify."],
   ["A Model Context Protocol server that provides structured thinking", "Сервер Model Context Protocol для структурированного обдумывания и рассуждения в диалогах с языковыми моделями."],
   ["Sonatype MCP server for interacting with", "Сервер MCP Sonatype для работы с платформой управления зависимостями и анализа безопасности Sonatype."],
-  ["The Google Maps Platform Code Assist MCP server provides", "Сервер MCP Google Maps Platform Code Assist предоставляет ИИ-помощнику актуальную официальную документацию Google Maps Platform, примеры кода и рекомендации. Официальные источники помогают генерировать более точный, надёжный и полезный код."],
-  ["This MCP server provides your LLM with docs and examples", "Сервер MCP предоставляет языковой модели документацию и примеры подключения трассировки приложений ИИ к Arize AX, а также доступ к поддержке Arize. Подключение к IDE или языковой модели даёт готовые примеры и рекомендации по трассировке."],
+  ["The Google Maps Platform Code Assist MCP server provides", "Сервер MCP Google Maps Platform Code Assist предоставляет ИИ-помощнику актуальную официальную документацию Google Maps Platform, примеры кода и рекомендации. Официальные источники помогают генерировать более точный, надежный и полезный код."],
+  ["This MCP server provides your LLM with docs and examples", "Сервер MCP предоставляет языковой модели документацию и примеры подключения трассировки приложений ИИ к Arize AX, а также доступ к поддержке Arize. Подключение к IDE или языковой модели дает готовые примеры и рекомендации по трассировке."],
   ["The Postman MCP Server connects Postman to AI tools,", "Сервер MCP Postman подключает Postman к инструментам ИИ: доступ к рабочим пространствам, управление коллекциями и средами, проверка API и автоматизация рабочих процессов на естественном языке."],
   ["The Stitch MCP server enables AI assistants", "Сервер MCP Stitch позволяет ИИ-помощникам создавать интерфейсы по тексту и изображениям и получать сведения о проектах и экранах Stitch. Подробнее: https://stitch.withgoogle.com/docs."],
   ["The Google Developer Knowledge MCP server gives", "Сервер MCP Google Developer Knowledge позволяет инструментам разработки с ИИ искать официальную документацию Google и получать сведения о Firebase, Google Cloud, Android, Maps и других продуктах. Прямое подключение к официальной библиотеке обеспечивает актуальный контекст для кода и рекомендаций."],
@@ -703,35 +721,35 @@ const CATALOG_DESCRIPTIONS = [
   ["Author, run, and maintain mabl end-to-end tests", "Создание, запуск и сопровождение сквозных тестов mabl из инструментов ИИ. Подключение к рабочим пространствам mabl, генерация и изменение тестов, облачные и локальные запуски, диагностика с ИИ и просмотр результатов в разных средах. Запуски и доказательства сохраняются в mabl для аудита и контроля соответствия."],
   ["Connect your Miro boards to AI assistants.", "Подключение досок Miro к ИИ-помощникам: поиск и сводки, создание и обновление стикеров, фигур, рамок и соединителей, генерация диаграмм Mermaid и работа с комментариями с соблюдением существующих прав доступа Miro."],
   ["Search the live web and extract content from URLs", "Поиск актуальной информации в интернете и извлечение содержимого URL прямо в Antigravity. Parallel предоставляет агенту подходящие результаты поиска и читаемый текст страниц. Начать можно бесплатно, ключ API не требуется."],
-  ["The Grafana Cloud MCP server is a remotely hosted", "Удалённый сервер Grafana Cloud Model Context Protocol (MCP) подключает внешних агентов ИИ к данным Grafana Cloud. Совместимые клиенты могут запрашивать метрики, журналы и другие данные наблюдаемости без локальной установки."],
+  ["The Grafana Cloud MCP server is a remotely hosted", "Удаленный сервер Grafana Cloud Model Context Protocol (MCP) подключает внешних агентов ИИ к данным Grafana Cloud. Совместимые клиенты могут запрашивать метрики, журналы и другие данные наблюдаемости без локальной установки."],
   ["Give your agent real-time web search and content retrieval.", "Поиск в интернете и получение содержимого в реальном времени для вашего агента. Сервер MCP подключается к поисковому API Exa: веб-поиск, полный текст страниц в Markdown и многошаговое исследование для составления и дополнения списков из инструментов ИИ."],
   ["Use natural language to find hosts, review detections, search events,", "Поиск узлов, просмотр обнаружений, поиск событий и другие операции безопасности в Falcon на естественном языке. CrowdStrike MCP безопасно подключает приложения ИИ к возможностям платформы Falcon через Model Context Protocol (MCP)."],
-  ["Interact with your Vercel projects using natural language.", "Работа с проектами Vercel на естественном языке: поиск документации, изучение проектов и развёртываний, анализ журналов сборки и развёртывания, безопасное управление поддерживаемыми ресурсами Vercel."],
+  ["Interact with your Vercel projects using natural language.", "Работа с проектами Vercel на естественном языке: поиск документации, изучение проектов и развертываний, анализ журналов сборки и развертывания, безопасное управление поддерживаемыми ресурсами Vercel."],
   ["Connect to FactSet AI-Ready Data to search and read", "Подключение к FactSet AI-Ready Data для поиска и чтения финансовых данных профессионального уровня на естественном языке. Доступ к показателям компаний, прогнозам, мировым ценам, структуре владения, сделкам M&A, долговому капиталу, цепочкам поставок, фондам/ETF и неструктурированным материалам."],
-  ["Stand up matters, shape workspace schema, govern access,", "Создание дел, настройка схем рабочих пространств, управление доступом и анализ использования RelativityOne. Безопасное подключение для поиска материалов, создания и изменения дел, рабочих пространств и клиентов, управления правами пользователей и групп и подготовки отчётов на естественном языке."],
-  ["Connect to Daloopa to discover companies, series,", "Подключение к Daloopa для поиска компаний и рядов данных, получения показателей компаний и котировок, поиска финансовых документов. Проверенные финансовые данные и KPI из отчётности SEC, презентаций инвесторам и отчётов о результатах с указанием источников."],
-  ["Search and retrieve real-time financial and stock market data from Finnhub", "Поиск и получение финансовых и биржевых данных Finnhub в реальном времени на естественном языке. Доступ к котировкам, историческим свечам OHLCV, профилям компаний, финансовой отчётности, расшифровкам обсуждений результатов, прогнозам и целевым ценам аналитиков, документам SEC, составу ETF и фондов, валютам, криптовалютам и экономическим показателям."],
-  ["Search and retrieve comprehensive financial and corporate data from S&P Global", "Поиск и получение финансовых и корпоративных данных S&P Global на естественном языке. Подключение к S&P Global Market Intelligence через Kensho: профили компаний, идентификаторы CUSIP и ISIN, финансовая отчётность, исторические цены акций, капитализация, расшифровки обсуждений результатов, сделки M&A, раунды финансирования, прогнозы аналитиков и сведения о руководителях."],
+  ["Stand up matters, shape workspace schema, govern access,", "Создание дел, настройка схем рабочих пространств, управление доступом и анализ использования RelativityOne. Безопасное подключение для поиска материалов, создания и изменения дел, рабочих пространств и клиентов, управления правами пользователей и групп и подготовки отчетов на естественном языке."],
+  ["Connect to Daloopa to discover companies, series,", "Подключение к Daloopa для поиска компаний и рядов данных, получения показателей компаний и котировок, поиска финансовых документов. Проверенные финансовые данные и KPI из отчетности SEC, презентаций инвесторам и отчетов о результатах с указанием источников."],
+  ["Search and retrieve real-time financial and stock market data from Finnhub", "Поиск и получение финансовых и биржевых данных Finnhub в реальном времени на естественном языке. Доступ к котировкам, историческим свечам OHLCV, профилям компаний, финансовой отчетности, расшифровкам обсуждений результатов, прогнозам и целевым ценам аналитиков, документам SEC, составу ETF и фондов, валютам, криптовалютам и экономическим показателям."],
+  ["Search and retrieve comprehensive financial and corporate data from S&P Global", "Поиск и получение финансовых и корпоративных данных S&P Global на естественном языке. Подключение к S&P Global Market Intelligence через Kensho: профили компаний, идентификаторы CUSIP и ISIN, финансовая отчетность, исторические цены акций, капитализация, расшифровки обсуждений результатов, сделки M&A, раунды финансирования, прогнозы аналитиков и сведения о руководителях."],
   ["Explore deep global markets data and financial analytics from LSEG", "Данные мировых рынков и финансовая аналитика LSEG (London Stock Exchange Group). Подключение к LSEG Financial Analytics (LFA) для оценки облигаций и фьючерсов, анализа кривых доходности и кредитных кривых, валютных стратегий FX, оценки опционов и их чувствительности, получения прогнозов IBES, показателей компаний, исторических цен и макроэкономических данных."],
   ["Bring Harvey's legal intelligence into your AI tools", "Юридические возможности Harvey в инструментах ИИ: общие правовые вопросы, анализ документов проектов Vault и поиск по специализированным источникам юридических знаний."],
   ["Search Guidepoint's expert network for interview transcripts,", "Поиск расшифровок интервью в сети экспертов Guidepoint, просмотр отобранных мероприятий и личного расписания. Управление участием: регистрация, запрос одобрения или отмена участия в предстоящих мероприятиях Guidepoint из инструментов ИИ."],
-  ["Access institutional-grade financial data in your AI tools,", "Финансовые данные профессионального уровня в инструментах ИИ: фундаментальные показатели, коэффициенты, KPI, сегменты, скорректированные метрики, отчётность SEC, обсуждения результатов и рыночные котировки через несколько минут после публикации результатов."],
+  ["Access institutional-grade financial data in your AI tools,", "Финансовые данные профессионального уровня в инструментах ИИ: фундаментальные показатели, коэффициенты, KPI, сегменты, скорректированные метрики, отчетность SEC, обсуждения результатов и рыночные котировки через несколько минут после публикации результатов."],
   ["Connect with your Docusign account using natural language.", "Работа с аккаунтом Docusign на естественном языке: поиск пакетов документов, шаблонов и документов, чтение сведений и метаданных, создание и обновление пакетов, запуск или отмена экземпляров рабочих процессов из инструментов ИИ."],
   ["LegalZoom's MCP connector gives users instant access", "Подключение MCP LegalZoom предоставляет в диалоге сведения о юридических продуктах, рекомендации по регистрации бизнеса и консультации юристов по запросу."],
   ["Search and retrieve documents from your NetDocuments repository", "Поиск и получение документов из NetDocuments на естественном языке. Безопасный поиск документов и писем, фильтрация по метаданным и чтение содержимого и сведений с соблюдением действующих прав и правил управления NetDocuments."],
   ["Interact with your iManage Work platform using natural language.", "Работа с iManage Work на естественном языке: подключение к аккаунту, поиск рабочих пространств, папок и документов, просмотр профилей документов и истории версий, чтение содержимого и управление юридическими рабочими процессами и знаниями."],
-  ["Search and manage Salesforce records from your Salesforce remote MCP server.", "Поиск и управление записями через удалённый сервер MCP Salesforce. Подключение к экземпляру Salesforce, поиск по объектам (SOSL), выполнение SOQL, изучение схем объектов и связанных записей, создание, обновление и удаление записей."],
-  ["Civil legal guidance for people navigating court without a lawyer.", "Образовательные рекомендации для самостоятельного ведения гражданских дел в судах США во всех 50 штатах: первоначальная оценка дела, расчёт процессуальных сроков и выбор следующих шагов по приоритету из инструментов ИИ."],
+  ["Search and manage Salesforce records from your Salesforce remote MCP server.", "Поиск и управление записями через удаленный сервер MCP Salesforce. Подключение к экземпляру Salesforce, поиск по объектам (SOSL), выполнение SOQL, изучение схем объектов и связанных записей, создание, обновление и удаление записей."],
+  ["Civil legal guidance for people navigating court without a lawyer.", "Образовательные рекомендации для самостоятельного ведения гражданских дел в судах США во всех 50 штатах: первоначальная оценка дела, расчет процессуальных сроков и выбор следующих шагов по приоритету из инструментов ИИ."],
   ["Intelligent DevSecOps automation for your development workflow,", "Автоматизация DevSecOps на естественном языке. Подключение агента Antigravity к более чем 150 инструментам DevOps через MCP: проверки безопасности, генерация конвейеров, аудит соответствия и документация из IDE. Анализ исходного кода выполняется локально; на портал возвращаются только структурированные результаты."],
   ["Forge is an AI-powered platform that automates", "Forge автоматизирует начальное планирование разработки «Day 0», которое обычно требует недель встреч и согласований. Предоставляет агенту ИИ связывание проектов и репозиториев, получение материалов PRD/BRD и архитектуры, управление заданиями, автоматизацию коммитов и PR и инструменты конвейеров CI/CD."],
-  ["Bring Endor Labs security into your AI tools.", "Безопасность Endor Labs в инструментах ИИ: проверка зависимости перед добавлением пакета, поиск уязвимостей и вредоносного кода в открытых зависимостях, поиск случайно сохранённых секретов в истории Git, статический анализ SAST и проверки изменений кода с ИИ."],
+  ["Bring Endor Labs security into your AI tools.", "Безопасность Endor Labs в инструментах ИИ: проверка зависимости перед добавлением пакета, поиск уязвимостей и вредоносного кода в открытых зависимостях, поиск случайно сохраненных секретов в истории Git, статический анализ SAST и проверки изменений кода с ИИ."],
   ["The Canva MCP server enables AI assistants", "Сервер MCP Canva предоставляет ИИ-помощникам инструменты дизайна Canva: создание и редактирование дизайнов, управление материалами и брендами, поиск в библиотеке, экспорт и комментарии. Возможности доступны на естественном языке через уже используемые инструменты ИИ."],
-  ["Enable Antigravity to control and inspect a live Chrome browser,", "Управление открытым браузером Chrome и его изучение через Antigravity с возможностями Chrome DevTools для надёжной автоматизации, подробной отладки и анализа производительности."],
+  ["Enable Antigravity to control and inspect a live Chrome browser,", "Управление открытым браузером Chrome и его изучение через Antigravity с возможностями Chrome DevTools для надежной автоматизации, подробной отладки и анализа производительности."],
 ];
 
 // Variable values remain opaque. These templates run only in tooltip attributes,
 // tooltip containers, and notification cards, never ordinary navigation titles.
-function translateScopedUiText(value, allowActionPrefixes = true) {
+function translateScopedUiText(value, allowActionPrefixes = true, allowGenericPrefixes = true) {
   if (value.length > 1200 || /[\r\n]/.test(value)) return null;
   const prefixes = [
     ["Searching as ", "Поиск от имени "],
@@ -816,7 +834,7 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   if ((match = /^Receive product updates, tips, and promotions from Google (.+) via email\.$/.exec(value))) return `Получать новости, советы и специальные предложения Google ${match[1]} по электронной почте.`;
   if ((match = /^Changes the base URL (on each extension page|for marketplace search results)\. You must restart (.+) to use the new marketplace after changing this value\.$/.exec(value))) return `Изменяет базовый адрес ${match[1]==="on each extension page"?"страниц расширений":"результатов поиска в каталоге"}. После изменения перезапустите ${match[2]}, чтобы использовать новый каталог.`;
   if ((match = /^When toggled on, (.+) will use your AI credits to fulfill model requests once you're out of model quota\. \1 will always use your model quota first before using AI credits\.$/.exec(value))) return `При включении ${match[1]} использует кредиты ИИ для запросов к моделям после исчерпания лимита. Сначала всегда расходуется лимит модели, затем кредиты ИИ.`;
-  if ((match = /^Cannot add folder: "(.+)" is not a valid folder location\.$/.exec(value))) return `Не удалось добавить папку: «${match[1]}» не является допустимым путём к папке.`;
+  if ((match = /^Cannot add folder: "(.+)" is not a valid folder location\.$/.exec(value))) return `Не удалось добавить папку: «${match[1]}» не является допустимым путем к папке.`;
   if ((match = /^Cannot add folder with unparseable URI: (.+)$/.exec(value))) return `Не удалось добавить папку: не удалось разобрать адрес ${match[1]}`;
   if ((match = /^This (project|workspace) overrides your global permission settings\.$/.exec(value))) return `${match[1]==="project"?"Этот проект":"Эта рабочая область"} переопределяет глобальные разрешения.`;
   if ((match = /^Agent settings and permissions for conversations outside of (projects|workspaces)\.$/.exec(value))) return `Настройки и разрешения агента для диалогов вне ${match[1]==="projects"?"проектов":"рабочих областей"}.`;
@@ -835,7 +853,7 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
     const actions = {"save configuration":"сохранить настройки","remove agent":"удалить агента","save project Google3 configuration":"сохранить настройки проекта Google3","resolve folder":"определить папку","save project":"сохранить проект","save project settings":"сохранить настройки проекта","save project permissions":"сохранить разрешения проекта","save settings":"сохранить настройки","create project":"создать проект","save project branch":"сохранить ветку проекта","unarchive project":"восстановить проект из архива","select workspace":"выбрать рабочую область","create workspace":"создать рабочую область"};
     if (actions[match[1]]) return `Не удалось ${actions[match[1]]}: ${match[2]}`;
   }
-  if ((match = /^See ([0-9]+) more(?: (skills|rules|agents|plugins))?$/.exec(value))) return `Показать ещё (${match[1]})${match[2]?" — "+({skills:"навыки",rules:"правила",agents:"агенты",plugins:"плагины"})[match[2]]:""}`;
+  if ((match = /^See ([0-9]+) more(?: (skills|rules|agents|plugins))?$/.exec(value))) return `Показать еще (${match[1]})${match[2]?" — "+({skills:"навыки",rules:"правила",agents:"агенты",plugins:"плагины"})[match[2]]:""}`;
   if ((match = /^See more (skills|rules|agents|plugins)$/.exec(value))) return `Показать другие ${({skills:"навыки",rules:"правила",agents:"агенты",plugins:"плагины"})[match[1]]}`;
   if ((match = /^(Unnamed Agent|Rule|Conversation|Navigate to step|Go to slide|Go to page) ([0-9]+)$/.exec(value))) return `${({"Unnamed Agent":"Агент без имени","Rule":"Правило","Conversation":"Диалог","Navigate to step":"Перейти к шагу","Go to slide":"Перейти к слайду","Go to page":"Перейти к странице"})[match[1]]} ${match[2]}`;
   if ((match = /^Question ([0-9]+) of ([0-9]+)$/.exec(value))) return `Вопрос ${match[1]} из ${match[2]}`;
@@ -867,8 +885,8 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   if ((match = /^User uploaded media ([0-9]+)$/.exec(value))) return `Медиафайл пользователя ${match[1]}`;
   if ((match = /^Copy entire (.+) JSON$/.exec(value))) return `Скопировать весь JSON: ${match[1]}`;
   if ((match = /^Artifacts \(([0-9]+) Files for Conversation\)$/.exec(value))) return `Артефакты (файлов диалога: ${match[1]})`;
-  if ((match = /^Debug Mode (Enabled|Disabled)$/.exec(value))) return `Режим отладки ${match[1]==="Enabled"?"включён":"выключен"}`;
-  if ((match = /^Unused capacity: ([0-9 ,]+) tokens$/.exec(value))) return `Неиспользованный объём: ${match[1]} токенов`;
+  if ((match = /^Debug Mode (Enabled|Disabled)$/.exec(value))) return `Режим отладки ${match[1]==="Enabled"?"включен":"выключен"}`;
+  if ((match = /^Unused capacity: ([0-9 ,]+) tokens$/.exec(value))) return `Неиспользованный объем: ${match[1]} токенов`;
   if ((match = /^View ([0-9]+) side questions?$/.exec(value))) return `Показать дополнительные вопросы (${match[1]})`;
   if ((match = /^(Subagents|Terminal|Changes Overview) \((.+)\)$/.exec(value))) return `${({Subagents:"Субагенты",Terminal:"Терминал","Changes Overview":"Обзор изменений"})[match[1]]} (${match[2]})`;
   if ((match = /^Build with (.+) Plugins$/.exec(value))) return `Разработка с плагинами ${match[1]}`;
@@ -884,11 +902,22 @@ function translateScopedUiText(value, allowActionPrefixes = true) {
   if ((match = /^Go to turn ([0-9]+) of ([0-9]+)$/.exec(value))) return `Перейти к ходу ${match[1]} из ${match[2]}`;
   if ((match = /^No (plugin|agent|server|skill|rule|project) found for$/.exec(value))) return `Не найден ${({plugin:"плагин",agent:"агент",server:"сервер",skill:"навык",rule:"правило",project:"проект"})[match[1]]} для`;
   if (!allowActionPrefixes) return null;
+  const toolToggle = /^(Enable|Disable) ([^\r\n]{1,240}) tool for ([^\r\n]{1,160})$/.exec(value);
+  if (toolToggle) return (toolToggle[1] === "Enable" ? "Включить" : "Отключить") + " инструмент «" + toolToggle[2] + "» для «" + toolToggle[3] + "»";
+  if (!allowGenericPrefixes) return null;
   for (const [source, translation] of prefixes.sort((a,b)=>b[0].length-a[0].length)) if (value.startsWith(source) && value.length > source.length) return translation + value.slice(source.length);
   return null;
 }
 
+const NAMED_CATALOG_DESCRIPTIONS = require("./dicts/catalog-copy-2.31.2.json").filter(item => item.nameSuffix);
 function translateCatalogDescription(value) {
+  for (const item of NAMED_CATALOG_DESCRIPTIONS) {
+    if (!value.startsWith(item.source)) continue;
+    const end = value.indexOf(item.nameSuffix, item.source.length);
+    if (end < 0 || !/^[A-Za-z][A-Za-z '-]{0,79}$/.test(value.slice(item.source.length, end))) continue;
+    const tail = value.slice(end + item.nameSuffix.length);
+    if (!tail || /^(?: |\.\.\.|…)/.test(tail)) return item.translation;
+  }
   for (const [source, translated] of CATALOG_DESCRIPTIONS) {
     if (value === source || value.startsWith(source + " ") || value.startsWith(source + "...") || value.startsWith(source + "…")) return translated;
   }
@@ -912,22 +941,28 @@ function makePreloadScript(dictionary) {
   // Only exact fixed-interface labels are translated. User prompts, model
   // responses, source code, terminals, editors, and browser content are kept.
   const dictionary = ${dictionaryJson};
-  const exact = new Map(Object.entries(dictionary));
-  const lower = new Map(Object.entries(dictionary).map(([key, value]) => [key.toLowerCase(), value]));
+  const normalize = ${normalizeUiCopy.toString()};
+  const exact = new Map(Object.entries(dictionary).map(([key, value]) => [normalize(key), value]));
+  const lower = new Map(Object.entries(dictionary).map(([key, value]) => [normalize(key).toLowerCase(), value]));
   const blockedTags = new Set(["SCRIPT", "STYLE", "CODE", "PRE", "INPUT", "TEXTAREA", "SVG", "CANVAS", "SYMBOL", "PATH"]);
   const blockedClasses = ["monaco-editor", "editor-container", "terminal", "output-view", "debug-console", "code-view", "artifact-container", "suggest-widget", "chat-message", "assistant-message", "user-message", "conversation-message", "cursor-edit", "markdown", "prose"];
   const blockedSelectors = ["[contenteditable='true']", "[data-testid='user-input-step']", "[data-testid='planner-response-text']", "[data-testid='setup-script-output']", "[data-ag-localization-skip]", "[data-message-id]", "[data-turn-id]", "[data-testid*='message']", "article", "pre", "code", "textarea", "input"];
 
-  const normalize = (value) => String(value || "").replace(/\\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
   const PERMISSION_SCOPES = ${JSON.stringify(PERMISSION_SCOPES)};
   const PERMISSION_PREFIXES = ${JSON.stringify(PERMISSION_PREFIXES)};
   const TASK_ACTIVITY_TITLES = ${JSON.stringify(TASK_ACTIVITY_TITLES)};
   const translateSettingsExtra = ${translateSettingsExtra.toString()};
+  const translateUiCount = ${translateUiCount.toString()};
+  const createUiTemplateTranslator = ${createUiTemplateTranslator.toString()};
+  const translateUiTemplate = createUiTemplateTranslator(${JSON.stringify(UI_TEMPLATE_COPY)});
+  const UI_FRAGMENT_SOURCES = new Set(${JSON.stringify(UI_FRAGMENT_SOURCES)});
+  const translateUiFragment = ${translateUiFragment.toString()};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
   const translateActivityTitle = ${translateActivityTitle.toString()};
   const translateActivityStatus = ${translateActivityStatus.toString()};
   const translateScopedUiText = ${translateScopedUiText.toString()};
   const CATALOG_DESCRIPTIONS = ${JSON.stringify(CATALOG_DESCRIPTIONS)};
+  const NAMED_CATALOG_DESCRIPTIONS = ${JSON.stringify(NAMED_CATALOG_DESCRIPTIONS)};
   const translateCatalogDescription = ${translateCatalogDescription.toString()};
   const permissionTitles = new Map([
     ["Allow checking Docker contexts and Postgres service path?", "Разрешить проверку контекстов Docker и пути к службе PostgreSQL?"],
@@ -987,7 +1022,7 @@ function makePreloadScript(dictionary) {
     if (dynamicTranslation) return dynamicTranslation;
     const permissionTranslation = translatePermissionText(normalized);
     if (permissionTranslation) return permissionTranslation;
-    return (notificationUi && notificationFragments.get(normalized)) || exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || translateScopedUiText(String(value || "").trim(), notificationUi || attributeUi) || null;
+    return (notificationUi && notificationFragments.get(normalized)) || exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || translateScopedUiText(String(value || "").trim(), notificationUi || attributeUi, false) || translateUiTemplate(String(value || "").trim()) || translateScopedUiText(String(value || "").trim(), notificationUi || attributeUi) || null;
   };
   const isBlocked = (node, allowFormFieldAttributes = false) => {
     const notificationUi = isNotificationUi(node);
@@ -1003,6 +1038,11 @@ function makePreloadScript(dictionary) {
         return current.matches(selector);
       })) return true;
       const classes = typeof current.className === "string" ? current.className : "";
+      if (classes.split(/\\s+/).includes("font-mono")) {
+        for (let owner = current.parentElement; owner; owner = owner.parentElement) {
+          if (owner.getAttribute("data-testid") === "run-command-step") return true;
+        }
+      }
       if (blockedClasses.some((className) => classes.includes(className) && !(notificationUi && (className === "markdown" || className === "prose")))) return true;
       current = current.parentElement;
     }
@@ -1029,6 +1069,26 @@ function makePreloadScript(dictionary) {
   const translateText = (node) => {
     if (!node || isBlocked(node)) return;
     const source = node.nodeValue;
+    if (UI_FRAGMENT_SOURCES.has(source.trim()) || /^in [^\\r\\n]{1,80}$/.test(source.trim())) {
+      const contexts = [];
+      let parent = node.parentElement;
+      for (let depth = 0; parent && depth < 5; depth++, parent = parent.parentElement) {
+        if (["BODY", "HTML"].includes(parent.tagName)) break;
+        if (typeof parent.querySelectorAll === "function" && parent.querySelectorAll(blockedSelectors.join(", ")).length) break;
+        const text = typeof parent.textContent === "string" ? parent.textContent : "";
+        if (text.length > 1800) break;
+        const controls = [];
+        for (const testId of ["automation-model-value", "sidecar-project-link"]) {
+          if (typeof parent.querySelectorAll === "function" && parent.querySelectorAll("[data-testid='" + testId + "']").length) controls.push(testId);
+        }
+        contexts.push({ text, testId: parent.getAttribute("data-testid"), controls });
+      }
+      const fragment = translateUiFragment(source.trim(), contexts);
+      if (fragment !== null) {
+        node.nodeValue = (source.match(/^\\s*/) || [""])[0] + fragment + (source.match(/\\s*$/) || [""])[0];
+        return;
+      }
+    }
     const greeting = node.parentElement?.closest?.("[data-testid='home-greeting']");
     if (greeting && !node.parentElement.closest("[data-message-id], [data-testid='planner-response-text'], [data-testid='user-message-bubble']")) {
       const named = /^Hi ([^\\s,\\r\\n]{1,80}), what can we get done today\\?$/.exec(source.trim());
@@ -1147,7 +1207,7 @@ function patchMenu(content) {
     File: "Файл", Edit: "Правка", View: "Вид", Window: "Окно", Help: "Справка",
     "New Window": "Новое окно", "Create Project": "Создать проект", "Command Palette": "Палитра команд",
     Docs: "Документация", "Check for Updates": "Проверить обновления", "Toggle Developer Tools": "Инструменты разработчика",
-    Undo: "Отменить", Redo: "Повторить", Cut: "Вырезать", Copy: "Копировать", Paste: "Вставить", "Select All": "Выделить всё",
+    Undo: "Отменить", Redo: "Повторить", Cut: "Вырезать", Copy: "Копировать", Paste: "Вставить", "Select All": "Выделить все",
     Minimize: "Свернуть", Maximize: "Развернуть", Close: "Закрыть", Zoom: "Масштаб", "Reset Zoom": "Сбросить масштаб",
     "Zoom In": "Увеличить", "Zoom Out": "Уменьшить", "Toggle Full Screen": "Полный экран", Version: "Версия",
     "About Antigravity": "О программе Antigravity", Services: "Службы", "Hide Antigravity": "Скрыть Antigravity",
@@ -1161,7 +1221,8 @@ function localizeAntigravityMenu(items) {
     const source = item.label || "";
     const mnemonic = source.match(/&([a-zA-Z])/);
     const clean = source.replace("&", "");
-    const translated = antigravityRuMenu[clean] || antigravityRuMenu[source];
+    const versionMatch = /^Version ([0-9]+(?:\\.[0-9]+){1,3}(?:[-+][A-Za-z0-9.-]+)?)$/.exec(clean);
+    const translated = antigravityRuMenu[clean] || antigravityRuMenu[source] || (versionMatch && "Версия " + versionMatch[1]);
     if (translated) item.label = translated + (mnemonic ? " (&" + mnemonic[1] + ")" : "");
     if (item.submenu && item.submenu.items) localizeAntigravityMenu(item.submenu.items);
   }
@@ -1329,16 +1390,17 @@ function selfTestPreloadDom(injected) {
       className: attributes.class || "", children, attributes: { ...attributes },
       parentElement: null, ownerDocument: document,
       getAttribute(name) { return this.attributes[name] ?? null; },
+      get textContent() { return this.children.map(child => child.nodeType === Node.TEXT_NODE ? child.nodeValue : child.textContent).join(""); },
       setAttribute(name, value) {
         this.attributes[name] = value;
         emitMutation({ type: "attributes", target: this, attributeName: name });
       },
       querySelectorAll(selector) {
-        if (selector !== "[data-testid='user-message-document-chip'], img[alt]") throw new Error("Unexpected fixture selector: " + selector);
+        const alternatives = selector.split(",").map(item => item.trim());
         const result = [];
         const visit = child => {
           if (child.nodeType !== Node.ELEMENT_NODE) return;
-          if (child.getAttribute("data-testid") === "user-message-document-chip" || (child.tagName === "IMG" && child.getAttribute("alt") !== null)) result.push(child);
+          if (alternatives.some(item => item === "img[alt]" ? child.tagName === "IMG" && child.getAttribute("alt") !== null : child.matches(item))) result.push(child);
           for (const nested of child.children || []) visit(nested);
         };
         for (const child of this.children || []) visit(child);
@@ -1403,7 +1465,7 @@ function selfTestPreloadDom(injected) {
     ["Thinking for 1m 2s", "Думает: 1 мин. 2 с."],
     ["Thought for 1m 2s", "Думал: 1 мин. 2 с."],
     ["Checked task Find Yandex Browser executable", "Проверена задача «Поиск исполняемого файла Яндекс Браузера»"],
-    ["Find Yandex Browser executable finished", "Поиск исполняемого файла Яндекс Браузера завершён"],
+    ["Find Yandex Browser executable finished", "Поиск исполняемого файла Яндекс Браузера завершен"],
     ["Checked task Check npm global packages", "Проверена задача «Проверка глобальных пакетов npm»"],
     ["Check npm global packages finished", "Проверка глобальных пакетов npm завершена"],
     ["Thinking...", "Думает…"],
@@ -1508,6 +1570,27 @@ function selfTestPreloadDom(injected) {
   const assistantTestIdImage = element("img", {alt:"User uploaded media 2"});
   const genericMessageImage = element("img", {alt:"User uploaded media 2"});
   const privateMessage = text("Open C:\\Private\\report.txt");
+  const opaqueCommandWord = text("source");
+  const shortFragments = {
+    article: text(" the "), automation: text(" automation. "), conjunction: text("and"),
+    counter: text("of"), at: text("at"), on: text("on the"), withModel: text("with"),
+    inProject: text("in"), errorArticle: text("An "), destination: text("to"), emptyProjects: text("projects"),
+    projectName: text("PRIVATE_project_name"), modelName: text("Gemini 4 Carbon"), untouched: text("with"),
+  };
+  const secretContainer = element("div", { "data-message-id": "do-not-read" }, [text("PRIVATE_prompt_text")]);
+  Object.defineProperty(secretContainer, "textContent", { get() { throw new Error("Fragment localization read private message content"); } });
+  const fragmentFixtures = [
+    element("p", {}, [text("This project was created for "), shortFragments.article, element("strong", {}, [shortFragments.projectName]), shortFragments.automation]),
+    element("p", {}, [element("a", { href: "https://example.invalid/terms" }, [text("Terms of Service")]), shortFragments.conjunction, element("a", {}, [text("Privacy Policy")])]),
+    element("span", { "aria-live": "polite" }, [text("Card 1 "), shortFragments.counter, text(" 3")]),
+    element("div", {}, [text("Repeat every"), element("span", {}, [shortFragments.at]), text(" 09:00 "), shortFragments.on]),
+    element("p", {}, [shortFragments.withModel, element("a", { "data-testid": "automation-model-value" }, [shortFragments.modelName])]),
+    element("p", {}, [text("Runs a command "), shortFragments.inProject, element("a", { "data-testid": "sidecar-project-link" }, [text("PRIVATE_workspace")])]),
+    element("span", { "data-testid": "new-sidecar-name-exists" }, [shortFragments.errorArticle, text("Automation with this name already exists on this computer. Run it remotely, or go back and rename it.")]),
+    element("span", {}, [text("Commit 2 file changes "), shortFragments.destination]),
+    element("div", {}, [text("No matching "), shortFragments.emptyProjects]),
+    element("div", {}, [element("span", {}, [shortFragments.untouched]), secretContainer]),
+  ];
   const attachmentFixture = element("div", {"data-message-id":"user-fixture",class:"user-message"}, [privateMessage, attachmentButton,
     element("button", {"data-tooltip-id":"fixture-img-1"}, [mediaImage]),
     element("button", {"data-tooltip-id":"fixture-img-1"}, [customImage]),
@@ -1515,6 +1598,8 @@ function selfTestPreloadDom(injected) {
     element("div", {"data-testid":"assistant-message"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [assistantTestIdImage])]),
     element("div", {class:"assistant-message"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [assistantImage])])]);
   const root = element("html", {}, [element("body", {}, [
+    element("div", { "data-testid": "run-command-step" }, [element("span", { class: "font-mono" }, [opaqueCommandWord])]),
+    ...fragmentFixtures,
     attachmentFixture,
     element("div", {"data-message-id":"unknown"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [genericMessageImage])]),
     ...statusCopyNodes.map(item => item.container),
@@ -1586,6 +1671,10 @@ function selfTestPreloadDom(injected) {
   assert(scannedRoots.filter(node => node === root).length === 1, "localization rescanned the whole document after its own writes");
   for (const label of activityLabels) assert(label.node.nodeValue === label.expected, "agent activity label translation failed: " + label.node.nodeValue);
   assert(description.nodeValue === CATALOG_DESCRIPTIONS[3][1], "known catalogue description translation failed");
+  assert(opaqueCommandWord.nodeValue === "source", "A shell command was mistaken for a translated interface label");
+  for (const [key, expected] of Object.entries({ article: "  ", automation: " . ", conjunction: "и", counter: "из", at: "в", on: "числа", withModel: "с моделью", inProject: "в", errorArticle: " ", destination: "в", emptyProjects: "проектов", projectName: "PRIVATE_project_name", modelName: "Gemini 4 Carbon", untouched: "with" })) {
+    assert(shortFragments[key].nodeValue === expected, "Contextual fragment failed or changed an identifier: " + key + " = " + shortFragments[key].nodeValue);
+  }
   for (const card of catalogueCards) assert(card.node.nodeValue === card.expected, "full or truncated catalogue card translation failed");
   assert(unknownDescription.nodeValue === "Unknown MCP server description with new capabilities.", "unknown catalogue description changed");
   assert(splitPlan.map(node => node.nodeValue).join(" ") === "и выберите plan чтобы агент составил план.", "split plan hint translation failed");
@@ -1696,9 +1785,9 @@ function selfTest() {
     ["Windows Subsystem for Linux", "Подсистема Windows для Linux"],
     ["Run the app against a Linux environment. Connecting relaunches the app into the selected WSL distro.", "Запуск приложения в среде Linux. При подключении приложение перезапустится в выбранном дистрибутиве WSL."],
     ["Other Customizations", "Другие настройки"],
-    ["Remote Control Issue", "Проблема с удалённым управлением"],
+    ["Remote Control Issue", "Проблема с удаленным управлением"],
     ["Describe the bug you encountered...", "Опишите обнаруженную ошибку..."],
-    ["Please describe the issue in detail. The more actionable your feedback, the quicker our team can address your request. Some helpful information includes:", "Подробно опишите проблему. Чем точнее будут сведения, тем быстрее команда сможет её решить. Полезно указать:"],
+    ["Please describe the issue in detail. The more actionable your feedback, the quicker our team can address your request. Some helpful information includes:", "Подробно опишите проблему. Чем точнее будут сведения, тем быстрее команда сможет ее решить. Полезно указать:"],
     ["The breakdown below shows token usage from customizations like rules, skills, and MCP. If a budget is exceeded, large rules are demoted to path pointers and large customizations are excluded automatically.", "Здесь показан расход токенов на настройки: правила, навыки и MCP. При превышении лимита большие правила заменяются ссылками на файлы, а крупные настройки автоматически исключаются."],
   ];
   for (const [source, expected] of screenshotTranslations) {
@@ -1738,12 +1827,12 @@ function selfTest() {
     ["No (tell the agent what to do instead)", "Нет (указать агенту другой вариант)"],
     ["(tell the agent what to do instead)", "(указать агенту другой вариант)"],
     ["Explored 3 searches, ran 9 commands", "Выполнено поисковых запросов: 3; команд: 9"],
-    ["Exploring 2 searches", "Идёт поиск: 2 запроса"],
+    ["Exploring 2 searches", "Идет поиск: 2 запроса"],
     ["Exploring 2 tasks, running 5 commands", "Выполняется: задач — 2; команд — 5"],
     ["Thought for 16s", "Думал: 16 с."],
     ["Thought for 1m 2s", "Думал: 1 мин. 2 с."],
     ["Checked task Find Yandex Browser executable", "Проверена задача «Поиск исполняемого файла Яндекс Браузера»"],
-    ["Find Yandex Browser executable finished", "Поиск исполняемого файла Яндекс Браузера завершён"],
+    ["Find Yandex Browser executable finished", "Поиск исполняемого файла Яндекс Браузера завершен"],
     ["Checked task Check npm global packages", "Проверена задача «Проверка глобальных пакетов npm»"],
     ["Check npm global packages finished", "Проверка глобальных пакетов npm завершена"],
     ["Thinking...", "Думает…"],
@@ -1840,6 +1929,11 @@ function selfTest() {
     if (!injected.includes(expected)) fail(`Permission-dialog translation is missing: ${expected}`);
   }
   const menuFixture = "const menu = { items: [] };\nelectron_1.Menu.setApplicationMenu(menu);";
+  const menuVersionFixture = { items: [{ label: "Antigravity", submenu: { items: [{ label: "Version 2.31.2" }, { label: "&Version 2.31.2" }, { label: "Version PRIVATE_project" }] } }] };
+  let menuApplied = false;
+  new vm.Script(patchMenu("const menu = globalThis.fixture;\nelectron_1.Menu.setApplicationMenu(menu);")).runInNewContext({ fixture: menuVersionFixture, electron_1: { Menu: { setApplicationMenu(menu) { if (menu !== menuVersionFixture) throw new Error("Unexpected native menu"); menuApplied = true; } } } });
+  const versionLabels = menuVersionFixture.items[0].submenu.items.map(item => item.label);
+  if (!menuApplied || versionLabels[0] !== "Версия 2.31.2" || versionLabels[1] !== "Версия 2.31.2 (&V)" || versionLabels[2] !== "Version PRIVATE_project") fail("Native version menu localization failed or changed an unknown label.");
   const twicePatchedMenu = patchMenu(patchMenu(menuFixture));
   if (twicePatchedMenu !== patchMenu(menuFixture)) fail("Menu patch changed on repeated application.");
   if ((twicePatchedMenu.match(/ANTIGRAVITY_RU_MENU_START/g) || []).length !== 1) {
@@ -1888,13 +1982,30 @@ function dependencyCheck() {
   console.log(`Pinned @electron/asar ${ASAR_VERSION} dependency check passed.`);
 }
 
-function translateAuditedUiCopy(value) {
-  const normalized = String(value || "").replace(/\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
-  const dictionary = loadDictionary();
-  return translateDynamicUiText(String(value || "").trim()) || dictionary[normalized] || Object.entries(dictionary).findLast(([key]) => key.toLowerCase() === normalized.toLowerCase())?.[1] || translateCatalogDescription(normalized) || translateScopedUiText(String(value || "").trim()) || null;
+let auditedUiDictionary;
+let auditedUiLowercase;
+function explainAuditedUiCopy(value) {
+  const normalized = normalizeUiCopy(value);
+  if (!auditedUiDictionary) {
+    const entries = Object.entries(loadDictionary()).map(([key, translated]) => [normalizeUiCopy(key), translated]);
+    auditedUiDictionary = new Map(entries);
+    auditedUiLowercase = new Map(entries.map(([key, translated]) => [key.toLowerCase(), translated]));
+  }
+  const raw = String(value || "").trim();
+  for (const [kind, translation] of [
+    ["dynamic", translateDynamicUiText(raw)],
+    ["dictionary", auditedUiDictionary.get(normalized) || auditedUiLowercase.get(normalized.toLowerCase())],
+    ["catalog", translateCatalogDescription(normalized)],
+    ["scoped", translateScopedUiText(raw, true, false)],
+    ["template", translateUiTemplate(raw)],
+    ["generic-prefix", translateScopedUiText(raw)],
+  ]) if (translation) return { kind, translation };
+  return { kind: "missing", translation: null };
 }
 
-module.exports = { translateAuditedUiCopy };
+function translateAuditedUiCopy(value) { return explainAuditedUiCopy(value).translation; }
+
+module.exports = { translateAuditedUiCopy, explainAuditedUiCopy };
 
 if (require.main === module) try {
   if (process.argv.includes("--self-test")) selfTest();

@@ -43,3 +43,16 @@ small dynamic formatter. No application content is sent to a translation service
 BetterGravity compatibility retains the upstream 3.0.0 bootstrap fingerprint and
 adds one exact locally reviewed bootstrap fingerprint; unknown variants still
 fail before any files change. No BetterGravity runtime is installed or bundled.
+
+## 2.31.2-r2 interface review
+
+Additional fixed UI translations, counter formatting, reviewed variable frames
+and rendered catalog summaries are locally authored. Catalog summary matching
+does not modify skill files or agent instructions. Private account names and
+local application snapshots are not distributed. Technical structural-audit
+exceptions are recorded as exact fingerprints rather than copied CSS or source
+bundles.
+
+The structural audit extends the existing offline audit with Acorn 8.19.0
+(MIT), installed from the pinned npm lock file. It parses the local static
+application source; it does not run the application or access a user profile.

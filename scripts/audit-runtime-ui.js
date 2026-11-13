@@ -71,6 +71,7 @@ function collectModelCopy(document) {
     }
   }
   result.serverModelsInspected=modelLabels.size;
+  result.modelLabels=[...modelLabels].sort();
   return result;
 }
 
@@ -84,15 +85,19 @@ function analyzeModelCopy(collected) {
   return {...collected,rows,missing,copySha256:crypto.createHash("sha256").update(JSON.stringify(collected.rows)).digest("hex"),scope:"System model badge titles/descriptions and loaded nux-card metadata only; unavailable unloaded content remains unverified"};
 }
 
-async function readCurrentModelCopy(portFile) {
-  if(path.basename(portFile)!=="DevToolsActivePort")throw new Error("Only the existing application's DevToolsActivePort metadata file is accepted");
-  const portStat=fs.lstatSync(portFile);
-  if(!portStat.isFile() || portStat.isSymbolicLink() || portStat.size>4096)throw new Error("Unexpected debug metadata file");
-  const port=Number(fs.readFileSync(portFile,"utf8").split(/\r?\n/)[0]);
-  if(!Number.isInteger(port)||port<1||port>65535)throw new Error("Invalid existing app debug endpoint");
-  const targets=await(await fetch(`http://127.0.0.1:${port}/json/list`,{signal:AbortSignal.timeout(5000)})).json();
-  const target=targets.find(item=>item.type==="page"&&item.webSocketDebuggerUrl&&(()=>{try{return new URL(item.url).hostname==="127.0.0.1";}catch{return false;}})());
-  if(!target)throw new Error("Existing application renderer unavailable; do not launch it for an audit");
+function mergeModelCopies(reports) {
+  const rows=new Map(), models=new Set();
+  for(const report of reports) {
+    for(const label of report.modelLabels || []) models.add(label);
+    for(const row of report.rows) rows.set(JSON.stringify([row.model,row.field,row.text]),row);
+  }
+  return analyzeModelCopy({providerFound:reports.some(item=>item.providerFound),
+    notificationCards:reports.reduce((total,item)=>total+item.notificationCards,0),
+    modelLabels:[...models].sort(),serverModelsInspected:models.size,rows:[...rows.values()],
+    rendererTargetsInspected:reports.length,applicationInteraction:false,chatDataRead:false});
+}
+
+async function readRendererModelCopy(target,port) {
   const socketUrl=new URL(target.webSocketDebuggerUrl);
   if(socketUrl.protocol!=="ws:" || socketUrl.hostname!=="127.0.0.1" || Number(socketUrl.port)!==port || !socketUrl.pathname.startsWith("/devtools/page/") || socketUrl.username || socketUrl.password || socketUrl.search || socketUrl.hash)throw new Error("Unexpected application debug channel");
   const socket=new WebSocket(target.webSocketDebuggerUrl);
@@ -104,8 +109,26 @@ async function readCurrentModelCopy(portFile) {
       socket.send(JSON.stringify({id:1,method:"Runtime.evaluate",params:{returnByValue:true,expression:`(${collectModelCopy.toString()})(document)`}}));
     });
     if(response.exceptionDetails||!response.result?.value)throw new Error("Model UI collection failed");
-    return analyzeModelCopy(response.result.value);
+    return response.result.value;
   } finally {socket.close();}
+}
+
+async function readCurrentModelCopy(portFile) {
+  if(path.basename(portFile)!=="DevToolsActivePort")throw new Error("Only the existing application's DevToolsActivePort metadata file is accepted");
+  const portStat=fs.lstatSync(portFile);
+  if(!portStat.isFile() || portStat.isSymbolicLink() || portStat.size>4096)throw new Error("Unexpected debug metadata file");
+  const port=Number(fs.readFileSync(portFile,"utf8").split(/\r?\n/)[0]);
+  if(!Number.isInteger(port)||port<1||port>65535)throw new Error("Invalid existing app debug endpoint");
+  const targets=await(await fetch(`http://127.0.0.1:${port}/json/list`,{signal:AbortSignal.timeout(5000)})).json();
+  if(!Array.isArray(targets))throw new Error("Unexpected application target response");
+  const selected=targets.filter(item=>item.type==="page"&&item.webSocketDebuggerUrl&&(()=>{
+    try {const url=new URL(item.url);const conversation=/^\/c\/[0-9a-f-]{36}$/i.test(url.pathname);return ["http:","https:"].includes(url.protocol)&&url.hostname==="127.0.0.1"&&!url.username&&!url.password&&(conversation||url.protocol==="https:"&&url.pathname==="/");}
+    catch {return false;}
+  })());
+  if(!selected.length||selected.length>8)throw new Error("Expected one to eight existing application renderers; do not launch or change the app for an audit");
+  const reports=[];
+  for(const target of selected) reports.push(await readRendererModelCopy(target,port));
+  return mergeModelCopies(reports);
 }
 
 async function main() {
@@ -114,10 +137,10 @@ async function main() {
   const value=name=>{const i=args.indexOf(name);if(i<0||!args[i+1])throw new Error("Missing "+name);return args[i+1];};
   const report=await readCurrentModelCopy(path.resolve(value("--port-file")));
   fs.writeFileSync(path.resolve(value("--out")),JSON.stringify(report,null,2)+"\n");
-  console.log(JSON.stringify({providerFound:report.providerFound,systemCopyRows:report.rows.length,missing:report.missing.length,copySha256:report.copySha256,applicationInteraction:false,chatDataRead:false}));
+  console.log(JSON.stringify({providerFound:report.providerFound,rendererTargetsInspected:report.rendererTargetsInspected,serverModelsInspected:report.serverModelsInspected,systemCopyRows:report.rows.length,missing:report.missing.length,copySha256:report.copySha256,applicationInteraction:false,chatDataRead:false}));
   if(!report.providerFound)throw new Error("Model provider not loaded; runtime coverage is incomplete");
   if(report.missing.length)throw new Error(`${report.missing.length} untranslated server model notices: review the local report before release`);
 }
 
-module.exports={collectModelCopy,analyzeModelCopy};
+module.exports={collectModelCopy,analyzeModelCopy,mergeModelCopies};
 if(require.main===module)main().catch(error=>{console.error(error.message);process.exitCode=1;});

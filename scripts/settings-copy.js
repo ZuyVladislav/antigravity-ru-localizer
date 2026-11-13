@@ -1,5 +1,7 @@
 'use strict';
 function translateSettingsExtra(value) {
+  const appVersion = /^Version ([0-9]+(?:\.[0-9]+){1,3}(?:[-+][A-Za-z0-9.-]+)?)$/.exec(value);
+  if (appVersion) return 'Версия ' + appVersion[1];
   let match = /^You have used some of your 5-hour limit, it will fully refresh in (.+?)\.?$/i.exec(value);
   if (match && /^[0-9]+\s+(?:days?|hours?|minutes?|seconds?)(?:(?:,\s*(?:and\s+)?|\s+(?:and\s+)?)[0-9]+\s+(?:days?|hours?|minutes?|seconds?))*$/i.test(match[1])) {
     const units = {day:['день','дня','дней'],hour:['час','часа','часов'],minute:['минуту','минуты','минут'],second:['секунду','секунды','секунд']};

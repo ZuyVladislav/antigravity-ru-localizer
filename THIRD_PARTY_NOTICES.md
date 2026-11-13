@@ -38,6 +38,7 @@ the user's local ASAR archive.
 The locked dependency graph was checked on 2026-11-13. Resolved packages:
 
 - `@electron/asar` 4.3.2 (MIT).
+- `acorn` 8.19.0 (MIT, development-only audit dependency).
 - `@isaacs/nonrecursive-glob-match` 1.1.0 (BlueOak-1.0.0).
 - `balanced-match` 4.0.4 (MIT).
 - `brace-expansion` 5.0.13 (MIT).
@@ -48,3 +49,8 @@ The locked dependency graph was checked on 2026-11-13. Resolved packages:
 - `path-scurry` 3.0.0 (BlueOak-1.0.0).
 
 Every resolved package has an integrity value in `package-lock.json`.
+
+`acorn` 8.19.0 (MIT) is a development-only dependency used by the offline
+structural UI audit. It is installed by npm from the pinned lock file and is
+not bundled with the injected renderer script. The project and MIT license
+are available at <https://github.com/acornjs/acorn>.
