@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.31.0.
+// Local, static Russian UI localization for Google Antigravity 2.31.2.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -11,10 +11,11 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const vm = require("vm");
+const translateSettingsExtra = require("./scripts/settings-copy.js");
 
 const SCRIPT_DIR = __dirname;
-const ASAR_VERSION = "4.3.0";
-const SUPPORTED_APP_VERSION = "2.31.0";
+const ASAR_VERSION = "4.3.2";
+const SUPPORTED_APP_VERSION = "2.31.2";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -458,6 +459,8 @@ function translateActivityTitle(value) {
 }
 
 function translateDynamicUiText(value) {
+  const extraSettingsTranslation = translateSettingsExtra(value);
+  if (extraSettingsTranslation) return extraSettingsTranslation;
   let match2290;
   if ((match2290 = /^Show (\d{1,5}) earlier steps$/.exec(value))) return `Показать предыдущие шаги (${match2290[1]})`;
   if ((match2290 = /^Failed to create project: ([^\r\n]{1,240})$/.exec(value))) return `Не удалось создать проект: ${match2290[1]}`;
@@ -919,6 +922,7 @@ function makePreloadScript(dictionary) {
   const PERMISSION_SCOPES = ${JSON.stringify(PERMISSION_SCOPES)};
   const PERMISSION_PREFIXES = ${JSON.stringify(PERMISSION_PREFIXES)};
   const TASK_ACTIVITY_TITLES = ${JSON.stringify(TASK_ACTIVITY_TITLES)};
+  const translateSettingsExtra = ${translateSettingsExtra.toString()};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
   const translateActivityTitle = ${translateActivityTitle.toString()};
   const translateActivityStatus = ${translateActivityStatus.toString()};

@@ -13,7 +13,7 @@ account data, prompts, chats, browser state or local backup files.
   `j46871417-ui/Antigravity-Localizer`, commit
   `8a6954cd1852397e893e9e60f08dea3f1f92fb35`, under MIT. The notice is in
   `THIRD_PARTY_NOTICES.md`.
-- `@electron/asar` 4.3.0 is an MIT dependency installed from the pinned npm
+- `@electron/asar` 4.3.2 is an MIT dependency installed from the pinned npm
   lock file. It is used as a local archive tool and is not vendored here.
 
 ## Compatibility research boundary
@@ -35,3 +35,11 @@ Distribute this repository only as source plus its dependency lock. Do not
 bundle or upload Google Antigravity files. Recheck the then-current Google
 terms and the target application's update/integrity behaviour before each
 release.
+
+## Additional reviewed settings copy
+
+The 2.31.2 release adds locally authored static settings translations and a
+small dynamic formatter. No application content is sent to a translation service.
+BetterGravity compatibility retains the upstream 3.0.0 bootstrap fingerprint and
+adds one exact locally reviewed bootstrap fingerprint; unknown variants still
+fail before any files change. No BetterGravity runtime is installed or bundled.

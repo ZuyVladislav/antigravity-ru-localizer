@@ -5319,5 +5319,22 @@
   "Refreshing credentials...": "Обновление данных авторизации...",
   "Rate limited": "Превышена частота запросов",
   "Request failed": "Ошибка запроса",
-  "Limited time": "Ограниченное время"
+  "Limited time": "Ограниченное время",
+  "Interface Layout": "Вид интерфейса",
+  "Knowledge Work": "Работа с информацией",
+  "Software Engineering": "Разработка ПО",
+  "Simplified interface for research, writing, and everyday tasks.": "Упрощенный интерфейс для исследований, работы с текстом и повседневных задач.",
+  "Full interface for coding, developer tools, and managing agents.": "Полный интерфейс для программирования, инструментов разработки и управления агентами.",
+  "Configure what the agent can do in local and remote conversations.": "Настройка действий, доступных агенту в локальных и удаленных диалогах.",
+  "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.": "Настройка разрешенных и запрещенных адресов для браузерного субагента. Он работает во встроенном браузере, поэтому устанавливать отдельный браузер не требуется.",
+  "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires": "Настройка разрешенных и запрещенных адресов для браузерного субагента (команда /browser). Требуется",
+  "Configure built-in browser, link opening, and browser subagent preferences.": "Настройка встроенного браузера, открытия ссылок и браузерного субагента.",
+  "Reapply after Antigravity updates": "Восстанавливать после обновления Antigravity",
+  "Antigravity replaces its own program files when it updates, which removes BetterGravity. Leave this on and it is put back automatically once the update finishes.": "При обновлении Antigravity заменяет свои программные файлы и удаляет BetterGravity. Если параметр включен, BetterGravity автоматически восстановится после завершения обновления.",
+  "Where your files are kept": "Где хранятся файлы",
+  "This is outside Antigravity, so your themes and plugins survive updates and reinstalls.": "Эта папка находится вне Antigravity, поэтому темы и плагины сохраняются при обновлениях и переустановке.",
+  "What you have": "Установленные компоненты",
+  "Starting up.": "Запуск.",
+  "No themes installed.": "Нет установленных тем.",
+  "No plugins installed.": "Нет установленных плагинов."
 }

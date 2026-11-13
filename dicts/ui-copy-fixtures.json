@@ -1,5 +1,5 @@
 {
-  "appVersion": "2.31.0",
+  "appVersion": "2.31.2",
   "sourceBundleSha256": "8d1196a22cd3eb9779e8faf5c31eb732d3df8d9d037b685733ed4e3d6cdfb5a2",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
@@ -3864,6 +3864,74 @@
     {
       "source": "Limited time",
       "expected": "Ограниченное время"
+    },
+    {
+      "source": "Interface Layout",
+      "expected": "Вид интерфейса"
+    },
+    {
+      "source": "Knowledge Work",
+      "expected": "Работа с информацией"
+    },
+    {
+      "source": "Software Engineering",
+      "expected": "Разработка ПО"
+    },
+    {
+      "source": "Simplified interface for research, writing, and everyday tasks.",
+      "expected": "Упрощенный интерфейс для исследований, работы с текстом и повседневных задач."
+    },
+    {
+      "source": "Full interface for coding, developer tools, and managing agents.",
+      "expected": "Полный интерфейс для программирования, инструментов разработки и управления агентами."
+    },
+    {
+      "source": "Configure what the agent can do in local and remote conversations.",
+      "expected": "Настройка действий, доступных агенту в локальных и удаленных диалогах."
+    },
+    {
+      "source": "Configure allowed and denied URLs for the browser subagent. It runs in the built-in browser, so no separate browser install is needed.",
+      "expected": "Настройка разрешенных и запрещенных адресов для браузерного субагента. Он работает во встроенном браузере, поэтому устанавливать отдельный браузер не требуется."
+    },
+    {
+      "source": "Configure allowed and denied URLs for the browser subagent (invoked with /browser). Requires",
+      "expected": "Настройка разрешенных и запрещенных адресов для браузерного субагента (команда /browser). Требуется"
+    },
+    {
+      "source": "Configure built-in browser, link opening, and browser subagent preferences.",
+      "expected": "Настройка встроенного браузера, открытия ссылок и браузерного субагента."
+    },
+    {
+      "source": "Reapply after Antigravity updates",
+      "expected": "Восстанавливать после обновления Antigravity"
+    },
+    {
+      "source": "Antigravity replaces its own program files when it updates, which removes BetterGravity. Leave this on and it is put back automatically once the update finishes.",
+      "expected": "При обновлении Antigravity заменяет свои программные файлы и удаляет BetterGravity. Если параметр включен, BetterGravity автоматически восстановится после завершения обновления."
+    },
+    {
+      "source": "Where your files are kept",
+      "expected": "Где хранятся файлы"
+    },
+    {
+      "source": "This is outside Antigravity, so your themes and plugins survive updates and reinstalls.",
+      "expected": "Эта папка находится вне Antigravity, поэтому темы и плагины сохраняются при обновлениях и переустановке."
+    },
+    {
+      "source": "What you have",
+      "expected": "Установленные компоненты"
+    },
+    {
+      "source": "Starting up.",
+      "expected": "Запуск."
+    },
+    {
+      "source": "No themes installed.",
+      "expected": "Нет установленных тем."
+    },
+    {
+      "source": "No plugins installed.",
+      "expected": "Нет установленных плагинов."
     }
   ],
   "exclusions": [

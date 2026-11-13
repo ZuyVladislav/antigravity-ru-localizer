@@ -1,7 +1,7 @@
 {
   "name": "antigravity-ru-localizer",
-  "version": "2.31.0",
-  "description": "Local static Russian UI patcher for Google Antigravity 2.31.0",
+  "version": "2.31.2",
+  "description": "Local static Russian UI patcher for Google Antigravity 2.31.2",
   "private": true,
   "license": "MIT",
   "type": "commonjs",
@@ -9,12 +9,12 @@
     "node": ">=22.12.0 <23"
   },
   "scripts": {
-    "test": "node localize-antigravity-ru.js --self-test && node localize-antigravity-ru.js --dependency-check && node scripts/test-bettergravity-compat.js && node scripts/test-tab-plugin.js",
+    "test": "node localize-antigravity-ru.js --self-test && node localize-antigravity-ru.js --dependency-check && node scripts/test-bettergravity-compat.js && node scripts/test-tab-plugin.js && node scripts/test-settings-copy.js",
     "self-test": "node localize-antigravity-ru.js --self-test",
     "dependency-check": "node localize-antigravity-ru.js --dependency-check",
     "platform-smoke-test": "node scripts/platform-smoke-test.js"
   },
   "dependencies": {
-    "@electron/asar": "4.3.0"
+    "@electron/asar": "4.3.2"
   }
 }
