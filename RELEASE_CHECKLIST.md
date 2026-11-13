@@ -36,7 +36,7 @@ first with `python scripts/publish-release.py --tag <tag> --commit <sha>
 - [ ] Run a secret scan of the complete reachable Git history, not only the
       working tree.
 - [ ] Test install and `--restore` on a disposable copy of the matching
-      Antigravity 2.31.2 installation. Do not test on an active work profile.
+      Antigravity 2.32.0 installation. Do not test on an active work profile.
 - [ ] Confirm the GitHub Actions matrix passes on Windows, Linux and macOS,
       including the Linux/macOS synthetic `install -> verify -> restore` smoke
       test and macOS ad-hoc signature verification.
@@ -45,3 +45,5 @@ first with `python scripts/publish-release.py --tag <tag> --commit <sha>
 - [ ] Recheck the current Google terms and application-integrity behaviour.
 - [ ] Confirm that release notes state the supported Antigravity version and
       that the project is unofficial.
+
+- [ ] For an already customized host, pin the complete pre-localization host and bootstrap for rollback. Confirm the update bridge, browser guards and all untouched host members survive install, reapply and restore. Never use a vanilla archive as the rollback point for unrelated custom fixes.

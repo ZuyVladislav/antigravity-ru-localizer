@@ -1,5 +1,5 @@
 {
-  "appVersion": "2.31.2",
+  "appVersion": "2.32.0",
   "sourceBundleSha256": "00c7aa77bcd1f0bce710f98a97be1e10c0b0fe91770d79216c94b47f2e591308",
   "scope": "Reviewed fixed notification, tooltip, title, aria-label, placeholder and nearby UI copy in embedded main.js; remote announcements are not a complete finite list",
   "activityStatusCases": [
@@ -6842,6 +6842,14 @@
     {
       "source": "Command Shift A",
       "reason": "Technical identifier, library exception, CSS class, model proper name or keyboard chord; preserve literal."
+    },
+    {
+      "source": "user@host:port",
+      "reason": "SSH address syntax; preserve literal placeholders"
+    },
+    {
+      "source": "Alt+ArrowUp Alt+ArrowDown",
+      "reason": "Platform keyboard accelerators; preserve exact key names"
     }
   ],
   "observedTemplates": [
@@ -7299,7 +7307,39 @@
     "New ${eb}",
     "Deleted \"${Ca}\".",
     "Failed to delete \"${Ca}\"",
-    "Add ${t.emptyMessageSingular}"
+    "Add ${t.emptyMessageSingular}",
+    "Showing first ${p} references",
+    "Worked for ${Ws(l.lastModifiedAtMs-l.createdAtMs)}",
+    "Searching as ${pa.searchingAs}",
+    "Disable Word Wrap${R}",
+    "Enable Word Wrap${R}",
+    "Toggle Word Wrap${R}",
+    "Select project, current: ${jb}${Za?",
+    "No matching ${C}",
+    "No remote ${C}",
+    "Thought for ${Math.max(1,Number(U.seconds))}s",
+    "Auth code for ${pa.name}",
+    "Failed to save project settings: ${zn(sa)}",
+    "Failed to save settings: ${zn(qa)}",
+    "Agent permissions preset: ${z}, ${g}",
+    "Agent permissions preset selector, current: ${z}",
+    "Couldn't switch to ${K}: ${zn(O)}",
+    "Couldn't save base branch: ${zn(O)}",
+    "Work locally on ${f.map(g=>Nq(g)).join(\", \")}",
+    "Worktree from ${m.map(p=>Nq(p)).join(\", \")}",
+    "Select model, current: ${x}${z?",
+    "Filter skills and rules: ${E6[a]}",
+    "Managed by the ${x||\"automation\"} automation",
+    "Managed by the ${x|| \"plugin\"} plugin",
+    "Remove ${ja.description||\"file\"}",
+    "Remove ${f$c(z)}",
+    "Remove ${e$c(z.displayName||z.name)}",
+    "Failed to save \"${Ka.displayName}\"",
+    "Created automation \"${T.trim()}\".",
+    "Failed to create ${Gb}.",
+    "New ${Gb}",
+    "Deleted \"${La}\".",
+    "Failed to delete \"${La}\""
   ],
   "templateScope": "2.26.0: 83 changed templates reviewed individually; 64 equivalent literal shapes, 16 specific UI templates, three static transport diagnostics. Native generated notification payload remains original."
 }

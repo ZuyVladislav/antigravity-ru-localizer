@@ -7,7 +7,7 @@ const { translateAuditedUiCopy } = require("../localize-antigravity-ru.js");
 const cases = [
   ["You have used some of your 5-hour limit, it will fully refresh in 2 hours, 58 minutes.", "Вы использовали часть лимита на 5 часов. Он полностью восстановится через 2 часа, 58 минут."],
   ["You have used some of your 5-hour limit, it will fully refresh in 1 hour, 11 minutes and 21 seconds.", "Вы использовали часть лимита на 5 часов. Он полностью восстановится через 1 час, 11 минут, 21 секунду."],
-  ["Version 3.0.0 on Antigravity 2.31.2.", "Версия 3.0.0 для Antigravity 2.31.2."],
+  ["Version 3.0.0 on Antigravity 2.32.0.", "Версия 3.0.0 для Antigravity 2.32.0."],
   ["0 installed, 0 on.", "Установлено: 0. Включено: 0."],
   ["12 installed, 3 running.", "Установлено: 12. Работает: 3."],
   ["C:\\Example\\BetterGravity\nThis is outside Antigravity, so your themes and plugins survive updates and reinstalls.", "C:\\Example\\BetterGravity\nЭта папка находится вне Antigravity, поэтому темы и плагины сохраняются при обновлениях и переустановке."],
@@ -21,7 +21,7 @@ for (const [source, expected] of cases) {
 for (const text of [
   "Gemini 4 Carbon (High)",
   "You have used some of your 5-hour limit, it will fully refresh in PRIVATE_VALUE.",
-  "Version custom on Antigravity 2.31.2.",
+  "Version custom on Antigravity 2.32.0.",
   "0 installed, 0 running.\nPRIVATE_VALUE",
   "You have used some of your 5-hour limit, it will fully refresh in 2 hours.\nPRIVATE_VALUE",
 ]) assert.equal(translate(text), null, "Unexpected or private input must not match a settings template");

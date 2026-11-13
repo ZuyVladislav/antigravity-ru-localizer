@@ -9,9 +9,9 @@ const count = require("./ui-counts.js");
 const { translateUiFragment } = require("./ui-fragments.js");
 const { mergeModelCopies } = require("./audit-runtime-ui.js");
 const { audit } = require("./audit-structural-ui.js");
-const specs = require("../dicts/ui-template-copy-2.31.2.json");
-const catalog = require("../dicts/catalog-copy-2.31.2.json");
-const marketplace = require("../dicts/marketplace-copy-2.31.2.json");
+const specs = require("../dicts/ui-template-copy-2.32.0.json");
+const catalog = require("../dicts/catalog-copy-2.32.0.json");
+const marketplace = require("../dicts/marketplace-copy-2.32.0.json");
 const templateTranslator = createTemplates(specs);
 const serialized = vm.runInNewContext("(" + createTemplates.toString() + ")")(specs);
 
@@ -34,7 +34,7 @@ assert.equal(templateTranslator("An unknown new system notice"), null);
 assert.equal(templateTranslator("Your Plan: value\nPRIVATE_INPUT"), null);
 
 const golden = [
-  ["Version 2.31.2", "Версия 2.31.2"],
+  ["Version 2.32.0", "Версия 2.32.0"],
   ["Fast", "Быстрая"],
   ["Carbon that may offload routine steps to Hydrogen. Same Carbon-level quality, fewer tokens used.", "Carbon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Carbon, а расход токенов снижается."],
   ["Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used.", "Argon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Argon, а расход токенов снижается."],
@@ -94,7 +94,7 @@ assert.equal(merged.rendererTargetsInspected, 3);
 assert.equal(merged.missing.length, 0);
 assert.equal(merged.modelLabels[0], "Orchestrator (Carbon)");
 
-const baseline = JSON.parse(fs.readFileSync(path.join(__dirname, "../dicts/structural-ui-2.31.2.json"), "utf8"));
+const baseline = JSON.parse(fs.readFileSync(path.join(__dirname, "../dicts/structural-ui-2.32.0.json"), "utf8"));
 const fixture = "React.createElement('div',null,'Reopen Closed Tab',true?'Save Video':'Download image');({title:'Don\\'t enter corp passwords'});React.createElement('p',null,`New unreviewed frame ${value}`);({label:'New unreviewed label'});";
 const structural = audit(fixture, baseline);
 assert.equal(structural.exactReviewedSource, false, "Synthetic evidence was accepted as the reviewed vendor source");
@@ -102,3 +102,15 @@ assert.equal(structural.missingLiterals.length, 1);
 assert.equal(structural.missingTemplates.length, 1);
 assert(structural.literalRows.some(row => row.source === "Don't enter corp passwords" && row.translation === "Не вводите корпоративные пароли"));
 console.log("Interface copy passed: new model descriptions, version, counters, complete frames, Unicode/path preservation, catalog summaries, multi-window audit and structural unknown-copy detection.");
+
+// 2.32.0 release frames: keep identifiers and actions readable without broad rewrites.
+for (const [source, expected] of [
+  ["Toggle Word Wrap (Alt+Z)", "Переключить перенос строк (Alt+Z)"],
+  ["Filter skills and rules: All", "Фильтр навыков и правил: Все"],
+  ["No remote branches", "Нет удаленных веток"],
+  ["Remove file", "Удалить файл"],
+  ["Hide O'Neil/path from this list", "Скрыть O'Neil/path из этого списка"],
+  ["Show Demo in the list again", "Снова показать Demo в списке"],
+  ["Connected to host:2222", "Подключено к host:2222"],
+  ["Microphone access for Demo was denied. Quit and reopen the app to be asked again.", "Доступ к микрофону для Demo запрещен. Закройте и снова откройте приложение, чтобы повторно запросить разрешение."],
+]) assert.equal(translate(source), expected);

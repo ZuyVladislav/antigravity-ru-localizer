@@ -66,3 +66,17 @@ The displayed Fast speed badge is localized without changing model IDs.
 Hidden native-component checks use a separate test profile and recorded system
 metadata. Application binaries, extracted frontend components, screenshots and
 local test profiles remain outside the public repository and release assets.
+
+## 2.32.0-r1 release admission
+
+The release supports only the reviewed 2.32.0 application. New fixed labels and
+14 newly reviewed variable frames cover SSH, microphone permissions, word wrap
+and connection notices. Existing selector frames retain their stricter UI scope.
+The exact frontend fingerprint and individually reviewed technical exceptions
+are retained in the structural audit. No application source bundle is included.
+
+The local preservation package is tested separately from this source release.
+Native-component UI checks on Windows use a hidden isolated copy and recorded
+system metadata. Linux and macOS coverage is the CI source/synthetic transaction
+and signing test, not an authenticated native application session. Neither
+application binaries nor regional backend patches are distributed here.

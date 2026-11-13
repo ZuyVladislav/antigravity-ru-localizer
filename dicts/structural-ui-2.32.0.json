@@ -1,0 +1,2148 @@
+{
+  "appVersion": "2.32.0",
+  "sourceBundleSha256": "4c0a1ff5659e7dd92e6ad249a386c0dbce2c8e94b88522a2f366ff20b397081e",
+  "literals": [
+    {
+      "sha256": "09c6f7bf8cdf5ee555ae31ce5ee5e640888c5d2653c52ad8efd2eeb383bc0a63",
+      "category": "preserved",
+      "reason": "Named demonstration project; preserve its identity"
+    },
+    {
+      "sha256": "8a8bf59dcb42c37e2be1296d0ad33476893e157a8f9655831c6aeb6875674b8f",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "4eb6c64565c71e67a13ed8eb420fcbf7c9bf9ddf95da5385e1ca1ac9eb7b6523",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "3dd9a150d6c024c1f3148a19568e82fd86b8afa6f0845db48e74c43726a2dfc9",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "11c80fa7f8d3eb43e79126faa4ccbda7a6445e0ceefe55981a3940f0095b4d8e",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "adbebeb0576012bbadf8322ce5f432f88013313bc7ba637bc0f0e73df13e4bbd",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "1d366deb2f9e65ddff7fd081b075bb781302ee5517e564c91675d45b3bfa6524",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "d14602bf3e9798e75f8f86affb5a232d6235e854d57fe7da49d4cd789666d0c9",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "bc0b102041ec76018f9625ead1e2cfdd439a8e89aaaa12a3899b9b4029b2bf68",
+      "category": "preserved",
+      "reason": "CSS class token, not visible UI copy"
+    },
+    {
+      "sha256": "6a219bbec8733ff0304c2b9e0299cefe07d1113380eb878c0505d35faa0e4662",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "5b4c7e15353f54b5610b2714143bde996dfbd210ed120b94f0ed13bd72099f3e",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "f39de133b9092677005712fe01f0b5a034ed1bf2985b33ae4a26eda63085fdb0",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "a142a882d37238665bbdaba01b125c9ba42cec19c19d1ffd1efe198ea0373cec",
+      "category": "preserved",
+      "reason": "Product or technical acronym"
+    },
+    {
+      "sha256": "aad51ea2fd1268aa8ebecf7bac5a21cf5bcfd5b3749c0b3e12de85300cfc819d",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "a76d8c3e94eba61fc46b5cc05fc51e5f6df1d0f46d901d32e9c27bb251f155ae",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "3e1943522517e81328e3f3f7ea1f0d7fc2ca886dfe1639a7fa6508760d1cee3a",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "43e85084a5508031c5089bd683f9bf350c3c65e3c1fc0526c85eadadb5fc7c6e",
+      "category": "preserved",
+      "reason": "Machine-facing error, diagnostic key or process identifier"
+    },
+    {
+      "sha256": "7f8221d92ae15d94d929e468f1f80c8637678451308eabf9b5dc68ebae6b268e",
+      "category": "preserved",
+      "reason": "Machine-facing error, diagnostic key or process identifier"
+    },
+    {
+      "sha256": "979380f5b4f4215c1e7c22e6aa43ac2f39f86fd11ac671054b4bb40af6c4f16b",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "3d1548ffba0bc8b1b16ec56d0befe788369bf7820e4dc6ddd634d7cf65e66b0e",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "03f39b23625c973b1bb9ef0f60f381c8d382a3ec0bd427b0abea691535234b53",
+      "category": "preserved",
+      "reason": "Product or technical acronym"
+    },
+    {
+      "sha256": "90b9af5aa7f38856af2ada87a91b1bf747f4d3a5002b60e677422de48cf62850",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "65490824df04920d5fe654f0e4fd77d467891abd75abaae0cb2725e40b49b7ad",
+      "category": "preserved",
+      "reason": "Machine-facing error, diagnostic key or process identifier"
+    },
+    {
+      "sha256": "88f3765f105be7c3a63ebb8205b0245e9be31b9acac927c807563df1df956f81",
+      "category": "preserved",
+      "reason": "Machine-facing error, diagnostic key or process identifier"
+    },
+    {
+      "sha256": "6a28901c040707b0a33ea0b03d99acd4bb7bbf44fa0118cf1485003169086b7b",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "f77b12a53ece5f6b7050800bbdbf8cc5ebe87f1b1387cf739f243e43e2ce886b",
+      "category": "preserved",
+      "reason": "Machine-facing error, diagnostic key or process identifier"
+    },
+    {
+      "sha256": "dff8976951be2c536885dfcf19b2d631e7183d5ae5486c53a5ed68ddae9c8e53",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "2577c0f557b2e4b591e9587374c6330c9c64de8017d5a848a682a135251a6f6f",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "b9776d7ddf459c9ad5b0e1d6ac61e27befb5e99fd62446677600d7cacef544d0",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "ea325d761f98c6b73320e442b67f2a3574d9924716d788ddc0dbbdcaca853fe7",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "c20f88d1eb661d7d4015a80b681c6fddebc492623a3b82c92cb9d2323abcb00b",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "494696fdf01dc0ecc003720f8fa7897a8e80dba3827aaaaf76ccd92a76ea0dd7",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "bc842c31a9e54efe320d30d948be61291f3ceee4766e36ab25fa65243cd76e0e",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "149c228157c0d08de64b03c67744566fb34278c7c3c22156de197f0f24ad25dc",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "9ffc1d9a7424584468eb9e37899abe46bf6983c16a0f7bad32de188b851aed74",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "ea9e896b900cef9ab6dcb78ef401a54d88b822094b60bf38559b3a9809a65aae",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "d5068153692e5b034ebee63853b30b5bdf79983b91afcefe92af7224d4ede294",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "2d3cbeb9939673564924d9fb08dcf1d0705ad167c21a33756ad8ea435f8d3e3c",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "e617b19ef1697513b078d08f847836a58d4a73fa546dc3d299a550d1b5d4e3a6",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "26fa85244c6eabcfc2ea1dce3d87adc055bbc31873cfb4501fc325d1b54cda6a",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "33a3c91b44d2f2f5bc8fc1450b24609fa6b41ebfefe1749928633c93124d2b1b",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "6201111b83a0cb5b0922cb37cc442b9a40e24e3b1ce100a4bb204f4c63fd2ac0",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "5aa357ab8a6dc8b6bff8394f65bcb40eb4f62b2e4f80c45f1398eafe8faefe54",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "9ba772e31aa3e03e5c3956447b8e9c456ba277d1ee906a1797cdeae448822f91",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "fe9b9a589567ea1a9095ec6d50f8935306b29970cda558d555758a4114c9bdc6",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "5a795aedb057ff2a53542576686189265a1705c36fdb956735db6cfc08b2249e",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "47330706f5e77b8da361f65c0ceb581c79bb95edd93c6fe170ae267adc3de70e",
+      "category": "preserved",
+      "reason": "Literal URL, filename, key notation or technical example value"
+    },
+    {
+      "sha256": "37d2b12d5d9abc2a364ef9448767ee03938e383c0284193477dc7618f4b7c6c2",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "24e5e1c2bbef565360c392851175f46821fc21d6725503a600353625b4c9209c",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "6312b4b9baf12770fd7dc7307169bfa3676fbec14485abe37264952d8502645e",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "4da276f5f11d050f83c5b576ab967b88eb7bf200f21cdf4830a482529af183d4",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "a20d12c5e9c428c398b9d25e4dded1d6d3e599184e38b4d37bcb9d2d595ff8f7",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "ce770667e5f9b0d8f55367bb79419689d90c48451bb33f079f3a9a72ae132de8",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "5a97fe3f9426c78bf6a976e630e195d22a0c9d35eb1959d3ff54094dcafab189",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "0cf53991d16dc7be688deea1fff53481df55f26f3ef8792e74fd0e5fc2ccd393",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "28391d3bc64ec15cbb090426b04aa6b7649c3cc85f11230bb0105e02d15e3624",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "ec251c9cbda7c0a27f199d2321ceb38ec3c023cf46faf3a00b738d1dbb42ec96",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "18f259e6bcba326d2858c7ba7d4edf9f9183926d5479f0b7b36e970491c9d527",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "1dd60be96ad61f7c22f089c88fbdddf569fbc12f8c066eb1ed1bc791353d027d",
+      "category": "preserved",
+      "reason": "Stylesheet source inside the application; never translate CSS"
+    },
+    {
+      "sha256": "b1d6b91b67c2afa5e322988d9462638d354ddf8a1ef79dba987f815c22b4baee",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "51baf1bef5d301e2f037f3d224ca0555dde5bdb53c47098e0233c1c16cfaf5f6",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "afc6ef196c364c30c139a2bee31db4cffeb340456e3e330f16c172096a598f8a",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "f3577cb543db90ce388e8461dd0e5f65b7d5b2f9ae4c4e497b104f4dc72539dd",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "0695b563acde461fc2f8d9aebccf35c7596ac458b8d8e067c602fb7b4e5f1578",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "8b99b7d8167e8549707e6a938a5504fcf69e9838009aa52088a273c4c0b6074f",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "561b537e0c667b1f71d85f0756374eec54a9fde193d9d009fe26e36fa40c999a",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "60f88344431a9e85c66bdc49ee7ac7a8cdd2f78c2a4224ff834ffeb3f6b03be5",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "018a1bc6af7ecfae98eb5bd1908abc5296e81d6316a072daa4e99b2dbb1b7ce3",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "c43156e60ac8e008afa291a4dd66b1528cbc66f0f5425c60e65e098d03086d65",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "598c0bbfff821ffc7b93ced7e989f0be6cb0d16513fccf4d42b19646793535bd",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "461af7b8c8f3e0e9012c39b8d30f3732b4041c0b5c647f9db498831f7343488f",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "582967534d0f909d196b97f9e6921342777aea87b46fa52df165389db1fb8ccf",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "9f98b7c7f071714517d9a5e67c135b41fa3e91f20bac108158b33b073396f6e5",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "86d1fabf7f9b0ec95db32a1b5c5ac8f7865913ec40c30c70a991cc4ddfeba17b",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "f75c6596507878933aa2bc17dfd9a8689ad0da4f85427ba457666ae5917fa631",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "231bf89d726826891c1578a8ffe06ad898e70ecad4adb07668c2d9beca734b0c",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "473287f8298dba7163a897908958f7c0eae733e25d2e027992ea2edc9bed2fa8",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "7187f0675eb3827939741acf7342ba78836ecec21a31ecf3f34a55309d3bee8a",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "15bd130d6833391404fb49db723d330e00d06cfdb9eb4522006d2afc0c8a84c5",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "50ce1a62663b77d9c66c2d5c987831a851d3d263e2cb46404557f464832ea39a",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "429a32e569f83e71a9ba506a7bd3f7a11b0d020a1b0f1f194f87eb30a1eb7cf3",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "221b0f4dae394adcbff030e1fa9cddcea6eed49ca6863af114b057957d4d4076",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "3f1b6dc519af96a7f3ec941dbfa4b7e02fa1ea96b85eface9ef7f9687350ab77",
+      "category": "preserved",
+      "reason": "Command, programming, CEL or math syntax; preserve it byte for byte"
+    },
+    {
+      "sha256": "316877bf8e401701c9ac95fdb7dee63577480e090eb586b6eb7cf7b36fa24cbf",
+      "category": "preserved",
+      "reason": "Model, model mode or product name; preserve its identity"
+    },
+    {
+      "sha256": "663ea1bfffe5038f3f0cf667f14c4257eff52d77ce7f2a218f72e9286616ea39",
+      "category": "contextual",
+      "reason": "Grammatical fragment; translated only in a reviewed system context with independent DOM fixtures"
+    },
+    {
+      "sha256": "4d669aebaf48644485c89e5b4fce4963933f2e3f16f5c5a10383191f26de1e63",
+      "category": "preserved",
+      "reason": "CSS color class tokens, not visible UI copy"
+    },
+    {
+      "sha256": "3ddae5b2270c450497ed3cfb995cb74669784dbef71cfff3f9ec60109c208d96",
+      "category": "preserved",
+      "reason": "CSS color class tokens, not visible UI copy"
+    },
+    {
+      "sha256": "fc3d69262341bbcf726bbdfa8d755cdaa004e123a094ccdb95ccdc028805fec4",
+      "category": "preserved",
+      "reason": "CSS color class tokens, not visible UI copy"
+    },
+    {
+      "sha256": "13b3fff5f17e831039c4a4064bd71480a087e23744b6ba1d5cf284c618b57a90",
+      "category": "preserved",
+      "reason": "CSS color class tokens, not visible UI copy"
+    },
+    {
+      "sha256": "07745ed06571386c4ebbc5112bbe1dbd9f2983664aa56fb9645f3a85be3ce724",
+      "category": "preserved",
+      "reason": "Literal SSH configuration path or address syntax; preserve exactly"
+    },
+    {
+      "sha256": "c687721b107f8da3d8a1494d1e1f659e60baf3326f62472cabf2835f69d3f263",
+      "category": "preserved",
+      "reason": "Literal SSH configuration path or address syntax; preserve exactly"
+    },
+    {
+      "sha256": "55394f3b09995430b16021a6d53510b2229aeb324a435ea0380d3c5b71da08e5",
+      "category": "preserved",
+      "reason": "Stylesheet source, not visible UI copy"
+    },
+    {
+      "sha256": "99e83f5c0f4ee57b04e1087cb4722cff139512452d1176470bf25cc593610db3",
+      "category": "preserved",
+      "reason": "Stylesheet source, not visible UI copy"
+    },
+    {
+      "sha256": "8363d20d6301822508e8677df8545e41943c0b71f313ee95bf58478727c7c21b",
+      "category": "preserved",
+      "reason": "Stylesheet source, not visible UI copy"
+    }
+  ],
+  "templates": [
+    {
+      "sha256": "3b07f9147c4fcf4c50cf68ececfe7f5b258d2aaa67fc27eeff435fb22c736e8c",
+      "category": "ui",
+      "sample": "2 seconds"
+    },
+    {
+      "sha256": "850c827bd6b2814f63a342d22107c4174f5e090e668e2d079551c85e5484ba3a",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "3659cebc35394f7dda1d7d54ebe8ca92dd5d3fe73c3dfcf535a82c8f1a54fe82",
+      "category": "ui",
+      "sample": "Playback speed 2x"
+    },
+    {
+      "sha256": "4d593c47689630468ebb2a03156119899d78eb334f8d59a96f388aca25661cb8",
+      "category": "ui",
+      "sample": "Zoom 2%, reset to fit"
+    },
+    {
+      "sha256": "d42b3dce8a1274d44b39a30af8437818260e40f21710ae65340864a1f3e5cb48",
+      "category": "ui",
+      "sample": "Open in 2"
+    },
+    {
+      "sha256": "1a65d34bd2178bca4f49370c9eb6d1768dc67038fe25c4dd89f7b68c661950d7",
+      "category": "ui",
+      "sample": "2 (Default)"
+    },
+    {
+      "sha256": "b40ebb519370d562d0d2e916438b1a895ae66b826b4e24b4969e12a664e120db",
+      "category": "ui",
+      "sample": "Open 2 skill"
+    },
+    {
+      "sha256": "767b6cc28f2dccda4b09cd7f7e1255d68d6272644b4288ceb9cbea288c5181a5",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "790a149d983f6bb86d23c1d91cbc55021cb8112d97dda67bbb98c164271aa4a1",
+      "category": "ui",
+      "sample": "Source 2"
+    },
+    {
+      "sha256": "2e6624ede8369e4d8625d415659811b278d40a7ce720b916cec5b3b6da963d13",
+      "category": "ui",
+      "sample": "Nothing is running on port 2"
+    },
+    {
+      "sha256": "c43bf6e37962727f55c572b555b0a3e1109d729fe7154821dab9556f474dc05a",
+      "category": "ui",
+      "sample": "Resume the conversation to start its workspace again, then start the server on port 2 and retry."
+    },
+    {
+      "sha256": "ddbba8130b875a2d55218d304bf978f1c8514e75d4b501e4de5c371e04c372d1",
+      "category": "ui",
+      "sample": "No server is listening on port 2 inside the remote workspace. Start it, or ask the agent to, then retry."
+    },
+    {
+      "sha256": "9d65c675e81b67f6e9ec7c8f753476567edba1cb7fb9a39e55b811d1a97eb123",
+      "category": "ui",
+      "sample": "script timed out after 2ms"
+    },
+    {
+      "sha256": "cdeae88ab669977d353d21a564ca37bcc04187c36d2f3348dda48cc82c9eeadf",
+      "category": "ui",
+      "sample": "2. View site information"
+    },
+    {
+      "sha256": "2fd3cb5a2cf907c826be14e029f20ff7c70c9de3868ce58f311d89ac13767bc2",
+      "category": "ui",
+      "sample": "Downloads, 2% complete"
+    },
+    {
+      "sha256": "e594f8cfdd16294434f7fd2404ab2e4e809f04ab1f9bcc912120a08a8a4bf3b2",
+      "category": "ui",
+      "sample": "2 download progress"
+    },
+    {
+      "sha256": "9e6de2338cde22f9c512491e90417f2be474973fe8a21e8adb35bb0410f8c6da",
+      "category": "ui",
+      "sample": "Show 2 in folder"
+    },
+    {
+      "sha256": "cc9bd7af4bd531b615f5ff9efec43c9ecff91c70f6e4e8452ab16fc3840ca6f1",
+      "category": "ui",
+      "sample": "Cancel 2"
+    },
+    {
+      "sha256": "4276386eaf41ebba72be29c00ca550a3a93e09db3178ad34dfa70509a61ba62c",
+      "category": "ui",
+      "sample": "Remove 2 from list"
+    },
+    {
+      "sha256": "74b441b2401e730ec990d1341ca5dffdb02bb0b8f316fec40ae6907b68274bbc",
+      "category": "ui",
+      "sample": "2 could not find the requested page."
+    },
+    {
+      "sha256": "df34c27bf7ec5b4709ca6f3533dbe858dc8eabcaa267fe34344988c5da92f4dd",
+      "category": "ui",
+      "sample": "2 is currently unable to handle this request."
+    },
+    {
+      "sha256": "a5576f0a03616c24b84d0c30486a10419401324dbc0cc3c6a0c6ce5a4b8a56a3",
+      "category": "ui",
+      "sample": "Give each Best of N fork a full clone of your workspace, including its local commit history. Choosing a winner then gives your workspace that fork's state, so the commits it made are kept. Forks take longer to create than the default CitC clone.2"
+    },
+    {
+      "sha256": "e198e67a51fa29ee48eadc05e460f1796e5340de71e80e1caa8ce0fad1eb8ee6",
+      "category": "ui",
+      "sample": "Give each Best of N fork its own clone of your Git repository instead of a copy-on-write overlay. Each fork is then a real repository, so commits it makes are kept when you choose it as the winner. Forks take longer to create, and the wait grows with the size of your repository.2"
+    },
+    {
+      "sha256": "5641ce69fe800d48137c7c3a3030319bd0fe8bce20fb693b30083d61523b3468",
+      "category": "ui",
+      "sample": "When toggled on, 2 collects usage data to help Google enhance performance and features."
+    },
+    {
+      "sha256": "aea15e910148c18821f99a17e70e9e43be1e944721247209e28b44e2b0248598",
+      "category": "ui",
+      "sample": "Receive product updates, tips, and promotions from Google 2 via email."
+    },
+    {
+      "sha256": "2951b3f4e5f2cb40a1952f7582a045cf596b81b9f202671c4add39b9db81771d",
+      "category": "ui",
+      "sample": "Your Plan: 2"
+    },
+    {
+      "sha256": "35e537b3100e6f78d92741ecca9efd87844a3f925b6351d4fc785ad6e0f5ce3e",
+      "category": "ui",
+      "sample": "Sign in from the 2 panel."
+    },
+    {
+      "sha256": "4567a86b65e3114912db450c6c9505d59dba7eede20242d07bf7a8b08d4235a4",
+      "category": "ui",
+      "sample": "Sign in to use 2!"
+    },
+    {
+      "sha256": "e267b5f08b792ba9484fcfd6b8f3713e4d41965f5706c973775b18ea2c71a674",
+      "category": "ui",
+      "sample": "2 (disabled by admin)"
+    },
+    {
+      "sha256": "9743009d236c378492acfa4d87a5e8605fa32cf28b72368772dc4c632ebb5580",
+      "category": "activity",
+      "sample": "Exited with code 2."
+    },
+    {
+      "sha256": "4147a102627e89dfe91f27c2820704018da8688e308adce97848627257cef07c",
+      "category": "ui",
+      "sample": "Manage 2 app settings."
+    },
+    {
+      "sha256": "dec75f0153c0920172300bd3daf819fb660cb6a0e09c84fee61ef27644f3c297",
+      "category": "ui",
+      "sample": "Reset 2 overrides"
+    },
+    {
+      "sha256": "ebba01579af92385348a8daec7c1a67c0c80b19528e7654cf1445a5455b3eab9",
+      "category": "ui",
+      "sample": "Microphone blocked. Allow in 2."
+    },
+    {
+      "sha256": "d55d6a4b333eb3f5d134fc5cac60b68e2b5864247d1ad54b19e31836c05e9545",
+      "category": "ui",
+      "sample": "When toggled on, 2 will use your AI credits to fulfill model requests once you're out of model quota. 2 will always use your model quota first before using AI credits."
+    },
+    {
+      "sha256": "ada30a56fbdc83fa62b719e2ca83d2a763799544a58d808268778d78c3d13447",
+      "category": "ui",
+      "sample": "Available AI Credits: 2"
+    },
+    {
+      "sha256": "5705c59c4b3f83d8cf2238101237e385e07358095d3166b8f898ef572dcb039a",
+      "category": "ui",
+      "sample": "Stop 2 selected"
+    },
+    {
+      "sha256": "74fe99dd3aa8ebc914fef8d63cb33abccd20d7a0a17f2f75fe68c4f948e285bf",
+      "category": "ui",
+      "sample": "Stop 2?"
+    },
+    {
+      "sha256": "4d73386363f8355d00cafaaf0b530f79c422d1ee5642385a26e45ac072493b86",
+      "category": "ui",
+      "sample": "Recording shortcut for 2. Press keys to bind, Enter to save, Escape to cancel."
+    },
+    {
+      "sha256": "4b3fe53fe4e0d5b6d0769ed50a57d4bfb672231ffd8463fe457ef68f43911f39",
+      "category": "ui",
+      "sample": "Shortcut 2 for 2"
+    },
+    {
+      "sha256": "912ef9d73594b772f071819c3fcf4564f996ca4fd9d3bbedad6261ed2e80b330",
+      "category": "ui",
+      "sample": "Remove shortcut 2 for 2"
+    },
+    {
+      "sha256": "072ae7a7e4372dca0ee6ec180c67f88bb4fbd202b4890547479ad4a175ca2b67",
+      "category": "ui",
+      "sample": "Add shortcut for 2"
+    },
+    {
+      "sha256": "e5341b836a37eaaf128d8832b8e2b35279f2305a088cb3b6dfab63cf2646506c",
+      "category": "ui",
+      "sample": "Reset 2 to default"
+    },
+    {
+      "sha256": "f41f4886e71a3a5baa4c2eb65c1bc8a92eeca38e2cd97ede09e4cc1c45ed5e4d",
+      "category": "ui",
+      "sample": "Carbon: 123 tokens"
+    },
+    {
+      "sha256": "ab042da2cd9c3cb129058951c94229a8c3643b1d62612dcce04f5a2fe08521b5",
+      "category": "ui",
+      "sample": "Show 2 breakdowns"
+    },
+    {
+      "sha256": "606bef611c743001eaca756779b681ae28d7708a00947c27f5fe871a660bc1ff",
+      "category": "ui",
+      "sample": "2 tools"
+    },
+    {
+      "sha256": "c3ee0b427564c66d657700bcad779306e858551e4d5f61ad54df2584a2dd1ba9",
+      "category": "ui",
+      "sample": "Choose 2's Voice"
+    },
+    {
+      "sha256": "d8eeabbae732f9936956e3780557e112852f3e68886a89c23ec563f2b4928997",
+      "category": "ui",
+      "sample": "2, voice 2 of 2"
+    },
+    {
+      "sha256": "584d92cee62a3bf2d8e4e200ef9b1a454f9e2bf73f6041baeb99d651bc244686",
+      "category": "ui",
+      "sample": "Failed to delete recordings: 2"
+    },
+    {
+      "sha256": "44900fa3a80dc7728bba05f96768f1ed0d1bef53a3b9caf144ff948f42c6f437",
+      "category": "ui",
+      "sample": "This deletes 2 (2) from your machine. You can't undo this."
+    },
+    {
+      "sha256": "ed215fce0992941a58bee64b5b59fe5f830a6a055464b9a128d412533816254e",
+      "category": "ui",
+      "sample": "Failed to save cloud permission settings: 2"
+    },
+    {
+      "sha256": "12dd45121d51fda84690cf016ba8c36d061103ad1c425d5c0728c89a5f6d5bcd",
+      "category": "ui",
+      "sample": "2 (Experimental)"
+    },
+    {
+      "sha256": "f0d899c453f8294f63f59638a5a44298e00173d333f752f80fb9ce8212eb607f",
+      "category": "ui",
+      "sample": "Build with 2 Plugins"
+    },
+    {
+      "sha256": "79220f0513146bceadbadabb2672c8cb6eaf7070e148b16b4f7162085591a49b",
+      "category": "ui",
+      "sample": "Failed to save project Google3 configuration: 2"
+    },
+    {
+      "sha256": "c2c9ff97e9286564b02d3125d424c8fae525576331d385b548f3e0f2183d8dc5",
+      "category": "ui",
+      "sample": "2 accounts"
+    },
+    {
+      "sha256": "35d563d7316ef8c77f1fbcd14c11704d8d05d0548d2a3a87fc58ae357030707a",
+      "category": "ui",
+      "sample": "Make 2 the default 2 account"
+    },
+    {
+      "sha256": "3288a11afde40028f394370116cfd7ec87177c621460852873ae77058a8f01ee",
+      "category": "ui",
+      "sample": "Label for 2"
+    },
+    {
+      "sha256": "ea3130a3a0c651f2ee70434657b6bfadb52e65f9a930a6489e9040e12a4dc369",
+      "category": "ui",
+      "sample": "Authorization code for 2"
+    },
+    {
+      "sha256": "c14b46c42ef294ba1bf2091d672f5c55dfe81a025440ee805837c1739680c991",
+      "category": "ui",
+      "sample": "2 on this computer"
+    },
+    {
+      "sha256": "b34a53afdf9425049d48c19b684de95c064a8a94af47a156afbecddf29454b2f",
+      "category": "ui",
+      "sample": "Sign in to 2 on this computer"
+    },
+    {
+      "sha256": "00bad52ce380cd34d1abd0c32398eea6fd7eb9941fe2dc29b1c929885897b0c4",
+      "category": "ui",
+      "sample": "2 (Remote)"
+    },
+    {
+      "sha256": "d6dbfb78ab1ddc9022b616153b10e421e708cb52fa7ab4e7f776ae235a015904",
+      "category": "ui",
+      "sample": "Sign in to 2 remotely"
+    },
+    {
+      "sha256": "5d5078cd411205a0d25956a9d0c815570b9154e6aa60ff6d3a2025711d2e752f",
+      "category": "ui",
+      "sample": "More for 2"
+    },
+    {
+      "sha256": "3121812594f8e34e1080165221e8759e5506982e92e13a2615404af7a962bf65",
+      "category": "ui",
+      "sample": "Add (2)"
+    },
+    {
+      "sha256": "4f3c354271da422084ba1ad92104bd2f7d301b8efb7507a6bff2c6ff20be56cc",
+      "category": "ui",
+      "sample": "Connect 2"
+    },
+    {
+      "sha256": "1876f10a37382931eebfd29392c5e0d605acbbcf5621d225d102e92c38775714",
+      "category": "ui",
+      "sample": "Failed to delete 2: 2"
+    },
+    {
+      "sha256": "6c4da2e1a95b16764c68086f65c62b82396db1cd4c5be6cb16f7a560675aef7a",
+      "category": "ui",
+      "sample": "Duplicate project name"
+    },
+    {
+      "sha256": "bbbca4dc4e8728b31ea1194c8917b8df34d99b44ac6bc5d58d7cc0f20f2fa50d",
+      "category": "ui",
+      "sample": "Failed to resolve folder: 2 (2)"
+    },
+    {
+      "sha256": "f66597eab1146e88c0d9c3a990e52ddb90a46aa8bc4dd11a2284aa8f928bb428",
+      "category": "ui",
+      "sample": "Failed to save project permissions: 2"
+    },
+    {
+      "sha256": "8943b10f939cc711bf443116cd17281b487005f9babaa9aaf262fb434558c39b",
+      "category": "ui",
+      "sample": "Edit 2 name"
+    },
+    {
+      "sha256": "456e03e4752b5ba80bed30f3c4928a4d80522249fc173b9ed058c46301ab47f7",
+      "category": "ui",
+      "sample": "this project"
+    },
+    {
+      "sha256": "73ade869fd64a2ad26f69ef9cd98043668aad14cf7419bb4f955c702c1fa47bb",
+      "category": "ui",
+      "sample": "Open 2, 2. 2"
+    },
+    {
+      "sha256": "227310734948d88e6326f7b39800e2f92a28921874ac8d4f11ef1a7fc70c57c3",
+      "category": "ui",
+      "sample": "Open 2, 2. Summarizing call"
+    },
+    {
+      "sha256": "632f458004f99a3e058f814439aa5e8b4d56944c98a0bae2588831e9234b1350",
+      "category": "ui",
+      "sample": "Open 2, 2"
+    },
+    {
+      "sha256": "a427586c737ce0399b6cad1b927e98c22b0bd69fbf344fd7e7eeb64d1af98bd0",
+      "category": "ui",
+      "sample": "2 lines added, 2 lines removed"
+    },
+    {
+      "sha256": "21ad1a89f7b99b3e8159e0b7995b9a987463376c467f502a02a11dc58645c993",
+      "category": "ui",
+      "sample": "2 Failed"
+    },
+    {
+      "sha256": "5c1add584041a8558c93c33c4c63cdcc9758cdb225995fc95566243e4ad758ea",
+      "category": "ui",
+      "sample": "Amended commit on 2."
+    },
+    {
+      "sha256": "d8fd704b33623247da79c358e022be763716254ed27a89a5ff939e941dc9d66c",
+      "category": "ui",
+      "sample": "Couldn't archive conversation"
+    },
+    {
+      "sha256": "1fbc47391dd778740658e1f4188177829fe1d0e0b5d1bafa5b78303fa4ce4993",
+      "category": "ui",
+      "sample": "Failed to archive conversation"
+    },
+    {
+      "sha256": "cf2308191873a248ed71dd808d42bf8f9b3af28aa566438cc5dd253c085b12d3",
+      "category": "ui",
+      "sample": "A file already exists at 2."
+    },
+    {
+      "sha256": "95861cd94d61a41eda66be693461294d5020953e0f2e718aac04de32ff1a47a9",
+      "category": "ui",
+      "sample": "Can’t create this path — “2” is a file, not a folder."
+    },
+    {
+      "sha256": "4b06004d9fe0750d70f2d452139829cbbe016c06d37c880c81a5332e42d15a59",
+      "category": "ui",
+      "sample": "The folder “2” does not exist. Would you like to create it?"
+    },
+    {
+      "sha256": "890acb21c2c7fe28850415938585bdaab93119d818ffa73aba18259e88b95e7c",
+      "category": "ui",
+      "sample": "“2” isn’t a valid folder name."
+    },
+    {
+      "sha256": "1f866eef632e01f3f8f33c77774b8279b3ce4496d09dffd6a046e036359f69bd",
+      "category": "ui",
+      "sample": "Failed to unarchive project: 2"
+    },
+    {
+      "sha256": "892539a1a0e09097228b7d5a17a20183ea3ffb41b1faded3523f7d8799ab2d4c",
+      "category": "ui",
+      "sample": "Failed to select workspace: 2"
+    },
+    {
+      "sha256": "3a77b46ef9811db2e433180be99ae38a137f86884d4d04c5b0900601322ffc96",
+      "category": "ui",
+      "sample": "Go to slide 2"
+    },
+    {
+      "sha256": "2d514548209a9cae2e494e7c3ed526627b1ef727e9a301f9a4f3296041bff4f4",
+      "category": "ui",
+      "sample": "Open conversation 2"
+    },
+    {
+      "sha256": "2a3d46b4c58fec690a0d5b7c92af58420e0c61d2eeb16d34effe77f37571be63",
+      "category": "ui",
+      "sample": "Conversation 2"
+    },
+    {
+      "sha256": "8de6e0bc02c0467b56e6253766e73a8e750f740e285b1ed22c779fd4871aac34",
+      "category": "ui",
+      "sample": "Open the 2 plugin"
+    },
+    {
+      "sha256": "01d8eadf1783b8eeb76f78e6823eded9590b4f414c3af792909d347da0ed1ad1",
+      "category": "ui",
+      "sample": "Opens external link: 2"
+    },
+    {
+      "sha256": "8028639d73afa3ec879994bfd16db080898c32646971ab5743cea6eb9eaff652",
+      "category": "ui",
+      "sample": "Error while 2"
+    },
+    {
+      "sha256": "39b550f47ba999d6a1198bfd9ea5bfa1ff6092eb8cde58ba00548924a8ca96a3",
+      "category": "ui",
+      "sample": "View Diff for 2"
+    },
+    {
+      "sha256": "511049ba5ef1153a8a13491069d18a31f04363026a0f03089293ab98bc69a672",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "d15a20a7c36b6832b2ef0766a0ee9f29ffdc2a2a039ee9f1b9037ec962fcaaf2",
+      "category": "ui",
+      "sample": "View 2 2"
+    },
+    {
+      "sha256": "f5ccfd1498e782e50c42f2ab3d1e616038ee074c200a3294d5320a6ba879699a",
+      "category": "ui",
+      "sample": "Environment paused. Click to resume it and load the 2."
+    },
+    {
+      "sha256": "20be4f0b610b6968606de1fde70785b0bd8861e4edd9eff546ffb41309125490",
+      "category": "ui",
+      "sample": "Agent needs permission to act on 2"
+    },
+    {
+      "sha256": "e551aa74360b5517f4693901bf21c077221b35b946e7a664011468dc20dc30de",
+      "category": "ui",
+      "sample": "Submit (Enter)"
+    },
+    {
+      "sha256": "df5ff4b185b011bf117c6b61b0bf49afb7ac71e47e0c9fa028c758807f1c575c",
+      "category": "ui",
+      "sample": "Continue (Ctrl+Enter)"
+    },
+    {
+      "sha256": "cae4b61e230a90f0a3d379f65ce561ef04fdb9b7e296e366b34051f5b5647496",
+      "category": "ui",
+      "sample": "Skip (2), Skip All (2)"
+    },
+    {
+      "sha256": "f55a0c593e97ba0fd02fea2772cfc9d997b645087fc078377bbd137a984ec215",
+      "category": "ui",
+      "sample": "Cancel Questionnaire and Stop the Agent (2)"
+    },
+    {
+      "sha256": "4153ab17407466e54add0d124088bbd0577d8a85845a8e16233410c79ab30d1c",
+      "category": "ui",
+      "sample": "Show 2 earlier steps"
+    },
+    {
+      "sha256": "a04220916c52910813bef4259c7e0f2ca7c9a05bfe2b0fc9ae81c9e057ffad0b",
+      "category": "ui",
+      "sample": "Stop 2"
+    },
+    {
+      "sha256": "c40a85b85336a1875f415257abb799a6c10aad9e514a1c7dd4e5ebdc3e76dc09",
+      "category": "ui",
+      "sample": "Failed to create project: 2"
+    },
+    {
+      "sha256": "b4c77722c905f4dcff3e6999327fad3d55fefafe25420bcb7e1491eb2c03bc23",
+      "category": "ui",
+      "sample": "2 folders in this project could not be loaded because their locations are invalid."
+    },
+    {
+      "sha256": "abfd6fc5e7c3d720cc17b9fc348977f3dede9576aa13a137612b40a83eb362e2",
+      "category": "ui",
+      "sample": "App view for 2"
+    },
+    {
+      "sha256": "44e2debc2b29d7943a29186c4d167abf1465d6c0d90ceee995dfb3fdc03fa39c",
+      "category": "ui",
+      "sample": "Open URL in system browser: 2"
+    },
+    {
+      "sha256": "0f20126d7e573b9bf939de9020a553916b22c8e278a97e126ab98f728eb42512",
+      "category": "ui",
+      "sample": "Thinking for 2s"
+    },
+    {
+      "sha256": "71df671b154bc1154b1888c724ab7f0c874e0ea5a4b11762a5d0ab7ad8527fbe",
+      "category": "activity",
+      "sample": "Waiting for command completion (up to 2 seconds)"
+    },
+    {
+      "sha256": "162fb473e1913498096d340f623520801264c2d0ee69b321caa16ed10c8ff594",
+      "category": "ui",
+      "sample": "Chunk 2"
+    },
+    {
+      "sha256": "4b3d3f8eef2b8a680efd20a69a92c07f5f7fd0ed2a93cbc24dd729cc97ddca87",
+      "category": "ui",
+      "sample": "Reading terminal:"
+    },
+    {
+      "sha256": "7627a6f62606a8104bb80a1c6b0176ef05383357b4464a43f0e49d35b04a18cf",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "753aab13ba85b1723701e72215ad0f557c3bf9ce9f01cb5c37a17b5368a1a703",
+      "category": "activity",
+      "sample": "Typing '2' in Browser"
+    },
+    {
+      "sha256": "a18214afdee4454ed9f5676b6eb98ecdd443c9c2c08652b57d056ee52d1992c0",
+      "category": "activity",
+      "sample": "Typed '2' in Browser"
+    },
+    {
+      "sha256": "e260f671ddf6c0b751efd6243294094d70ac51768d13425ff43b31099ee44fef",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "77153537260406129681ae0b40183ac197497e6f8a28f0756f1f5c77e25e622a",
+      "category": "ui",
+      "sample": "(2 steps)"
+    },
+    {
+      "sha256": "2f1ec551300c6201789e78ccd47894d739cd9807447ce64f0e83bb1d49918f44",
+      "category": "activity",
+      "sample": "Message from 2"
+    },
+    {
+      "sha256": "5d769f978d0c888e19e7f9fbbc98c5027f3dc0fffa29e4cd49833992cea9dea9",
+      "category": "ui",
+      "sample": "2 questions"
+    },
+    {
+      "sha256": "7d2593bf22a4f197c2000134cae9b2d6918d0d3a210e2807c7112c0e0294cb28",
+      "category": "activity",
+      "sample": "Using browser · 2"
+    },
+    {
+      "sha256": "c94620ac1e62f831b2ebf182693b298fbca84c21a5e680fbf24ab3382669e77b",
+      "category": "ui",
+      "sample": "Cost summary: 2"
+    },
+    {
+      "sha256": "ff5a6cdbe724c3a570e932d0fcbcf8244ce2b7202657efa5ed1ffaf705bac91f",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "fd3b55bd1a2edc27f61d55e7d3371263a2e530ecce07559ab96722e5bc8013bc",
+      "category": "ui",
+      "sample": "Set up 2"
+    },
+    {
+      "sha256": "a0f5c8c04d535e57f54e62418e7a5ada14bbf74dbb5d690aa82e38b8b1ddc953",
+      "category": "ui",
+      "sample": "Review permissions for 2"
+    },
+    {
+      "sha256": "b0befb141b30b37d1208a1e6d37d7969d9a990de66aa23abc0f2f24d4dec8978",
+      "category": "ui",
+      "sample": "On top of those defaults, 2 requests the access below."
+    },
+    {
+      "sha256": "8d62834b24fd7e9fae83f507e8585a4cbb1d70a5848427a40fcc3996937e185f",
+      "category": "ui",
+      "sample": "Enabled \"2\"."
+    },
+    {
+      "sha256": "5fb3e83df43a3e9bf4359bd9d7a4b97eec26442a7928519600ec224ab57ca5a7",
+      "category": "ui",
+      "sample": "Agents created by this 2 run in a dedicated 2 with its own permissions. You can change the permissions in the 2 settings page."
+    },
+    {
+      "sha256": "91e8e43f72a7956f900a51aca93b905cd5cfc1e18fec659bec252f0d503d90a5",
+      "category": "ui",
+      "sample": "Started \"2\"."
+    },
+    {
+      "sha256": "74c90e25dc8e1a7ff71bb71958172fb913760a0dbe5b5de32df9b89e92a97572",
+      "category": "ui",
+      "sample": "Failed to start \"2\"."
+    },
+    {
+      "sha256": "bfbe8a794afede1f29d7521b2cb802a3f4c9c25cf0b9617aeacc57689f7bd78c",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "59ad9ac5be730ab804991f80c1f00227316d17b66f11a9d823044121fd55f87a",
+      "category": "ui",
+      "sample": "Copy 2"
+    },
+    {
+      "sha256": "ff4526579c01de40e0ff6a5f07ab12b2678ed4d858b8a4a45547b14b1d4cfe8c",
+      "category": "ui",
+      "sample": "Sort and filter conversations (2 active)"
+    },
+    {
+      "sha256": "7c34bab1e99025be17b24f126cae279f49321fc1e916812bddc2a355d1c823a3",
+      "category": "ui",
+      "sample": "Marked 2 conversations as read"
+    },
+    {
+      "sha256": "7d4f172797c9953573596d52ddcc0f4d000e3fe01fd6733245e433e431ae6954",
+      "category": "ui",
+      "sample": "Help us improve 2."
+    },
+    {
+      "sha256": "32cb0c9c457551b138052224e0c19c3a9c8aeb6c2780478081b445c97f79c86f",
+      "category": "ui",
+      "sample": "Showing first 2 references"
+    },
+    {
+      "sha256": "74260070d95da2aac273e7165441cfbd79147224ee27af5eda9ff4e6787a7ae9",
+      "category": "ui",
+      "sample": "Fold lines 2-2"
+    },
+    {
+      "sha256": "efc7eeba45ec29a90f39a5f508ae182b0e0b545498116def59775fbc8332cb26",
+      "category": "ui",
+      "sample": "Unfold lines 2-2"
+    },
+    {
+      "sha256": "08ea5bc692f2eb80d5a6764a72542a538f45f65e6cad50be9f9ced34eb6c0477",
+      "category": "ui",
+      "sample": "Edit comment: 2"
+    },
+    {
+      "sha256": "c8edf399f2f90c696a24593737ec6c5a0c5d96ba52a6519194794916f1e94767",
+      "category": "ui",
+      "sample": "Send all (2)"
+    },
+    {
+      "sha256": "88e322f6e5073a3ed8c188fdb103c05dffe7a5c95bc29bdcc8e16945d24181ed",
+      "category": "ui",
+      "sample": "2 files changed"
+    },
+    {
+      "sha256": "bdaeb1984853631ff582ad0d190b807a16967f829eb747c0e9718525aeb55a1d",
+      "category": "ui",
+      "sample": "Install 2"
+    },
+    {
+      "sha256": "5534f61d34cec65264eb9ce6b07a70170a74896d5e9131a59e3afe8c246a725a",
+      "category": "ui",
+      "sample": "Install folder \"2\" is already in use"
+    },
+    {
+      "sha256": "3ef02d55eb3e59bff1cd5acfcb6d2f77c8f4bd3a35ee18488adc3958ed5cd4e4",
+      "category": "ui",
+      "sample": "The 2 MCP server requires configuration parameters before it can be started."
+    },
+    {
+      "sha256": "878cf118754b5518d9f8ec31808bc9247d75e95eaf42c8d17d6bbc765c3fbd9d",
+      "category": "ui",
+      "sample": "Sign in to 2"
+    },
+    {
+      "sha256": "99b34d69d1786990455925909db052cc1d902900f0ed27c6a8f80922c86c6f14",
+      "category": "preserved",
+      "reason": "Agent-facing instruction, not display copy; do not translate it"
+    },
+    {
+      "sha256": "aab3a0520a41cfaa4ae9e1c0077fb68c5660f87953abea293fc29071caaf7781",
+      "category": "preserved",
+      "reason": "Agent-facing instruction, not display copy; do not translate it"
+    },
+    {
+      "sha256": "714be7d91fe3ec957bc2feda7046e56677471587648d7342abc29b0269fedf7a",
+      "category": "ui",
+      "sample": "Loading 2..."
+    },
+    {
+      "sha256": "1dfdb68adeb1a220a9d4b8800bc5434893ee7fa4e1a97d38a4cbc9b24a1924d0",
+      "category": "ui",
+      "sample": "No plugin found for"
+    },
+    {
+      "sha256": "432b1e713d65fa5ea876aa4b43461101945d1d2229fbb1bb0016370e753bce51",
+      "category": "ui",
+      "sample": "Fix with Agent: 2"
+    },
+    {
+      "sha256": "ebb9d9f35d0135ae8cf9d04c48724647ceed740a71edb2f3743f5b241f4b959d",
+      "category": "ui",
+      "sample": "Configure 2, values missing"
+    },
+    {
+      "sha256": "23222513b829cde07d563440bf7d1479261001478a2e83dd85ea8edc8b5ac4cc",
+      "category": "ui",
+      "sample": "2 tools enabled"
+    },
+    {
+      "sha256": "e8f6373e7758e83a1c4a6690d6476a361d5498bdb951f30ebc1fc2ad6f9623eb",
+      "category": "ui",
+      "sample": "2 tools disabled"
+    },
+    {
+      "sha256": "bbd5c10baf972b79e6fd9790f2aadbc2c965f288624930275dd14b02c3588583",
+      "category": "ui",
+      "sample": "Enable read_file tool for Main"
+    },
+    {
+      "sha256": "22cc86680c0d03b11338218fa2ecca9f5a58082185908b28e3cd6ddf7a48a830",
+      "category": "ui",
+      "sample": "Account this MCP server uses: 2"
+    },
+    {
+      "sha256": "f0d82b1ebe0cb343fc96dfc9ea1869651f03824cae37cd61c4140e5d3e790f5e",
+      "category": "ui",
+      "sample": "Reconnect 2"
+    },
+    {
+      "sha256": "23e73bed60dfca6e957bbd6c6ecab646c2466caa89071bb4afd056840973b3d1",
+      "category": "ui",
+      "sample": "Disconnect 2"
+    },
+    {
+      "sha256": "0da0ac2b767dc0f809e5d964b454177819e0eb9b0df0901d1080187297c0cfd1",
+      "category": "ui",
+      "sample": "Rule 2"
+    },
+    {
+      "sha256": "c0ab86a5a5eef706537e09261b9bbba5c92179d81adbb31449d3899172f67381",
+      "category": "ui",
+      "sample": "2, setup required"
+    },
+    {
+      "sha256": "7884da87c34858e628cdddda673774e78d8fefe1c933da117bba9a913d5741a8",
+      "category": "ui",
+      "sample": "Configure 2"
+    },
+    {
+      "sha256": "aeb204a5279156defb3fa3b6b9e0e2be3b92147604f0e37842de91ccd0b4f4c1",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "e0f9986531b0e35e86b1b070a76e356a1da90ca7648b31e87495b02f4a09a8b2",
+      "category": "ui",
+      "sample": "2 / 12 rows"
+    },
+    {
+      "sha256": "fb10396f75d1211f630cee0503700c6ea2ef886b372fd5b7923e138a7e047ecf",
+      "category": "ui",
+      "sample": "2 rows"
+    },
+    {
+      "sha256": "1216f5c44c47a45e4f3f81dd4a49d89968fe29df6a9fecd622b4577a91b209ff",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "3e67c9ec270661ede2ba9e460c0cc73d0945fc2ee2e63935d96fa0eef080b434",
+      "category": "ui",
+      "sample": "Preview unavailable — 2"
+    },
+    {
+      "sha256": "78f89440229bbdaebb6b230dabe3fb5c0ac5780c656e2f3fb69556e5aa1b4c49",
+      "category": "ui",
+      "sample": "2 failed"
+    },
+    {
+      "sha256": "e5f92921ee970ec71bedb9cad64fba269262c77914b02e6893b9a44dca87a834",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "2370482d52f3a3d8350ab5ba93f2f39db4a784d0e0612891fbfaeaa4dfe8c83c",
+      "category": "ui",
+      "sample": "Move to Group: 2"
+    },
+    {
+      "sha256": "4cf90f322a5d931ea5ca4fe48e9d976d49551f1e9e13644c32a86209b740bae0",
+      "category": "ui",
+      "sample": "Workspace Name"
+    },
+    {
+      "sha256": "3b65c4c0fe14c95be496061d91a4491d6ba854c372465f796ddfde1b9822f584",
+      "category": "ui",
+      "sample": "Forked from 2"
+    },
+    {
+      "sha256": "4fe77d55c0aa11c620f7dea0c6b0919ed08d7cec1c27f3a99799d9125f6597f8",
+      "category": "ui",
+      "sample": "Where the agent runs, current: 2"
+    },
+    {
+      "sha256": "2a50aaea5811bc16ebc206a5af3ffdb0207521ea0fdb83d36143d28f0cad68cf",
+      "category": "ui",
+      "sample": "Failed to save project: 2"
+    },
+    {
+      "sha256": "bfccef3a4e614ddfc72d203b1916139fbbb8472c08197501efba419c9e0f90ce",
+      "category": "ui",
+      "sample": "Cannot add folder: \"2\" is not a valid folder location."
+    },
+    {
+      "sha256": "87f62bbf6e6aee1a147d2024614e91069fedaf1d563ad592a013c79f4f4f6d92",
+      "category": "ui",
+      "sample": "Select project, current: 2"
+    },
+    {
+      "sha256": "9809e1170a416f2008b9366ad1f563fb4fbb68b4a69ba258a269473c4af24f34",
+      "category": "ui",
+      "sample": "No matching projects"
+    },
+    {
+      "sha256": "81849e088406bc17ac29803d0b954bc318f183b263afb87cb718aea56fa96d76",
+      "category": "ui",
+      "sample": "No remote workspaces"
+    },
+    {
+      "sha256": "c569bc6400a7b650b46c6f9ea8e74954f3b684c7e5880568789267647e2e8be8",
+      "category": "ui",
+      "sample": "Remove context from 2"
+    },
+    {
+      "sha256": "c3f056d361edc8b82eb2b6a4d7afceebb29ffbe82f475575f3fb3ae375b870a8",
+      "category": "ui",
+      "sample": "Question 2 of 2"
+    },
+    {
+      "sha256": "889f902d912d94d3f7a4d4057ecee05e90c23146873df00897b31810a5ab7e6f",
+      "category": "ui",
+      "sample": "Compare responses from 2 models side-by-side to find the best result."
+    },
+    {
+      "sha256": "b4d76731fd5d7f235785ffeaa1939780b0860ef3965fb0a63136eb02207b49a3",
+      "category": "ui",
+      "sample": "Auth code for 2"
+    },
+    {
+      "sha256": "0b5c6730b48bb23dbcee57c7145ea90f717aef77b41ec9b23b628427d9971f32",
+      "category": "ui",
+      "sample": "No connectors match “2”"
+    },
+    {
+      "sha256": "d711d0675c5826a487a8e076fb1ad69c06d5c67a6b07f67234520c6cc18208cc",
+      "category": "ui",
+      "sample": "+2 more (Show all)"
+    },
+    {
+      "sha256": "c5e09e9890ef04688f5b9ce01632cd34939d4f876aaa0f222450d7da014fa3cf",
+      "category": "ui",
+      "sample": "Failed to save project settings: 2"
+    },
+    {
+      "sha256": "eb521f2713ba1eb4b00a82ba365a21a01083b0262bd674d86b25a11d802599d3",
+      "category": "ui",
+      "sample": "Failed to save settings: 2"
+    },
+    {
+      "sha256": "a7408395793c16245953bffc36b5032257067af80fcb148c8a3cbc2bcdcfc056",
+      "category": "ui",
+      "sample": "Agent permissions preset: 2, 2"
+    },
+    {
+      "sha256": "e8c2f13cab34df533ad0ed68b3082ce9076d0e62e11a8f7c2ba5a24ce514acca",
+      "category": "ui",
+      "sample": "Agent permissions preset selector, current: 2"
+    },
+    {
+      "sha256": "5e524fc69c4ffb5fe35ec6e63ddde92edbdcf049cac3bf66c3089a33a352b4a3",
+      "category": "ui",
+      "sample": "2. Starting in local workspace."
+    },
+    {
+      "sha256": "fee2c1f9011e6cef5adf7a74ce2a534db778bd51c27804f87a559da2e96d38d6",
+      "category": "ui",
+      "sample": "Using default 2 name"
+    },
+    {
+      "sha256": "c70df749bce96fd11fa856544cc760ca7af7d847e6cdb14a93cff32bcc763f88",
+      "category": "ui",
+      "sample": "Failed to create 2"
+    },
+    {
+      "sha256": "a907da701041a2d30465e5a6eafaeb6d44c6e99dc39138b5fd4a6f5618e44d10",
+      "category": "ui",
+      "sample": "Detached at 2"
+    },
+    {
+      "sha256": "734444c125512d53e1b2972001280c83064877dc6aa6439e4a06838bf5333f65",
+      "category": "ui",
+      "sample": "Branch, current: 22"
+    },
+    {
+      "sha256": "2eab946203506af38e68fb14d5ce50baa66b1eb6a493bc61538ddb78657ec2bb",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "6e3d399d2fcf929566967d926c30a07f2458711c3dc7996b914eba570e90fac5",
+      "category": "ui",
+      "sample": "Select model, current: 222"
+    },
+    {
+      "sha256": "dbae9d026cd2cfa2d9ee6168994bfb934f430a7ff0b344fdf68dad18f8446a0d",
+      "category": "ui",
+      "sample": "Environment: 2"
+    },
+    {
+      "sha256": "c5f2134b60ae3673e65335d0cf312f0ecf003779b5c3f6bd80e1fceae3a1e211",
+      "category": "ui",
+      "sample": "System default (2)"
+    },
+    {
+      "sha256": "8de8a6256ce42668eaac1544c8e332dfb70dd81e216d4800b6867d386fafb7e2",
+      "category": "ui",
+      "sample": "2. Switch microphone."
+    },
+    {
+      "sha256": "f8c13da1bb519ddb52c6c9fa864327bc5579559ed85b3c1b7ea215d6ea587580",
+      "category": "ui",
+      "sample": "2. Switch mic"
+    },
+    {
+      "sha256": "bd1919f89e07ba1c8b17226f05453896dc7551514435dcaa3fa19ef3ed9cfbcc",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "464b84ac7c387c0515c580989c340a5e5d5c23c83ccf34bb38f0a8f7e17ad67f",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "dc1bef654d133283074815f9d6f5730e165cc1df269d2519d2db3f273c6b80df",
+      "category": "ui",
+      "sample": "Voice Speed, 2"
+    },
+    {
+      "sha256": "808233fa051293a6581ba7410c70b057b0915d0731c719df56d2fed9bf5f30df",
+      "category": "ui",
+      "sample": "Voice speed, 2"
+    },
+    {
+      "sha256": "e721398205d1bdf27c29d93bd2050d288614e5642a3f3683b23acd7efcf3898f",
+      "category": "ui",
+      "sample": "View 2"
+    },
+    {
+      "sha256": "2748aa229c722b2dee4a2154faaf94e2f052f9ee17a0f604dc29647eb42e18fc",
+      "category": "ui",
+      "sample": "+2 attachments"
+    },
+    {
+      "sha256": "3d4be22121a85bbd40e352afee84d419b6d639d250a85031e3f3797eb29f9c4f",
+      "category": "ui",
+      "sample": "Send now: 2"
+    },
+    {
+      "sha256": "d46467e9d1a425c497a5375bf2785746dd68480cb3b6b4624e32032c2939c45f",
+      "category": "ui",
+      "sample": "2 comments"
+    },
+    {
+      "sha256": "dead3f0a1774056aab4c7d64d9b9aa1622f4f623361a138c2fff545f6034e32f",
+      "category": "ui",
+      "sample": "Version 2.31.2"
+    },
+    {
+      "sha256": "29bbf8116fc082cdb43cbd22ed107ee96c83d7e9be0f95598a4a7c13b5c520b2",
+      "category": "ui",
+      "sample": "Welcome to 2!"
+    },
+    {
+      "sha256": "7935b4a289440ceed9e917648875934a8adb88c0880293c89f3bf5684c6edd7e",
+      "category": "contextual",
+      "sample": "in ExampleProduct",
+      "contexts": [
+        {
+          "text": "Plugins are packaged collections of skills and MCPs to help the Agent in ExampleProduct work with Google developer products."
+        }
+      ]
+    },
+    {
+      "sha256": "9a1bcedff69c65e79c945fce1dcdd0cb6d529d4f5b2f74409946a03f2f6e1bca",
+      "category": "ui",
+      "sample": "Select 2 Theme"
+    },
+    {
+      "sha256": "08932e552cd347b93f5bc554e5d274947b09733e42bcdc10ee32895343e91fb8",
+      "category": "ui",
+      "sample": "No MCP servers found for \"2\""
+    },
+    {
+      "sha256": "3ec39ffaf1e01de51ce404476505cf5303705e328b0ed9c170c67c189829cc54",
+      "category": "ui",
+      "sample": "See 2 more 2"
+    },
+    {
+      "sha256": "aecd8a6a1ee55670cd81776e0a5aa14ad7557f4e02c9406f440b6a6e5c743f66",
+      "category": "ui",
+      "sample": "See more 2"
+    },
+    {
+      "sha256": "3c1abb5ac3914bbbb384ee4d5f5913e94bf1b082a6acd7497915ff94a07866c4",
+      "category": "ui",
+      "sample": "See 2 more"
+    },
+    {
+      "sha256": "958fabfa37a49bdd768c9db37932fd9a4b4e09c037471b26aa6ef258a889b840",
+      "category": "ui",
+      "sample": "More actions for 2"
+    },
+    {
+      "sha256": "4557996606e5234a1c07afef06a751fbfaf4cdc1089f4d33f0b1b896a1a83ecf",
+      "category": "ui",
+      "sample": "Filter skills and rules: 2"
+    },
+    {
+      "sha256": "7e38a60072d44fc48881619b77ba7fa256e8e05f4cb023d852aa3bb53ad71d66",
+      "category": "ui",
+      "sample": "Toggle 2"
+    },
+    {
+      "sha256": "92c891aed3d22c8fc28723fe55dfc3d3f44366c9b983bd8d036435ee9529b2c8",
+      "category": "ui",
+      "sample": "Search for \"2\" in the Marketplace"
+    },
+    {
+      "sha256": "c10cf91df715637034f3d3fb5012cd630226e030ce64cef997df48622316e79e",
+      "category": "ui",
+      "sample": "No plugins found for \"2\"."
+    },
+    {
+      "sha256": "c2afb3bf2b261e4f800b75619617430112e090e4f25985d450c72de3fae75633",
+      "category": "ui",
+      "sample": "Adding plugins from 2"
+    },
+    {
+      "sha256": "6ed61963f19050da870a424d0637b29a31a5163db6babb59e57f64ce274b74f2",
+      "category": "ui",
+      "sample": "Add 2 2 from 2"
+    },
+    {
+      "sha256": "76886dd5abd7384f44067bfff4b708357f3bebc186940dc26f2f9534c653407c",
+      "category": "ui",
+      "sample": "Add all · 2"
+    },
+    {
+      "sha256": "9f823fff2d3c740e561d362583c282374ac919e28e9a538127f9582f4b8f33bf",
+      "category": "ui",
+      "sample": "Adding 2"
+    },
+    {
+      "sha256": "2c7b089dc8dbfe2549f38e9013fbc00c3b29c9867e7338ae85cd78bac4c7b51a",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "473928b1ddf542fba6a0ad35f98a61ac6074e88af9f723aa44a6fc3e235fa434",
+      "category": "ui",
+      "sample": "Blocked: 2"
+    },
+    {
+      "sha256": "b19e4433ca89aa7d1978a64b5c1e25398307a0b084a576e03fd5823aee6e64b8",
+      "category": "ui",
+      "sample": "Details for 2"
+    },
+    {
+      "sha256": "0d38420c2a912dab1e108480a102969780cea9fb38985ba85421215bc716b03e",
+      "category": "ui",
+      "sample": "Plugins in 2"
+    },
+    {
+      "sha256": "d9286493048a4b9ca7411abb0f86aa0050c2bc121c58ffb3bac7c91a0dcf2bb2",
+      "category": "ui",
+      "sample": "See more in 2"
+    },
+    {
+      "sha256": "f47145d5fe9b2c4f48b0198d396c85c958744769bb1e1372507f9f3cd2d01f7b",
+      "category": "ui",
+      "sample": "See less in 2"
+    },
+    {
+      "sha256": "cafc17fb76fb945ca1730a7f835e0cdf39639fa53f321af4b19f940efc4b2b64",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "044eec2784e9767286430c5b292f1a6155efe65c7da48ab799e3649eba16ac80",
+      "category": "ui",
+      "sample": "Show 2 more subagents"
+    },
+    {
+      "sha256": "123bbbc94aa861dc0d1002592bc368f6cdefe88937eaa9ba71ba00c0e70041f6",
+      "category": "ui",
+      "sample": "You have 2 conversations in progress. Updating will interrupt them, and they will automatically resume once the update completes."
+    },
+    {
+      "sha256": "c684b858178e2d11189f2f8ac2cdd3d936a14be73cbac775221d1233cd60cb67",
+      "category": "ui",
+      "sample": "You have 2 conversations in progress. Updating will cancel them and you'll need to manually restart them."
+    },
+    {
+      "sha256": "b11bc76bf17ef8642d2ad8cb9ecb573ddcd0c48ed68b445a4832f8e1c9d1d33a",
+      "category": "ui",
+      "sample": "Coordinator 2"
+    },
+    {
+      "sha256": "77ec6ed3d39e869610e4add43cc35f0c28025639eeb9a13b31fe2667dd768a1f",
+      "category": "ui",
+      "sample": "Switch environment (2)"
+    },
+    {
+      "sha256": "5cbf2d2903e570d39f0343589e2b2f2d3c9190a9cfbb155701d91c8621b35296",
+      "category": "ui",
+      "sample": "Load older messages, showing 2 of 2"
+    },
+    {
+      "sha256": "a1a316bec4f88e4fbd95b5a74b4eec4842fd5d21711ebbdd6891230ba30ecee2",
+      "category": "ui",
+      "sample": "No more older messages, showing 2 of 2"
+    },
+    {
+      "sha256": "1e8ae84714416330f78d215a483b8cd101d694f7fe7c2d9ac5824d81b69442c7",
+      "category": "ui",
+      "sample": "Turn 2"
+    },
+    {
+      "sha256": "14ba8039766a25abfef5457670223c62b8e9f353e802b959cd2b33d2efb93919",
+      "category": "ui",
+      "sample": "Go to turn 2 of 2"
+    },
+    {
+      "sha256": "0d8d453c2def8b1dbc48012b20d7c107a9d96c21fc28b6b52c2114a50e8235bd",
+      "category": "ui",
+      "sample": "Turn 2 of 2"
+    },
+    {
+      "sha256": "b3cf588c6a0bc8221178ca71de469984cc6d0caec27fafd7629389acf241184e",
+      "category": "ui",
+      "sample": "Open Subagent: 2"
+    },
+    {
+      "sha256": "8f5af98f65abccbee1ee804a4fd642f896136f4f44d1841dac96d696b3db663a",
+      "category": "ui",
+      "sample": "Select model with Ctrl+Shift+M"
+    },
+    {
+      "sha256": "0fdfd10f6087e320265c7e2192e6fa37ffdcb1648d5cd7df5ae201af88752a11",
+      "category": "ui",
+      "sample": "Error: 2"
+    },
+    {
+      "sha256": "9ea52d94a0a6711dcc1314701ec5f4a988b4bbfb129f3099eb500211f06eda52",
+      "category": "ui",
+      "sample": "Managed by the 2 automation"
+    },
+    {
+      "sha256": "82cf38c75b221ae609f4aa5c09ea7519b1314daa1e6acdb55f1077252dcd0520",
+      "category": "ui",
+      "sample": "Managed by the 2 plugin"
+    },
+    {
+      "sha256": "2521a429cac3cb0364cecf73c21a4d82db827cdfdae6929e8955f839254f182d",
+      "category": "ui",
+      "sample": "2 archived"
+    },
+    {
+      "sha256": "6ac5298b31baab544f00e5ffeca332f8f277b2b39f1b1dedd2839e9257558479",
+      "category": "ui",
+      "sample": "Failed to archive 2"
+    },
+    {
+      "sha256": "a60976a7a51355695dc652d84b4eec71964fca5d0d8c268870875f959c2fdd4b",
+      "category": "ui",
+      "sample": "2 deleted"
+    },
+    {
+      "sha256": "50ab857c7e46c3b10d132f7a407ec8721e259e5aa16b684a0960f4027369ff1c",
+      "category": "ui",
+      "sample": "Failed to delete 2"
+    },
+    {
+      "sha256": "9e141c8adeed766ec4528708fcadf444e9ad41282fcf044c6a8a7123902bbd2b",
+      "category": "ui",
+      "sample": "2. Show in 2"
+    },
+    {
+      "sha256": "49ba73b061a0b3ccaaa9367c40ea78635258bf5bf4d1ee0e14c61b9f75fab8eb",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "9dc2a327154df015ae178efe8ad5a1f77a2e6ad54ea2d7d56ca2c7f6fce86d0e",
+      "category": "ui",
+      "sample": "Edit side question title: 2"
+    },
+    {
+      "sha256": "f103d3d1b81ed363558b8e22d47513b689d75eb749110f7723c49a53749390d8",
+      "category": "ui",
+      "sample": "2 header"
+    },
+    {
+      "sha256": "6095391e3f2bdd8efc2de0a1b28c2ac4950a21bf936f72965dc2c59c789303a5",
+      "category": "ui",
+      "sample": "Open 2"
+    },
+    {
+      "sha256": "abf6040f514cabc62ed26f84f8dbcfaaebe8e2c7b674b4ea143ea0580ab92814",
+      "category": "ui",
+      "sample": "Search Google for \"2\""
+    },
+    {
+      "sha256": "0d79b750bf33f0be8733eeba49e0f672794eea014f7f5a80aada775e1ac8b1dd",
+      "category": "ui",
+      "sample": "2 tab"
+    },
+    {
+      "sha256": "1dbc8b393740dc31ba246a4328f3aac243d7ca85016f8ed915e55aca5755022c",
+      "category": "ui",
+      "sample": "Unpin 2"
+    },
+    {
+      "sha256": "2e70709889e1998e3b77b896c8cfc8881f6ce1a216b46c2993a155e0cc981fc9",
+      "category": "ui",
+      "sample": "Close 2"
+    },
+    {
+      "sha256": "e724b040a6a2f489810a96d2330ed2fc1378a21e7ea62ebd79c19a268261ce28",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "36c97ba1571ab1cb57b980b51aa7ea386da78a786c28298f4d5a165944b7d555",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "d975d7ecc16fda38f6cc54a7a05d969d2cf41c7e0376cb098b4c8c7d76e6a841",
+      "category": "ui",
+      "sample": "Keep: 2"
+    },
+    {
+      "sha256": "2642abe71cd1206ae852141833cf4c33873820f87579fcfd373141c769e3d107",
+      "category": "ui",
+      "sample": "2 (unavailable)"
+    },
+    {
+      "sha256": "d82be1777494f2d8ff0df4dd782c0378935202ad1a24dd631e756b7bcdf71cfe",
+      "category": "ui",
+      "sample": "2 (latest)"
+    },
+    {
+      "sha256": "c084954be36a50dcfc729a20e050fe98c5b28c457309d46e03817dee33cb01b9",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "3821085cef4b87bb7f430ea74ce3650a43be1a811702c8569879b2415914a214",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "0eb677f96bacdccadb042f02715909b2982653852475c1c0933160d4d8432d18",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "a23d5864a6646557cd41e397b7237fd72716dc3cbdd91f51f1b64e73a821c3c6",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "9709bacea475947cb65d1410f246b64dc0cda54122b7abf4226388c02dc86de1",
+      "category": "ui",
+      "sample": "Remove 2"
+    },
+    {
+      "sha256": "83f7998874db78877d3dbaaaff09fe3a14fb0a63a071395fade222b989ba8eb6",
+      "category": "ui",
+      "sample": "2 CEL values"
+    },
+    {
+      "sha256": "73778815d64e82a0385387205010b644fc693443c1e9d6a95ccf35781e392dc8",
+      "category": "ui",
+      "sample": "+2 more"
+    },
+    {
+      "sha256": "0155ee7923e5f02c652af9959142f453fdd88e25234d23e6f2342e7452b47610",
+      "category": "ui",
+      "sample": "Connect an account for 2 so the agent can run automations."
+    },
+    {
+      "sha256": "4879c736bb2d388d7c40fb51b36d5b60820c527c2f4e9953981e1589eb2d8fb5",
+      "category": "ui",
+      "sample": "See 2: 2"
+    },
+    {
+      "sha256": "955c28b8d41fcc4d58b73db3f6881f86f270e2a3a05e73a297ea200a8ad97d7f",
+      "category": "ui",
+      "sample": "See all (2)"
+    },
+    {
+      "sha256": "73368b484047104ba0357a0d1582cb08e68cfeadb599655b8901c509ef3bb8fc",
+      "category": "ui",
+      "sample": "Failed to save \"2\""
+    },
+    {
+      "sha256": "9bda656b1675b522652bdf843214537e424484e9ad97d6cec1461ed023b9fa19",
+      "category": "ui",
+      "sample": "Enable 2"
+    },
+    {
+      "sha256": "bdb9b9ec03d0e51a001e21e1bdb0c0e388a1706cc1a9b6c7dff7f1ef63cbc52f",
+      "category": "ui",
+      "sample": "Delete 2"
+    },
+    {
+      "sha256": "0d7dae08ecf05a3921a92f66ba2677c59a690aa868eac104c7121e01a0806aae",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "a100cf3ce66c96812c3416c5ccec2640b3a467a3156b514ee8f7fa482c52086a",
+      "category": "ui",
+      "sample": "Running for 2"
+    },
+    {
+      "sha256": "0305207f111826e713713e321c2f670c24a6c5fd8cd0fc68bcf89905ea93f167",
+      "category": "ui",
+      "sample": "Restarted \"2\"."
+    },
+    {
+      "sha256": "36426a2b1a22f8c5d447c158d81c788f0bec48ebe6d3e4734c919660012640c3",
+      "category": "ui",
+      "sample": "Restart 2"
+    },
+    {
+      "sha256": "3a505ef54f212845070e97d086288d9371701e186d52eea2000cf43ff8a8b1d1",
+      "category": "ui",
+      "sample": "Up 2"
+    },
+    {
+      "sha256": "1505c6eed18ce8504cfc293d38f869ad21db668d1451c5cd01b4ea38ab8cbcda",
+      "category": "ui",
+      "sample": "Failed to update \"2\""
+    },
+    {
+      "sha256": "8e347f08e07f21da75833027353f06a9ceebdd1baae0dec3f32a15357e948d9c",
+      "category": "ui",
+      "sample": "Pause 2"
+    },
+    {
+      "sha256": "fa431dab9796f63c4a48457019924263e92c796c1783abb77835f164ee605528",
+      "category": "ui",
+      "sample": "Resume 2"
+    },
+    {
+      "sha256": "38d7fa602a6e14805cd7b198865387e40abf81a16d356f59d4eb58ca9481f37b",
+      "category": "ui",
+      "sample": "Run 2 now"
+    },
+    {
+      "sha256": "ac3593a4e96a975d04eec4292ee135bf51733b7e1ebff5e1ddc686edd88c685a",
+      "category": "ui",
+      "sample": "Enter automation name..."
+    },
+    {
+      "sha256": "4cadb0041642d6ab63c14ffdabaf6b4688a613fb5c1f583d1c2f24511891ffbd",
+      "category": "ui",
+      "sample": "Created automation \"2\"."
+    },
+    {
+      "sha256": "d1d8becc6d9642ea1ec5d8619df8d39b37890b2d969aad4afea1fdcea2ab9472",
+      "category": "ui",
+      "sample": "Failed to create 2."
+    },
+    {
+      "sha256": "4612b48529e3dd26068104b47ece8db2765263b431d01e80f100130d63ca0e2d",
+      "category": "ui",
+      "sample": "New 2"
+    },
+    {
+      "sha256": "ffc83c8fe3764d4b93ba234c906b0566adffeb4e8a8a7efbea14cc8b00fd0227",
+      "category": "ui",
+      "sample": "Step 2 of 5"
+    },
+    {
+      "sha256": "f9af4a6de26476dc54c81a947d6002fc39a43f23adbbb2092741b40305903a2d",
+      "category": "ui",
+      "sample": "Create Automation"
+    },
+    {
+      "sha256": "9ce17a8e1a1b40fb1650c8e5295f343f91478278d266ff38824a0bce3d0b4ad2",
+      "category": "ui",
+      "sample": "Deleted \"2\"."
+    },
+    {
+      "sha256": "adb5c34ed4eb4ba4b4062ac81f2416f18dbc35c7831cbff6c037029a9ed1ce35",
+      "category": "ui",
+      "sample": "Failed to delete \"2\""
+    },
+    {
+      "sha256": "66cc3192ee8d8e23823dcca8df94949b9817735c8b46a146da83713641a2e567",
+      "category": "ui",
+      "sample": "See [2](2)."
+    },
+    {
+      "sha256": "f2b99b0766f9b5da4c02f8913a531954184b58182559fbf79f8ace9c3d249eb9",
+      "category": "ui",
+      "sample": "Add 2"
+    },
+    {
+      "sha256": "9a1d318d6fe2e97d295c1f8fec75962c3bec298964324e12f13ee320faefa85c",
+      "category": "ui",
+      "sample": "Bar 2"
+    },
+    {
+      "sha256": "5a63fded342f631ccd110ea9874d9721c36b82c19bb14b63d8081c9ff630a762",
+      "category": "ui",
+      "sample": "Line 2"
+    },
+    {
+      "sha256": "45040b7a2f53a3b2257680fc3bf57e78ecd7c4f286f199f31f4b05ded342321d",
+      "category": "ui",
+      "sample": "Endpoint 2 not implemented"
+    },
+    {
+      "sha256": "856ab0480ff15ab839ee5deee82a4585fd7ffa380f99024c2505ff2224611ea3",
+      "category": "ui",
+      "sample": "2 color picker"
+    },
+    {
+      "sha256": "945abbe5eef7692e8cfe216a38faf83350caa52b662fd3a4074f80a9e94938f1",
+      "category": "ui",
+      "sample": "Low contrast ratio (2:1). Text may be hard to read."
+    },
+    {
+      "sha256": "157d421f60c8f8a54f3e66c2ad5779c4947e9cc498975fd1b535e9b1f2a59830",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "5ed890c17ccc6bf303ab86f79ae9d7d51fd239a8e7d2585ee18d12203c9f9b82",
+      "category": "ui",
+      "sample": "Failed to evict annotation index for page 2"
+    },
+    {
+      "sha256": "d618f9c0e7debe903ee53e478d2fcf242bd2540fbb717d572c6b0d0c4d098262",
+      "category": "ui",
+      "sample": "Scroll to: 2 on page 2"
+    },
+    {
+      "sha256": "2a68b2b81144b4b894f12e5bf1072aad384e329481eb1338cdeb1f2fe2b92560",
+      "category": "ui",
+      "sample": "Page 2 failed to load"
+    },
+    {
+      "sha256": "2e908a9415827f3d3fe71c0eaf8103e76df3724248390e536e6e32b3e7b19a73",
+      "category": "ui",
+      "sample": "Go to page 2"
+    },
+    {
+      "sha256": "62a2122ce7e228c4e7b21facaf6454d5ec5e3087a9825b9d71b0a4152117b353",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "3e36099b4497c66862c03047026ac32456dc27fb254c6dac090fd3a9309d22e9",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "6955b117382c80b3cca36d79631e58360faa981ab4b6e8de215d52bd3aa13d29",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "52c71acaa3fc5ee5389866a580f23b87899d871b0cab9c81c9224e79b9aa5d90",
+      "category": "ui",
+      "sample": "Committed to 2."
+    },
+    {
+      "sha256": "5c2e972ed8afa0dd098c168a65162425b9139e41e00ae26310ce28467df869ae",
+      "category": "ui",
+      "sample": "2. This commit is already pushed; amending will require a force push."
+    },
+    {
+      "sha256": "cbdfdfc2ddb74f0ab905f933ec8de5b8b4397ca18e372adbae222eb19d15e5fa",
+      "category": "ui",
+      "sample": "Push 2 commits to origin/main"
+    },
+    {
+      "sha256": "7e380d14636e35f54cf94c03815c07d2e8374aa863a27164d3371953efcc8c79",
+      "category": "ui",
+      "sample": "Publish 2 to origin"
+    },
+    {
+      "sha256": "c192f4867ff859b795b38800830ac15c229db18965a33c37d57584b7074e44be",
+      "category": "preserved",
+      "reason": "Opaque values, numeric notation, IDs, CSS, CRON, CEL or Markdown syntax; no English UI frame to translate"
+    },
+    {
+      "sha256": "5c330316d4466789bbb588c26922b4d9559075a57db5acb430f1894b59a67039",
+      "category": "ui",
+      "sample": "Pushed 2 commits to origin/main."
+    },
+    {
+      "sha256": "48cc1aa1d3bc502a5f5908861a61516aaf2d162cfc10ddc46fec72713f52a283",
+      "category": "ui",
+      "sample": "Pushed to 2."
+    },
+    {
+      "sha256": "35337c4b37ab9b28afde8338617d9ef47be602dfff716befd235cfa2ab43ef50",
+      "category": "ui",
+      "sample": "Published 2 to origin."
+    },
+    {
+      "sha256": "109e9b72214bc33d2fc9871aae5b29f46f9e87bc71924bd8f6859d0b0757ed14",
+      "category": "ui",
+      "sample": "The browser blocked the download of REVIEW_HOST",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "a0a18c0ba243830c5b340c74bf7ea45458af51b8ff92fd606c959863b9e2dc8f",
+      "category": "ui",
+      "sample": "Microphone access for REVIEW_HOST was denied. Quit and reopen the app to be asked again.",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "57d015667d8f49b344882cc63346d47032fb914d9ba6311a9b9f3722febc6381",
+      "category": "preserved",
+      "reason": "Runtime stylesheet selector; never translate CSS"
+    },
+    {
+      "sha256": "7de6fc0a3b59238cc137e44687798b0f763b1b46e7b936671421deb613f8dd11",
+      "category": "ui",
+      "sample": "Couldn't connect to REVIEW_HOST",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "58fb0864dce14a8ff533bd4b9fc48ac7b559bd1f0c8c5121a659cecfcaa52b5a",
+      "category": "ui",
+      "sample": "Remove REVIEW_HOST from Recent",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "acf7e9d56ab207adb813778e2b91708ad34ee2a00d2fc7fc1d3167810d7795cb",
+      "category": "ui",
+      "sample": "Hide REVIEW_HOST from this list",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "e07afeef159a3c5681092da2f9f18f4e15fcc83baed057b2a6f78871006a0b35",
+      "category": "ui",
+      "sample": "Show REVIEW_HOST in the list again",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "2e99dceabef95a3bc9e5cbb38968153f78069d6e2b69a828d1ba14f90cea92ac",
+      "category": "ui",
+      "sample": "REVIEW_HOST hidden hosts",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "67129de51a128f5eb49a4e7a134ea3511733c529197bb57334c7ef2c66c59bf1",
+      "category": "ui",
+      "sample": "On REVIEW_HOST",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "54d576ea4b91f360c787ce58daf5e3f76f6aae09c98048f95453ad69e52a64a7",
+      "category": "ui",
+      "sample": "This window's agents, files, and terminals are on REVIEW_HOST.",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "8eb611d52bf994d75fe6632f812005aecd44cf6d85321c604a75693128071cfd",
+      "category": "ui",
+      "sample": "REVIEW_HOST, error",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "3860fb6ade2b91f986b989c008de1bee9757d62a5ab12d23f4a695bee8014ff3",
+      "category": "ui",
+      "sample": "Disable Word WrapREVIEW_HOST",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "a2685096eaadb4a463ef1c7ee031cc996fb847b5298111f0048c123a11c3b30a",
+      "category": "ui",
+      "sample": "Enable Word WrapREVIEW_HOST",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "4b10913d6ca7767b2a7de5d22c87c55626f88d4e690c70b35ed2f96a44b1f7a4",
+      "category": "ui",
+      "sample": "Select project, current: REVIEW_HOST (remote)",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    },
+    {
+      "sha256": "a0627d9964e2cbe1c4ac1e9a97966813f7ad7433f1dc1c5c635c240d03b01cfd",
+      "category": "preserved",
+      "reason": "Technical connection identity or punctuation-only metadata; preserve opaque values"
+    },
+    {
+      "sha256": "a09de6f11df9f6d59579ab1c7cefbaaf7f893f703640bbb52608c7f0f2a3a55d",
+      "category": "preserved",
+      "reason": "Technical connection identity or punctuation-only metadata; preserve opaque values"
+    },
+    {
+      "sha256": "b26b5001595bc29440a783425559dcea98757a1802331daa20b5b3c21a2ceb15",
+      "category": "preserved",
+      "reason": "Technical connection identity or punctuation-only metadata; preserve opaque values"
+    },
+    {
+      "sha256": "976b8462182d585bf4768d6556a6b25eeb9b3c0a623d74e84a0f85966f13995a",
+      "category": "ui",
+      "sample": "Connected to REVIEW_HOST",
+      "reason": "New 2.32.0 UI frame reviewed against the signed vendor bundle; opaque values are retained"
+    }
+  ],
+  "scope": "Static structural UI inventory. Reviewed technical exclusions are exact fingerprints, not generic allow rules. Current model and skill metadata are validated separately."
+}

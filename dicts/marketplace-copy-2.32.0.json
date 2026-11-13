@@ -1,0 +1,219 @@
+[
+  {
+    "id": "marketplace-google-docs",
+    "source": "Read, draft, and edit docs.",
+    "translation": "Чтение, подготовка и редактирование документов."
+  },
+  {
+    "id": "marketplace-google-sheets",
+    "source": "Read, write, and format spreadsheets.",
+    "translation": "Чтение, заполнение и оформление электронных таблиц."
+  },
+  {
+    "id": "marketplace-google-slides",
+    "source": "Read, edit, and export presentations.",
+    "translation": "Чтение, редактирование и экспорт презентаций."
+  },
+  {
+    "id": "marketplace-google-drive",
+    "source": "Search, upload, download, and share files.",
+    "translation": "Поиск, загрузка, скачивание и совместное использование файлов."
+  },
+  {
+    "id": "marketplace-google-calendar",
+    "source": "Check availability, schedule events, and RSVP.",
+    "translation": "Проверка свободного времени, планирование событий и ответы на приглашения."
+  },
+  {
+    "id": "marketplace-gemini-api",
+    "source": "Build applications and shell workflows with the Gemini Interactions API, Live API, and Gemini API CLI, including text, image, video, and speech generation, managed agents, and real-time multimodal streaming.",
+    "translation": "Разработка приложений и сценариев командной строки с помощью Gemini Interactions API, Live API и Gemini API CLI. Генерация текста, изображений, видео и речи, управляемые агенты и мультимодальный потоковый обмен в реальном времени."
+  },
+  {
+    "id": "marketplace-android-cli",
+    "source": "Core tools and knowledge required to develop for Android.",
+    "translation": "Основные инструменты и сведения для разработки приложений Android."
+  },
+  {
+    "id": "marketplace-firebase",
+    "source": "Prototype, build & run modern apps that users love with Firebase's backend, AI, and operational infrastructure.",
+    "translation": "Создание прототипов, разработка и запуск современных приложений с серверными сервисами, ИИ и эксплуатационной инфраструктурой Firebase."
+  },
+  {
+    "id": "marketplace-science",
+    "source": "Curated collection of agent skills for science tasks.",
+    "translation": "Подборка навыков агента для научных задач."
+  },
+  {
+    "id": "marketplace-canva",
+    "source": "Create, edit, review, resize, and brand-check Canva designs with the Canva MCP server.",
+    "translation": "Создание, редактирование, проверка и изменение размеров макетов Canva, а также проверка соответствия фирменному стилю через сервер Canva MCP."
+  },
+  {
+    "id": "marketplace-figma",
+    "source": "Turn Figma designs into production code, map components with Code Connect, and create or edit Figma files in Antigravity.",
+    "translation": "Преобразование макетов Figma в рабочий код, связь компонентов через Code Connect, создание и редактирование файлов Figma в Antigravity."
+  },
+  {
+    "id": "marketplace-mobbin",
+    "source": "Give your AI agent 600,000+ real app screens, and the skills to use them. Includes the Mobbin MCP and a skill that redesigns your screen from patterns real apps ship, in your own design system, with the references behind every change.",
+    "translation": "Доступ агента к более чем 600 000 экранам реальных приложений и навыкам работы с ними. Включает Mobbin MCP и навык переработки экрана по проверенным образцам из готовых приложений, в вашей дизайн-системе и со ссылками на источники каждого изменения."
+  },
+  {
+    "id": "marketplace-atlassian-teamwork-graph-cli",
+    "source": "Teamwork Graph CLI is Atlassian's agent-first interface to your entire work context: Jira issues, Confluence pages, Bitbucket PRs, along with your connected third-party data sources. Purpose-built for coding agents like Antigravity (terminal or desktop), and powered by Atlassian's context graph. Try: \"draft a Jira issue from this PR and link it to the epic.\" Run /twg-setup after install to connect Atlassian Teamwork Graph CLI to Antigravity.",
+    "translation": "Командный интерфейс Atlassian для агентов: задачи Jira, страницы Confluence, запросы на слияние Bitbucket и подключенные сторонние источники в едином рабочем контексте. Разработан для агентов вроде Antigravity в терминале и приложении и использует граф контекста Atlassian. Например: «Подготовь задачу Jira по этому запросу на слияние и свяжи ее с эпиком». После установки выполните /twg-setup для подключения к Antigravity."
+  },
+  {
+    "id": "marketplace-dropbox",
+    "source": "Connect Antigravity to Dropbox to search, inspect, summarize, share, collect uploads, organize folders, and clean up files with confirmation for write actions.",
+    "translation": "Подключение Antigravity к Dropbox для поиска, просмотра, подготовки сводок, совместного доступа, сбора загружаемых файлов, упорядочения папок и очистки файлов. Действия, изменяющие данные, требуют подтверждения.",
+    "aliases": [
+      "Подключить Antigravity to Dropbox to search, inspect, summarize, share, collect uploads, organize folders, and clean up files with confirmation for write actions."
+    ]
+  },
+  {
+    "id": "marketplace-linear",
+    "source": "The product development system for teams and agents. Manage issues, projects, and documents across your Linear workspace from Antigravity.",
+    "translation": "Система разработки продуктов для команд и агентов. Управление задачами, проектами и документами рабочего пространства Linear из Antigravity."
+  },
+  {
+    "id": "marketplace-monday-com",
+    "source": "Plan and track work in monday.com from Antigravity: create, update and assign items, write docs, and build forms that turn requests into items.",
+    "translation": "Планирование и отслеживание работы в monday.com из Antigravity: создание, изменение и назначение элементов, работа с документами и создание форм, которые превращают заявки в рабочие элементы."
+  },
+  {
+    "id": "marketplace-notion",
+    "source": "Connect Antigravity to your Notion workspace with the Notion MCP server, plus skills for research, documentation, meeting prep, specs, trackers, and project updates.",
+    "translation": "Подключение Antigravity к рабочему пространству Notion через сервер Notion MCP. Навыки для исследований, документации, подготовки встреч, спецификаций, отслеживания работы и обновления проектов.",
+    "aliases": [
+      "Подключить Antigravity to your Notion workspace with the Notion MCP server, plus skills for research, documentation, meeting prep, specs, trackers, and project updates."
+    ]
+  },
+  {
+    "id": "marketplace-pandadoc",
+    "source": "Create and send proposals, quotes, and contracts for e-signature. Track signing progress and identify documents that need follow-up.",
+    "translation": "Создание и отправка предложений, смет и договоров на электронное подписание. Отслеживание подписания и поиск документов, по которым нужны дальнейшие действия."
+  },
+  {
+    "id": "marketplace-netlify",
+    "source": "Build and deploy on Netlify: functions, edge functions, blobs, database, identity, forms, image CDN, caching, and AI Gateway, plus the Netlify MCP server.",
+    "translation": "Разработка и развертывание в Netlify: функции, пограничные функции, объектное хранилище, база данных, управление пользователями, формы, CDN изображений, кеширование и AI Gateway, а также сервер Netlify MCP."
+  },
+  {
+    "id": "marketplace-railway",
+    "source": "Deploy, configure, monitor, and troubleshoot apps, databases, and infrastructure on Railway from Antigravity with Railway's agent skill and hosted MCP server.",
+    "translation": "Развертывание, настройка, мониторинг и устранение неполадок приложений, баз данных и инфраструктуры Railway из Antigravity с помощью навыка агента и размещенного сервера MCP."
+  },
+  {
+    "id": "marketplace-vercel",
+    "source": "Build and deploy web apps and AI agents on Vercel with skills for Next.js, AI SDK, and cloud services, plus the official Vercel MCP server.",
+    "translation": "Разработка и развертывание веб-приложений и ИИ-агентов в Vercel. Навыки для Next.js, AI SDK и облачных сервисов, а также официальный сервер Vercel MCP."
+  },
+  {
+    "id": "marketplace-wix",
+    "source": "Build Wix apps and headless sites, and manage Wix stores, bookings, CMS and more, with Wix CLI skills and the official Wix MCP server.",
+    "translation": "Разработка приложений Wix и сайтов с отдельным интерфейсом, управление магазинами, бронированиями, CMS и другими возможностями Wix с навыками Wix CLI и официальным сервером Wix MCP."
+  },
+  {
+    "id": "marketplace-wordpress",
+    "source": "Build, publish, and manage WordPress.com and Jetpack-connected sites. Draft posts, edit blocks, check traffic stats, moderate comments, and manage plugins.",
+    "translation": "Создание, публикация и управление сайтами WordPress.com и сайтами, подключенными к Jetpack. Подготовка записей, редактирование блоков, проверка статистики посещений, модерация комментариев и управление плагинами."
+  },
+  {
+    "id": "marketplace-auth0",
+    "source": "Add Auth0 authentication to any app: login, MFA, SSO, Organizations, RBAC, custom domains, and branding. Debug auth errors and migrate from other providers.",
+    "translation": "Добавление аутентификации Auth0 в приложение: вход, многофакторная аутентификация (MFA), единый вход (SSO), организации, ролевой доступ (RBAC), собственные домены и оформление. Диагностика ошибок входа и переход от других поставщиков."
+  },
+  {
+    "id": "marketplace-base44",
+    "source": "Build and deploy Base44 full-stack apps: CLI project management, JavaScript/TypeScript SDK development, and production troubleshooting skills.",
+    "translation": "Разработка и развертывание приложений Base44 с клиентской и серверной частью: управление проектом через CLI, разработка с SDK JavaScript и TypeScript и устранение неполадок в рабочей среде."
+  },
+  {
+    "id": "marketplace-browserbase",
+    "source": "Give your agent a real browser: navigate, click, type, screenshot, and extract data from any site, locally or on Browserbase cloud browsers.",
+    "translation": "Доступ агента к полноценному браузеру: переходы, нажатия, ввод текста, снимки экрана и извлечение данных с сайтов локально или в облачных браузерах Browserbase."
+  },
+  {
+    "id": "marketplace-coderabbit",
+    "source": "AI-powered code review, review-comment autofix, and repository configuration, powered by CodeRabbit.",
+    "translation": "Проверка кода с помощью ИИ, автоматическое исправление замечаний и настройка репозитория средствами CodeRabbit."
+  },
+  {
+    "id": "marketplace-context7",
+    "source": "Up-to-date documentation lookup. Pull version-specific documentation and code examples directly from source repositories into your coding agent's context.",
+    "translation": "Поиск актуальной документации. Получение документации для конкретных версий и примеров кода непосредственно из исходных репозиториев в контекст агента."
+  },
+  {
+    "id": "marketplace-crowdstrike-falcon",
+    "source": "Use the official CrowdStrike-hosted MCP server to work across Falcon: detections, cases, threat intel, SIEM, hosts, vulnerabilities, cloud, and more.",
+    "translation": "Работа с платформой Falcon через официальный сервер MCP от CrowdStrike: обнаружения, расследования, сведения об угрозах, SIEM, устройства, уязвимости, облачная среда и другие возможности."
+  },
+  {
+    "id": "marketplace-bigin",
+    "source": "Manage your Bigin CRM from Antigravity: review pipelines, find contacts and deals, log calls, plan follow-ups, and email customers.",
+    "translation": "Управление Bigin CRM из Antigravity: просмотр воронок, поиск контактов и сделок, регистрация звонков, планирование дальнейших действий и письма клиентам."
+  },
+  {
+    "id": "marketplace-databricks",
+    "source": "Databricks skills for the CLI, Apps, Lakebase, Model Serving, Lakeflow Jobs, Spark Declarative Pipelines, Declarative Automation Bundles (DABs), and classic-to-serverless migration.",
+    "translation": "Навыки Databricks для CLI, Apps, Lakebase, Model Serving, Lakeflow Jobs, Spark Declarative Pipelines, Declarative Automation Bundles (DABs) и перехода с классических вычислений на бессерверные."
+  },
+  {
+    "id": "marketplace-intercom",
+    "source": "Search Intercom conversations, contacts, and companies, spot support trends, and install the Intercom Messenger with secure identity verification.",
+    "translation": "Поиск переписок, контактов и компаний в Intercom, выявление тенденций в обращениях в поддержку и установка Intercom Messenger с безопасной проверкой личности."
+  },
+  {
+    "id": "marketplace-semrush",
+    "source": "SEO workflows on live Semrush data: keyword research, site audits, backlinks, competitor, traffic and market analytics, PPC, and AI brand visibility.",
+    "translation": "Работа с актуальными данными Semrush для поискового продвижения: подбор ключевых слов, аудит сайта, обратные ссылки, анализ конкурентов, трафика и рынка, контекстная реклама и видимость бренда в ИИ-сервисах."
+  },
+  {
+    "id": "marketplace-stripe",
+    "source": "Accept payments and grow your business. Stripe's official MCP server enables AI agents to manage customers, products, prices, payment links, invoices, subscriptions, and refunds, as well as search Stripe documentation.",
+    "translation": "Прием платежей и развитие бизнеса через официальный сервер Stripe MCP. Управление клиентами, товарами, ценами, платежными ссылками, счетами, подписками и возвратами, а также поиск по документации Stripe."
+  },
+  {
+    "id": "marketplace-wispr-flow",
+    "source": "Search and read your Wispr Flow meeting notes, transcripts, scratchpad notes, and calendar events. Read-only access to your own account.",
+    "translation": "Поиск и чтение заметок со встреч, расшифровок, быстрых записей и событий календаря Wispr Flow. Только чтение данных собственного аккаунта."
+  },
+  {
+    "id": "marketplace-gmail",
+    "source": "Search, read, draft, and send emails in Gmail.",
+    "translation": "Поиск, чтение, подготовка и отправка писем в Gmail."
+  },
+  {
+    "id": "marketplace-looker",
+    "source": "Connect to your managed Looker MCP server to explore data, run saved Looks, build dashboards, and validate LookML.",
+    "translation": "Подключение к управляемому серверу Looker MCP для изучения данных, запуска сохраненных отчетов Looks, создания панелей и проверки LookML.",
+    "aliases": [
+      "Подключить to your managed Looker MCP server to explore data, run saved Looks, build dashboards, and validate LookML."
+    ]
+  },
+  {
+    "id": "marketplace-arize-ax",
+    "source": "Query Arize AX projects, traces, datasets, and experiments from Antigravity, with skills for tracing, evals, and prompt optimization.",
+    "translation": "Запросы к проектам, трассировкам, наборам данных и экспериментам Arize AX из Antigravity. Навыки для трассировки, оценки и улучшения запросов к моделям."
+  },
+  {
+    "id": "marketplace-grafana-cloud",
+    "source": "Query Grafana Cloud metrics, logs, traces and profiles, manage dashboards, alerts and incidents, and ask Grafana Assistant through the hosted MCP server.",
+    "translation": "Запросы к метрикам, журналам, трассировкам и профилям Grafana Cloud, управление панелями, оповещениями и инцидентами, а также обращения к Grafana Assistant через размещенный сервер MCP."
+  },
+  {
+    "id": "marketplace-granola",
+    "source": "The AI notepad for meetings. Connect to your meeting history and use your conversation context to get things done.",
+    "translation": "ИИ-блокнот для встреч. Подключение к истории встреч и выполнение задач с учетом контекста ваших бесед."
+  },
+  {
+    "id": "marketplace-invideo",
+    "source": "Connect your agent to invideo's AI-native video editor. It trims, grades and mixes on a real timeline while you watch every change land.",
+    "translation": "Подключение агента к видеоредактору invideo на основе ИИ. Обрезка видео, цветокоррекция и микширование на монтажной шкале с отображением каждого изменения.",
+    "aliases": [
+      "Подключить your agent to invideo's AI-native video editor. It trims, grades and mixes on a real timeline while you watch every change land."
+    ]
+  }
+]
