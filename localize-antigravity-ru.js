@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.32.0.
+// Local, static Russian UI localization for Google Antigravity 2.32.1.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -14,13 +14,13 @@ const vm = require("vm");
 const translateSettingsExtra = require("./scripts/settings-copy.js");
 const translateUiCount = require("./scripts/ui-counts.js");
 const createUiTemplateTranslator = require("./scripts/interpolated-copy.js");
-const UI_TEMPLATE_COPY = require("./dicts/ui-template-copy-2.32.0.json");
+const UI_TEMPLATE_COPY = require("./dicts/ui-template-copy-2.32.1.json");
 const translateUiTemplate = createUiTemplateTranslator(UI_TEMPLATE_COPY);
 const { sources: UI_FRAGMENT_SOURCES, translateUiFragment } = require("./scripts/ui-fragments.js");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.2";
-const SUPPORTED_APP_VERSION = "2.32.0";
+const SUPPORTED_APP_VERSION = "2.32.1";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -642,8 +642,8 @@ function translateDynamicUiText(value) {
 // before it reaches the DOM; show a fixed Russian summary for those entries.
 // These mappings never edit a skill's source, instructions, ID or server name.
 const CATALOG_DESCRIPTIONS = [
-  ...require("./dicts/marketplace-copy-2.32.0.json").flatMap(({ source, aliases = [], translation }) => [source, ...aliases].map(value => [value, translation])),
-  ...require("./dicts/catalog-copy-2.32.0.json").filter(item => !item.nameSuffix).map(({ source, translation }) => [source, translation]),
+  ...require("./dicts/marketplace-copy-2.32.1.json").flatMap(({ source, aliases = [], translation }) => [source, ...aliases].map(value => [value, translation])),
+  ...require("./dicts/catalog-copy-2.32.1.json").filter(item => !item.nameSuffix).map(({ source, translation }) => [source, translation]),
   ["Interactive guide to design and create a scheduled background automation.", "Руководство по созданию фоновых задач по расписанию: ежедневные сводки, еженедельные списки дел и другие повторяющиеся задания. Также открывается командой /automation."],
   ["Manage the separately connected second Gmail account used as a reserve mailbox and for service registrations, security notices, and account recovery.", "Работа с отдельно подключенным вторым Gmail для регистраций в сервисах, уведомлений безопасности и восстановления доступа. Поиск и чтение писем, очистка, метки, архивирование, вложения и подготовка сообщений в указанном втором ящике."],
   ["How to manage and create plugins — namespaced bundles of skills, agents, rules, MCP servers and hooks", "Управление и создание плагинов — комплектов навыков, агентов, правил, серверов MCP и обработчиков, которые устанавливаются, включаются и отключаются вместе. Установка, удаление и создание плагинов; команда /plugin. Для отдельных навыков и правил используйте руководство по кастомизации."],
@@ -915,7 +915,7 @@ function translateScopedUiText(value, allowActionPrefixes = true, allowGenericPr
   return null;
 }
 
-const NAMED_CATALOG_DESCRIPTIONS = require("./dicts/catalog-copy-2.32.0.json").filter(item => item.nameSuffix);
+const NAMED_CATALOG_DESCRIPTIONS = require("./dicts/catalog-copy-2.32.1.json").filter(item => item.nameSuffix);
 function translateCatalogDescription(value) {
   for (const item of NAMED_CATALOG_DESCRIPTIONS) {
     if (!value.startsWith(item.source)) continue;
@@ -1939,11 +1939,11 @@ function selfTest() {
     if (!injected.includes(expected)) fail(`Permission-dialog translation is missing: ${expected}`);
   }
   const menuFixture = "const menu = { items: [] };\nelectron_1.Menu.setApplicationMenu(menu);";
-  const menuVersionFixture = { items: [{ label: "Antigravity", submenu: { items: [{ label: "Version 2.32.0" }, { label: "&Version 2.32.0" }, { label: "Version PRIVATE_project" }] } }] };
+  const menuVersionFixture = { items: [{ label: "Antigravity", submenu: { items: [{ label: "Version 2.32.1" }, { label: "&Version 2.32.1" }, { label: "Version PRIVATE_project" }] } }] };
   let menuApplied = false;
   new vm.Script(patchMenu("const menu = globalThis.fixture;\nelectron_1.Menu.setApplicationMenu(menu);")).runInNewContext({ fixture: menuVersionFixture, electron_1: { Menu: { setApplicationMenu(menu) { if (menu !== menuVersionFixture) throw new Error("Unexpected native menu"); menuApplied = true; } } } });
   const versionLabels = menuVersionFixture.items[0].submenu.items.map(item => item.label);
-  if (!menuApplied || versionLabels[0] !== "Версия 2.32.0" || versionLabels[1] !== "Версия 2.32.0 (&V)" || versionLabels[2] !== "Version PRIVATE_project") fail("Native version menu localization failed or changed an unknown label.");
+  if (!menuApplied || versionLabels[0] !== "Версия 2.32.1" || versionLabels[1] !== "Версия 2.32.1 (&V)" || versionLabels[2] !== "Version PRIVATE_project") fail("Native version menu localization failed or changed an unknown label.");
   const twicePatchedMenu = patchMenu(patchMenu(menuFixture));
   if (twicePatchedMenu !== patchMenu(menuFixture)) fail("Menu patch changed on repeated application.");
   if ((twicePatchedMenu.match(/ANTIGRAVITY_RU_MENU_START/g) || []).length !== 1) {

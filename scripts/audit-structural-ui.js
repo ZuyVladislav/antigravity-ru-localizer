@@ -10,7 +10,7 @@ const { embeddedMain } = require("./audit-ui-copy.js");
 const { translateAuditedUiCopy, explainAuditedUiCopy } = require("../localize-antigravity-ru.js");
 const createTranslator = require("./interpolated-copy.js");
 const { translateUiFragment } = require("./ui-fragments.js");
-const templates = createTranslator(require("../dicts/ui-template-copy-2.32.0.json"));
+const templates = createTranslator(require("../dicts/ui-template-copy-2.32.1.json"));
 const sha = value => crypto.createHash("sha256").update(value).digest("hex");
 const normalize = value => value.replace(/\s+/g, " ").trim();
 const properties = new Set(["children", "tooltip", "description", "placeholder", "title", "content", "label", "message", "text", "helperText", "aria-label", "aria-placeholder"]);
@@ -68,7 +68,7 @@ function audit(source, baseline) {
     const translation = reviewed.category === "activity" ? templates(reviewed.sample, "activity") : reviewed.category === "contextual" ? translateUiFragment(reviewed.sample, reviewed.contexts) : translateAuditedUiCopy(reviewed.sample);
     return { ...row, sample: reviewed.sample, translation, category: translation !== null ? reviewed.category : "missing", reason: reviewed.reason || null };
   });
-  return { appVersion: "2.32.0", parser: "acorn@" + acorn.version, sourceSha256: found.sourceSha256,
+  return { appVersion: "2.32.1", parser: "acorn@" + acorn.version, sourceSha256: found.sourceSha256,
     exactReviewedSource: found.sourceSha256 === baseline.sourceBundleSha256, astNodes: found.astNodes,
     literalCandidates: literalRows.length, translatedLiterals: literalRows.filter(row => row.category === "translated").length,
     contextualLiterals: literalRows.filter(row => row.category === "contextual").length,
@@ -92,7 +92,7 @@ function main() {
   if (!binary && !["main.js", "application-static-main.js"].includes(path.basename(input))) throw new Error("Only the static application bundle is accepted");
   if (destination === input || fs.existsSync(destination)) throw new Error("Choose a fresh evidence output; existing files are preserved");
   const data = fs.readFileSync(input), source = (binary ? embeddedMain(data) : data).toString("utf8");
-  const baseline = JSON.parse(fs.readFileSync(path.join(__dirname, "../dicts/structural-ui-2.32.0.json"), "utf8"));
+  const baseline = JSON.parse(fs.readFileSync(path.join(__dirname, "../dicts/structural-ui-2.32.1.json"), "utf8"));
   const report = audit(source, baseline);
   fs.writeFileSync(destination, JSON.stringify(report, null, 2) + "\n");
   const { literalRows, templateRows, missingLiterals, missingTemplates, ...summary } = report;

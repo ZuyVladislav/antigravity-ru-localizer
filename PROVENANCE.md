@@ -80,3 +80,11 @@ Native-component UI checks on Windows use a hidden isolated copy and recorded
 system metadata. Linux and macOS coverage is the CI source/synthetic transaction
 and signing test, not an authenticated native application session. Neither
 application binaries nor regional backend patches are distributed here.
+
+## 2.32.1-r1 point release
+
+The signed 2.32.1 distribution has the exact reviewed 2.32.0 frontend and host
+members, except the package version. Existing translations and audited scopes
+are retained, with explicit 2.32.1 version checks and a separate structural
+baseline. Backend compatibility and private preservation are verified separately;
+no Google executable, regional backend patch or private profile is published.
