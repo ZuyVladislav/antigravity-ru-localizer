@@ -933,10 +933,35 @@ function translateCatalogDescription(value) {
 // Ambiguous labels belong only to the application's activity headers. In
 // particular, the model mode named Thinking must retain its original spelling.
 function translateActivityStatus(value) {
+  if (typeof value !== "string") return null;
+  value = value.trim();
   if (value === "Thinking") return "Думает";
   const exit = /^([·•] ?)?Exited with code(?: (-?[0-9]+)(\.)?)?$/.exec(value);
   if (exit) return `${exit[1] || ""}Завершено с кодом${exit[2] ? " " + exit[2] : ""}${exit[3] || ""}`;
-  return null;
+  // Only the finite tool-group summary grammar emitted by Antigravity 2.32.1.
+  // This function runs exclusively in activity headers, including animation slots.
+  const parts = value.split(", ");
+  if (!parts.length || parts.length > 3) return null;
+  const result = [];
+  let previousKind = -1;
+  for (let index = 0; index < parts.length; index++) {
+    const part = parts[index];
+    let kind, translated, match;
+    if (index === 0 && (match = /^Explored(?: (file|files|artifact|artifacts))?$/.exec(part))) {
+      kind = 0;
+      translated = { file: "Изучен файл", files: "Изучены файлы", artifact: "Изучен артефакт", artifacts: "Изучены артефакты" }[match[1]] || "Изучение завершено";
+    } else if ((match = /^(Ran|ran) (command|commands)$/.exec(part)) && match[1] === (index ? "ran" : "Ran")) {
+      kind = 1;
+      translated = match[2] === "command" ? "Выполнена команда" : "Выполнены команды";
+    } else if ((match = /^(Edited|edited)(?: (file|files|artifact|artifacts))?$/.exec(part)) && match[1] === (index ? "edited" : "Edited")) {
+      kind = 2;
+      translated = { file: "Изменен файл", files: "Изменены файлы", artifact: "Изменен артефакт", artifacts: "Изменены артефакты" }[match[2]] || "Редактирование завершено";
+    } else return null;
+    if (kind <= previousKind) return null;
+    previousKind = kind;
+    result.push(index ? translated[0].toLowerCase() + translated.slice(1) : translated);
+  }
+  return result.join(", ");
 }
 
 function makePreloadScript(dictionary) {
@@ -1065,6 +1090,7 @@ function makePreloadScript(dictionary) {
       const classes = typeof current.className === "string" ? current.className : "";
       if (classes.split(/\\s+/).includes("font-mono")) return false;
       if (current.tagName === "BUTTON" && current.getAttribute("data-testid") === "tool-group-collapsible") return true;
+      if (current.tagName === "DIV" && current.getAttribute("data-testid") === "ephemeral-tool-status") return true;
       if (current.getAttribute("data-testid") === "thinking-collapsible-trigger") return true;
       // The compact (non-verbose) thinking indicator has no test id in 2.25.
       if (current.tagName === "DIV" && ["tabular-nums", "min-h-8", "select-none", "text-muted-foreground", "rounded-lg", "text-left", "gap-1.5"].every(token => classes.split(/\\s+/).includes(token))) return true;
@@ -1370,6 +1396,14 @@ function selfTestPreloadDom(injected) {
   const activityCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-activity-fixtures.json"), "utf8"));
   const reviewedCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-copy-fixtures.json"), "utf8"));
   const dynamicCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-dynamic-fixtures.json"), "utf8"));
+  const toolGroupCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "tool-group-summaries-2.32.1.json"), "utf8"));
+  if (toolGroupCopy.appVersion !== SUPPORTED_APP_VERSION || toolGroupCopy.cases.length !== 107) fail("Tool-group summary fixtures are missing or incomplete.");
+  for (const item of toolGroupCopy.cases) {
+    if (translateActivityStatus(item.source) !== item.expected) fail("Tool-group summary mismatch: " + item.source);
+    // MCc leaves a final space when the edited resource kind is empty.
+    if (/^(?:Edited)$|, edited$/.test(item.source) && translateActivityStatus(item.source + " ") !== item.expected) fail("Raw tool-group summary mismatch: " + item.source);
+  }
+  for (const source of toolGroupCopy.unchanged) if (translateActivityStatus(source) !== null) fail("Unknown tool-group summary was changed: " + source);
   if (dynamicCopy.some(row => row.length !== 2 && !(row.length === 3 && row[2] === "activity-status"))) fail("Unknown dynamic fixture scope; review it instead of skipping it.");
   if (reviewedCopy.appVersion !== SUPPORTED_APP_VERSION || reviewedCopy.cases.length < 400) fail("Reviewed UI copy inventory is missing or incomplete.");
   // Execute the actual generated preload against a minimal DOM fixture.
@@ -1555,17 +1589,22 @@ function selfTestPreloadDom(injected) {
     const container = element("div", {}, [group, element("div", { "data-testid": "run-command-step" }, [header, element("div", {}, [output])]), element("div", { class: "assistant-message" }, [message]), outside]);
     return { source, expected, title, groupTitle, group, output, command, message, outside, container };
   });
-  const statusCopy = [...reviewedCopy.activityStatusCases.map(item => [item.source, item.expected]), ...dynamicCopy.filter(row => row[2] === "activity-status")];
+  // Existing general labels (for example Edited) keep their legacy behavior
+  // outside headers; the status-only fixture asserts no new general translation.
+  const statusOnlySummaries = toolGroupCopy.cases.filter(item => translateAuditedUiCopy(item.source) === null);
+  const statusOnlyUnknowns = toolGroupCopy.unchanged.filter(source => translateAuditedUiCopy(source) === null);
+  const statusCopy = [...reviewedCopy.activityStatusCases.map(item => [item.source, item.expected]), ...dynamicCopy.filter(row => row[2] === "activity-status"), ...statusOnlySummaries.map(item => [item.source, item.expected]), ...statusOnlyUnknowns.map(source => [source, source])];
   const statusCopyNodes = statusCopy.map(([source, expected]) => {
-    const header = text(source), group = text(source), compact = text(source), thinking = text(source), statusBar = text(source);
+    const header = text(source), group = text(source), compact = text(source), ephemeral = text(source), thinking = text(source), statusBar = text(source);
     const output = text(source), command = text(source), outside = text(source), model = text(source), thought = text(source);
     const groupButton = element("button", {"data-testid":"tool-group-collapsible", "aria-label":source, "data-slot-in":source, "data-slot-out":source}, [group]);
     const unrelatedSlots = element("span", {"data-slot-in":source, "data-slot-out":source});
-    return {source,expected,header,group,compact,thinking,statusBar,output,command,outside,model,thought,groupButton,unrelatedSlots,
+    return {source,expected,header,group,compact,ephemeral,thinking,statusBar,output,command,outside,model,thought,groupButton,unrelatedSlots,
       container:element("div", {}, [
         element("div", {"data-testid":"run-command-step"}, [element("div", {class:"min-h-8 select-none"}, [header, element("span", {class:"font-mono"}, [command])]), output]),
         groupButton, element("button", {"data-testid":"thinking-collapsible-trigger"}, [thinking]),
         element("div", {class:"flex w-full items-center gap-1.5 px-2 min-h-8 text-left text-sm rounded-lg text-muted-foreground tabular-nums select-none"}, [compact]),
+        element("div", {"data-testid":"ephemeral-tool-status",class:"flex items-center gap-1 w-full text-left px-2 min-h-8 py-1 rounded-lg tabular-nums select-none"}, [ephemeral]),
         element("div", {class:"flex items-center rounded-t-lg border-b px-1.5 py-0.5 -m-1 mb-0.5 text-sm font-medium transition-colors border-border bg-muted"}, [statusBar]),
         element("button", {"data-testid":"model-selector-trigger"}, [model]), unrelatedSlots,
         element("div", {class:"cursor-edit group relative text-secondary-foreground pl-2"}, [element("button", {"data-testid":"thinking-collapsible-trigger"}, [thought])]), outside])};
@@ -1647,7 +1686,7 @@ function selfTestPreloadDom(injected) {
   assert(customImage.getAttribute("alt") === "User uploaded media 3" && assistantImage.getAttribute("alt") === "User uploaded media 2", "attachment translation changed unrelated content");
   assert(skippedImage.getAttribute("alt") === "User uploaded media 2" && assistantTestIdImage.getAttribute("alt") === "User uploaded media 2" && genericMessageImage.getAttribute("alt") === "User uploaded media 2", "attachment translation bypassed a protected or unidentified message");
   for (const item of statusCopyNodes) {
-    for (const node of [item.header,item.group,item.compact,item.thinking,item.statusBar]) assert(node.nodeValue === item.expected, "activity status: " + item.source);
+    for (const node of [item.header,item.group,item.compact,item.ephemeral,item.thinking,item.statusBar]) assert(node.nodeValue === item.expected, "activity status: " + item.source);
     assert(item.groupButton.getAttribute("aria-label") === item.expected, "activity status accessible name");
     for (const attribute of ["data-slot-in", "data-slot-out"]) {
       assert(item.groupButton.getAttribute(attribute) === item.expected, "animated activity status: " + item.source);

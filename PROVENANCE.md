@@ -88,3 +88,11 @@ members, except the package version. Existing translations and audited scopes
 are retained, with explicit 2.32.1 version checks and a separate structural
 baseline. Backend compatibility and private preservation are verified separately;
 no Google executable, regional backend patch or private profile is published.
+
+## 2.32.1-r2 tool-group summaries
+
+This revision adds original Russian translations for the finite application UI
+summary grammar: explored files/artifacts, ran commands, and edited files/artifacts.
+It covers all 107 combinations, accessible labels and animation slots only within
+the existing activity-header scope. Unknown fragments, command bodies, filenames
+and message text remain unchanged. No dependency or application binary is added.

@@ -1,0 +1,448 @@
+{
+  "appVersion": "2.32.1",
+  "scope": "Finite application-generated tool group summaries only; all user content is excluded",
+  "cases": [
+    {
+      "source": "Edited",
+      "expected": "Редактирование завершено"
+    },
+    {
+      "source": "Edited file",
+      "expected": "Изменен файл"
+    },
+    {
+      "source": "Edited files",
+      "expected": "Изменены файлы"
+    },
+    {
+      "source": "Edited artifact",
+      "expected": "Изменен артефакт"
+    },
+    {
+      "source": "Edited artifacts",
+      "expected": "Изменены артефакты"
+    },
+    {
+      "source": "Ran command",
+      "expected": "Выполнена команда"
+    },
+    {
+      "source": "Ran command, edited",
+      "expected": "Выполнена команда, редактирование завершено"
+    },
+    {
+      "source": "Ran command, edited file",
+      "expected": "Выполнена команда, изменен файл"
+    },
+    {
+      "source": "Ran command, edited files",
+      "expected": "Выполнена команда, изменены файлы"
+    },
+    {
+      "source": "Ran command, edited artifact",
+      "expected": "Выполнена команда, изменен артефакт"
+    },
+    {
+      "source": "Ran command, edited artifacts",
+      "expected": "Выполнена команда, изменены артефакты"
+    },
+    {
+      "source": "Ran commands",
+      "expected": "Выполнены команды"
+    },
+    {
+      "source": "Ran commands, edited",
+      "expected": "Выполнены команды, редактирование завершено"
+    },
+    {
+      "source": "Ran commands, edited file",
+      "expected": "Выполнены команды, изменен файл"
+    },
+    {
+      "source": "Ran commands, edited files",
+      "expected": "Выполнены команды, изменены файлы"
+    },
+    {
+      "source": "Ran commands, edited artifact",
+      "expected": "Выполнены команды, изменен артефакт"
+    },
+    {
+      "source": "Ran commands, edited artifacts",
+      "expected": "Выполнены команды, изменены артефакты"
+    },
+    {
+      "source": "Explored",
+      "expected": "Изучение завершено"
+    },
+    {
+      "source": "Explored, edited",
+      "expected": "Изучение завершено, редактирование завершено"
+    },
+    {
+      "source": "Explored, edited file",
+      "expected": "Изучение завершено, изменен файл"
+    },
+    {
+      "source": "Explored, edited files",
+      "expected": "Изучение завершено, изменены файлы"
+    },
+    {
+      "source": "Explored, edited artifact",
+      "expected": "Изучение завершено, изменен артефакт"
+    },
+    {
+      "source": "Explored, edited artifacts",
+      "expected": "Изучение завершено, изменены артефакты"
+    },
+    {
+      "source": "Explored, ran command",
+      "expected": "Изучение завершено, выполнена команда"
+    },
+    {
+      "source": "Explored, ran command, edited",
+      "expected": "Изучение завершено, выполнена команда, редактирование завершено"
+    },
+    {
+      "source": "Explored, ran command, edited file",
+      "expected": "Изучение завершено, выполнена команда, изменен файл"
+    },
+    {
+      "source": "Explored, ran command, edited files",
+      "expected": "Изучение завершено, выполнена команда, изменены файлы"
+    },
+    {
+      "source": "Explored, ran command, edited artifact",
+      "expected": "Изучение завершено, выполнена команда, изменен артефакт"
+    },
+    {
+      "source": "Explored, ran command, edited artifacts",
+      "expected": "Изучение завершено, выполнена команда, изменены артефакты"
+    },
+    {
+      "source": "Explored, ran commands",
+      "expected": "Изучение завершено, выполнены команды"
+    },
+    {
+      "source": "Explored, ran commands, edited",
+      "expected": "Изучение завершено, выполнены команды, редактирование завершено"
+    },
+    {
+      "source": "Explored, ran commands, edited file",
+      "expected": "Изучение завершено, выполнены команды, изменен файл"
+    },
+    {
+      "source": "Explored, ran commands, edited files",
+      "expected": "Изучение завершено, выполнены команды, изменены файлы"
+    },
+    {
+      "source": "Explored, ran commands, edited artifact",
+      "expected": "Изучение завершено, выполнены команды, изменен артефакт"
+    },
+    {
+      "source": "Explored, ran commands, edited artifacts",
+      "expected": "Изучение завершено, выполнены команды, изменены артефакты"
+    },
+    {
+      "source": "Explored file",
+      "expected": "Изучен файл"
+    },
+    {
+      "source": "Explored file, edited",
+      "expected": "Изучен файл, редактирование завершено"
+    },
+    {
+      "source": "Explored file, edited file",
+      "expected": "Изучен файл, изменен файл"
+    },
+    {
+      "source": "Explored file, edited files",
+      "expected": "Изучен файл, изменены файлы"
+    },
+    {
+      "source": "Explored file, edited artifact",
+      "expected": "Изучен файл, изменен артефакт"
+    },
+    {
+      "source": "Explored file, edited artifacts",
+      "expected": "Изучен файл, изменены артефакты"
+    },
+    {
+      "source": "Explored file, ran command",
+      "expected": "Изучен файл, выполнена команда"
+    },
+    {
+      "source": "Explored file, ran command, edited",
+      "expected": "Изучен файл, выполнена команда, редактирование завершено"
+    },
+    {
+      "source": "Explored file, ran command, edited file",
+      "expected": "Изучен файл, выполнена команда, изменен файл"
+    },
+    {
+      "source": "Explored file, ran command, edited files",
+      "expected": "Изучен файл, выполнена команда, изменены файлы"
+    },
+    {
+      "source": "Explored file, ran command, edited artifact",
+      "expected": "Изучен файл, выполнена команда, изменен артефакт"
+    },
+    {
+      "source": "Explored file, ran command, edited artifacts",
+      "expected": "Изучен файл, выполнена команда, изменены артефакты"
+    },
+    {
+      "source": "Explored file, ran commands",
+      "expected": "Изучен файл, выполнены команды"
+    },
+    {
+      "source": "Explored file, ran commands, edited",
+      "expected": "Изучен файл, выполнены команды, редактирование завершено"
+    },
+    {
+      "source": "Explored file, ran commands, edited file",
+      "expected": "Изучен файл, выполнены команды, изменен файл"
+    },
+    {
+      "source": "Explored file, ran commands, edited files",
+      "expected": "Изучен файл, выполнены команды, изменены файлы"
+    },
+    {
+      "source": "Explored file, ran commands, edited artifact",
+      "expected": "Изучен файл, выполнены команды, изменен артефакт"
+    },
+    {
+      "source": "Explored file, ran commands, edited artifacts",
+      "expected": "Изучен файл, выполнены команды, изменены артефакты"
+    },
+    {
+      "source": "Explored files",
+      "expected": "Изучены файлы"
+    },
+    {
+      "source": "Explored files, edited",
+      "expected": "Изучены файлы, редактирование завершено"
+    },
+    {
+      "source": "Explored files, edited file",
+      "expected": "Изучены файлы, изменен файл"
+    },
+    {
+      "source": "Explored files, edited files",
+      "expected": "Изучены файлы, изменены файлы"
+    },
+    {
+      "source": "Explored files, edited artifact",
+      "expected": "Изучены файлы, изменен артефакт"
+    },
+    {
+      "source": "Explored files, edited artifacts",
+      "expected": "Изучены файлы, изменены артефакты"
+    },
+    {
+      "source": "Explored files, ran command",
+      "expected": "Изучены файлы, выполнена команда"
+    },
+    {
+      "source": "Explored files, ran command, edited",
+      "expected": "Изучены файлы, выполнена команда, редактирование завершено"
+    },
+    {
+      "source": "Explored files, ran command, edited file",
+      "expected": "Изучены файлы, выполнена команда, изменен файл"
+    },
+    {
+      "source": "Explored files, ran command, edited files",
+      "expected": "Изучены файлы, выполнена команда, изменены файлы"
+    },
+    {
+      "source": "Explored files, ran command, edited artifact",
+      "expected": "Изучены файлы, выполнена команда, изменен артефакт"
+    },
+    {
+      "source": "Explored files, ran command, edited artifacts",
+      "expected": "Изучены файлы, выполнена команда, изменены артефакты"
+    },
+    {
+      "source": "Explored files, ran commands",
+      "expected": "Изучены файлы, выполнены команды"
+    },
+    {
+      "source": "Explored files, ran commands, edited",
+      "expected": "Изучены файлы, выполнены команды, редактирование завершено"
+    },
+    {
+      "source": "Explored files, ran commands, edited file",
+      "expected": "Изучены файлы, выполнены команды, изменен файл"
+    },
+    {
+      "source": "Explored files, ran commands, edited files",
+      "expected": "Изучены файлы, выполнены команды, изменены файлы"
+    },
+    {
+      "source": "Explored files, ran commands, edited artifact",
+      "expected": "Изучены файлы, выполнены команды, изменен артефакт"
+    },
+    {
+      "source": "Explored files, ran commands, edited artifacts",
+      "expected": "Изучены файлы, выполнены команды, изменены артефакты"
+    },
+    {
+      "source": "Explored artifact",
+      "expected": "Изучен артефакт"
+    },
+    {
+      "source": "Explored artifact, edited",
+      "expected": "Изучен артефакт, редактирование завершено"
+    },
+    {
+      "source": "Explored artifact, edited file",
+      "expected": "Изучен артефакт, изменен файл"
+    },
+    {
+      "source": "Explored artifact, edited files",
+      "expected": "Изучен артефакт, изменены файлы"
+    },
+    {
+      "source": "Explored artifact, edited artifact",
+      "expected": "Изучен артефакт, изменен артефакт"
+    },
+    {
+      "source": "Explored artifact, edited artifacts",
+      "expected": "Изучен артефакт, изменены артефакты"
+    },
+    {
+      "source": "Explored artifact, ran command",
+      "expected": "Изучен артефакт, выполнена команда"
+    },
+    {
+      "source": "Explored artifact, ran command, edited",
+      "expected": "Изучен артефакт, выполнена команда, редактирование завершено"
+    },
+    {
+      "source": "Explored artifact, ran command, edited file",
+      "expected": "Изучен артефакт, выполнена команда, изменен файл"
+    },
+    {
+      "source": "Explored artifact, ran command, edited files",
+      "expected": "Изучен артефакт, выполнена команда, изменены файлы"
+    },
+    {
+      "source": "Explored artifact, ran command, edited artifact",
+      "expected": "Изучен артефакт, выполнена команда, изменен артефакт"
+    },
+    {
+      "source": "Explored artifact, ran command, edited artifacts",
+      "expected": "Изучен артефакт, выполнена команда, изменены артефакты"
+    },
+    {
+      "source": "Explored artifact, ran commands",
+      "expected": "Изучен артефакт, выполнены команды"
+    },
+    {
+      "source": "Explored artifact, ran commands, edited",
+      "expected": "Изучен артефакт, выполнены команды, редактирование завершено"
+    },
+    {
+      "source": "Explored artifact, ran commands, edited file",
+      "expected": "Изучен артефакт, выполнены команды, изменен файл"
+    },
+    {
+      "source": "Explored artifact, ran commands, edited files",
+      "expected": "Изучен артефакт, выполнены команды, изменены файлы"
+    },
+    {
+      "source": "Explored artifact, ran commands, edited artifact",
+      "expected": "Изучен артефакт, выполнены команды, изменен артефакт"
+    },
+    {
+      "source": "Explored artifact, ran commands, edited artifacts",
+      "expected": "Изучен артефакт, выполнены команды, изменены артефакты"
+    },
+    {
+      "source": "Explored artifacts",
+      "expected": "Изучены артефакты"
+    },
+    {
+      "source": "Explored artifacts, edited",
+      "expected": "Изучены артефакты, редактирование завершено"
+    },
+    {
+      "source": "Explored artifacts, edited file",
+      "expected": "Изучены артефакты, изменен файл"
+    },
+    {
+      "source": "Explored artifacts, edited files",
+      "expected": "Изучены артефакты, изменены файлы"
+    },
+    {
+      "source": "Explored artifacts, edited artifact",
+      "expected": "Изучены артефакты, изменен артефакт"
+    },
+    {
+      "source": "Explored artifacts, edited artifacts",
+      "expected": "Изучены артефакты, изменены артефакты"
+    },
+    {
+      "source": "Explored artifacts, ran command",
+      "expected": "Изучены артефакты, выполнена команда"
+    },
+    {
+      "source": "Explored artifacts, ran command, edited",
+      "expected": "Изучены артефакты, выполнена команда, редактирование завершено"
+    },
+    {
+      "source": "Explored artifacts, ran command, edited file",
+      "expected": "Изучены артефакты, выполнена команда, изменен файл"
+    },
+    {
+      "source": "Explored artifacts, ran command, edited files",
+      "expected": "Изучены артефакты, выполнена команда, изменены файлы"
+    },
+    {
+      "source": "Explored artifacts, ran command, edited artifact",
+      "expected": "Изучены артефакты, выполнена команда, изменен артефакт"
+    },
+    {
+      "source": "Explored artifacts, ran command, edited artifacts",
+      "expected": "Изучены артефакты, выполнена команда, изменены артефакты"
+    },
+    {
+      "source": "Explored artifacts, ran commands",
+      "expected": "Изучены артефакты, выполнены команды"
+    },
+    {
+      "source": "Explored artifacts, ran commands, edited",
+      "expected": "Изучены артефакты, выполнены команды, редактирование завершено"
+    },
+    {
+      "source": "Explored artifacts, ran commands, edited file",
+      "expected": "Изучены артефакты, выполнены команды, изменен файл"
+    },
+    {
+      "source": "Explored artifacts, ran commands, edited files",
+      "expected": "Изучены артефакты, выполнены команды, изменены файлы"
+    },
+    {
+      "source": "Explored artifacts, ran commands, edited artifact",
+      "expected": "Изучены артефакты, выполнены команды, изменен артефакт"
+    },
+    {
+      "source": "Explored artifacts, ran commands, edited artifacts",
+      "expected": "Изучены артефакты, выполнены команды, изменены артефакты"
+    }
+  ],
+  "unchanged": [
+    "Explored private-report.docx",
+    "Explored files and private messages",
+    "Explored files, ran powershell.exe",
+    "Explored files, ran commands, edited secrets.txt",
+    "Explored files, ran commands, edited files, uploaded files",
+    "Ran commands, explored files",
+    "Ran command, ran commands",
+    "Edited files, ran commands",
+    "explored files",
+    "Ran Command",
+    "Edited files.",
+    "Explored files\nPRIVATE_INPUT"
+  ]
+}
