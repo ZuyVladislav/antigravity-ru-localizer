@@ -1,6 +1,6 @@
 "use strict";
 
-// Local, static Russian UI localization for Google Antigravity 2.32.1.
+// Local, static Russian UI localization for Google Antigravity 2.33.0.
 // It never sends application content to a translator or any remote service.
 // The sole external tool is the open-source @electron/asar package used to
 // unpack and repack Electron's local app.asar archive.
@@ -16,11 +16,15 @@ const translateUiCount = require("./scripts/ui-counts.js");
 const createUiTemplateTranslator = require("./scripts/interpolated-copy.js");
 const UI_TEMPLATE_COPY = require("./dicts/ui-template-copy-2.32.1.json");
 const translateUiTemplate = createUiTemplateTranslator(UI_TEMPLATE_COPY);
+const REVIEWED_UI_COPY = require("./dicts/ui-copy-2.33.0.json");
+const { createReviewedTemplateTranslator, translatePlanChipLabel } = require("./scripts/reviewed-ui.js");
+const reviewedUiLiterals = new Map(Object.entries(REVIEWED_UI_COPY.literals).map(([source, translation]) => [normalizeUiCopy(source), translation]));
+const translateReviewedTemplate = createReviewedTemplateTranslator(REVIEWED_UI_COPY.templates, createUiTemplateTranslator);
 const { sources: UI_FRAGMENT_SOURCES, translateUiFragment } = require("./scripts/ui-fragments.js");
 
 const SCRIPT_DIR = __dirname;
 const ASAR_VERSION = "4.3.2";
-const SUPPORTED_APP_VERSION = "2.32.1";
+const SUPPORTED_APP_VERSION = "2.33.0";
 const START = "/* ANTIGRAVITY_RU_LOCALIZER_START */";
 const END = "/* ANTIGRAVITY_RU_LOCALIZER_END */";
 const MENU_START = "/* ANTIGRAVITY_RU_MENU_START */";
@@ -470,6 +474,8 @@ function translateActivityTitle(value) {
 }
 
 function translateDynamicUiText(value) {
+  const duration = typeof value === "string" && /^Worked for ([0-9 dhms]+)$/.exec(value);
+  if (duration) return "Время работы: " + duration[1].replace(/d/g, "д.").replace(/h/g, "ч.").replace(/m/g, "мин.").replace(/s/g, "с.");
   const extraSettingsTranslation = translateSettingsExtra(value);
   if (extraSettingsTranslation) return extraSettingsTranslation;
   const moreSubagents = /^Show ([0-9]{1,5}) more subagents?$/.exec(value);
@@ -813,7 +819,6 @@ function translateScopedUiText(value, allowActionPrefixes = true, allowGenericPr
 
   if ((match = /^Help us improve (.+)\.$/.exec(value))) return `Помогите улучшить ${match[1]}.`;
   if ((match = /^Showing first ([0-9]+) references$/.exec(value))) return `Показаны первые ссылки: ${match[1]}`;
-  if ((match = /^Worked for ([0-9 dhms]+)$/.exec(value))) return `Время работы: ${match[1].replace(/d/g,"д.").replace(/h/g,"ч.").replace(/m/g,"мин.").replace(/s/g,"с.")}`;
   if ((match = /^View ([0-9]+) help(?: items)?$/.exec(value))) return `Показать справку (${match[1]})`;
   if ((match = /^Generating (.+) name took > 7 seconds$/.exec(value))) return `Создание названия ${match[1]} заняло более 7 секунд`;
   if ((match = /^Using default (.+) name$/.exec(value))) return `Используется название ${match[1]} по умолчанию`;
@@ -986,6 +991,10 @@ function makePreloadScript(dictionary) {
   const translateUiCount = ${translateUiCount.toString()};
   const createUiTemplateTranslator = ${createUiTemplateTranslator.toString()};
   const translateUiTemplate = createUiTemplateTranslator(${JSON.stringify(UI_TEMPLATE_COPY)});
+  const reviewedUiLiterals = new Map(${JSON.stringify([...reviewedUiLiterals])});
+  const createReviewedTemplateTranslator = ${createReviewedTemplateTranslator.toString()};
+  const translateReviewedTemplate = createReviewedTemplateTranslator(${JSON.stringify(REVIEWED_UI_COPY.templates)}, createUiTemplateTranslator);
+  const translatePlanChipLabel = ${translatePlanChipLabel.toString()};
   const UI_FRAGMENT_SOURCES = new Set(${JSON.stringify(UI_FRAGMENT_SOURCES)});
   const translateUiFragment = ${translateUiFragment.toString()};
   const translateDynamicUiText = ${translateDynamicUiText.toString()};
@@ -1049,11 +1058,14 @@ function makePreloadScript(dictionary) {
     const normalized = normalize(value);
     if (!normalized) return null;
     if (planHintUi && planHintFragments.has(normalized)) return planHintFragments.get(normalized);
+    if (reviewedUiLiterals.has(normalized)) return reviewedUiLiterals.get(normalized);
     // A reviewed complete description wins over broad action prefixes such as Connect.
     const catalogTranslation = translateCatalogDescription(normalized);
     if (catalogTranslation) return catalogTranslation;
     const dynamicTranslation = translateDynamicUiText(String(value || "").trim()) || translateDynamicUiText(normalized);
     if (dynamicTranslation) return dynamicTranslation;
+    const reviewedTemplate = translateReviewedTemplate(String(value || "").trim(), notificationUi || attributeUi);
+    if (reviewedTemplate) return reviewedTemplate;
     const permissionTranslation = translatePermissionText(normalized);
     if (permissionTranslation) return permissionTranslation;
     return (notificationUi && notificationFragments.get(normalized)) || exact.get(normalized) || lower.get(normalized.toLowerCase()) || translateCatalogDescription(normalized) || translateScopedUiText(String(value || "").trim(), notificationUi || attributeUi, false) || translateUiTemplate(String(value || "").trim()) || translateScopedUiText(String(value || "").trim(), notificationUi || attributeUi) || null;
@@ -1144,7 +1156,9 @@ function makePreloadScript(dictionary) {
     for (const attribute of ["placeholder", "aria-placeholder", "title", "aria-label", "data-placeholder", ...(activityUi ? ["data-slot-in", "data-slot-out"] : [])]) {
       if (isFormField && attribute !== "placeholder" && attribute !== "aria-placeholder") continue;
       const source = element.getAttribute(attribute);
-      const translated = (activityUi && (translateActivityStatus(source) || translateActivityTitle(source))) || translationFor(source, false, false, true);
+      const planLabel = attribute === "aria-label" && element.getAttribute("data-testid") === "step-plan-chip"
+        ? translatePlanChipLabel(source, element.getAttribute("aria-expanded")) : null;
+      const translated = planLabel || (activityUi && (translateActivityStatus(source) || translateActivityTitle(source))) || translationFor(source, false, false, true);
       if (translated && translated !== source) element.setAttribute(attribute, translated);
     }
   };
@@ -1397,7 +1411,7 @@ function selfTestPreloadDom(injected) {
   const reviewedCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-copy-fixtures.json"), "utf8"));
   const dynamicCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "ui-dynamic-fixtures.json"), "utf8"));
   const toolGroupCopy = JSON.parse(fs.readFileSync(path.join(SCRIPT_DIR, "dicts", "tool-group-summaries-2.32.1.json"), "utf8"));
-  if (toolGroupCopy.appVersion !== SUPPORTED_APP_VERSION || toolGroupCopy.cases.length !== 107) fail("Tool-group summary fixtures are missing or incomplete.");
+  if (toolGroupCopy.appVersion !== "2.32.1" || toolGroupCopy.cases.length !== 107) fail("Tool-group summary fixtures are missing or incomplete.");
   for (const item of toolGroupCopy.cases) {
     if (translateActivityStatus(item.source) !== item.expected) fail("Tool-group summary mismatch: " + item.source);
     // MCc leaves a final space when the edited resource kind is empty.
@@ -1405,7 +1419,7 @@ function selfTestPreloadDom(injected) {
   }
   for (const source of toolGroupCopy.unchanged) if (translateActivityStatus(source) !== null) fail("Unknown tool-group summary was changed: " + source);
   if (dynamicCopy.some(row => row.length !== 2 && !(row.length === 3 && row[2] === "activity-status"))) fail("Unknown dynamic fixture scope; review it instead of skipping it.");
-  if (reviewedCopy.appVersion !== SUPPORTED_APP_VERSION || reviewedCopy.cases.length < 400) fail("Reviewed UI copy inventory is missing or incomplete.");
+  if (reviewedCopy.appVersion !== "2.32.1" || reviewedCopy.cases.length < 400) fail("Reviewed UI copy inventory is missing or incomplete.");
   // Execute the actual generated preload against a minimal DOM fixture.
   // The fixture contains no application data and requires no browser process.
   const Node = { ELEMENT_NODE: 1, TEXT_NODE: 3 };
@@ -1645,7 +1659,11 @@ function selfTestPreloadDom(injected) {
     element("button", {"data-tooltip-id":"fixture-img-1"}, [skippedImage]),
     element("div", {"data-testid":"assistant-message"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [assistantTestIdImage])]),
     element("div", {class:"assistant-message"}, [element("button", {"data-tooltip-id":"fixture-img-1"}, [assistantImage])])]);
+  const planChip = element("button", { "data-testid": "step-plan-chip", "aria-expanded": "true", "aria-label": "Example $1. Hide plan" });
+  const unrelatedPlanLabel = element("button", { "aria-expanded": "true", "aria-label": "Example $1. Hide plan" });
+  const protectedPlanChip = element("button", { "data-testid": "step-plan-chip", "aria-expanded": "true", "aria-label": "Example $1. Hide plan", translate: "no" });
   const root = element("html", {}, [element("body", {}, [
+    planChip, unrelatedPlanLabel, protectedPlanChip,
     element("div", { "data-testid": "run-command-step" }, [element("span", { class: "font-mono" }, [opaqueCommandWord])]),
     ...fragmentFixtures,
     attachmentFixture,
@@ -1713,6 +1731,8 @@ function selfTestPreloadDom(injected) {
   assert(changedActivity.title.nodeValue === "Проверка путей", "updated activity heading was missed");
   assert(uiLabel.nodeValue === "Изменения в доступе к сторонним моделям", "notification translation failed");
   assert(uiCount.nodeValue === "Инструментов включено: 24", "tool count translation failed");
+  assert(planChip.getAttribute("aria-label") === "Example $1. Скрыть план", "expanded plan label did not preserve the summary");
+  assert(unrelatedPlanLabel.getAttribute("aria-label") === "Example $1. Hide plan" && protectedPlanChip.getAttribute("aria-label") === "Example $1. Hide plan", "plan label escaped its scope");
   assert(quotaRefresh.nodeValue === "Вы использовали часть недельного лимита. Он полностью восстановится через 4 дня, 19 часов.", "weekly quota refresh translation failed");
   assert(spacedBrandLabels.every(node => node.writes === 0), "unchanged brand labels with whitespace were rewritten");
   assert(spacedUiLabel.nodeValue === "  Модель \n" && spacedUiLabel.writes === 1, "localized whitespace label was rewritten repeatedly");
@@ -1783,6 +1803,10 @@ function selfTestPreloadDom(injected) {
   input.setAttribute("placeholder", "Search MCP servers by name");
   flush();
   assert(input.getAttribute("placeholder") === "Поиск серверов MCP по имени", "updated field placeholder was not translated");
+  planChip.setAttribute("aria-expanded", "false");
+  planChip.setAttribute("aria-label", "Example $2. Show plan");
+  flush();
+  assert(planChip.getAttribute("aria-label") === "Example $2. Показать план", "collapsed plan label was not translated");
 }
 
 function selfTest() {
@@ -1978,11 +2002,11 @@ function selfTest() {
     if (!injected.includes(expected)) fail(`Permission-dialog translation is missing: ${expected}`);
   }
   const menuFixture = "const menu = { items: [] };\nelectron_1.Menu.setApplicationMenu(menu);";
-  const menuVersionFixture = { items: [{ label: "Antigravity", submenu: { items: [{ label: "Version 2.32.1" }, { label: "&Version 2.32.1" }, { label: "Version PRIVATE_project" }] } }] };
+  const menuVersionFixture = { items: [{ label: "Antigravity", submenu: { items: [{ label: "Version 2.33.0" }, { label: "&Version 2.33.0" }, { label: "Version PRIVATE_project" }] } }] };
   let menuApplied = false;
   new vm.Script(patchMenu("const menu = globalThis.fixture;\nelectron_1.Menu.setApplicationMenu(menu);")).runInNewContext({ fixture: menuVersionFixture, electron_1: { Menu: { setApplicationMenu(menu) { if (menu !== menuVersionFixture) throw new Error("Unexpected native menu"); menuApplied = true; } } } });
   const versionLabels = menuVersionFixture.items[0].submenu.items.map(item => item.label);
-  if (!menuApplied || versionLabels[0] !== "Версия 2.32.1" || versionLabels[1] !== "Версия 2.32.1 (&V)" || versionLabels[2] !== "Version PRIVATE_project") fail("Native version menu localization failed or changed an unknown label.");
+  if (!menuApplied || versionLabels[0] !== "Версия 2.33.0" || versionLabels[1] !== "Версия 2.33.0 (&V)" || versionLabels[2] !== "Version PRIVATE_project") fail("Native version menu localization failed or changed an unknown label.");
   const twicePatchedMenu = patchMenu(patchMenu(menuFixture));
   if (twicePatchedMenu !== patchMenu(menuFixture)) fail("Menu patch changed on repeated application.");
   if ((twicePatchedMenu.match(/ANTIGRAVITY_RU_MENU_START/g) || []).length !== 1) {
@@ -2042,8 +2066,10 @@ function explainAuditedUiCopy(value) {
   }
   const raw = String(value || "").trim();
   for (const [kind, translation] of [
+    ["reviewed-literal", reviewedUiLiterals.get(normalized)],
     ["catalog", translateCatalogDescription(normalized)],
     ["dynamic", translateDynamicUiText(raw)],
+    ["reviewed-template", translateReviewedTemplate(raw, true)],
     ["dictionary", auditedUiDictionary.get(normalized) || auditedUiLowercase.get(normalized.toLowerCase())],
     ["scoped", translateScopedUiText(raw, true, false)],
     ["template", translateUiTemplate(raw)],

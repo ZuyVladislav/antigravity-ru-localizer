@@ -1,0 +1,190 @@
+{
+  "appVersion": "2.33.0",
+  "sourceBundleSha256": "f066a497c9c61198394cb3218e42ff61d85b03910d81282589c3ef066905f347",
+  "literals": [
+    {
+      "sha256": "ce770667e5f9b0d8f55367bb79419689d90c48451bb33f079f3a9a72ae132de8",
+      "category": "preserved",
+      "reason": "Product name"
+    },
+    {
+      "sha256": "ec6d1399b7bba546ca26759b998ca4e31228b56f3a022af0294ffedc47dbc7b0",
+      "category": "preserved",
+      "reason": "Application namespace"
+    },
+    {
+      "sha256": "445929267209c034d1e324834c17e0c8305df3dcb21d1710a639ac6ca08c648b",
+      "category": "preserved",
+      "reason": "Lexical editor node type"
+    },
+    {
+      "sha256": "995cf20a9c45daaf0a2cc31e85c290032ced97aadbac6c9d625595f5ce0ed427",
+      "category": "preserved",
+      "reason": "Lexical editor node type"
+    },
+    {
+      "sha256": "9fe84af93ed94f89af2c95b9f53571e14b6dc14891db90a87379b88d10cc36d9",
+      "category": "preserved",
+      "reason": "CSS of the sidebar style element"
+    }
+  ],
+  "templates": [
+    {
+      "sha256": "682f8583974de82e2d1bfe2fa0052dc39289b2b8f0e3756734a01f9c623a59ad",
+      "category": "preserved",
+      "reason": "Literal braces around an opaque value"
+    },
+    {
+      "sha256": "d77b171014a116d1738290cda5de002242373d3092bf4cf11b7b586ec1d87a52",
+      "category": "ui",
+      "sample": "Worked for sample-1",
+      "expected": "Время работы sample-1"
+    },
+    {
+      "sha256": "6fbb1bb1abdb5e31627a8d4e42e62f00795be2e6739c9d45fc1669a34028ffe4",
+      "category": "ui",
+      "sample": "These plugins in sample-1 may have looser code review. Review their contents before adding the bundle.",
+      "expected": "Проверка кода этих плагинов в sample-1 может быть менее строгой. Проверьте их содержимое перед добавлением набора."
+    },
+    {
+      "sha256": "7049593ccc001b307d8c362ebf0b136d5e88a5ddda8db71b836f7c00b644bbeb",
+      "category": "ui",
+      "sample": "Searching as sample-1",
+      "expected": "Поиск от имени sample-1"
+    },
+    {
+      "sha256": "d78d9ba9e0d91c42c18ea0cab927d945b2f27c5b1b5b2df6f757a10d9852fc07",
+      "category": "ui",
+      "sample": "Work locally on sample-1",
+      "expected": "Работать локально: sample-1"
+    },
+    {
+      "sha256": "1c4f2b06371f5e8b42d4f0a25ced2e895b3256d4711275e1ec42fcd4f7878d90",
+      "category": "ui",
+      "sample": "Missing Worker RPC batch result for sample-1 (id=sample-2)",
+      "expected": "Нет результата пакетного вызова RPC для sample-1 (идентификатор sample-2)"
+    },
+    {
+      "sha256": "109a176f70eadf700e939320668a04553165556cb47a02275f58f048436036d2",
+      "category": "ui",
+      "sample": "Add bundle sample-1",
+      "expected": "Добавить набор sample-1"
+    },
+    {
+      "sha256": "3cde17b497d51f4bfb2ed07dba19a46b46c34396c56677c26e3dabc5a1797de3",
+      "category": "ui",
+      "sample": "Worktree from sample-1",
+      "expected": "Рабочая копия из sample-1"
+    },
+    {
+      "sha256": "0c48588e73cc18996174bdd38b1eff633093b5d1a6428f144a0d2e15a5d1e7d2",
+      "category": "ui",
+      "sample": "Review sample-1 before installing",
+      "expected": "Проверьте sample-1 перед установкой"
+    },
+    {
+      "sha256": "5fbb98b484b96247f2c3a1a24282b0cf6a5447891a2a3dbd0042c47d37338b48",
+      "category": "ui",
+      "sample": "Retrying transcription (attempt sample-1)…",
+      "expected": "Повтор распознавания (попытка sample-1)…"
+    },
+    {
+      "sha256": "d0b178d7fbf1a413af15cffc0ef1f7ff93e883b3fc76c61cdcbade987172a071",
+      "category": "ui",
+      "sample": "The preview did not respond on port sample-1.",
+      "expected": "Предпросмотр не ответил на порту sample-1."
+    },
+    {
+      "sha256": "f3a034659a891c7c68889236fd57e68448e69ea926e28133beab1fba87bcc7aa",
+      "category": "ui",
+      "sample": "Couldn't switch to sample-1: sample-2",
+      "expected": "Не удалось переключиться на sample-1: sample-2"
+    },
+    {
+      "sha256": "761f3acc97ea1b38b10712a049d7ba4e91029842c76b0602573bbb7ed11960e3",
+      "category": "ui",
+      "sample": "Plan, sample-1 of sample-2 steps done",
+      "expected": "В плане выполнено sample-1 из sample-2 шагов"
+    },
+    {
+      "sha256": "0605a3c2f6fb2cd21c1d96ec764fbe1e50f9f0719d7fc1b88688f8a2e51cab39",
+      "category": "ui",
+      "sample": "Delete cookies for sample-1",
+      "expected": "Удалить файлы куки для сайта sample-1"
+    },
+    {
+      "sha256": "66c40eaacfc5693bb584d26ea7e322ad186bcea69b8c1d70406f08b9a7d54144",
+      "category": "ui",
+      "sample": "This plugin in sample-1 may have looser code review. Review its contents before adding the bundle.",
+      "expected": "Проверка кода этого плагина в sample-1 может быть менее строгой. Проверьте его содержимое перед добавлением набора."
+    },
+    {
+      "sha256": "bcb234461ba7c0956a75805e95c32915152c446e7b153a8df4ce15f9ee370b1e",
+      "category": "ui",
+      "sample": "Couldn't save base branch: sample-1",
+      "expected": "Не удалось сохранить базовую ветку: sample-1"
+    },
+    {
+      "sha256": "39dc6ee385d4e58fc36af241b20f114fdc4ae311b17388f202e643d9bb319db7",
+      "category": "ui",
+      "sample": "You're signing in on sample-1. Your sign-in stays on that machine.",
+      "expected": "Вы входите на устройстве sample-1. Данные входа остаются на этом устройстве."
+    },
+    {
+      "sha256": "8ef3abc21ac2de20bbe39db55dd927ba28451882435f3e9ea3456e1c6682dff8",
+      "category": "plan-chip-label",
+      "sample": "Sample plan. Hide plan",
+      "expected": "Sample plan. Скрыть план"
+    }
+  ],
+  "legacyLiteralExclusions": [
+    {
+      "source": "Google",
+      "reason": "Product name"
+    },
+    {
+      "source": "antigravity.",
+      "reason": "Application namespace"
+    },
+    {
+      "source": "element",
+      "reason": "Lexical editor node type"
+    },
+    {
+      "source": "inline",
+      "reason": "Lexical editor node type"
+    }
+  ],
+  "legacyTemplateSha256": [
+    "05d7c15d8f555efece0eb5af62c39a4334553ba4f6ab46a29328efa1de31bb36",
+    "060903dd06c350b8aed545ea04935cabd537c63749970ce94f4a0fe3b785b221",
+    "10dcb87e9d82441710dfb8d986a615e49875e193d453bf8a58f853f34de74bd9",
+    "14d1e20cab7bed17ef7ac594243250df206d7696b15482625aba58954afa09ba",
+    "173e1d20917ccd0cc47e1efb38e7a406fbbb8e50d4c318718389100082202488",
+    "19d24f9eae558ba2613cc7d0fbc8d42ef278cb916843a075dd7d12370b7fef74",
+    "1da75c06c2c274656e6c4b649c03354f12eeef445ee7f49d1be1a15e60b0e3ca",
+    "1f54cfe4bc064ff5b17a4564afdb2552fc31037a195caa835f84396b82942576",
+    "28bd9120b9be1c75260751c02fdbbc589368e8693ceb2726761d60f021aee6cc",
+    "3494e37f24280823ee53b012a17d6d3612e9480ac171fb14e81e980a36e96021",
+    "34e05e391d4cf83fc513e9fd362d1c6865a0990afe99691d3625306fc2d88fa3",
+    "35a3dee56404c56d7639a427717b206a6c93a4976f304c67d0af97a4fe474a2e",
+    "456a9dd48b7342699ac1047808ab47dc380cb0f46ea2a3556a63d08287cc0f5e",
+    "515d7db05cc510254970f7730c2ccd8ede4bca0983ce422f22a0d77b33213508",
+    "528607be91b5514506cfddd666ea2efe4802fb43adbfc8e6770665e0f7797e0a",
+    "6586775df79eac7f10d195f29a6118a56f0243e1bb91394a3319fcda996d5778",
+    "66ef500560cd66d979b4c0b22124bb572b2a8fb93383e555a3264706fae837f8",
+    "7640cab291f3407fc9f97283765a2c73e868c36443c7b4aafc0bb7ba889a7d7d",
+    "93acc2128ca180d42eda5d3533fa6ff6009226139d15de122d185f2d57ce02d7",
+    "9acc03d4df7e3c939f1637b10dbafd03c771945badc7ea6aff20dd6963f268f0",
+    "a3d2434584675d9ca57564dfbce366865c887799f223a5ff1dd7ff2716eeb587",
+    "aeb6e5217a73d3b0161c15a61a567a8f8befb1a53e3abecf66a28e9edf64fbb4",
+    "b9142ceb159bc665e0041b29f2dfcb934549f0af4a137839c40cc4924527185e",
+    "cb200909391575a578a16634c1615dcbef0273c8f0fd451b5121883500e89fa3",
+    "d6ab4ef4e10a641438672d35c9d2234b620f6f1a8badaa3ca6592d83504fe973",
+    "e4762b08e23b10b31e26c9b2378ea397ccd711de46ba95deac0ba72c078863d9",
+    "e880f5b735f031e3adfa9e80c62b267a739ebbcdd16cd58e7d57e8d410894b0a",
+    "f336f80462bca0c03758f09153fd53a002e64356baa1f20ff3e1daa58fa041fb",
+    "f6312d41375b82ba218eb283180417ec112c835885117d62024c1501a9866228",
+    "fa27eb6b04acc51273410c67f51ab8f4d2a3c8040b6d92f4ff84f6af22feb577"
+  ]
+}

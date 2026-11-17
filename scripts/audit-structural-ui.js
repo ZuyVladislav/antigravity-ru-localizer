@@ -10,6 +10,8 @@ const { embeddedMain } = require("./audit-ui-copy.js");
 const { translateAuditedUiCopy, explainAuditedUiCopy } = require("../localize-antigravity-ru.js");
 const createTranslator = require("./interpolated-copy.js");
 const { translateUiFragment } = require("./ui-fragments.js");
+const { translatePlanChipLabel } = require("./reviewed-ui.js");
+const versionReview = require("../dicts/structural-ui-2.33.0.json");
 const templates = createTranslator(require("../dicts/ui-template-copy-2.32.1.json"));
 const sha = value => crypto.createHash("sha256").update(value).digest("hex");
 const normalize = value => value.replace(/\s+/g, " ").trim();
@@ -65,15 +67,19 @@ function audit(source, baseline) {
     const reviewed = templateRules.get(sha(row.source));
     if (!reviewed) return { ...row, category: "missing", reason: "Unreviewed interpolated UI frame" };
     if (reviewed.category === "preserved") return { ...row, category: "preserved", reason: reviewed.reason };
-    const translation = reviewed.category === "activity" ? templates(reviewed.sample, "activity") : reviewed.category === "contextual" ? translateUiFragment(reviewed.sample, reviewed.contexts) : translateAuditedUiCopy(reviewed.sample);
-    return { ...row, sample: reviewed.sample, translation, category: translation !== null ? reviewed.category : "missing", reason: reviewed.reason || null };
+    const translation = reviewed.category === "activity" ? templates(reviewed.sample, "activity")
+      : reviewed.category === "contextual" ? translateUiFragment(reviewed.sample, reviewed.contexts)
+      : reviewed.category === "plan-chip-label" && row.scope === "property:aria-label" ? translatePlanChipLabel(reviewed.sample, "true")
+      : translateAuditedUiCopy(reviewed.sample);
+    const passed = translation !== null && (!reviewed.expected || translation === reviewed.expected);
+    return { ...row, sample: reviewed.sample, translation, category: passed ? reviewed.category : "missing", reason: reviewed.reason || null };
   });
-  return { appVersion: "2.32.1", parser: "acorn@" + acorn.version, sourceSha256: found.sourceSha256,
+  return { appVersion: baseline.appVersion, parser: "acorn@" + acorn.version, sourceSha256: found.sourceSha256,
     exactReviewedSource: found.sourceSha256 === baseline.sourceBundleSha256, astNodes: found.astNodes,
     literalCandidates: literalRows.length, translatedLiterals: literalRows.filter(row => row.category === "translated").length,
     contextualLiterals: literalRows.filter(row => row.category === "contextual").length,
     preservedLiterals: literalRows.filter(row => row.category === "preserved").length,
-    templateCandidates: templateRows.length, translatedTemplates: templateRows.filter(row => ["ui", "activity", "contextual"].includes(row.category)).length,
+    templateCandidates: templateRows.length, translatedTemplates: templateRows.filter(row => ["ui", "activity", "contextual", "plan-chip-label"].includes(row.category)).length,
     preservedTemplates: templateRows.filter(row => row.category === "preserved").length,
     missingLiterals: literalRows.filter(row => row.category === "missing"), missingTemplates: templateRows.filter(row => row.category === "missing"),
     userDataRead: false, applicationLaunched: false, scope: "Static UI properties, React rendered children and reviewed interpolated frames; live server metadata requires the separate runtime audit", literalRows, templateRows };
@@ -92,7 +98,12 @@ function main() {
   if (!binary && !["main.js", "application-static-main.js"].includes(path.basename(input))) throw new Error("Only the static application bundle is accepted");
   if (destination === input || fs.existsSync(destination)) throw new Error("Choose a fresh evidence output; existing files are preserved");
   const data = fs.readFileSync(input), source = (binary ? embeddedMain(data) : data).toString("utf8");
-  const baseline = JSON.parse(fs.readFileSync(path.join(__dirname, "../dicts/structural-ui-2.32.1.json"), "utf8"));
+  const previous = require("../dicts/structural-ui-2.32.1.json");
+  const baseline = {
+    ...versionReview,
+    literals: [...previous.literals, ...versionReview.literals],
+    templates: [...previous.templates, ...versionReview.templates],
+  };
   const report = audit(source, baseline);
   fs.writeFileSync(destination, JSON.stringify(report, null, 2) + "\n");
   const { literalRows, templateRows, missingLiterals, missingTemplates, ...summary } = report;

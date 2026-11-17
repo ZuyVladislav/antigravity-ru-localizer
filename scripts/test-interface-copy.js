@@ -34,7 +34,7 @@ assert.equal(templateTranslator("An unknown new system notice"), null);
 assert.equal(templateTranslator("Your Plan: value\nPRIVATE_INPUT"), null);
 
 const golden = [
-  ["Version 2.32.1", "Версия 2.32.1"],
+  ["Version 2.33.0", "Версия 2.33.0"],
   ["Fast", "Быстрая"],
   ["Carbon that may offload routine steps to Hydrogen. Same Carbon-level quality, fewer tokens used.", "Carbon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Carbon, а расход токенов снижается."],
   ["Argon that may offload routine steps to Hydrogen. Same Argon-level quality, fewer tokens used.", "Argon может передавать обычные шаги модели Hydrogen. Качество остается на уровне Argon, а расход токенов снижается."],
@@ -114,3 +114,21 @@ for (const [source, expected] of [
   ["Connected to host:2222", "Подключено к host:2222"],
   ["Microphone access for Demo was denied. Quit and reopen the app to be asked again.", "Доступ к микрофону для Demo запрещен. Закройте и снова откройте приложение, чтобы повторно запросить разрешение."],
 ]) assert.equal(translate(source), expected);
+
+const reviewedCopy = require("../dicts/ui-copy-2.33.0.json");
+const { createReviewedTemplateTranslator } = require("./reviewed-ui.js");
+const reviewedTemplate = createReviewedTemplateTranslator(reviewedCopy.templates, createTemplates);
+assert.equal(Object.keys(reviewedCopy.literals).length, 86);
+assert.equal(reviewedCopy.templates.length, 16);
+for (const [source, expected] of Object.entries(reviewedCopy.literals)) assert.equal(translate(source), expected, source);
+for (const frame of reviewedCopy.templates) {
+  const values = ["C:/Example/O'Neil  $1.txt", "example (sample) $&"];
+  let index = 0;
+  const source = frame.source.replace(/\x24\{value\}/g, () => values[index++]);
+  const expected = frame.translation.replace(/\x24\{([0-9]+)\}/g, (_, slot) => values[Number(slot)]);
+  assert.equal(translate(source), expected, source);
+}
+assert.equal(reviewedTemplate("Couldn't switch to A: B: C"), null);
+assert.equal(reviewedTemplate("Searching as Example"), null);
+assert.equal(reviewedTemplate("Searching as Example", true), "Поиск от имени Example");
+assert.equal(translate("Worked for 2m"), "Время работы: 2мин.");

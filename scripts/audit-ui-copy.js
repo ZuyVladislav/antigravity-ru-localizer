@@ -9,7 +9,9 @@ const zlib = require("zlib");
 const { translateAuditedUiCopy } = require("../localize-antigravity-ru.js");
 const ROOT = path.resolve(__dirname, "..");
 const baseline = JSON.parse(fs.readFileSync(path.join(ROOT, "dicts", "ui-copy-fixtures.json"), "utf8"));
+const versionReview = require("../dicts/structural-ui-2.33.0.json");
 const normalize = value => value.replace(/\s+/g, " ").replace(/[‘’]/g, "'").replace(/[“”]/g, '"').trim();
+const sha256 = value => crypto.createHash("sha256").update(value).digest("hex");
 
 function embeddedMain(binary) {
   const marker = binary.indexOf(Buffer.from("main.js"));
@@ -30,7 +32,9 @@ function embeddedMain(binary) {
 }
 
 function audit(source) {
-  const exclusions = new Map(baseline.exclusions.map(item => [item.source, item.reason]));
+  const sourceSha256 = sha256(source);
+  const exactSource = sourceSha256 === versionReview.sourceBundleSha256;
+  const exclusions = new Map([...baseline.exclusions, ...(exactSource ? versionReview.legacyLiteralExclusions : [])].map(item => [item.source, item.reason]));
   const rows = new Map();
   let literals = 0;
   for (const match of source.matchAll(/"(?:[^"\\]|\\.)*"/g)) {
@@ -56,8 +60,11 @@ function audit(source) {
     if (value.length<550 && /^`[A-Z][a-z]/.test(value) && /tooltip|toast|notification|title:|description:|aria-label/.test(context)) templates.add(value.slice(1,-1).replace(/\s+/g," ").trim());
   }
   const observed=new Set(baseline.observedTemplates);
-  const newTemplates=[...templates].filter(item=>!observed.has(item));
-  return { sourceSha256:crypto.createHash("sha256").update(source).digest("hex"), reviewedVersion:baseline.appVersion, literals, candidates:rows.size, translated:[...rows.values()].filter(item=>item.translation).length, excluded:[...rows.values()].filter(item=>item.exclusion).length, missing, observedTemplates:templates.size, newTemplates, userDataRead:false, applicationLaunched:false, limitation:"Bounded literal/context audit; dynamic and server-provided notices require separate template tests.", rows:[...rows.values()] };
+  // The exact source also passes the separate structural audit. Its lexical
+  // scanner can see fragments of nested templates and minified variable names.
+  const reviewedFrames = new Set(exactSource ? versionReview.legacyTemplateSha256 : []);
+  const newTemplates = [...templates].filter(item => !observed.has(item) && !reviewedFrames.has(sha256(item)));
+  return { sourceSha256, reviewedVersion: exactSource ? versionReview.appVersion : baseline.appVersion, literals, candidates:rows.size, translated:[...rows.values()].filter(item=>item.translation).length, excluded:[...rows.values()].filter(item=>item.exclusion).length, missing, observedTemplates:templates.size, newTemplates, userDataRead:false, applicationLaunched:false, limitation:"Bounded literal/context audit; dynamic and server-provided notices require separate template tests.", rows:[...rows.values()] };
 }
 
 function main() {

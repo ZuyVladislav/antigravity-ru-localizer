@@ -1,0 +1,160 @@
+{
+  "literals": {
+    ". Try again.": ". Повторите попытку.",
+    "Access restricted": "Доступ ограничен",
+    "Add anyway": "Все равно добавить",
+    "Add bundle": "Добавить набор",
+    "Always open": "Всегда открывать",
+    "An agent is using the built-in browser. Clearing its data signs the agent out of sites and may interrupt its task.": "Агент использует встроенный браузер. При очистке данных он выйдет из аккаунтов на сайтах, и его задача может прерваться.",
+    "Antigravity (AGY) Style": "Стиль Antigravity (AGY)",
+    "Bot": "Бот",
+    "Browsing Data": "Данные браузера",
+    "Check that the microphone is unmuted and the right input device is selected.": "Проверьте, включен ли микрофон и правильно ли выбрано устройство ввода.",
+    "Checking access...": "Проверка доступа…",
+    "Choose what to clear from the built-in browser. It can't be undone.": "Выберите, какие данные встроенного браузера удалить. Отменить это действие нельзя.",
+    "Clear Browsing Data?": "Очистить данные браузера?",
+    "Clear history, cookies and site data from the built-in browser, or manage cookies for each site.": "Очистите историю, файлы куки и данные сайтов во встроенном браузере или настройте файлы куки для отдельных сайтов.",
+    "Code": "Код",
+    "Command prompt": "Командная строка",
+    "Cookies and other site data": "Файлы куки и другие данные сайтов",
+    "Cookies by Site": "Файлы куки по сайтам",
+    "Cookies the built-in browser stores for each site. Deleting a site's cookies usually signs you out of it. Other site data (local storage, IndexedDB, cache) is cleared only by Browsing Data → Clear.": "Файлы куки, которые встроенный браузер хранит для каждого сайта. При их удалении обычно происходит выход из аккаунта на сайте. Другие данные сайтов (локальное хранилище, IndexedDB и кеш) удаляются только через «Данные браузера → Очистить».",
+    "Cookies, site storage and cache. Signs you out of all sites in the built-in browser and reloads its open tabs.": "Файлы куки, хранилище сайтов и кеш. Очистка приведет к выходу со всех сайтов во встроенном браузере и перезагрузит его открытые вкладки.",
+    "Couldn't clear browsing data. Try again.": "Не удалось очистить данные браузера. Повторите попытку.",
+    "Couldn't delete cookies for": "Не удалось удалить файлы куки для сайта",
+    "Couldn't load cookies.": "Не удалось загрузить файлы куки.",
+    "Customize Shortcuts": "Настроить сочетания клавиш",
+    "Declared by": "Объявлено в",
+    "Disabling or removing this bundle doesn't affect it.": "Отключение или удаление этого набора на него не влияет.",
+    "Enable Browser Agent": "Включить браузерного агента",
+    "Eye": "Глаз",
+    "Flask": "Колба",
+    "Gauge": "Шкала",
+    "Hub": "Центр",
+    "Initialized with": "Инициализировано с",
+    "Insert into main conversation": "Вставить в основной диалог",
+    "Inspect live bindings or record custom key chords filtered to": "Посмотрите действующие сочетания или запишите свои, отфильтрованные по",
+    "Installed separately": "Установлено отдельно",
+    "Interrupt Agent": "Прервать работу агента",
+    "Keybinding Scheme": "Схема сочетаний клавиш",
+    "Let the agent open URLs, read web pages, and interact with browser content. This gives the agent access to important (and often critical) knowledge and methods of validation, but any browser integration does increase exposure to external malicious parties for security exploits.": "Разрешите агенту открывать ссылки, читать веб-страницы и взаимодействовать с содержимым браузера. Это дает агенту важные, а часто и необходимые сведения и способы проверки. Любая интеграция с браузером повышает риск атак со стороны злоумышленников.",
+    "Loading cookies…": "Загрузка файлов куки…",
+    "Loading preview…": "Загрузка предпросмотра…",
+    "Manage your keybinding scheme and customize shortcuts in VS Code.": "Управляйте схемой сочетаний клавиш и настраивайте их в VS Code.",
+    "Managed by application menu": "Настраивается в меню приложения",
+    "Microphone problem": "Проблема с микрофоном",
+    "Microphone silent": "Нет звука с микрофона",
+    "No bundles available.": "Нет доступных наборов.",
+    "No longer available": "Больше недоступно",
+    "No sites have cookies in the built-in browser.": "Во встроенном браузере нет файлов куки сайтов.",
+    "No sites match “": "Нет сайтов по запросу “",
+    "Open browser screenshot": "Открыть снимок браузера",
+    "Open in settings": "Открыть в настройках",
+    "Radar": "Радар",
+    "Removed from the marketplace. Stays installed until you uninstall it.": "Удалено из каталога. Останется установленным, пока вы сами его не удалите.",
+    "Response actions": "Действия с ответом",
+    "Review bundle before adding": "Проверить набор перед добавлением",
+    "Review contents": "Проверить содержимое",
+    "Robot": "Робот",
+    "Search sites...": "Поиск по сайтам…",
+    "Setup Script": "Скрипт настройки",
+    "Shield": "Щит",
+    "Side Question Selection": "Выделение для уточняющего вопроса",
+    "Sites with cookies": "Сайты с файлами куки",
+    "Sliders": "Ползунки",
+    "Sparkles": "Искры",
+    "Speech recognition service is failing, and the current model doesn't support direct audio file input.": "Сервис распознавания речи работает со сбоями, а выбранная модель не поддерживает прямую загрузку аудиофайлов.",
+    "Speedometer": "Спидометр",
+    "System default app": "Приложение по умолчанию в системе",
+    "Terminal window": "Окно терминала",
+    "Terminal: Select All": "Выделить все в терминале",
+    "Text Selection": "Выделение текста",
+    "The main conversation's input isn't available right now.": "Поле ввода в основном диалоге сейчас недоступно.",
+    "This side question isn't available in this conversation.": "Этот уточняющий вопрос недоступен в данном диалоге.",
+    "Toggle Virtual Machine": "Переключить виртуальную машину",
+    "Transcribing audio…": "Распознавание аудио…",
+    "Tree": "Дерево",
+    "Unarchive the main conversation to insert": "Верните основной диалог из архива, чтобы вставить",
+    "VS Code Default": "По умолчанию в VS Code",
+    "VS Code Keyboard Shortcuts": "Сочетания клавиш VS Code",
+    "Visited URLs and autocomplete suggestions.": "Посещенные адреса и подсказки автодополнения.",
+    "Voice dictation unavailable": "Голосовой ввод недоступен",
+    "Web (desktop, remote agents)": "Веб (компьютер, удаленные агенты)",
+    "Web (desktop, remote agents, PWA)": "Веб (компьютер, удаленные агенты, PWA)",
+    "Web (mobile, remote agents)": "Веб (мобильные устройства, удаленные агенты)",
+    "Web (mobile, remote agents, PWA)": "Веб (мобильные устройства, удаленные агенты, PWA)",
+    "Wrench": "Гаечный ключ",
+    "commands.": "команды.",
+    "links without asking": "ссылки без запроса"
+  },
+  "templates": [
+    {
+      "source": "Add bundle ${value}",
+      "translation": "Добавить набор ${0}"
+    },
+    {
+      "source": "Couldn't save base branch: ${value}",
+      "translation": "Не удалось сохранить базовую ветку: ${0}",
+      "tooltipOnly": true
+    },
+    {
+      "source": "Couldn't switch to ${value}: ${value}",
+      "translation": "Не удалось переключиться на ${0}: ${1}"
+    },
+    {
+      "source": "Delete cookies for ${value}",
+      "translation": "Удалить файлы куки для сайта ${0}"
+    },
+    {
+      "source": "Missing Worker RPC batch result for ${value} (id=${value})",
+      "translation": "Нет результата пакетного вызова RPC для ${0} (идентификатор ${1})"
+    },
+    {
+      "source": "Plan, ${value} of ${value} steps done",
+      "translation": "В плане выполнено ${0} из ${1} шагов"
+    },
+    {
+      "source": "Retrying transcription (attempt ${value})…",
+      "translation": "Повтор распознавания (попытка ${0})…"
+    },
+    {
+      "source": "Review ${value} before installing",
+      "translation": "Проверьте ${0} перед установкой"
+    },
+    {
+      "source": "Searching as ${value}",
+      "translation": "Поиск от имени ${0}",
+      "tooltipOnly": true
+    },
+    {
+      "source": "The preview did not respond on port ${value}.",
+      "translation": "Предпросмотр не ответил на порту ${0}."
+    },
+    {
+      "source": "These plugins in ${value} may have looser code review. Review their contents before adding the bundle.",
+      "translation": "Проверка кода этих плагинов в ${0} может быть менее строгой. Проверьте их содержимое перед добавлением набора."
+    },
+    {
+      "source": "This plugin in ${value} may have looser code review. Review its contents before adding the bundle.",
+      "translation": "Проверка кода этого плагина в ${0} может быть менее строгой. Проверьте его содержимое перед добавлением набора."
+    },
+    {
+      "source": "Work locally on ${value}",
+      "translation": "Работать локально: ${0}",
+      "tooltipOnly": true
+    },
+    {
+      "source": "Worked for ${value}",
+      "translation": "Время работы ${0}"
+    },
+    {
+      "source": "Worktree from ${value}",
+      "translation": "Рабочая копия из ${0}",
+      "tooltipOnly": true
+    },
+    {
+      "source": "You're signing in on ${value}. Your sign-in stays on that machine.",
+      "translation": "Вы входите на устройстве ${0}. Данные входа остаются на этом устройстве."
+    }
+  ]
+}
